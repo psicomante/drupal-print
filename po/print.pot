@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2005-01-26 14:48+0100\n"
+"POT-Creation-Date: 2005-01-28 15:31+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -19,8 +19,8 @@ msgstr ""
 msgid "Allows users to create printer-friendly pages for nodes."
 msgstr ""
 
-#: print.module:28
-msgid "printer friendly"
+#: print.module:28;155
+msgid "printer friendly page"
 msgstr ""
 
 #: print.module:58
@@ -32,7 +32,7 @@ msgid "The URL to your print cascading stylesheet."
 msgstr ""
 
 #: print.module:60
-msgid "Printer friendly URLs"
+msgid "A list of the node's links at the bottom"
 msgstr ""
 
 #: print.module:61
@@ -55,34 +55,19 @@ msgstr ""
 msgid "Enable or disable the 'printer friendly page' link for each node. Even if the link is disabled, you can still view the print version of a node by going to 'node/nid/print' where nid is the numeric id of the node."
 msgstr ""
 
-#: print.module:149
-msgid "printer friendly version"
+#: print.module:63
+msgid "Printer friendly page icon"
 msgstr ""
 
-#: print.module:149
-msgid "Display a printer friendly version of this page."
+#: print.module:63
+msgid "An optional icon to put in front of the printer friendly page link."
+msgstr ""
+
+#: print.module:155
+msgid "Display a printer friendly page."
 msgstr ""
 
 #: print.module:0
 msgid "print"
 msgstr ""
 
-#: print.tpl.php:17
-msgid "Published on"
-msgstr ""
-
-#: print.tpl.php:25
-msgid "By"
-msgstr ""
-
-#: print.tpl.php:29
-msgid "Created"
-msgstr ""
-
-#: print.tpl.php:39
-msgid "Source URL:"
-msgstr ""
-
-#: print.tpl.php:44
-msgid "Links:"
-msgstr ""
