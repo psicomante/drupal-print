@@ -60,7 +60,7 @@ function print_settings() {
   $field .= form_checkbox(t('A list of the node\'s links at the bottom'), 'print_urls', 1, variable_get('print_urls', 0));
   $output .= form_group(t('Print page elements'), $field);
   $output .= form_radios(t('Printer friendly page link'), 'print_show_link', variable_get('print_show_link', 1), array(t("Disabled"), t("Enabled")), t("Enable or disable the 'printer friendly page' link for each node. Even if the link is disabled, you can still view the print version of a node by going to 'node/nid/print' where nid is the numeric id of the node."));
-  $output .= form_textfield(t('Printer friendly page icon'), 'print_icon', variable_get('print_icon', 'misc/print.gif'), 60, 64, t('An optional icon to put in front of the printer friendly page link.'));
+  $output .= form_textfield(t('Printer friendly page icon'), 'print_icon', variable_get('print_icon', ''), 60, 64, t('An optional icon to put in front of the printer friendly page link.'));
 
   return $output;
 }
@@ -88,7 +88,9 @@ function print_generate($title) {
 
   /* We can take a node id or a node title */
   $node = (is_numeric($title)) ? node_load(array('nid' => $title)) : node_load(array('title' => $title));
-  if (!$node->title) return false;
+  if (!$node->title) {
+		return false;
+	}
 
   $teaser = false;
   $page = true;
@@ -101,10 +103,12 @@ function print_generate($title) {
 
   // The 'view' hook can be implemented to overwrite the default function
   // to display nodes.
-  if (node_hook($node, 'view'))
+  if (node_hook($node, 'view')) {
     node_invoke($node, 'view', $teaser, $page);
-  else
+  }
+	else {
     $node = node_prepare($node, $teaser);
+  }
   // Allow modules to change $node->body before viewing.
   node_invoke_nodeapi($node, 'view', $teaser, $page);
 
