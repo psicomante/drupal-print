@@ -48,7 +48,7 @@ function print_link($type, $node = 0, $main) {
     return;
   }
 
-  if ($type == 'node' && variable_get('print_show_link', 1) && $main == 0) {
+  if ($type == 'node' && !isset($node->parent) && variable_get('print_show_link', 1) && $main == 0) {
     $links[] = theme('print_link', $node);
   }
 
