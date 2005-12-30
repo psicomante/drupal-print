@@ -4,6 +4,7 @@
   <head>
     <title><?php print $node->title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <?php print $robots_meta; ?>
     <base href="<?php print $base_url ?>/" />
     <style type="text/css">
       @import url(<?php print $node->printcss; ?>);
@@ -11,10 +12,10 @@
   </head>
   <body>
 
-    <?php theme_get_setting('logo') ? print '<img src="'.theme_get_setting('logo').'" alt="logo" border="0" />' : '';?>
+    <?php $node->logo ? print '<img src="'.$node->logo.'" alt="logo" border="0" />' : '';?>
 
     <div class="source_url">
-    <?php variable_get('site_name', 0) && print t('Published on').' '.variable_get('site_name', 0).' ('.l($base_url,'').')'; ?>
+    <?php variable_get('site_name', 0) && print t('Published on').' '.variable_get('site_name', 0).' ('.l($base_url, $base_url).')'; ?>
     </div>
 
     <h2 class="title">
@@ -33,15 +34,15 @@
       <?php print $node->body; ?>
     </div>
 
-    <hr size="1" noshade>
+    <hr size="1" noshade />
 
     <div class="source_url">
-      <?php print '<strong>'.t('Source URL:').'</strong><br><a href="'.$node->source_url.'>">'.$node->source_url.'</a>'?>
+      <?php print '<strong>'.t('Source URL:').'</strong><br /><a href="'.$node->source_url.'">'.$node->source_url.'</a>'?>
     </div>
 
     <div class="pfp-links">
       <!-- Output printer friendly links -->
-      <?php $node->pfp_links ? print '<p class="links"><strong>'.t('Links:').'</strong><br>'.$node->pfp_links.'</p>' : ''; ?>
+      <?php $node->pfp_links ? print '<p class="links"><strong>'.t('Links:').'</strong><br />'.$node->pfp_links.'</p>' : ''; ?>
     </div>
 
     <div class="footer">
