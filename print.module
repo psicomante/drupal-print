@@ -247,6 +247,7 @@ function print_generate_node($title) {
     }
   }
 
+  init_theme(); 
   $node->logo = !empty($print_settings['logo_url']) ? $print_settings['logo_url'] : theme_get_setting('logo');
 
   /* Grab and format the src URL */
