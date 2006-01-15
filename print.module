@@ -111,7 +111,7 @@ function print_generate($title) {
 
   if (variable_get('print_urls', 1)) {
     /* Collect links and display them at the bottom of the page. Code once taken from Kjartan Mannes' project.module  */
-    $pattern = "@href=([\']?[\"]?)([^\"|^\'|^|^>]*)([^>]*)>(.+?)</a>@ise";
+    $pattern = "@<a.*?href=([\']?[\"]?)([^\"|^\'|^|^>]*)([^>]*)>(.+?)</a>@ise";
     $node->body = preg_replace($pattern, "'<u>'.stripslashes('\\4').'</u> ['. print_friendly_urls(stripslashes('\\2')) .']'", $node->body);
     $urls = print_friendly_urls();
     if (count($urls)) {
