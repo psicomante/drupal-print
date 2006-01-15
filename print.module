@@ -123,6 +123,7 @@ function print_generate($title) {
     }
   }
 
+  init_theme();
   /* Grab and format the src URL */
   $node->source_url = $base_url. '/'. url("node/$node->nid");
   $node->language = $GLOBALS['locale'];
