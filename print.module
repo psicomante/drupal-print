@@ -28,7 +28,7 @@ function print_menu($may_cache) {
 
   if (!$may_cache) {
     $items[] = array('path' => 'node/'. arg(1) .'/print', 'title' => t('printer friendly'),
-      'callback' => 'print_node_controller', 'access' => user_access('access content'),
+      'callback' => 'print_node_controller', 
       'type' => MENU_CALLBACK);
 
     $items[] = array('path' => 'print', 'title' => t('printer friendly'),
