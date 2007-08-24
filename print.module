@@ -27,7 +27,7 @@ function print_menu($may_cache) {
     $items[] = array(
       'path' => 'admin/settings/print',
       'title' => t('Printer friendly'),
-      'description' => t('Allows users to create printer-friendly pages for nodes and profile pages.'),
+      'description' => t('Adds a printer-friendly version link to node pages.'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('print_main_settings')
     );
@@ -36,7 +36,7 @@ function print_menu($may_cache) {
     $nid = arg(1);
     if (is_numeric($nid)) {
       $items[] = array(
-        'path' => 'node/'. $nid .'/print',
+        'path' => 'print/'. $nid,
         'title' => t('Printer friendly'),
         'callback' => 'print_node_controller',
         'callback arguments' => array($nid),
@@ -75,7 +75,7 @@ function print_main_settings() {
     '#title' => t('Printer friendly page link'),
     '#default_value' => variable_get('print_show_link', 1),
     '#options' => array(t("Disabled"), t("Enabled")),
-    '#description' => t("Enable or disable the printer friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to node/nid/print where nid is the numeric id of the node."),
+    '#description' => t("Enable or disable the printer friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."),
   );
 
   $print_settings = variable_get('print_settings', NULL);
@@ -206,6 +206,17 @@ function _print_robots_meta_generator() {
   return $robots_meta;
 }
 
+function print_convert_abspath($matches) {
+  $path = $matches[2];
+  if (strpos($path, '://') || preg_match("/^mailto:.*?@.*?\..*?$/iu", $path) || ((substr($path, 0, 1) == "#")) ) {
+    // URL is OK, do not touch
+  } else {
+    $path = url(trim($path, "/"), NULL, NULL, TRUE);
+  }
+  
+  return $matches[1].$path.$matches[3];
+}
+
 /**
  * Outputs a printer friendly page.
  */
@@ -218,31 +229,25 @@ function print_generate_node($title) {
 
   $teaser = false;
   $page = true;
-  /* This section is ripped from node_view.
-     This does everything node_view does except theme the node! */
 
-  // Remove the delimiter (if any) that separates the teaser from the body.
-  // TODO: this strips legitimate uses of '<!--break-->' also.
-  $node->body = str_replace('<!--break-->', '', $node->body);
+  // To work with other node types, use drupal's render engine instead of the old node_view method
+  $node->body = drupal_render(node_build_content($node)->content);
 
-  // The 'view' hook can be implemented to overwrite the default function
-  // to display nodes.
-  if (node_hook($node, 'view'))
-    node_invoke($node, 'view', $teaser, $page);
-  else
-    $node = node_prepare($node, $teaser);
-  // Allow modules to change $node->body before viewing.
-  node_invoke_nodeapi($node, 'view', $teaser, $page);
-
-  /* End of code stealing from node_view() */
+  // Relative links need to be changed to absolute paths since we the printer friendly page is not in the original URL
+  // First the href links
+  $pattern ="@(<a[^>]*?href=[\']?[\"]?)([^\"|^\'|^|^>]*)(.+?</a>)@is";
+  $node->body = preg_replace_callback($pattern, "print_convert_abspath", $node->body);
+  // Now the src links
+  $pattern ="@(<[^>]*?src=[\']?[\"]?)([^\"|^\'|^|^>]*)(.+?>)@is";
+  $node->body = preg_replace_callback($pattern, "print_convert_abspath", $node->body);
 
   // associative array settings
   $print_settings = variable_get('print_settings', NULL);
 
   if (!isset($print_settings['urls']) || !empty($print_settings['urls'])) {
     /* Collect links and display them at the bottom of the page. Code once taken from Kjartan Mannes' project.module  */
-    $pattern = "@<a.*?href=([\']?[\"]?)([^\"|^\'|^|^>]*)([^>]*)>(.+?)</a>@ise";
-    $node->body = preg_replace($pattern, "'<u>'.stripslashes('\\4').'</u> ['. print_friendly_urls(stripslashes('\\2')) .']'", $node->body);
+    $pattern = "@<a[^>]*?href=([\']?[\"]?)([^\"|^\'|^|^>]*)([^>]*)>(.+?)</a>@ise";
+    $node->body = preg_replace($pattern, "'<span style=\'text-decoration:underline\'>'.stripslashes('\\4').'</span> ['. print_friendly_urls(trim(stripslashes('\\2')), $node->nid) .']'", $node->body);
     $urls = print_friendly_urls();
     if (count($urls)) {
       $node->pfp_links = '';
@@ -266,112 +271,20 @@ function print_generate_node($title) {
   include_once('print.node.tpl.php');
 }
 
-/**
- * Renders a print friendly version of profile pages.
- */
-function print_generate_profile() {
-  global $base_url;
 
-  $source_url = $base_url . substr($_GET['q'], 5);
-  $language = $GLOBALS['locale'];
-
-  $name = arg(2);
-  $value = arg(3);
-
-  $field = db_fetch_object(db_query("SELECT DISTINCT(fid), type, title, page, visibility FROM {profile_fields} WHERE name = '%s'", $name));
-  $robots_meta = _print_robots_meta_generator();
-
-  $print_settings = variable_get('print_settings', NULL);
-  $node->printcss = empty($print_settings['css']) ? 'misc/print.css' : $print_settings['css'];
-
-  if ($name && $field->fid) {
-    // Do not allow browsing of private fields by non-admins
-    if (!user_access('administer users') && $field->visibility == PROFILE_PRIVATE) {
-       drupal_access_denied();
-       return;
-    }
-
-    // Compile a list of fields to show
-    $fields = array();
-    $result = db_query('SELECT name, title, type FROM {profile_fields} WHERE fid != %d AND visibility = %d ORDER BY weight', $field->fid, PROFILE_PUBLIC_LISTINGS);
-    while ($record = db_fetch_object($result)) {
-      $fields[] = $record;
-    }
-
-    // Determine what query to use:
-    switch ($field->type) {
-      case 'checkbox':
-        $query = 'v.value = 1';
-        break;
-      case 'selection':
-        $query = "v.value = '". db_escape_string($value) ."'";
-        break;
-      case 'list':
-        $query = "v.value LIKE '%%". db_escape_string($value) ."%%'";
-        break;
-      default:
-        drupal_not_found();
-        return;
-    }
-
-    // Extract the affected users:
-    $result = db_query("SELECT u.uid FROM {users} u INNER JOIN {profile_values} v ON u.uid = v.uid WHERE v.fid = %d AND $query", $field->fid);
-
-    $output = '<div id="profile">';
-    while ($account = db_fetch_object($result)) {
-      $user = user_load(array('uid' => $account->uid));
-      $sort[$user->profile_lastname] = $user;
-    }
-    ksort($sort);
-    foreach ($sort as $user) {
-      $output .= theme('profile_profile', $user, $fields);
-    }
-
-    if ($field->type == 'selection' || $field->type == 'list') {
-      $title = strtr($field->page, array('%value' => theme('placeholder', $value)));
-    }
-    else {
-      $title = $field->page;
-    }
-    $output .= '</div>';
-
-    include_once('print.profile.tpl.php');
-  }
-  else if ($name && !$field->id) {
-    drupal_not_found();
-  }
-  else {
-    // Compile a list of fields to show
-    $fields = array();
-    $result = db_query('SELECT name, title, type FROM {profile_fields} WHERE visibility = %d', PROFILE_PUBLIC_LISTINGS);
-    while ($record = db_fetch_object($result)) {
-      $fields[] = $record;
-    }
-
-    // Extract the affected users:
-    $result = pager_query("SELECT uid FROM {users} WHERE uid > 0 ORDER BY access DESC", 20, 0, NULL);
-
-    $output = '<div id="profile">';
-    while ($account = db_fetch_object($result)) {
-      $output .= theme('profile_profile', user_load(array('uid' => $account->uid)), $fields);
-    }
-    $output .= '</div>';
-    $output .= theme('pager', NULL, 20);
-
-    $title = t('user list');
-
-    include_once('print.profile.tpl.php');
-  }
-}
-
-function print_friendly_urls($url = 0) {
-  global $base_url;
+function print_friendly_urls($url = 0, $nid) {
   static $urls = array();
   if ($url) {
     if(strpos($url, '://') || preg_match("/^mailto:.*?@.*?\..*?$/iu", $url)) {
       $urls[] = $url;
     } else {
-      $base_url. '/'. url($url);
+      // Convert into absolute URL, removing extra beginning and end '/'
+      if (substr($url, 0, 1) == "#") {
+        // Handle <a name> tags
+        $urls[] = url("node/" . $nid, NULL, substr($url,1), TRUE);
+      } else {
+        $urls[] = url(trim($url,"/"), NULL, NULL, TRUE);
+      }
     }
     return count($urls);
   }
@@ -384,7 +297,7 @@ function print_friendly_urls($url = 0) {
 
 function theme_print_link($node) {
   return array('title' => t('Printer friendly version'),
-           'href' => "node/$node->nid/print",
+           'href' => "print/$node->nid",
            'attributes' => array('title' => t('Display a printer friendly version of this page.')),
          );
 }

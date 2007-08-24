@@ -5,7 +5,7 @@
     <title><?php print $node->title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php print $robots_meta; ?>
-    <base href="<?php print $base_url ?>/" />
+    <base href="<?php print $node->url ?>/" />
     <style type="text/css">
       @import url(<?php print $node->printcss; ?>);
     </style>
@@ -34,10 +34,10 @@
       <?php print $node->body; ?>
     </div>
 
-    <hr size="1" noshade />
+    <hr style="border:0;height:1px;color:#9E9E9E;background-color:#9E9E9E;" />
 
     <div class="source_url">
-      <?php print '<strong>'.t('Source URL:').'</strong><br /><a href="'.$node->source_url.'">'.$node->source_url.'</a>'?>
+      <?php print '<strong>'.t('Source URL (retrieved on '. date(r).'):').'</strong><br /><a href="'.$node->source_url.'">'.$node->source_url.'</a>'?>
     </div>
 
     <div class="pfp-links">
