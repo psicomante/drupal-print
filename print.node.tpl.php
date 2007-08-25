@@ -6,46 +6,54 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php print $robots_meta; ?>
     <base href="<?php print $node->url ?>/" />
+    <?php print theme_get_setting("toggle_favicon") ? "<link rel='shortcut icon' href='".theme_get_setting("favicon")."' type='image/x-icon'/>\n" : ""; ?>
     <style type="text/css">
-      @import url(<?php print $node->printcss; ?>);
+      <?php if ($node->undefcss) {include_once($node->printcss);} else {print "@import url($node->printcss)\n";} ?>
     </style>
   </head>
-  <body>
+  <body<?php $node->sendtoprinter ? print ' onload="window.print();"' : ''; ?>>
 
-    <?php $node->logo ? print '<img src="'.$node->logo.'" alt="logo" border="0" />' : '';?>
+    <?php $node->logo ? print '<img class="print-logo" src="'.$node->logo.'" alt="" border="0" />' : '';?>
 
-    <div class="source_url">
+    <div class="print-site_name">
     <?php variable_get('site_name', 0) && print t('Published on').' '.variable_get('site_name', 0).' ('.l($base_url, $base_url).')'; ?>
     </div>
 
-    <h2 class="title">
-      <?php print $node->title; ?>
-    </h2>
+    <div class="print-title"><?php print $node->title; ?></div>
 
-    <div class="submitted">
+    <div class="print-submitted">
       <?php print theme_get_setting("toggle_node_info_$node->type") ? t('By').' '.$node->name : ''; ?>
     </div>
 
-    <div class="created">
+    <div class="print-created">
       <?php print theme_get_setting("toggle_node_info_$node->type") ? t('Created').' '.format_date($node->created, 'small') : '' ?>
     </div>
 
-    <div class="content">
+    <p />
+
+    <div class="print-content">
       <?php print $node->body; ?>
     </div>
 
-    <hr style="border:0;height:1px;color:#9E9E9E;background-color:#9E9E9E;" />
+    <hr class="print-hr" />
 
-    <div class="source_url">
-      <?php print '<strong>'.t('Source URL (retrieved on '. date(r).'):').'</strong><br /><a href="'.$node->source_url.'">'.$node->source_url.'</a>'?>
+    <div class="print-source_url">
+      <?php 
+         if ($node->source_url) { 
+           print '<strong>';
+           print t('Source URL');
+           $node->printdate ? print t(' (retrieved on ' . format_date(time(), 'small') . ')') : '';
+           print ':</strong> <a href="'.$node->source_url.'">'.$node->source_url.'</a>';
+        } 
+      ?>
     </div>
 
-    <div class="pfp-links">
+    <div class="print-links">
       <!-- Output printer friendly links -->
-      <?php $node->pfp_links ? print '<p class="links"><strong>'.t('Links:').'</strong><br />'.$node->pfp_links.'</p>' : ''; ?>
+      <?php $node->pfp_links ? print '<p><strong>'.t('Links:').'</strong><br />'.$node->pfp_links.'</p>' : ''; ?>
     </div>
 
-    <div class="footer">
+    <div class="print-footer">
       <!-- Add your custom footer here. -->
     </div>
 
