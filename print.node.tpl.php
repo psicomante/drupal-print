@@ -42,7 +42,7 @@
          if ($node->source_url) { 
            print '<strong>';
            print t('Source URL');
-           $node->printdate ? print t(' (retrieved on ' . format_date(time(), 'small') . ')') : '';
+           $node->printdate ? print (t(' (retrieved on ') . format_date(time(), 'small') . ')') : '';
            print ':</strong> <a href="'.$node->source_url.'">'.$node->source_url.'</a>';
         } 
       ?>

@@ -6,6 +6,8 @@
  * Display printer-friendly versions of nodes (except books)
  */
 
+$_print_nid = 0;
+
 /********************************************************************
  * Drupal Hooks :: Overview
  ********************************************************************/
@@ -64,12 +66,12 @@ function print_menu($may_cache) {
 /**
  * Implementation of hook_link().
  */
-function print_link($type, $node = 0, $main = 0) {
+function print_link($type, $node = 0, $teaser = 0) {
 /*  if ('comment' == $type && !variable_get('print_display_comment', '1')) {
     return;
   }*/
 
-  if ($node->type == 'book' && function_exists('book_link'))  {
+  if ( (($node->type == 'book') && (function_exists('book_link'))) || ($teaser) ) {
     return;
   }
 
@@ -320,6 +322,8 @@ function _print_robots_meta_generator() {
  *  2. When off, relative URLs must be transformed to absolute URLs, including images, but not the anchors.
  */
 function print_rewrite_urls($matches) {
+  global $_print_nid;
+
   // Get value of Printer-friendly URLs setting
   $print_settings = variable_get('print_settings', print_settings_default());
   $pfurls = (!empty($print_settings['urls']));
@@ -342,8 +346,7 @@ function print_rewrite_urls($matches) {
           // URL is an anchor tag
           if ($pfurls) {
             // Printer-friendly URLs is on, so we need to make it absolute
-            $newurl = url("node/" . $node->nid, NULL, substr($url,1), TRUE);
-            $matches[1] = str_replace($url, $newurl, $matches[1]);
+            $newurl = url("node/" . $_print_nid, NULL, substr($url,1), TRUE);
           }
         } else {
           // URL is relative, convert it into absolute URL, removing any extra beginning or end '/'
@@ -357,7 +360,7 @@ function print_rewrite_urls($matches) {
   $ret = '<' . $matches[1] . '>';
   if ($attribs[0] == "a") {
     $ret .= $matches[2] . '</a>';
-    if ($pfurls) {
+    if (($pfurls) && ($newurl)) {
       $ret .= ' <span class="print-footnote">[' . print_friendly_urls(trim(stripslashes($newurl))) . ']</span>';
     }
   }
@@ -370,6 +373,9 @@ function print_rewrite_urls($matches) {
  */
 function print_generate_node($nid) {
   global $base_url;
+  global $_print_nid;
+
+  $_print_nid = $nid;
 
   /* We can take a node id */
   $node = node_load(array('nid' => $nid));
@@ -422,13 +428,13 @@ function print_generate_node($nid) {
 
   $node->language = $GLOBALS['locale'];
   $node->undefcss = empty($print_settings['css']);
-  $node->printcss = !empty($print_settings['css']) ? $print_settings['css'] : (drupal_get_path('module', 'print') . '/' . 'print.css');
+  $node->printcss = !empty($print_settings['css']) ? $print_settings['css'] : (drupal_get_path('module', 'print') . '/print.css');
   $node->printdate = $print_sourceurl_settings['date'];
   $node->sendtoprinter = $print_settings['sendtoprinter'];
 
   $robots_meta = _print_robots_meta_generator();
 
-  include_once(drupal_get_path('module', 'print') . '/' . 'print.node.tpl.php');
+  include_once(drupal_get_path('module', 'print') . '/print.node.tpl.php');
 }
 
 
