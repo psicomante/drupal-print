@@ -67,17 +67,17 @@ function print_menu($may_cache) {
  * Implementation of hook_link().
  */
 function print_link($type, $node = 0, $teaser = 0) {
-/*  if ('comment' == $type && !variable_get('print_display_comment', '1')) {
+/*  if ($type == 'comment' && !variable_get('print_display_comment', '1')) {
     return;
   }*/
 
-  if ( (($node->type == 'book') && (function_exists('book_link'))) || ($teaser) ) {
+  if ( ($node->type == 'book') || ($teaser) ) {
     return;
   }
 
   $print_settings = variable_get('print_settings', print_settings_default());
 
-  if (($type == 'node' || $type == 'comment') && user_access('access print') && ($print_settings['show_link']) && variable_get('print_display_'. $node->type, '1')) {
+  if (($type == 'node') && user_access('access print') && ($print_settings['show_link']) && variable_get('print_display_'. $node->type, '1')) {
     $links = array();
 
     $attributes = array('title' => t('Display a printer-friendly version of this page.'), 'class' => 'print-page');
@@ -328,6 +328,17 @@ function print_rewrite_urls($matches) {
   $print_settings = variable_get('print_settings', print_settings_default());
   $pfurls = (!empty($print_settings['urls']));
 
+  //Temporarily convert spaces to %20 so that it isn't split below
+  $in_string = false; 
+  for ($i=0; $i < strlen($matches[1]); $i++) {
+    if ($matches[1][$i] == '"') {
+      $in_string = !$in_string;
+    }
+    if (($matches[1][$i] == ' ') && ($in_string)) {
+      $matches[1]=substr_replace($matches[1], "%20", $i, 1);
+    }
+  }
+
   // first, split the html into the different tag attributes
   $attribs = preg_split("/[ \t]+/m", $matches[1]);
 
@@ -340,7 +351,7 @@ function print_rewrite_urls($matches) {
 
       if (strpos($url, '://') || preg_match("/^mailto:.*?@.*?\..*?$/iu", $url)) {
         // URL is absolute, do nothing
-        $newurl = $url;
+        $newurl = urldecode($url);
       } else {
         if (substr($url, 0, 1) == "#") {
           // URL is an anchor tag
@@ -377,12 +388,23 @@ function print_generate_node($nid) {
 
   $_print_nid = $nid;
 
-  /* We can take a node id */
+  // We can take a node id
   $node = node_load(array('nid' => $nid));
 
-  // To work with other node types, use drupal's render engine instead of the old node_view method
+  //alert other modules that we are generating a printer-friendly page, so they can choose to show/hide info
+  $node->printing = true;
+  // Turn off Pagination by the Paging module
+  unset($node->pages);
+  unset($node->pages_count);
+
+  // Adapted (simplified) version of node_view for Drupal 5.x
   $node = (object)$node;
   $node = node_build_content($node, false, true);
+  // Disable fivestar widget output
+  unset($node->content["fivestar_widget"]);
+  // Disable service links module output
+  unset($node->content["service_links"]);
+  
   $node->body = drupal_render($node->content);
   unset($node->teaser);
 
