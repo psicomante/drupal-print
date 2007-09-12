@@ -360,8 +360,17 @@ function print_rewrite_urls($matches) {
             $newurl = url("node/" . $_print_nid, NULL, substr(urldecode($url),1), TRUE);
           }
         } else {
-          // URL is relative, convert it into absolute URL, removing any extra beginning or end '/'
-          $newurl = url(trim(urldecode($url),"/"), NULL, NULL, TRUE);
+          // URL is relative, convert it into absolute URL
+          $clean_url = (bool)variable_get('clean_url', '0');
+          if (($attribs[0] == "a") && (!$clean_url)) {
+            $newurl = preg_replace('/^[\/]?\?q=(.*)/i', '${1}', $url);
+            $newurl = url(urldecode($newurl), NULL, NULL, TRUE);
+          } else {
+            $newurl = url(trim(urldecode($url),"/"), NULL, NULL, TRUE);
+          }
+          if (($attribs[0] != "a") && (!$clean_url)) {
+            $newurl = str_replace("?q=", "", $newurl);
+          }
           $matches[1] = str_replace($url, $newurl, $matches[1]);
         }
       }
