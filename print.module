@@ -281,7 +281,8 @@ function print_controller() {
     // If there is a path alias with these arguments, generate a printer-friendly version for it
     $path = db_fetch_array(db_query('SELECT * FROM {url_alias} WHERE dst LIKE "%s"', $args));
     if ($path) {
-       print_generate_node($path["pid"]);
+      $nid = str_replace("node/", "", $path["src"]);
+      print_generate_node($nid);
     } else {
       drupal_not_found();
     }
