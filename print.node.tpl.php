@@ -5,10 +5,10 @@
     <title><?php print $node->title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php print $robots_meta; ?>
-    <base href="<?php print $node->url ?>/" />
-    <?php print theme_get_setting("toggle_favicon") ? "<link rel='shortcut icon' href='".theme_get_setting("favicon")."' type='image/x-icon'/>\n" : ""; ?>
+    <base href="<?php print $node->source_url ?>" />
+    <?php print theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"".theme_get_setting("favicon")."\" type=\"image/x-icon\"/>\n" : ""; ?>
     <style type="text/css">
-      <?php if ($node->undefcss) {include_once($node->printcss);} else {print "@import url($node->printcss)\n";} ?>
+      <?php if ($node->undefcss) {include_once($node->printcss);} else {print "@import \"$node->printcss\";\n";} ?>
     </style>
   </head>
   <body<?php $node->sendtoprinter ? print ' onload="window.print();"' : ''; ?>>
