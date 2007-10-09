@@ -66,7 +66,7 @@ function print_menu($may_cache) {
 /**
  * Implementation of hook_link().
  */
-function print_link($type, $node = 0, $teaser = 0) {
+function print_link($type, $node = NULL, $teaser = FALSE) {
 /*  if ($type == 'comment' && !variable_get('print_display_comment', '1')) {
     return;
   }*/
@@ -282,6 +282,8 @@ function print_controller() {
     $path = db_fetch_array(db_query('SELECT * FROM {url_alias} WHERE dst LIKE "%s"', $args));
     if ($path) {
       $nid = str_replace("node/", "", $path["src"]);
+    }
+    if (is_numeric($nid)) {
       print_generate_node($nid);
     } else {
       drupal_not_found();
@@ -323,6 +325,71 @@ function _print_robots_meta_generator() {
   }
 
   return $robots_meta;
+}
+
+/**
+ * Generates the HTML to insert in the template file
+ */
+function _print_var_generator($node) {
+  global $base_url;
+
+  // print module settings
+  $print_settings = variable_get('print_settings', print_settings_default());
+  $print_sourceurl_settings = variable_get('print_sourceurl_settings', print_sourceurl_settings_default());
+
+  $print["language"] = $GLOBALS['locale'];
+  $print["title"] = $node->title;
+  $print["robots_meta"] = _print_robots_meta_generator();
+  $print["base_href"] = "<base href=\"".$base_url."/node/".$node->nid."\" />\n";
+  $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"".theme_get_setting("favicon")."\" type=\"image/x-icon\"/>\n" : "";
+
+  if (!empty($print_settings['css'])) {
+    $print["css"] = "<style type=\"text/css\">@import \"".$print_settings['css']."\";</style>\n";
+  } else {
+    ob_start();
+    include_once(drupal_get_path('module', 'print') . "/print.css");
+    $print["css"] = "<style type=\"text/css\">".ob_get_contents()."</style>\n";
+    ob_end_clean();
+  }
+
+  $print["sendtoprinter"] = $print_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
+    
+  $print["logo"] = !empty($print_settings['logo_url']) ? $print_settings['logo_url'] : theme_get_setting('logo');
+  $print["logo"] = $print["logo"] ? "<img class=\"print-logo\" src=\"".$print["logo"]."\" alt=\"\" />\n" : "";
+
+  /* Grab and format the src URL */
+  if ($print_sourceurl_settings['enabled'] == 1) {
+    if (empty($print_sourceurl_settings['forcenode'])) {
+      $print["source_url"] = url("node/$node->nid", NULL, NULL, TRUE);
+    } else {
+      $print["source_url"] = $base_url . '/' . (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . 'node/' . $node->nid;
+    }
+    $print["printdate"] = $print_sourceurl_settings['date'] ? (t(" (retrieved on ").format_date(time(), 'small').")") : "";
+    $print["source_url"] = "<strong>".t('Source URL').$print["printdate"].":</strong> <a href=\"".$print["source_url"]."\">".$print["source_url"]."</a>";
+  } else {
+    $print["source_url"] = "";
+  }
+
+  $print["site_name"] = variable_get('site_name', 0) ? (t('Published on')." ".variable_get('site_name', 0)." (".l($base_url, $base_url).")") : "";
+  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? t('By')." ".$node->name : "";
+  $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? t('Created')." ".format_date($node->created, 'small') : "";
+
+  // Display the collected links at the bottom of the page. Code once taken from Kjartan Mannes' project.module
+  if (!empty($print_settings['urls'])) {
+    $urls = print_friendly_urls();
+    $max = count($urls);
+    if ($max) {
+      $print["pfp_links"] = '';
+      for ($i = 0; $i < $max; $i++) {
+        $print["pfp_links"] .= '['. ($i + 1) .'] '. $urls[$i] ."<br />\n";
+      }
+      $print["pfp_links"] = "<p><strong>".t('Links:')."</strong><br />".$print["pfp_links"]."</p>";
+    }
+  }
+
+  $print["footer_message"] = filter_xss_admin(variable_get('site_footer', FALSE)) . "\n" . theme('blocks', 'footer') ;
+
+  return $print;
 }
 
 /**
@@ -430,44 +497,9 @@ function print_generate_node($nid) {
   $pattern = "@<(a[^>]*?)>(.*?)</a>@is";
   $node->body = preg_replace_callback($pattern, "print_rewrite_urls", $node->body);
 
-  // associative array settings
-  $print_settings = variable_get('print_settings', print_settings_default());
-  $print_sourceurl_settings = variable_get('print_sourceurl_settings', print_sourceurl_settings_default());
-
-  // Display the collected links at the bottom of the page. Code once taken from Kjartan Mannes' project.module
-  if (!empty($print_settings['urls'])) {
-    $urls = print_friendly_urls();
-    if (count($urls)) {
-      $node->pfp_links = '';
-      $max = count($urls);
-      for ($i = 0; $i < $max; $i++) {
-        $node->pfp_links .= '['. ($i + 1) .'] '. $urls[$i] ."<br />\n";
-      }
-    }
-  }
-
   init_theme();
-  $node->logo = !empty($print_settings['logo_url']) ? $print_settings['logo_url'] : theme_get_setting('logo');
 
-  /* Grab and format the src URL */
-  if ($print_sourceurl_settings['enabled'] == 1) {
-    if (empty($print_sourceurl_settings['forcenode'])) {
-      $node->source_url = url("node/$node->nid", NULL, NULL, TRUE);
-    } else {
-      $clean_url = (bool)variable_get('clean_url', '0');
-      $node->source_url = $base_url . '/' . ($clean_url ? '' : '?q=') . 'node/' . $node->nid;
-    }
-  } else {
-    $node->source_url = 0;
-  }
-
-  $node->language = $GLOBALS['locale'];
-  $node->undefcss = empty($print_settings['css']);
-  $node->printcss = !empty($print_settings['css']) ? $print_settings['css'] : (drupal_get_path('module', 'print') . '/print.css');
-  $node->printdate = $print_sourceurl_settings['date'];
-  $node->sendtoprinter = $print_settings['sendtoprinter'];
-
-  $robots_meta = _print_robots_meta_generator();
+  $print = _print_var_generator($node);
 
   include_once(drupal_get_path('module', 'print') . '/print.node.tpl.php');
 }
