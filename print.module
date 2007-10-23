@@ -364,7 +364,7 @@ function _print_var_generator($node) {
     } else {
       $print["source_url"] = $base_url . '/' . (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . 'node/' . $node->nid;
     }
-    $print["printdate"] = $print_sourceurl_settings['date'] ? (t(" (retrieved on ").format_date(time(), 'small').")") : "";
+    $print["printdate"] = $print_sourceurl_settings['date'] ? (" (".t("retrieved on")." ".format_date(time(), 'small').")") : "";
     $print["source_url"] = "<strong>".t('Source URL').$print["printdate"].":</strong> <a href=\"".$print["source_url"]."\">".$print["source_url"]."</a>";
   } else {
     $print["source_url"] = "";
@@ -417,7 +417,7 @@ function print_rewrite_urls($matches) {
   }
 
   // first, split the html into the different tag attributes
-  $attribs = preg_split("/[ \t]+/m", $matches[1]);
+  $attribs = preg_split("/\s+/m", $matches[1]);
 
   for ($i=1; $i < count($attribs); $i++) {
     // If the attribute is href or src, we may need to rewrite the URL in the value
@@ -494,7 +494,7 @@ function print_generate_node($nid) {
   node_invoke_nodeapi($node, 'alter', false, true);
 
   // Convert the a href elements
-  $pattern = "@<(a[^>]*?)>(.*?)</a>@is";
+  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
   $node->body = preg_replace_callback($pattern, "print_rewrite_urls", $node->body);
 
   init_theme();

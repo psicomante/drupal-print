@@ -170,8 +170,8 @@ msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link
 msgstr "Ikke-standard tag som instruerer søkemotorer til ikke å vise en \"Cashed\" lenke for dine utskriftsvennlige sider."
 
 #: print.module:367
-msgid " (retrieved on "
-msgstr "(hentet  "
+msgid "retrieved on"
+msgstr "hentet"
 
 #: print.module:373
 msgid "Published on"

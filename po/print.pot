@@ -168,7 +168,7 @@ msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link
 msgstr ""
 
 #: print.module:367
-msgid " (retrieved on "
+msgid "retrieved on"
 msgstr ""
 
 #: print.module:373

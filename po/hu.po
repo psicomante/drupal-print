@@ -165,8 +165,8 @@ msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link
 msgstr "Nem szabványos kulcsszó arra, hogy a keresőrobotok ne jelenítsék meg a \"Cached\" hivatkozást."
 
 #: print.module:367
-msgid " (retrieved on "
-msgstr "(letöltve"
+msgid "retrieved on"
+msgstr "letöltve"
 
 #: print.module:373
 msgid "Published on"

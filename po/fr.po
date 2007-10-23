@@ -164,8 +164,8 @@ msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link
 msgstr "Tag non-standard pour ordonner aux moteurs de recherche de ne pas montrer un lien en cache pour les versions imprimables."
 
 #: print.module:367
-msgid " (retrieved on "
-msgstr "(créé le"
+msgid "retrieved on"
+msgstr "créé le"
 
 #: print.module:373
 msgid "Published on"
