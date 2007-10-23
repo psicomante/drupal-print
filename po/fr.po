@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: print.module\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-09-24 20:51+0100\n"
+"POT-Creation-Date: 2007-10-09 02:38+0200\n"
+"PO-Revision-Date: 2007-10-23 20:51+0100\n"
 "Last-Translator: Ronan LE LOC'H <rondev@free.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -14,39 +14,12 @@ msgstr ""
 "X-Poedit-Country: FRANCE\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: print.node.tpl.php:19
-msgid "Published on"
-msgstr "Publié sur"
-
-#: print.node.tpl.php:25
-msgid "By"
-msgstr "Par"
-
-#: print.node.tpl.php:29
-msgid "Created"
-msgstr "Créé"
-
-#: print.node.tpl.php:44
-#: print.module:190
-msgid "Source URL"
-msgstr "URL source"
-
-#: print.node.tpl.php:45
-#, fuzzy
-msgid " (retrieved on "
-msgstr "(créé le"
-
-#: print.node.tpl.php:53
-msgid "Links:"
-msgstr "Liens:"
-
 # Nom du module
 #: print.module:31;38;50
 msgid "Printer-friendly"
 msgstr "Printer-friendly"
 
-#: print.module:39
-#: print.info:0
+#: print.module:39 print.info:0
 msgid "Adds a printer-friendly version link to node pages."
 msgstr "Ajoute un lien vers la version imprimable au noeud."
 
@@ -126,6 +99,10 @@ msgstr "Envoyer à l'imprimante"
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Appelle automatiquement la fonction d'impression du navigateur lorque la version imprimable est affichée."
 
+#: print.module:190;368
+msgid "Source URL"
+msgstr "URL source"
+
 #: print.module:198
 msgid "Display source URL"
 msgstr "Affiche l'URL source"
@@ -185,6 +162,26 @@ msgstr "Ajouter nocache"
 #: print.module:259
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr "Tag non-standard pour ordonner aux moteurs de recherche de ne pas montrer un lien en cache pour les versions imprimables."
+
+#: print.module:367
+msgid " (retrieved on "
+msgstr "(créé le"
+
+#: print.module:373
+msgid "Published on"
+msgstr "Publié sur"
+
+#: print.module:374
+msgid "By"
+msgstr "Par"
+
+#: print.module:375
+msgid "Created"
+msgstr "Créé"
+
+#: print.module:386
+msgid "Links:"
+msgstr "Liens:"
 
 #: print.module:19
 msgid "access print"

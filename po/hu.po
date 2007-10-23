@@ -1,8 +1,12 @@
+# $Id$
+#
+# Hungarian translation of Drupal (general)
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Drupal print-5.x-2.1\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-09-21 21:07+0100\n"
+"Project-Id-Version: Drupal print-5.x-2.2\n"
+"POT-Creation-Date: 2007-10-09 02:38+0200\n"
+"PO-Revision-Date: 2007-10-23 21:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: Balassy Mihály <search@google>\n"
 "MIME-Version: 1.0\n"
@@ -12,37 +16,11 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: print.node.tpl.php:19
-msgid "Published on"
-msgstr "Közzétéve"
-
-#: print.node.tpl.php:25
-msgid "By"
-msgstr "Létrehozta"
-
-#: print.node.tpl.php:29
-msgid "Created"
-msgstr "Létrehozva"
-
-#: print.node.tpl.php:44
-#: print.module:190
-msgid "Source URL"
-msgstr "Forráscím"
-
-#: print.node.tpl.php:45
-msgid " (retrieved on "
-msgstr "(letöltve"
-
-#: print.node.tpl.php:53
-msgid "Links:"
-msgstr "Linkek:"
-
 #: print.module:31;38;50
 msgid "Printer-friendly"
 msgstr "Nyomtatóbarát"
 
-#: print.module:39
-#: print.info:0
+#: print.module:39 print.info:0
 msgid "Adds a printer-friendly version link to node pages."
 msgstr "A \"Nyomtatóbarát változat\" hivatkozás mutatása a node-okon."
 
@@ -122,6 +100,10 @@ msgstr "Nyomtatóra küldés"
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Automatikusan meghívja a böngésző nyomtatás funkcióját, amikor a nyomtatóbarát oldal megjelenik."
 
+#: print.module:190;368
+msgid "Source URL"
+msgstr "Forráscím"
+
 #: print.module:198
 msgid "Display source URL"
 msgstr "Forrás cím mutatása"
@@ -181,6 +163,26 @@ msgstr "'nocache' hozzáadása"
 #: print.module:259
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr "Nem szabványos kulcsszó arra, hogy a keresőrobotok ne jelenítsék meg a \"Cached\" hivatkozást."
+
+#: print.module:367
+msgid " (retrieved on "
+msgstr "(letöltve"
+
+#: print.module:373
+msgid "Published on"
+msgstr "Közzétéve"
+
+#: print.module:374
+msgid "By"
+msgstr "Létrehozta"
+
+#: print.module:375
+msgid "Created"
+msgstr "Létrehozva"
+
+#: print.module:386
+msgid "Links:"
+msgstr "Linkek:"
 
 #: print.module:19
 msgid "access print"

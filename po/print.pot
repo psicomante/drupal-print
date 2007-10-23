@@ -3,14 +3,14 @@
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  print.module,v 1.15.2.5.2.1 2007/08/26 23:25:41 jcnventura
+#  print.module,v 1.15.2.5.2.9 2007/10/09 00:28:43 jcnventura
 #  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2007-08-28 00:45+0200\n"
+"POT-Creation-Date: 2007-10-09 02:38+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -18,30 +18,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-
-#: print.node.tpl.php:19
-msgid "Published on"
-msgstr ""
-
-#: print.node.tpl.php:25
-msgid "By"
-msgstr ""
-
-#: print.node.tpl.php:29
-msgid "Created"
-msgstr ""
-
-#: print.node.tpl.php:44 print.module:190
-msgid "Source URL"
-msgstr ""
-
-#: print.node.tpl.php:45
-msgid " (retrieved on "
-msgstr ""
-
-#: print.node.tpl.php:53
-msgid "Links:"
-msgstr ""
 
 #: print.module:31;38;50
 msgid "Printer-friendly"
@@ -127,6 +103,10 @@ msgstr ""
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr ""
 
+#: print.module:190;368
+msgid "Source URL"
+msgstr ""
+
 #: print.module:198
 msgid "Display source URL"
 msgstr ""
@@ -185,6 +165,26 @@ msgstr ""
 
 #: print.module:259
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
+msgstr ""
+
+#: print.module:367
+msgid " (retrieved on "
+msgstr ""
+
+#: print.module:373
+msgid "Published on"
+msgstr ""
+
+#: print.module:374
+msgid "By"
+msgstr ""
+
+#: print.module:375
+msgid "Created"
+msgstr ""
+
+#: print.module:386
+msgid "Links:"
 msgstr ""
 
 #: print.module:19
