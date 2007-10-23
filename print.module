@@ -42,19 +42,6 @@ function print_menu($may_cache) {
       'access'  => user_access('administer print'),
     );
   }
-  else {
-    $nid = arg(1);
-    if (is_numeric($nid)) {
-      $items[] = array(
-        'path' => 'print/'. $nid,
-        'title' => t('Printer-friendly'),
-        'callback' => 'print_node_controller',
-        'callback arguments' => array($nid),
-        'access'   => (user_access('access print')) && node_access('view', node_load($nid)),
-        'type' => MENU_CALLBACK
-      );
-    }
-  }
 
   return $items;
 }
@@ -88,6 +75,21 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
     $links['print'] = array('title' => t('Printer-friendly version'), 'href' => "print/$node->nid", 'attributes' => $attributes);
 
     return $links;
+  }
+}
+
+function print_help($section) {
+  static $output = FALSE;
+  if ($output === FALSE) {
+    $output = TRUE;
+    $path = $_GET['q'];
+    
+    // Do not display link if this is a node
+    if (preg_match("/^node\//i", $path) == 1) {
+      return;
+    }
+    $ret = '<span class="print-page">'.l(t('Printer-friendly version'), 'print/'.$path).'</span>';
+    return $ret;
   }
 }
 
@@ -266,27 +268,28 @@ function print_main_settings() {
  * Module Functions :: Controllers
  ********************************************************************/
 
-function print_node_controller($nid) {
-  print_generate_node($nid);
-}
-
 function print_controller() {
-  // Remove the print/ prefix
-  $args = preg_replace("/(.*?)\/(.*)/", '$2', $_GET['q']);
-  $f = 'print_generate_'. $args;
-
-  if (function_exists($f)) {
-    $f();
+  if ($_GET['q'] === "print") {
+    return drupal_not_found();
   } else {
-    // If there is a path alias with these arguments, generate a printer-friendly version for it
-    $path = db_fetch_array(db_query('SELECT * FROM {url_alias} WHERE dst LIKE "%s"', $args));
-    if ($path) {
-      $nid = str_replace("node/", "", $path["src"]);
+    // Remove the print/ prefix
+    $args = preg_replace("/(.*?)\/(.*)/", '$2', $_GET['q']);
+
+    $nid = $args;
+    if (!is_numeric($nid)) {
+      // Indirect call with print/alias
+      // If there is a path alias with these arguments, generate a printer-friendly version for it
+      $path = drupal_get_normal_path($args);
+      $ret = preg_match("/^node\/(.*)/i", $path, $matches);
+      if ($ret == 1) {
+        $nid = $matches[1];
+      }
     }
     if (is_numeric($nid)) {
       print_generate_node($nid);
     } else {
-      drupal_not_found();
+      // If no content node was found, handle the page printing with the 'printable' engine
+      print_generate_path($args);
     }
   }
 }
@@ -473,6 +476,10 @@ function print_generate_node($nid) {
 
   // We can take a node id
   $node = node_load(array('nid' => $nid));
+  if (!node_access('view', $node)) {
+    // Access is denied
+    return drupal_access_denied();
+  }
 
   //alert other modules that we are generating a printer-friendly page, so they can choose to show/hide info
   $node->printing = true;
@@ -492,6 +499,38 @@ function print_generate_node($nid) {
   unset($node->teaser);
 
   node_invoke_nodeapi($node, 'alter', false, true);
+
+  // Convert the a href elements
+  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
+  $node->body = preg_replace_callback($pattern, "print_rewrite_urls", $node->body);
+
+  init_theme();
+
+  $print = _print_var_generator($node);
+
+  include_once(drupal_get_path('module', 'print') . '/print.node.tpl.php');
+}
+
+function print_generate_path($path) {
+  global $base_url;
+
+  menu_set_active_item($path);
+  // Adapted from index.php.
+  $node->body = menu_execute_active_handler();
+
+  // It may happen that a drupal_not_found is called in the above call
+  if (preg_match('/404 Not Found/', drupal_get_headers()) == 1) {
+    return;
+  }
+
+  switch ($node->body) {
+  case MENU_NOT_FOUND:
+    return drupal_not_found();
+    break;
+  case MENU_ACCESS_DENIED:
+    return drupal_access_denied();
+    break;
+  }
 
   // Convert the a href elements
   $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";

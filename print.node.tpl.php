@@ -16,9 +16,9 @@
     <div class="print-created"><?php print $print["created"] ?></div>
     <p />
     <div class="print-content"><?php print $node->body; ?></div>
+    <div class="print-footer"><?php print $print["footer_message"] ?></div>
     <hr class="print-hr" />
     <div class="print-source_url"><?php print $print["source_url"] ?></div>
     <div class="print-links"><?php print $print["pfp_links"] ?></div>
-    <div class="print-footer"><?php print $print["footer_message"] ?></div>
   </body>
 </html>

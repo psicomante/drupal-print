@@ -21,4 +21,4 @@ a:link img, a:visited img {border:0}
 .print-hr {border:0;height:1px;width:100%;color:#9E9E9E;background-color:#9E9E9E;}
 .print-source_url {}
 .print-links {font-size:small;}
-.print-footer {}
+.print-footer {text-align:center;}
