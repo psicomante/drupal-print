@@ -64,7 +64,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
 
   $print_settings = variable_get('print_settings', print_settings_default());
 
-  if (($type == 'node') && user_access('access print') && ($print_settings['show_link']) && variable_get('print_display_'. $node->type, '1')) {
+  if (($type == 'node' || $type == 'comment') && user_access('access print') && ($print_settings['show_link']) && variable_get('print_display_'. $node->type, '1')) {
     $links = array();
 
     $attributes = array('title' => t('Display a printer-friendly version of this page.'), 'class' => 'print-page');
@@ -72,7 +72,14 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
       $attributes['target'] = '_blank';
     }
 
-    $links['print'] = array('title' => t('Printer-friendly version'), 'href' => "print/$node->nid", 'attributes' => $attributes);
+    if ($type == 'comment') {
+      $query = "comment=$node->cid";
+    }
+
+    $links['print'] = array('href' => "print/$node->nid",
+                            'title' => t('Printer-friendly version'),
+                            'attributes' => $attributes,
+                            'query' => $query);
 
     return $links;
   }
@@ -273,7 +280,9 @@ function print_controller() {
     return drupal_not_found();
   } else {
     // Remove the print/ prefix
-    $args = preg_replace("/(.*?)\/(.*)/", '$2', $_GET['q']);
+    $args = substr($_GET['q'], 6);
+
+    $cid = $_GET['comment'];
 
     $nid = $args;
     if (!is_numeric($nid)) {
@@ -286,7 +295,7 @@ function print_controller() {
       }
     }
     if (is_numeric($nid)) {
-      print_generate_node($nid);
+      print_generate_node($nid, $cid);
     } else {
       // If no content node was found, handle the page printing with the 'printable' engine
       print_generate_path($args);
@@ -333,7 +342,7 @@ function _print_robots_meta_generator() {
 /**
  * Generates the HTML to insert in the template file
  */
-function _print_var_generator($node) {
+function _print_var_generator($node, $cid = NULL) {
   global $base_url;
 
   // print module settings
@@ -366,6 +375,9 @@ function _print_var_generator($node) {
       $print["source_url"] = url("node/$node->nid", NULL, NULL, TRUE);
     } else {
       $print["source_url"] = $base_url . '/' . (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . 'node/' . $node->nid;
+    }
+    if ($cid) {
+      $print["source_url"] .= "#comment-$cid";
     }
     $print["printdate"] = $print_sourceurl_settings['date'] ? (" (".t("retrieved on")." ".format_date(time(), 'small').")") : "";
     $print["source_url"] = "<strong>".t('Source URL').$print["printdate"].":</strong> <a href=\"".$print["source_url"]."\">".$print["source_url"]."</a>";
@@ -468,7 +480,7 @@ function print_rewrite_urls($matches) {
 /**
  * Outputs a printer-friendly page.
  */
-function print_generate_node($nid) {
+function print_generate_node($nid, $cid = NULL) {
   global $base_url;
   global $_print_nid;
 
@@ -487,16 +499,27 @@ function print_generate_node($nid) {
   unset($node->pages);
   unset($node->pages_count);
 
+  unset($node->teaser);
+
   // Adapted (simplified) version of node_view for Drupal 5.x
   $node = (object)$node;
-  $node = node_build_content($node, false, true);
-  // Disable fivestar widget output
-  unset($node->content["fivestar_widget"]);
-  // Disable service links module output
-  unset($node->content["service_links"]);
+  if ($cid) {
+    //Print only the requested comment
+    $comment = _comment_load($cid);
+    $node->body = theme('comment_view', $comment);
+    
+    //Remove the comment title hyperlink
+    $node->body = preg_replace("/(<h3.*?>)(<a.*?>)(.*?)<\/a>(<\/h3>)/", "$1$3$4", $node->body);
+  } else {
+    //Render the node content
+    $node = node_build_content($node, false, true);
+    // Disable fivestar widget output
+    unset($node->content["fivestar_widget"]);
+    // Disable service links module output
+    unset($node->content["service_links"]);
   
-  $node->body = drupal_render($node->content);
-  unset($node->teaser);
+    $node->body = drupal_render($node->content);
+  }
 
   node_invoke_nodeapi($node, 'alter', false, true);
 
@@ -506,7 +529,7 @@ function print_generate_node($nid) {
 
   init_theme();
 
-  $print = _print_var_generator($node);
+  $print = _print_var_generator($node, $cid);
 
   include_once(drupal_get_path('module', 'print') . '/print.node.tpl.php');
 }
@@ -514,8 +537,13 @@ function print_generate_node($nid) {
 function print_generate_path($path) {
   global $base_url;
 
+  $path = drupal_get_normal_path($path);
+  $_GET['q'] = $path;
+  _menu_append_contextual_items();
+
   menu_set_active_item($path);
   // Adapted from index.php.
+  $node = new StdClass();
   $node->body = menu_execute_active_handler();
 
   // It may happen that a drupal_not_found is called in the above call
