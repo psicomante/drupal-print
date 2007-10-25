@@ -50,7 +50,7 @@ function print_menu($may_cache) {
 function print_link($type, $node = NULL, $teaser = FALSE) {
   $print_settings = variable_get('print_settings', print_settings_default());
   // No link is shown for several motives...
-  if ( !($teaser) && ($node->type == 'comment' || $node->type == 'node') &&
+  if ( !($teaser) && ($node->type != 'book') &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && variable_get('print_display_comment', '0')) ||
        ($type == 'node' && variable_get('print_display_'. $node->type, '1')))) {
@@ -77,16 +77,16 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
  * Implementation of hook_help()
  */
 function print_help($section) {
-  static $output = FALSE;
-
   $print_settings = variable_get('print_settings', print_settings_default());
-  if ($output === FALSE) {
-    $output = TRUE;
-    $path = $_GET['q'];
+  $path = $_GET['q'];
+
+  if (($print_settings['show_link']) && ($print_settings['show_sys_link']) &&
+      user_access('access print') && (preg_match("/^node\//i", $path) == 0)) {
+    static $output = FALSE;
+
+    if ($output === FALSE) {
+      $output = TRUE;
     
-    // Do not display link if this is a node
-    if ((preg_match("/^node\//i", $path) == 0) && ($print_settings['show_link']) 
-        && ($print_settings['show_sys_link'])) {
       return print_insert_link();
     }
   }

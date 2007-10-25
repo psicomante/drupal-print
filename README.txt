@@ -20,12 +20,6 @@ INSTALLATION:
 see the INSTALL.txt file in this directory.
 
 ********************************************************************
-TODO:
-
-- Add ability to optionally attach comments to nodes for printing
-  by calling comment_render().
-
-********************************************************************
 UPCOMING FEATURES:
 
 - None planned
