@@ -50,7 +50,7 @@ function print_menu($may_cache) {
 function print_link($type, $node = NULL, $teaser = FALSE) {
   $print_settings = variable_get('print_settings', print_settings_default());
   // No link is shown for several motives...
-  if ( !($teaser) &&
+  if ( !($teaser) && ($node->type == 'comment' || $node->type == 'node') &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && variable_get('print_display_comment', '0')) ||
        ($type == 'node' && variable_get('print_display_'. $node->type, '1')))) {
@@ -78,15 +78,17 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
  */
 function print_help($section) {
   static $output = FALSE;
+
+  $print_settings = variable_get('print_settings', print_settings_default());
   if ($output === FALSE) {
     $output = TRUE;
     $path = $_GET['q'];
     
     // Do not display link if this is a node
-    if (preg_match("/^node\//i", $path) == 1) {
-      return;
+    if ((preg_match("/^node\//i", $path) == 0) && ($print_settings['show_link']) 
+        && ($print_settings['show_sys_link'])) {
+      return print_insert_link();
     }
-    return print_insert_link("print/$path");
   }
 }
 
@@ -119,7 +121,7 @@ function print_form_alter($form_id, &$form) {
  ********************************************************************/
 
 function print_settings_default() {
-  return array('show_link' => 1, 'logo_url' => '', 'css' => '', 'urls' => 1, 'comments' => 0, 'newwindow' => 0, 'sendtoprinter' => 0);
+  return array('show_link' => 1, 'show_sys_link' => 1, 'logo_url' => '', 'css' => '', 'urls' => 1, 'comments' => 0, 'newwindow' => 0, 'sendtoprinter' => 0);
 }
 
 function print_sourceurl_settings_default() {
@@ -144,6 +146,14 @@ function print_main_settings() {
     '#default_value' => $print_settings['show_link'],
     '#options' => array(t("Disabled"), t("Enabled")),
     '#description' => t("Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."),
+  );
+
+  $form['print_settings']['show_sys_link'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show link in system (non-content) pages'),
+    '#return_value' => 1,
+    '#default_value' => $print_settings['show_sys_link'],
+    '#description' => t('Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules.'),
   );
 
   $form['print_settings']['logo_url'] = array(
@@ -496,7 +506,10 @@ function print_format_link() {
                'attributes' => $attributes);
 }
 
-function print_insert_link($path) {
+function print_insert_link($path = NULL) {
+  if ($path === NULL) {
+    $path = "print/".$_GET['q'];
+  }
   $format = print_format_link();
   return '<span class="print">'.l($format['text'], $path, $format['attributes'], NULL, NULL, TRUE, FALSE).'</span>';
 }
