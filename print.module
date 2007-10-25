@@ -6,21 +6,19 @@
  * Display printer-friendly versions of nodes (except books)
  */
 
-$_print_nid = 0;
-
 /********************************************************************
- * Drupal Hooks :: Overview
+ * Drupal Hooks
  ********************************************************************/
 
 /**
- * Permissions
+ * Implementation of hook_perm()
  */
 function print_perm() {
   return array('access print', 'administer print');
 }
 
 /**
- * Implementation of hook_menu().
+ * Implementation of hook_menu()
  */
 function print_menu($may_cache) {
   $items = array();
@@ -46,45 +44,38 @@ function print_menu($may_cache) {
   return $items;
 }
 
-/********************************************************************
- * Drupal Hooks :: Core
- ********************************************************************/
-
 /**
  * Implementation of hook_link().
  */
 function print_link($type, $node = NULL, $teaser = FALSE) {
-/*  if ($type == 'comment' && !variable_get('print_display_comment', '1')) {
-    return;
-  }*/
-
-  if ( ($node->type == 'book') || ($teaser) ) {
-    return;
-  }
-
   $print_settings = variable_get('print_settings', print_settings_default());
-
-  if (($type == 'node' || $type == 'comment') && user_access('access print') && ($print_settings['show_link']) && variable_get('print_display_'. $node->type, '1')) {
+  // No link is shown for several motives...
+  if ( !($teaser) &&
+      ($print_settings['show_link']) && user_access('access print') &&
+      (($type == 'comment' && variable_get('print_display_comment', '0')) ||
+       ($type == 'node' && variable_get('print_display_'. $node->type, '1')))) {
     $links = array();
 
-    $attributes = array('title' => t('Display a printer-friendly version of this page.'), 'class' => 'print-page');
-    if ($print_settings['newwindow']) {
-      $attributes['target'] = '_blank';
-    }
+    $format = print_format_link();
 
     if ($type == 'comment') {
       $query = "comment=$node->cid";
     }
 
     $links['print'] = array('href' => "print/$node->nid",
-                            'title' => t('Printer-friendly version'),
-                            'attributes' => $attributes,
+                            'title' => $format['text'],
+                            'attributes' => $format['attributes'],
                             'query' => $query);
 
     return $links;
+  } else {
+    return;
   }
 }
 
+/**
+ * Implementation of hook_help()
+ */
 function print_help($section) {
   static $output = FALSE;
   if ($output === FALSE) {
@@ -95,11 +86,13 @@ function print_help($section) {
     if (preg_match("/^node\//i", $path) == 1) {
       return;
     }
-    $ret = '<span class="print-page">'.l(t('Printer-friendly version'), 'print/'.$path).'</span>';
-    return $ret;
+    return print_insert_link("print/$path");
   }
 }
 
+/**
+ * Implementation of hook_form_alter()
+ */
 function print_form_alter($form_id, &$form) {
   // Add the node-type settings option to activate the printer-friendly version link
   if ('node_type_form' == $form_id) {
@@ -110,20 +103,23 @@ function print_form_alter($form_id, &$form) {
       '#default_value' => variable_get('print_display_'. $form['#node_type']->type, '1'),
       '#description' => t('Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
     );
-  }
-/*  elseif ('comment_admin_settings' == $form_id) {
+  } elseif ('comment_admin_settings' == $form_id) {
     $form['viewing_options']['print_display_comment'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show printer-friendly version link'),
       '#return_value' => 1,
-      '#default_value' => variable_get('print_display_comment', '1'),
+      '#default_value' => variable_get('print_display_comment', '0'),
       '#description' => t('Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
     );
-  }*/
+  }
 }
 
+/********************************************************************
+ * Admin Settings: Print
+ ********************************************************************/
+
 function print_settings_default() {
-  return array('show_link' => 1, 'logo_url' => '', 'css' => '', 'urls' => 1, 'newwindow' => 0, 'sendtoprinter' => 0);
+  return array('show_link' => 1, 'logo_url' => '', 'css' => '', 'urls' => 1, 'comments' => 0, 'newwindow' => 0, 'sendtoprinter' => 0);
 }
 
 function print_sourceurl_settings_default() {
@@ -174,6 +170,14 @@ function print_main_settings() {
     '#return_value' => 1,
     '#default_value' => $print_settings['urls'],
     '#description' => t('If set, links in your page will be de-activated, and a list of the destination URLs will be displayed at the bottom of the page.'),
+  );
+
+  $form['print_settings']['comments'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include comments in print-friendly version'),
+    '#return_value' => 1,
+    '#default_value' => $print_settings['comments'],
+    '#description' => t('When this option is active, user comments are also included in the printer-friendly version.'),
   );
 
   $form['print_settings']['newwindow'] = array(
@@ -272,7 +276,7 @@ function print_main_settings() {
 }
 
 /********************************************************************
- * Module Functions :: Controllers
+ * Module Functions :: Controller
  ********************************************************************/
 
 function print_controller() {
@@ -304,7 +308,7 @@ function print_controller() {
 }
 
 /********************************************************************
- * Module Functions
+ * Module Functions : Auxiliary
  ********************************************************************/
 
 /**
@@ -414,7 +418,6 @@ function _print_var_generator($node, $cid = NULL) {
  */
 function print_rewrite_urls($matches) {
   global $base_url;
-  global $_print_nid;
 
   // Get value of Printer-friendly URLs setting
   $print_settings = variable_get('print_settings', print_settings_default());
@@ -448,8 +451,12 @@ function print_rewrite_urls($matches) {
         if (substr($url, 0, 1) == "#") {
           // URL is an anchor tag
           if ($pfurls) {
+            $path = substr($_GET['q'], 6);
+            if (is_numeric($path)) {
+              $path = "node/$path";
+            }
             // Printer-friendly URLs is on, so we need to make it absolute
-            $newurl = url("node/" . $_print_nid, NULL, substr(urldecode($url),1), TRUE);
+            $newurl = url($path, NULL, substr(urldecode($url),1), TRUE);
           }
         } else {
           // URL is relative, convert it into absolute URL
@@ -477,14 +484,57 @@ function print_rewrite_urls($matches) {
   return $ret;
 }
 
+function print_format_link() {
+  $print_settings = variable_get('print_settings', print_settings_default());
+  $attributes = array('title' => t('Display a printer-friendly version of this page.'), 
+                      'class' => 'print-page');
+  if ($print_settings['newwindow']) {
+    $attributes['target'] = '_blank';
+  }
+
+  return array('text' => t('Printer-friendly version'),
+               'attributes' => $attributes);
+}
+
+function print_insert_link($path) {
+  $format = print_format_link();
+  return '<span class="print">'.l($format['text'], $path, $format['attributes'], NULL, NULL, TRUE, FALSE).'</span>';
+}
+
+function print_get_template($type = NULL) {
+  if ($type) {
+    // If the node type is known, then try to find that type's template file
+    // First in the theme directory
+    $filename = drupal_get_path('theme', $GLOBALS['theme_key']) . "/print.$type.tpl.php";
+    if (file_exists($filename)) {
+      return $filename;
+    }
+    // Then in the module directory
+    $filename = drupal_get_path('module', 'print') . "/print.$type.tpl.php";
+    if (file_exists($filename)) {
+      return $filename;
+    }
+  }
+  // Search for a generic template file
+  // First in the theme directory
+  $filename = drupal_get_path('theme', $GLOBALS['theme_key']) . "/print.tpl.php";
+  if (file_exists($filename)) {
+    return $filename;
+  }
+  // Then in the module directory
+  // This one must always exist (provided with the module!)
+  return drupal_get_path('module', 'print') . "/print.tpl.php";
+}
+
+/********************************************************************
+ * Module Functions : Content renderers
+ ********************************************************************/
+
 /**
- * Outputs a printer-friendly page.
+ * Outputs a printer-friendly page. Used for content types
  */
 function print_generate_node($nid, $cid = NULL) {
   global $base_url;
-  global $_print_nid;
-
-  $_print_nid = $nid;
 
   // We can take a node id
   $node = node_load(array('nid' => $nid));
@@ -500,17 +550,9 @@ function print_generate_node($nid, $cid = NULL) {
   unset($node->pages_count);
 
   unset($node->teaser);
-
-  // Adapted (simplified) version of node_view for Drupal 5.x
   $node = (object)$node;
-  if ($cid) {
-    //Print only the requested comment
-    $comment = _comment_load($cid);
-    $node->body = theme('comment_view', $comment);
-    
-    //Remove the comment title hyperlink
-    $node->body = preg_replace("/(<h3.*?>)(<a.*?>)(.*?)<\/a>(<\/h3>)/", "$1$3$4", $node->body);
-  } else {
+  if ($cid === NULL) {
+    // Adapted (simplified) version of node_view for Drupal 5.x
     //Render the node content
     $node = node_build_content($node, false, true);
     // Disable fivestar widget output
@@ -519,6 +561,23 @@ function print_generate_node($nid, $cid = NULL) {
     unset($node->content["service_links"]);
   
     $node->body = drupal_render($node->content);
+  }
+
+  $print_settings = variable_get('print_settings', print_settings_default());
+
+  if (($cid != NULL) || ($print_settings['comments'])) {
+    //Print only the requested comment (or if $cid is NULL, all of them)
+    $comments = comment_render($node, $cid);
+    
+    //Remove the comment title hyperlink
+    $comments = preg_replace("/(<h3.*?>)(<a.*?>)(.*?)<\/a>(<\/h3>)/", "$1$3$4", $comments);
+    //Remove the comment links
+    $comments = preg_replace("/\s*<div class=\"links\">.*?<\/div>/sim", "", $comments);
+    if ($cid != NULL) {
+      // Single comment requested, output only the comment
+      unset($node->body);
+    }
+    $node->body .= $comments;
   }
 
   node_invoke_nodeapi($node, 'alter', false, true);
@@ -531,9 +590,12 @@ function print_generate_node($nid, $cid = NULL) {
 
   $print = _print_var_generator($node, $cid);
 
-  include_once(drupal_get_path('module', 'print') . '/print.node.tpl.php');
+  include_once(print_get_template($node->type));
 }
 
+/**
+ * Outputs a printer-friendly page. Used for drupal core pages.
+ */
 function print_generate_path($path) {
   global $base_url;
 
@@ -568,7 +630,7 @@ function print_generate_path($path) {
 
   $print = _print_var_generator($node);
 
-  include_once(drupal_get_path('module', 'print') . '/print.node.tpl.php');
+  include_once(print_get_template());
 }
 
 
