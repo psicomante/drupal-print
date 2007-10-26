@@ -6,6 +6,8 @@
  * Display printer-friendly versions of nodes (except books)
  */
 
+define("PRINT_PATH", "print");
+
 /********************************************************************
  * Drupal Hooks
  ********************************************************************/
@@ -25,7 +27,7 @@ function print_menu($may_cache) {
 
   if ($may_cache) {
     $items[] = array(
-      'path' => 'print',
+      'path' => PRINT_PATH,
       'title' => t('Printer-friendly'),
       'callback' => 'print_controller',
       'access' => user_access('access print'),
@@ -62,7 +64,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
       $query = "comment=$node->cid";
     }
 
-    $links['print'] = array('href' => "print/$node->nid",
+    $links['print'] = array('href' => PRINT_PATH."/".$node->nid,
                             'title' => $format['text'],
                             'attributes' => $format['attributes'],
                             'query' => $query);
@@ -187,7 +189,7 @@ function print_main_settings() {
     '#title' => t('Include comments in print-friendly version'),
     '#return_value' => 1,
     '#default_value' => $print_settings['comments'],
-    '#description' => t('When this option is active, user comments are also included in the printer-friendly version.'),
+    '#description' => t('When this option is active, user comments are also included in the printer-friendly version. Requires the comment module.'),
   );
 
   $form['print_settings']['newwindow'] = array(
@@ -290,30 +292,26 @@ function print_main_settings() {
  ********************************************************************/
 
 function print_controller() {
-  if ($_GET['q'] === "print") {
-    return drupal_not_found();
+  // Remove the print/ prefix
+  $args = substr($_GET['q'], strlen(PRINT_PATH)+1);
+
+  $cid = $_GET['comment'];
+
+  $nid = $args;
+  if (!is_numeric($nid)) {
+    // Indirect call with print/alias
+    // If there is a path alias with these arguments, generate a printer-friendly version for it
+    $path = drupal_get_normal_path($args);
+    $ret = preg_match("/^node\/(.*)/i", $path, $matches);
+    if ($ret == 1) {
+      $nid = $matches[1];
+    }
+  }
+  if (is_numeric($nid)) {
+    print_generate_node($nid, $cid);
   } else {
-    // Remove the print/ prefix
-    $args = substr($_GET['q'], 6);
-
-    $cid = $_GET['comment'];
-
-    $nid = $args;
-    if (!is_numeric($nid)) {
-      // Indirect call with print/alias
-      // If there is a path alias with these arguments, generate a printer-friendly version for it
-      $path = drupal_get_normal_path($args);
-      $ret = preg_match("/^node\/(.*)/i", $path, $matches);
-      if ($ret == 1) {
-        $nid = $matches[1];
-      }
-    }
-    if (is_numeric($nid)) {
-      print_generate_node($nid, $cid);
-    } else {
-      // If no content node was found, handle the page printing with the 'printable' engine
-      print_generate_path($args);
-    }
+    // If no content node was found, handle the page printing with the 'printable' engine
+    print_generate_path($args);
   }
 }
 
@@ -366,7 +364,8 @@ function _print_var_generator($node, $cid = NULL) {
   $print["language"] = $GLOBALS['locale'];
   $print["title"] = $node->title;
   $print["robots_meta"] = _print_robots_meta_generator();
-  $print["base_href"] = "<base href=\"".$base_url."/node/".$node->nid."\" />\n";
+//  $print["base_href"] = "<base href=\"".$base_url."/node/".$node->nid."\" />\n";
+  $print["base_href"] = "<base href=\"".url("node/$node->nid", NULL, NULL, TRUE)."\" />\n";
   $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"".theme_get_setting("favicon")."\" type=\"image/x-icon\"/>\n" : "";
 
   if (!empty($print_settings['css'])) {
@@ -461,7 +460,7 @@ function print_rewrite_urls($matches) {
         if (substr($url, 0, 1) == "#") {
           // URL is an anchor tag
           if ($pfurls) {
-            $path = substr($_GET['q'], 6);
+            $path = substr($_GET['q'], strlen(PRINT_PATH)+1);
             if (is_numeric($path)) {
               $path = "node/$path";
             }
@@ -508,7 +507,7 @@ function print_format_link() {
 
 function print_insert_link($path = NULL) {
   if ($path === NULL) {
-    $path = "print/".$_GET['q'];
+    $path = PRINT_PATH."/".$_GET['q'];
   }
   $format = print_format_link();
   return '<span class="print">'.l($format['text'], $path, $format['attributes'], NULL, NULL, TRUE, FALSE).'</span>';
@@ -578,7 +577,7 @@ function print_generate_node($nid, $cid = NULL) {
 
   $print_settings = variable_get('print_settings', print_settings_default());
 
-  if (($cid != NULL) || ($print_settings['comments'])) {
+  if (function_exists(comment_render) && (($cid != NULL) || ($print_settings['comments']))) {
     //Print only the requested comment (or if $cid is NULL, all of them)
     $comments = comment_render($node, $cid);
     
