@@ -85,8 +85,8 @@ msgid "Printer-friendly URLs list"
 msgstr "Druckoptimierte URL-Liste"
 
 #: print.module:184
-msgid "If set, links in your page will be de-activated, and a list of the destination URLs will be displayed at the bottom of the page."
-msgstr "Wenn aktiviert, werden Links im Text entfernt und am Ende der Seite in einer Liste zusammengefasst dargestellt."
+msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
+msgstr "Wenn aktiviert, werden Links im Text am Ende der Seite in einer Liste zusammengefasst dargestellt."
 
 #: print.module:189
 msgid "Include comments in print-friendly version"

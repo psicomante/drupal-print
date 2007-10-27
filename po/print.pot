@@ -84,7 +84,7 @@ msgid "Printer-friendly URLs list"
 msgstr ""
 
 #: print.module:184
-msgid "If set, links in your page will be de-activated, and a list of the destination URLs will be displayed at the bottom of the page."
+msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr ""
 
 #: print.module:189

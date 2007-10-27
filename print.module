@@ -181,7 +181,7 @@ function print_main_settings() {
     '#title' => t('Printer-friendly URLs list'),
     '#return_value' => 1,
     '#default_value' => $print_settings['urls'],
-    '#description' => t('If set, links in your page will be de-activated, and a list of the destination URLs will be displayed at the bottom of the page.'),
+    '#description' => t('If set, a list of the destination URLs for the page links will be displayed at the bottom of the page.'),
   );
 
   $form['print_settings']['comments'] = array(
