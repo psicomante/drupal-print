@@ -509,6 +509,7 @@ function print_format_link() {
                       'class' => 'print-page');
   if ($print_settings['newwindow']) {
     $attributes['target'] = '_blank';
+//    $attributes['onclick'] = 'window.open(this.href); return false';
   }
 
   return array('text' => t('Printer-friendly version'),
