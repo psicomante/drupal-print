@@ -55,7 +55,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
   if ( !($teaser) && ($node->type != 'book') &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && variable_get('print_display_comment', '0')) ||
-       ($type == 'node' && variable_get('print_display_'. $node->type, '1')))) {
+      ($type == 'node' && variable_get('print_display_'. $node->type, '1')))) {
     $links = array();
 
     $format = print_format_link();
@@ -64,13 +64,14 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
       $query = "comment=$node->cid";
     }
 
-    $links['print'] = array('href' => PRINT_PATH."/".$node->nid,
+    $links['print'] = array('href' => PRINT_PATH ."/". $node->nid,
                             'title' => $format['text'],
                             'attributes' => $format['attributes'],
                             'query' => $query);
 
     return $links;
-  } else {
+  } 
+  else {
     return;
   }
 }
@@ -107,7 +108,8 @@ function print_form_alter($form_id, &$form) {
       '#default_value' => variable_get('print_display_'. $form['#node_type']->type, '1'),
       '#description' => t('Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
     );
-  } elseif ('comment_admin_settings' == $form_id) {
+  }
+  elseif ('comment_admin_settings' == $form_id) {
     $form['viewing_options']['print_display_comment'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show printer-friendly version link'),
@@ -309,7 +311,8 @@ function print_controller() {
   }
   if (is_numeric($nid)) {
     print_generate_node($nid, $cid);
-  } else {
+  } 
+  else {
     // If no content node was found, handle the page printing with the 'printable' engine
     print_generate_path($args);
   }
@@ -328,23 +331,24 @@ function _print_robots_meta_generator() {
   $robots_settings = variable_get('print_robot_settings', print_robot_settings_default());
   $robots_meta = array();
 
-  if(!empty($robots_settings['noindex'])) {
+  if (!empty($robots_settings['noindex'])) {
     $robots_meta[] = 'noindex';
   }
-  if(!empty($robots_settings['nofollow'])) {
+  if (!empty($robots_settings['nofollow'])) {
     $robots_meta[] = 'nofollow';
   }
-  if(!empty($robots_settings['noarchive'])) {
+  if (!empty($robots_settings['noarchive'])) {
     $robots_meta[] = 'noarchive';
   }
-  if(!empty($robots_settings['nocache'])) {
+  if (!empty($robots_settings['nocache'])) {
     $robots_meta[] = 'nocache';
   }
 
-  if(sizeof($robots_meta) > 0) {
+  if (sizeof($robots_meta) > 0) {
     $robots_meta = isset($robots_meta[1]) ? implode(', ', $robots_meta) : $robots_meta[0];
     $robots_meta = '<meta name="robots" content="'. $robots_meta ."\" />\n";
-  } else {
+  } 
+  else {
     $robots_meta = '';
   }
 
@@ -365,42 +369,45 @@ function _print_var_generator($node, $cid = NULL) {
   $print["title"] = $node->title;
   $print["robots_meta"] = _print_robots_meta_generator();
 //  $print["base_href"] = "<base href=\"".$base_url."/node/".$node->nid."\" />\n";
-  $print["base_href"] = "<base href=\"".url("node/$node->nid", NULL, NULL, TRUE)."\" />\n";
-  $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"".theme_get_setting("favicon")."\" type=\"image/x-icon\"/>\n" : "";
+  $print["base_href"] = "<base href=\"". url("node/$node->nid", NULL, NULL, TRUE) ."\" />\n";
+  $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"". theme_get_setting("favicon") ."\" type=\"image/x-icon\"/>\n" : "";
 
   if (!empty($print_settings['css'])) {
-    $print["css"] = "<style type=\"text/css\">@import \"".$print_settings['css']."\";</style>\n";
-  } else {
+    $print["css"] = "<style type=\"text/css\">@import \"". $print_settings['css'] ."\";</style>\n";
+  } 
+  else {
     ob_start();
-    include_once(drupal_get_path('module', 'print') . "/print.css");
-    $print["css"] = "<style type=\"text/css\">".ob_get_contents()."</style>\n";
+    include_once(drupal_get_path('module', 'print') ."/print.css");
+    $print["css"] = "<style type=\"text/css\">". ob_get_contents() ."</style>\n";
     ob_end_clean();
   }
 
   $print["sendtoprinter"] = $print_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
     
   $print["logo"] = !empty($print_settings['logo_url']) ? $print_settings['logo_url'] : theme_get_setting('logo');
-  $print["logo"] = $print["logo"] ? "<img class=\"print-logo\" src=\"".$print["logo"]."\" alt=\"\" />\n" : "";
+  $print["logo"] = $print["logo"] ? "<img class=\"print-logo\" src=\"". $print["logo"] ."\" alt=\"\" />\n" : "";
 
   /* Grab and format the src URL */
   if ($print_sourceurl_settings['enabled'] == 1) {
     if (empty($print_sourceurl_settings['forcenode'])) {
       $print["source_url"] = url("node/$node->nid", NULL, NULL, TRUE);
-    } else {
-      $print["source_url"] = $base_url . '/' . (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . 'node/' . $node->nid;
+    } 
+    else {
+      $print["source_url"] = $base_url .'/'. (((bool)variable_get('clean_url', '0')) ? '' : '?q=') .'node/'. $node->nid;
     }
     if ($cid) {
       $print["source_url"] .= "#comment-$cid";
     }
-    $print["printdate"] = $print_sourceurl_settings['date'] ? (" (".t("retrieved on")." ".format_date(time(), 'small').")") : "";
-    $print["source_url"] = "<strong>".t('Source URL').$print["printdate"].":</strong> <a href=\"".$print["source_url"]."\">".$print["source_url"]."</a>";
-  } else {
+    $print["printdate"] = $print_sourceurl_settings['date'] ? (" (". t("retrieved on") ." ". format_date(time(), 'small') .")") : "";
+    $print["source_url"] = "<strong>". t('Source URL') . $print["printdate"] .":</strong> <a href=\"". $print["source_url"] ."\">". $print["source_url"] ."</a>";
+  } 
+  else {
     $print["source_url"] = "";
   }
 
-  $print["site_name"] = variable_get('site_name', 0) ? (t('Published on')." ".variable_get('site_name', 0)." (".l($base_url, $base_url).")") : "";
-  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? t('By')." ".$node->name : "";
-  $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? t('Created')." ".format_date($node->created, 'small') : "";
+  $print["site_name"] = variable_get('site_name', 0) ? (t('Published on') ." ". variable_get('site_name', 0) ." (". l($base_url, $base_url) .")") : "";
+  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? t('By') ." ". $node->name : "";
+  $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? t('Created') ." ". format_date($node->created, 'small') : "";
 
   // Display the collected links at the bottom of the page. Code once taken from Kjartan Mannes' project.module
   if (!empty($print_settings['urls'])) {
@@ -411,11 +418,11 @@ function _print_var_generator($node, $cid = NULL) {
       for ($i = 0; $i < $max; $i++) {
         $print["pfp_links"] .= '['. ($i + 1) .'] '. $urls[$i] ."<br />\n";
       }
-      $print["pfp_links"] = "<p><strong>".t('Links:')."</strong><br />".$print["pfp_links"]."</p>";
+      $print["pfp_links"] = "<p><strong>". t('Links:') ."</strong><br />". $print["pfp_links"] ."</p>";
     }
   }
 
-  $print["footer_message"] = filter_xss_admin(variable_get('site_footer', FALSE)) . "\n" . theme('blocks', 'footer') ;
+  $print["footer_message"] = filter_xss_admin(variable_get('site_footer', FALSE)) ."\n". theme('blocks', 'footer') ;
 
   return $print;
 }
@@ -451,12 +458,13 @@ function print_rewrite_urls($matches) {
     if (preg_match("/^href|src/i", $attribs[$i]) > 0) {
       // We may need to rewrite the URL, so let's isolate it
       preg_match("/.*?=(.*)/is", $attribs[$i], $urls);
-      $url = trim($urls[1]," \t\n\r\0\x0B\"\'");
+      $url = trim($urls[1], " \t\n\r\0\x0B\"\'");
 
       if (strpos($url, '://') || preg_match("/^mailto:.*?@.*?\..*?$/iu", $url)) {
         // URL is absolute, do nothing
         $newurl = urldecode($url);
-      } else {
+      } 
+      else {
         if (substr($url, 0, 1) == "#") {
           // URL is an anchor tag
           if ($pfurls) {
@@ -465,16 +473,18 @@ function print_rewrite_urls($matches) {
               $path = "node/$path";
             }
             // Printer-friendly URLs is on, so we need to make it absolute
-            $newurl = url($path, NULL, substr(urldecode($url),1), TRUE);
+            $newurl = url($path, NULL, substr(urldecode($url), 1), TRUE);
           }
-        } else {
+        } 
+        else {
           // URL is relative, convert it into absolute URL
           $clean_url = (bool)variable_get('clean_url', '0');
           if ((!$clean_url) && (preg_match("/^[\/]?\?q=.*/i", $url))) {
             // If Clean URLs is disabled, and it starts with q=?, just prepend with the base URL
-            $newurl = $base_url . '/' . trim(urldecode($url),"/");
-          } else {
-            $newurl = url(trim(urldecode($url),"/"), NULL, NULL, TRUE);
+            $newurl = $base_url .'/'. trim(urldecode($url), "/");
+          } 
+          else {
+            $newurl = url(trim(urldecode($url), "/"), NULL, NULL, TRUE);
           }
           $matches[1] = str_replace($url, $newurl, $matches[1]);
         }
@@ -482,11 +492,11 @@ function print_rewrite_urls($matches) {
     }
   }
 
-  $ret = '<' . $matches[1] . '>';
+  $ret = '<'. $matches[1] .'>';
   if ($attribs[0] == "a") {
-    $ret .= $matches[2] . '</a>';
+    $ret .= $matches[2] .'</a>';
     if (($pfurls) && ($newurl)) {
-      $ret .= ' <span class="print-footnote">[' . print_friendly_urls(trim(stripslashes($newurl))) . ']</span>';
+      $ret .= ' <span class="print-footnote">['. print_friendly_urls(trim(stripslashes($newurl))) .']</span>';
     }
   }
 
@@ -507,35 +517,35 @@ function print_format_link() {
 
 function print_insert_link($path = NULL) {
   if ($path === NULL) {
-    $path = PRINT_PATH."/".$_GET['q'];
+    $path = PRINT_PATH ."/". $_GET['q'];
   }
   $format = print_format_link();
-  return '<span class="print">'.l($format['text'], $path, $format['attributes'], NULL, NULL, TRUE, FALSE).'</span>';
+  return '<span class="print">'. l($format['text'], $path, $format['attributes'], NULL, NULL, TRUE, FALSE) .'</span>';
 }
 
 function print_get_template($type = NULL) {
   if ($type) {
     // If the node type is known, then try to find that type's template file
     // First in the theme directory
-    $filename = drupal_get_path('theme', $GLOBALS['theme_key']) . "/print.$type.tpl.php";
+    $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.$type.tpl.php";
     if (file_exists($filename)) {
       return $filename;
     }
     // Then in the module directory
-    $filename = drupal_get_path('module', 'print') . "/print.$type.tpl.php";
+    $filename = drupal_get_path('module', 'print') ."/print.$type.tpl.php";
     if (file_exists($filename)) {
       return $filename;
     }
   }
   // Search for a generic template file
   // First in the theme directory
-  $filename = drupal_get_path('theme', $GLOBALS['theme_key']) . "/print.tpl.php";
+  $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.tpl.php";
   if (file_exists($filename)) {
     return $filename;
   }
   // Then in the module directory
   // This one must always exist (provided with the module!)
-  return drupal_get_path('module', 'print') . "/print.tpl.php";
+  return drupal_get_path('module', 'print') ."/print.tpl.php";
 }
 
 /********************************************************************
@@ -617,7 +627,7 @@ function print_generate_path($path) {
 
   menu_set_active_item($path);
   // Adapted from index.php.
-  $node = new StdClass();
+  $node = new stdClass();
   $node->body = menu_execute_active_handler();
 
   // It may happen that a drupal_not_found is called in the above call
