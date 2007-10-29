@@ -41,11 +41,11 @@ msgstr "página de configuração"
 
 #: print.module:114
 msgid "Show printer-friendly version link in individual comments"
-msgstr ""
+msgstr "Mostrar ligação para a versão para imprimir em cada comentário"
 
 #: print.module:117
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr ""
+msgstr "Mostra uma ligação para a versão para imprimir do comentário. Configuravel também em !settings"
 
 #: print.module:148
 msgid "Printer-friendly page link"

@@ -79,9 +79,8 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
 /**
  * Implementation of hook_help()
  */
-function print_help($section) {
+function print_help($path) {
   $print_settings = variable_get('print_settings', print_settings_default());
-  $path = $_GET['q'];
 
   if (($print_settings['show_link']) && ($print_settings['show_sys_link']) &&
       user_access('access print') && (preg_match("/^node\//i", $path) == 0)) {
@@ -112,10 +111,10 @@ function print_form_alter($form_id, &$form) {
   elseif ('comment_admin_settings' == $form_id) {
     $form['viewing_options']['print_display_comment'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Show printer-friendly version link'),
+      '#title' => t('Show printer-friendly version link in individual comments'),
       '#return_value' => 1,
       '#default_value' => variable_get('print_display_comment', '0'),
-      '#description' => t('Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
+      '#description' => t('Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
     );
   }
 }
@@ -623,8 +622,6 @@ function print_generate_path($path) {
   global $base_url;
 
   $path = drupal_get_normal_path($path);
-  $_GET['q'] = $path;
-  _menu_append_contextual_items();
 
   menu_set_active_item($path);
   // Adapted from index.php.
