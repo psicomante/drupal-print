@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php  print $print["language"] ?>" xml:lang="<?php  print $print["language"] ?>">
   <head>
     <title><?php  print $print["title"] ?></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <?php  print $print["head"] ?>
     <?php  print $print["robots_meta"] ?>
     <?php  print $print["base_href"] ?>
     <?php  print $print["favicon"] ?>
