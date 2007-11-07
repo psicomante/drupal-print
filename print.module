@@ -52,7 +52,7 @@ function print_menu($may_cache) {
 function print_link($type, $node = NULL, $teaser = FALSE) {
   $print_settings = variable_get('print_settings', print_settings_default());
   // No link is shown for several motives...
-  if ( !($teaser) && ($node->type != 'book') &&
+  if ( !($teaser) && ($node->type != 'book') && (!function_exists('book_link')) &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && variable_get('print_display_comment', '0')) ||
       ($type == 'node' && variable_get('print_display_'. $node->type, '1')))) {
