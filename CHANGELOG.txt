@@ -1,3 +1,15 @@
+November 7, 2007
+      Commit #87160 by jcnventura at 03:39
+        Sync documentation in HEAD with the 5.x version
+      Commit #87159 by jcnventura at 03:30
+        Russian translation by VladSavitsky. Thanks!
+      Commit #87155 by jcnventura at 02:26
+        Remove duplicate PF link in book pages
+November 6, 2007
+      Commit #87144 by jcnventura at 20:56
+        Updated the installation instructions (INSTALL.txt)
+      Commit #87136 by jcnventura at 19:34
+        Update documentation (README, CREDITS and CHANGELOG)
 October 31, 2007
       Commit #86493 by jcnventura at 12:58
         Fix #172100: use drupal_get_html_head to starting building the head section
