@@ -3,14 +3,14 @@
 # French Translation of Drupal
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  print.module,v 1.15.2.5.2.20 2007/10/28 18:43:59 jcnventura
+#  print.module,v 1.15.2.5.2.23 2007/11/07 00:26:54 jcnventura
 #  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: print.module\n"
-"POT-Creation-Date: 2007-10-29 23:57+0100\n"
+"POT-Creation-Date: 2007-11-07 01:30+0100\n"
 "PO-Revision-Date: 2007-10-23 20:51+0100\n"
 "Last-Translator: Ronan LE LOC'H <rondev@free.fr>\n"
 "Language-Team: \n"
@@ -121,7 +121,7 @@ msgstr "Envoyer à l'imprimante"
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Appelle automatiquement la fonction d'impression du navigateur lorque la version imprimable est affichée."
 
-#: print.module:216;401
+#: print.module:216;402
 msgid "Source URL"
 msgstr "URL source"
 
@@ -185,34 +185,33 @@ msgstr "Ajouter nocache"
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr "Tag non-standard pour ordonner aux moteurs de recherche de ne pas montrer un lien en cache pour les versions imprimables."
 
-#: print.module:400
+#: print.module:401
 msgid "retrieved on"
 msgstr "créé le"
 
-#: print.module:407
+#: print.module:408
 msgid "Published on"
 msgstr "Publié sur"
 
-#: print.module:408
+#: print.module:409
 msgid "By"
 msgstr "Par"
 
-#: print.module:409
+#: print.module:410
 msgid "Created"
 msgstr "Créé"
 
-#: print.module:420
+#: print.module:421
 msgid "Links:"
 msgstr "Liens:"
 
-#: print.module:507
+#: print.module:508
 msgid "Display a printer-friendly version of this page."
 msgstr "Affiche une version imprimable de cette page."
 
-#: print.module:514
+#: print.module:515
 msgid "Printer-friendly version"
 msgstr "Version imprimable"
-msgstr ""
 
 #: print.module:19
 msgid "access print"

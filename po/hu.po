@@ -3,14 +3,14 @@
 # Hungarian translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  print.module,v 1.15.2.5.2.20 2007/10/28 18:43:59 jcnventura
+#  print.module,v 1.15.2.5.2.23 2007/11/07 00:26:54 jcnventura
 #  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Drupal print-5.x-2.2\n"
-"POT-Creation-Date: 2007-10-29 23:57+0100\n"
+"POT-Creation-Date: 2007-11-07 01:30+0100\n"
 "PO-Revision-Date: 2007-10-23 21:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: Balassy Mihály <search@google>\n"
@@ -121,7 +121,7 @@ msgstr "Nyomtatóra küldés"
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Automatikusan meghívja a böngésző nyomtatás funkcióját, amikor a nyomtatóbarát oldal megjelenik."
 
-#: print.module:216;401
+#: print.module:216;402
 msgid "Source URL"
 msgstr "Forráscím"
 
@@ -185,31 +185,31 @@ msgstr "'nocache' hozzáadása"
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr "Nem szabványos kulcsszó arra, hogy a keresőrobotok ne jelenítsék meg a \"Cached\" hivatkozást."
 
-#: print.module:400
+#: print.module:401
 msgid "retrieved on"
 msgstr "letöltve"
 
-#: print.module:407
+#: print.module:408
 msgid "Published on"
 msgstr "Közzétéve"
 
-#: print.module:408
+#: print.module:409
 msgid "By"
 msgstr "Létrehozta"
 
-#: print.module:409
+#: print.module:410
 msgid "Created"
 msgstr "Létrehozva"
 
-#: print.module:420
+#: print.module:421
 msgid "Links:"
 msgstr "Linkek:"
 
-#: print.module:507
+#: print.module:508
 msgid "Display a printer-friendly version of this page."
 msgstr "A nyomtatóbarát változat megjelenítése."
 
-#: print.module:514
+#: print.module:515
 msgid "Printer-friendly version"
 msgstr "Nyomatatóbarát változat"
 

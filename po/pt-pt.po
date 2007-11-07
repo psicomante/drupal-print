@@ -3,14 +3,14 @@
 # Portuguese (Portugal) translation of Drupal
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  print.module,v 1.15.2.5.2.20 2007/10/28 18:43:59 jcnventura
+#  print.module,v 1.15.2.5.2.23 2007/11/07 00:26:54 jcnventura
 #  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2007-10-29 23:57+0100\n"
+"POT-Creation-Date: 2007-11-07 01:30+0100\n"
 "PO-Revision-Date: 2007-10-27 22:09+0200\n"
 "Last-Translator: Joao Ventura <search@google>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -119,7 +119,7 @@ msgstr "Enviar para a impressora"
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Chama automaticamente a função do navegador para enviar a versão para imprimir na impressora."
 
-#: print.module:216;401
+#: print.module:216;402
 msgid "Source URL"
 msgstr "URL de origem"
 
@@ -173,7 +173,7 @@ msgstr "Especificar noarchive"
 
 #: print.module:277
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
-msgstr "Etiqueta não-standard que indica aos motores de pesquisa que não se deve mostrar uma ligação para a versão \"em cache" das páginas de versão para imprimir. Reconhecido pelo Googlebot."
+msgstr "Etiqueta não-standard que indica aos motores de pesquisa que não se deve mostrar uma ligação para a versão \"em cache\" das páginas de versão para imprimir. Reconhecido pelo Googlebot."
 
 #: print.module:282
 msgid "Add nocache"
@@ -181,33 +181,33 @@ msgstr "Especificar nocache"
 
 #: print.module:285
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr ""Etiqueta não-standard que indica aos motores de pesquisa que não se deve mostrar uma ligação para a versão \"em cache" das páginas de versão para imprimir."
+msgstr "Etiqueta não-standard que indica aos motores de pesquisa que não se deve mostrar uma ligação para a versão \"em cache\" das páginas de versão para imprimir."
 
-#: print.module:400
+#: print.module:401
 msgid "retrieved on"
 msgstr "acedido em"
 
-#: print.module:407
+#: print.module:408
 msgid "Published on"
 msgstr "Publicado em"
 
-#: print.module:408
+#: print.module:409
 msgid "By"
 msgstr "Por"
 
-#: print.module:409
+#: print.module:410
 msgid "Created"
 msgstr "Criado"
 
-#: print.module:420
+#: print.module:421
 msgid "Links:"
 msgstr "Ligações:"
 
-#: print.module:507
+#: print.module:508
 msgid "Display a printer-friendly version of this page."
 msgstr "Mostrar uma versão para imprimir desta página"
 
-#: print.module:514
+#: print.module:515
 msgid "Printer-friendly version"
 msgstr "Versão para imprimir"
 
