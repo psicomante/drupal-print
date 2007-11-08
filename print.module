@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Display printer-friendly versions of nodes (except books)
+ * Display printer-friendly versions of Drupal pages
  */
 
 define("PRINT_PATH", "print");
@@ -73,6 +73,21 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
   } 
   else {
     return;
+  }
+}
+
+/**
+ * Implementation of hook_link_alter().
+ */
+function print_link_alter(&$node, &$links) {
+  foreach ($links as $module => $link) {
+    if (strstr($module, 'book_printer')) {
+      $format = print_format_link();
+      $format['attributes']['title'] = $link['attributes']['title'];
+
+      $links[$module]['href'] = PRINT_PATH ."/". $link['href'];
+      $links[$module]['attributes'] = $format['attributes'];
+    }
   }
 }
 
@@ -312,8 +327,15 @@ function print_controller() {
     print_generate_node($nid, $cid);
   } 
   else {
-    // If no content node was found, handle the page printing with the 'printable' engine
-    print_generate_path($args);
+    $ret = preg_match("/^book\/export\/html\/(.*)/i", $args, $matches);
+    if ($ret == 1) {
+      // This is a book PF page link, handle trough the book handling functions
+      print_generate_book($matches[1]);
+    }
+    else {
+      // If no content node was found, handle the page printing with the 'printable' engine
+      print_generate_path($args);
+    }
   }
 }
 
@@ -503,6 +525,15 @@ function print_rewrite_urls($matches) {
   return $ret;
 }
 
+function print_friendly_urls($url = 0) {
+  static $urls = array();
+  if ($url) {
+    $urls[] = $url;
+    return count($urls);
+  }
+  return $urls;
+}
+
 function print_format_link() {
   $print_settings = variable_get('print_settings', print_settings_default());
   $attributes = array('title' => t('Display a printer-friendly version of this page.'), 
@@ -662,11 +693,30 @@ function print_generate_path($path) {
 }
 
 
-function print_friendly_urls($url = 0) {
-  static $urls = array();
-  if ($url) {
-    $urls[] = $url;
-    return count($urls);
+/**
+ * Outputs a printer-friendly page. Used for book pages
+ */
+function print_generate_book($nid) {
+  global $base_url;
+
+  $node = node_load(array('nid' => $nid));
+  if (!node_access('view', $node)) {
+    // Access is denied
+    return drupal_access_denied();
   }
-  return $urls;
+
+  $depth = count(book_location($node)) + 1;
+  $node->body = book_recurse($nid, $depth, 'book_node_visitor_html_pre', 'book_node_visitor_html_post');
+
+  // Convert the a href elements
+  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
+  $node->body = preg_replace_callback($pattern, "print_rewrite_urls", $node->body);
+
+  init_theme();
+
+  $print = _print_var_generator($node);
+  // The title is already displayed by the book_recurse, so avoid duplication
+  $print["title"] = "";
+
+  include_once(print_get_template($node->type));
 }
