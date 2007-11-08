@@ -187,16 +187,16 @@ function print_main_settings() {
 
   $form['print_settings']['comments'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Include comments in print-friendly version'),
+    '#title' => t('Include comments in printer-friendly version'),
     '#return_value' => 1,
     '#default_value' => $print_settings['comments'],
     '#description' => t('When this option is active, user comments are also included in the printer-friendly version. Requires the comment module.'),
   );
 
   $form['print_settings']['newwindow'] = array(
-    '#type' => 'checkbox',
+    '#type' => 'radios',
     '#title' => t('Open the printer-friendly version in a new window'),
-    '#return_value' => 1,
+    '#options' => array(t("Disabled"), t("Use HTML target (does not validate as XHTML Strict)"), t("Use Javascript (requires browser support)")),
     '#default_value' => $print_settings['newwindow'],
     '#description' => t('Setting this option will make the printer-friendly version open in a new window/tab.'),
   );
@@ -507,9 +507,13 @@ function print_format_link() {
   $print_settings = variable_get('print_settings', print_settings_default());
   $attributes = array('title' => t('Display a printer-friendly version of this page.'), 
                       'class' => 'print-page');
-  if ($print_settings['newwindow']) {
+  switch ($print_settings['newwindow']) {
+  case 1:
     $attributes['target'] = '_blank';
-//    $attributes['onclick'] = 'window.open(this.href); return false';
+    break;
+  case 2:
+    $attributes['onclick'] = 'window.open(this.href); return false';
+    break;
   }
 
   return array('text' => t('Printer-friendly version'),
