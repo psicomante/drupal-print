@@ -1,4 +1,15 @@
+November 13, 2007
+      Commit #87880 by jcnventura at 03:58
+        Update all .po files to the latest print.pot from the potx module
+November 9, 2007
+      Commit #87371 by jcnventura at 01:56
+        Add the capability to handle book's PF link via this module
+November 8, 2007
+      Commit #87271 by jcnventura at 03:33
+        Enable choice of method to open the new window via radio boxes (now possible to select a Javascript XHTML Strict compliant method)
 November 7, 2007
+      Commit #87223 by jcnventura at 18:24
+        Correct fix for the duplicate PF link in book pages
       Commit #87160 by jcnventura at 03:39
         Sync documentation in HEAD with the 5.x version
       Commit #87159 by jcnventura at 03:30

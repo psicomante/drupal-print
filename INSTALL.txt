@@ -32,7 +32,6 @@ Disallow: /print/
 
 Also, for updates from older versions (<=4.7.x-1.0 and <=5.x-1.2) which used node/nnn/print instead of print/nnn, the following lines can prevent requests from Google for the obsolete print URLs:
 
-User-agent: Googlebot
 Disallow: /*/print$
 
 Note that pattern matching in robots.txt is a Google extension (see http://www.google.com/support/webmasters/bin/answer.py?answer=40367 for more information).

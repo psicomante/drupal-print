@@ -64,6 +64,9 @@ Administer › Site configuration › Printer-friendly (admin/settings/print)
   Show link in system (non-content) pages (default: enabled)
   Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules.
 
+  Take control of the book module printer-friendly link (default: enabled)
+  Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module.
+
   Logo URL (default: empty)
   An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used.
 
@@ -124,7 +127,7 @@ Frequently Asked Questions:
 
 2. The Printer-friendly version in book nodes is not working correctly..
 
-  That PF link is managed by the book module and this module has nothing to do with it.
+  Before reporting the error, tell me if you have enabled the 'Take control of the book module printer-friendly link' option.
 
 3. Can I replace the 'Printer-friendly version' link with an image?
 
