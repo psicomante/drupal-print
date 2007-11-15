@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Display printer-friendly versions of nodes (except books)
+ * Display printer-friendly versions of Drupal pages
  */
 
 define("PRINT_PATH", "print");
@@ -50,13 +50,13 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
   static $print_display_comment = FALSE;
 
   if ($print_display == FALSE) {
-    $print_display = variable_get('print_display_'. $node->type, '0');
-    $print_display_comment = variable_get('print_display_comment_'. $node->type, '1');
+    $print_display_comment = variable_get('print_display_comment_'. $node->type, '0');
+    $print_display = variable_get('print_display_'. $node->type, '1');
   }
 
   $print_settings = variable_get('print_settings', print_settings_default());
   // No link is shown for several motives...
-  if ( !($teaser) && ($node->type != 'book') &&
+  if ( !($teaser) && ($node->type != 'book') && (!$node->book) &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && $print_display_comment) ||
       ($type == 'node' && $print_display))) {
@@ -77,6 +77,22 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
   } 
   else {
     return;
+  }
+}
+
+/**
+ * Implementation of hook_link_alter().
+ */
+function print_link_alter(&$links, $node) {
+  $print_settings = variable_get('print_settings', print_settings_default());
+
+  if ($print_settings['book_link']) {
+    $link =& $links['book_printer'];
+    $format = print_format_link();
+    $format['attributes']['title'] = $link['attributes']['title'];
+
+    $link['href'] = PRINT_PATH ."/". $link['href'];
+    $link['attributes'] = $format['attributes'];
   }
 }
 
@@ -125,18 +141,30 @@ function print_form_alter(&$form, $form_state, $form_id) {
  * Admin Settings: Print
  ********************************************************************/
 
+/**
+ * Default values of the print_settings variable
+ */
 function print_settings_default() {
-  return array('show_link' => 1, 'show_sys_link' => 1, 'logo_url' => '', 'css' => '', 'urls' => 1, 'comments' => 0, 'newwindow' => 0, 'sendtoprinter' => 0);
+  return array('show_link' => 1, 'show_sys_link' => 1, 'book_link' => 1, 'logo_url' => '', 'css' => '', 'urls' => 1, 'comments' => 0, 'newwindow' => 0, 'sendtoprinter' => 0);
 }
 
+/**
+ * Default values of the print_sourceurl_settings variable
+ */
 function print_sourceurl_settings_default() {
   return array('enabled' => 1, 'date' => 0, 'forcenode' => 0);
 }
 
+/**
+ * Default values of the print_robot_settings variable
+ */
 function print_robot_settings_default() {
   return array('noindex' => 1, 'nofollow' => 1, 'noarchive' => 0, 'nocache' => 0);
 }
 
+/**
+ * Print module settings form
+ */
 function print_main_settings() {
   $print_settings = variable_get('print_settings', print_settings_default());
   
@@ -159,6 +187,14 @@ function print_main_settings() {
     '#return_value' => 1,
     '#default_value' => $print_settings['show_sys_link'],
     '#description' => t('Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules.'),
+  );
+
+  $form['print_settings']['book_link'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Take control of the book module printer-friendly link'),
+    '#return_value' => 1,
+    '#default_value' => $print_settings['book_link'],
+    '#description' => t('Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module.'),
   );
 
   $form['print_settings']['logo_url'] = array(
@@ -189,16 +225,16 @@ function print_main_settings() {
 
   $form['print_settings']['comments'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Include comments in print-friendly version'),
+    '#title' => t('Include comments in printer-friendly version'),
     '#return_value' => 1,
     '#default_value' => $print_settings['comments'],
     '#description' => t('When this option is active, user comments are also included in the printer-friendly version. Requires the comment module.'),
   );
 
   $form['print_settings']['newwindow'] = array(
-    '#type' => 'checkbox',
+    '#type' => 'radios',
     '#title' => t('Open the printer-friendly version in a new window'),
-    '#return_value' => 1,
+    '#options' => array(t("Disabled"), t("Use HTML target (does not validate as XHTML Strict)"), t("Use Javascript (requires browser support)")),
     '#default_value' => $print_settings['newwindow'],
     '#description' => t('Setting this option will make the printer-friendly version open in a new window/tab.'),
   );
@@ -294,6 +330,9 @@ function print_main_settings() {
  * Module Functions :: Controller
  ********************************************************************/
 
+/**
+ * Print module path catcher
+ */
 function print_controller() {
   // Remove the print/ prefix
   $args = substr($_GET['q'], strlen(PRINT_PATH)+1);
@@ -314,8 +353,15 @@ function print_controller() {
     print_generate_node($nid, $cid);
   } 
   else {
-    // If no content node was found, handle the page printing with the 'printable' engine
-    print_generate_path($args);
+    $ret = preg_match("/^book\/export\/html\/(.*)/i", $args, $matches);
+    if ($ret == 1) {
+      // This is a book PF page link, handle trough the book handling functions
+      print_generate_book($matches[1]);
+    }
+    else {
+      // If no content node was found, handle the page printing with the 'printable' engine
+      print_generate_path($args);
+    }
   }
 }
 
@@ -358,6 +404,8 @@ function _print_robots_meta_generator() {
 
 /**
  * Generates the HTML to insert in the template file
+ *
+ * @return string
  */
 function _print_var_generator($node, $cid = NULL) {
   global $base_url;
@@ -371,6 +419,7 @@ function _print_var_generator($node, $cid = NULL) {
   $print["robots_meta"] = _print_robots_meta_generator();
 //  $print["base_href"] = "<base href=\"".$base_url."/node/".$node->nid."\" />\n";
   $print["base_href"] = "<base href=\"". url("node/$node->nid", array('absolute' => TRUE)) ."\" />\n";
+  $print["head"] = drupal_get_html_head();
   $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"". theme_get_setting("favicon") ."\" type=\"image/x-icon\"/>\n" : "";
 
   if (!empty($print_settings['css'])) {
@@ -429,9 +478,10 @@ function _print_var_generator($node, $cid = NULL) {
 }
 
 /**
- * We need to manipulate URLs in two manners, depending on the state of the Printer-friendly URLs setting:
- *  1. When on, we need to show the original URLs, making sure that they are absolute (even anchor names).
- *  2. When off, relative URLs must be transformed to absolute URLs, including images, but not the anchors.
+ * We need to manipulate URLs so that they are recorded as absolute in the 
+ *  Printer-friendly URLs list, and to add a [n] footnote marker.
+ *
+ * @return string containing the changed <a> tag
  */
 function print_rewrite_urls($matches) {
   global $base_url;
@@ -476,6 +526,9 @@ function print_rewrite_urls($matches) {
             // Printer-friendly URLs is on, so we need to make it absolute
             $newurl = url($path, array('fragment' => substr(urldecode($url), 1), 'absolute' => TRUE));
           }
+          // Because base href is the original page, change the link to
+          // still be usable inside the print page
+          $matches[1] = str_replace($url, $_GET['q'] . $url, $matches[1]);
         } 
         else {
           // URL is relative, convert it into absolute URL
@@ -504,19 +557,48 @@ function print_rewrite_urls($matches) {
   return $ret;
 }
 
+/**
+ * Auxiliary function to store the Printer-friendly URLs list as static.
+ *
+ * @return string containing the list of URLs previously stored if $url is 0, 
+ *         or the current count otherwise.
+ */
+function print_friendly_urls($url = 0) {
+  static $urls = array();
+  if ($url) {
+    $urls[] = $url;
+    return count($urls);
+  }
+  return $urls;
+}
+
+/**
+ * Auxiliary function to fill the Printer-friendly link attributes
+ *
+ * @return array of formatted attributes
+ */
 function print_format_link() {
   $print_settings = variable_get('print_settings', print_settings_default());
   $attributes = array('title' => t('Display a printer-friendly version of this page.'), 
                       'class' => 'print-page');
-  if ($print_settings['newwindow']) {
+  switch ($print_settings['newwindow']) {
+  case 1:
     $attributes['target'] = '_blank';
-//    $attributes['onclick'] = 'window.open(this.href); return false';
+    break;
+  case 2:
+    $attributes['onclick'] = 'window.open(this.href); return false';
+    break;
   }
 
   return array('text' => t('Printer-friendly version'),
                'attributes' => $attributes);
 }
 
+/**
+ * Auxiliary function to display a formatted Printer-friendly link
+ *
+ * @return string
+ */
 function print_insert_link($path = NULL) {
   if ($path === NULL) {
     $path = PRINT_PATH ."/". $_GET['q'];
@@ -525,6 +607,13 @@ function print_insert_link($path = NULL) {
   return '<span class="print">'. l($format['text'], $path, array('attributes' => $format['attributes'], 'absolute' => TRUE)) .'</span>';
 }
 
+/**
+ * Auxiliary function to resolve the most appropriate template trying to find
+ * a content specific template in the theme or module dir before falling back
+ * on a generic template also in those dirs.
+ *
+ * @return string with the most suitable template filename
+ */
 function print_get_template($type = NULL) {
   if ($type) {
     // If the node type is known, then try to find that type's template file
@@ -657,11 +746,30 @@ function print_generate_path($path) {
 }
 
 
-function print_friendly_urls($url = 0) {
-  static $urls = array();
-  if ($url) {
-    $urls[] = $url;
-    return count($urls);
+/**
+ * Outputs a printer-friendly page. Used for book pages
+ */
+function print_generate_book($nid) {
+  global $base_url;
+
+  $node = node_load(array('nid' => $nid));
+  if (!node_access('view', $node) || (!user_access('access printer-friendly version'))) {
+    // Access is denied
+    return drupal_access_denied();
   }
-  return $urls;
+
+  $tree = book_menu_subtree_data($node->book);
+  $node->body = book_export_traverse($tree, 'book_node_visitor_html_pre', 'book_node_visitor_html_post');
+
+  // Convert the a href elements
+  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
+  $node->body = preg_replace_callback($pattern, "print_rewrite_urls", $node->body);
+
+  init_theme();
+
+  $print = _print_var_generator($node);
+  // The title is already displayed by the book_recurse, so avoid duplication
+  $print["title"] = "";
+
+  include_once(print_get_template($node->type));
 }

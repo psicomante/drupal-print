@@ -1,0 +1,12 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function print_uninstall() {
+  variable_del('print_settings');
+  variable_del('print_display_comment');
+  variable_del('print_sourceurl_settings');
+  variable_del('print_robot_settings');
+}
