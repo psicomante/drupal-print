@@ -61,7 +61,7 @@ msgstr "Activat"
 
 #: print.module:179
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
-msgstr "Activar o desactivar l'enllaç a la versió per a imprimir de cada node. Encara que l'enllaç estigui desactivat, es pot veure la versió per a imprimir d'un node visitant l'adreça 'print/nid', on nid �s l'identificador del node."
+msgstr "Activar o desactivar l'enllaç a la versió per a imprimir de cada node. Encara que l'enllaç estigui desactivat, es pot veure la versió per a imprimir d'un node visitant l'adreça 'print/nid', on nid es l'identificador del node."
 
 #: print.module:184
 msgid "Show link in system (non-content) pages"

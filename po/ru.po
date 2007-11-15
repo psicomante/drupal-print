@@ -42,11 +42,11 @@ msgstr "страница настройки"
 
 #: print.module:130
 msgid "Show printer-friendly version link in individual comments"
-msgstr "TODO Show printer-friendly version link in individual comments"
+msgstr ""
 
 #: print.module:133
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr "TODO Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
+msgstr ""
 
 #: print.module:176
 msgid "Printer-friendly page link"
@@ -66,19 +66,19 @@ msgstr "Разрешить или запретить страницу для п�
 
 #: print.module:184
 msgid "Show link in system (non-content) pages"
-msgstr "TODO Show link in system (non-content) pages"
+msgstr ""
 
 #: print.module:187
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
-msgstr "TODO Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
+msgstr ""
 
 #: print.module:192
 msgid "Take control of the book module printer-friendly link"
-msgstr "TODO Take control of the book module printer-friendly link"
+msgstr ""
 
 #: print.module:195
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
-msgstr "TODO Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
+msgstr ""
 
 #: print.module:200
 msgid "Logo URL"
@@ -102,15 +102,15 @@ msgstr "Список URL страниц для печати"
 
 #: print.module:221
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
-msgstr "TODO If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
+msgstr ""
 
 #: print.module:226
 msgid "Include comments in printer-friendly version"
-msgstr "TODO Include comments in printer-friendly version"
+msgstr ""
 
 #: print.module:229
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
-msgstr "TODO When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
+msgstr ""
 
 #: print.module:234
 msgid "Open the printer-friendly version in a new window"
@@ -118,11 +118,11 @@ msgstr "Открывать Версию для печати в новом окн
 
 #: print.module:235
 msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "TODO Use HTML target (does not validate as XHTML Strict)"
+msgstr ""
 
 #: print.module:235
 msgid "Use Javascript (requires browser support)"
-msgstr "TODO Use Javascript (requires browser support)"
+msgstr ""
 
 #: print.module:237
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
