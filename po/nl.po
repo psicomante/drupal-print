@@ -1,247 +1,245 @@
 # $Id$
 #
-# Norwegian translation of Drupal (general)
-# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Nederlands translation of Drupal (general)
+# Copyright 2004 Hendrik Eeckhaut <Hendrik.Eeckhaut@UGent.be>
 # Generated from files:
 #  print.module,v 1.15.2.5.2.26 2007/11/08 23:56:59 jcnventura
 #  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: print\n"
+"Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2007-11-13 02:03+0100\n"
-"PO-Revision-Date: 2007-11-15 16:28+0100\n"
-"Last-Translator: Sten Johnsen <sten@bedre-bilder.no>\n"
-"Language-Team: THINEA Webteknologi <sten@thinea.no>\n"
+"PO-Revision-Date: 2004-11-11 14:20+0100\n"
+"Last-Translator: Hendrik Eeckhaut <Hendrik.Eeckhaut@UGent.be>\n"
+"Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Poedit-Language: Norwegian Bokmal\n"
-"X-Poedit-Country: NORWAY\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: print.module:31;38
 msgid "Printer-friendly"
-msgstr "Utskriftsvennlig"
+msgstr ""
 
 #: print.module:39 print.info:0
 msgid "Adds a printer-friendly version link to node pages."
-msgstr "Legger til en utskriftsvennlig versjon -lenke til nodesider"
+msgstr ""
 
 #: print.module:121
 msgid "Show printer-friendly version link"
-msgstr "Vis en utskriftsvennlig versjon lenke"
+msgstr ""
 
 #: print.module:124
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
-msgstr "Viser lenken til en utskriftsvennlig versjon av innholdet. Flere innstillinger er tilgjengelig på !settings."
+msgstr ""
 
 #: print.module:124;133
 msgid "settings page"
-msgstr "innstillinger"
+msgstr ""
 
 #: print.module:130
 msgid "Show printer-friendly version link in individual comments"
-msgstr "Vis lenke til utskriftsvennlig versjon i individuelle kommentarer"
+msgstr ""
 
 #: print.module:133
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr "Viser en lenke til en utskriftsvennlig versjon av kommentaren. Flere innstillinger er tilgjengelig i !settings."
+msgstr ""
 
 #: print.module:176
 msgid "Printer-friendly page link"
-msgstr "Utskriftsvennlig side lenke"
+msgstr "Printervriendelijke pagina-links"
 
 #: print.module:178;235
 msgid "Disabled"
-msgstr "Deaktivert"
+msgstr "Uitgeschakeld"
 
 #: print.module:178
 msgid "Enabled"
-msgstr "Aktivert"
+msgstr "Ingeschakeld"
 
 #: print.module:179
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
-msgstr "Aktiver eller deaktiver utskriftsvennlig side lenke for hver node. Selv om lenken er slått av kan du allikevel se en utskriftsvennlig versjon av en node ved å gå til print/nid hvor nid er den numeriske id for noden."
+msgstr "Schakelt de 'printervriendelijke pagina'-link in of uit voor elke node. Zelfs indien een link uitgeschakeld is, kan u nog steeds een printervriendelijke versie te zien krijgen door naar 'print/nid' te gaan; waarbij nid de nummer id is van de node."
 
 #: print.module:184
 msgid "Show link in system (non-content) pages"
-msgstr "Vis lenke på systemsider (sider som ikke er innhold)"
+msgstr ""
 
 #: print.module:187
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
-msgstr "Aktivering av dette valget vil legge til en lenke til utskriftsvennlig side på sider generert av Drupal eller av aktiverte moduler."
+msgstr ""
 
 #: print.module:192
 msgid "Take control of the book module printer-friendly link"
-msgstr "Ta kontroll over bok-modulens utskriftsvennlig lenke"
+msgstr ""
 
 #: print.module:195
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
-msgstr "Aktivere denne for å la lenke til utskriftsvennlig versjon av bok-noder håndteres av denne modulen. Krever Bok-modulen (kjerne)."
+msgstr ""
 
 #: print.module:200
 msgid "Logo URL"
-msgstr "Logo URL"
+msgstr ""
 
 #: print.module:204
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
-msgstr "En alternativ logo som vises på utskriftvennlig versjon. Dersom den står tom, vil gjeldende temas logo bli benyttet."
+msgstr ""
 
 #: print.module:209
 msgid "Stylesheet URL"
-msgstr "Stilark URL"
+msgstr "URL-adres stijlbestand"
 
 #: print.module:213
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
-msgstr "URL'en til din spesifikke CSS dersom du har en. Om ingen er spesifisert, vil standard CSS bli benyttet."
+msgstr ""
 
 #: print.module:218
 msgid "Printer-friendly URLs list"
-msgstr "Utskrftsvennlig URL liste"
+msgstr ""
 
 #: print.module:221
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
-msgstr "Dersom satt vil en liste av sidens lenker vises nederst på siden."
+msgstr ""
 
 #: print.module:226
 msgid "Include comments in printer-friendly version"
-msgstr "Ta med kommentarer på utskriftsvennlige sider"
+msgstr ""
 
 #: print.module:229
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
-msgstr "Når denne er aktivert vil brukerkommentarer også bli inkludert på en utskriftsvennlig side. Dette krever at Kommentar-modulen (Comment) er aktivert."
+msgstr ""
 
 #: print.module:234
 msgid "Open the printer-friendly version in a new window"
-msgstr "Åpne utskriftvennlig versjon i et nytt vindu"
+msgstr ""
 
 #: print.module:235
 msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "Benytt HTML destinasjon (validerer ikke XHTML Strict)"
+msgstr ""
 
 #: print.module:235
 msgid "Use Javascript (requires browser support)"
-msgstr "Benytt Javascript (krever nettleser støtte)"
+msgstr ""
 
 #: print.module:237
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
-msgstr "Slår du på denne innstillingen vil den utskriftsvennlige versjonen åpnes i et nytt vindu eller fanekort."
+msgstr ""
 
 #: print.module:242
 msgid "Send to printer"
-msgstr "Send til skriver"
+msgstr ""
 
 #: print.module:245
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
-msgstr "Kaller automatisk nettleserens utskriftsfunksjon når utskriftsvennlig versjon vises."
+msgstr ""
 
 #: print.module:252;450
 msgid "Source URL"
-msgstr "Kilde URL "
+msgstr ""
 
 #: print.module:260
 msgid "Display source URL"
-msgstr "Vis kilde URL"
+msgstr ""
 
 #: print.module:263
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
-msgstr "Når denne muligheten er valgt vil URL'en til orginalsiden bli skrevet nederst på den utskriftsvennlige versjonen."
+msgstr ""
 
 #: print.module:268
 msgid "Add current time/date to the source URL"
-msgstr "Legg til gjeldende tid/dato til kilde URL"
+msgstr ""
 
 #: print.module:271
 msgid "Display the current date and time in the Source URL line."
-msgstr "Viser dato og tid for når utskriften gjøres sammen med kilde URL nederst på siden."
+msgstr ""
 
 #: print.module:276
 msgid "Force use of node ID in source URL"
-msgstr "Bruk node id i kilde URL"
+msgstr ""
 
 #: print.module:279
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
-msgstr "Drupal vil forsøke å benytte sidens definerte alias dersom det er en. For å bruke fast URL, slå på dette valget."
+msgstr ""
 
 #: print.module:286
 msgid "Robots META tags"
-msgstr "Robot- META tager"
+msgstr ""
 
 #: print.module:294
 msgid "Add noindex"
-msgstr "Legg til noindex"
+msgstr ""
 
 #: print.module:297
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
-msgstr "Instruer roboter til ikke å indeksere utskriftsvennlige sider. Anbefales for god søkemotor-karma."
+msgstr ""
 
 #: print.module:302
 msgid "Add nofollow"
-msgstr "Legg til nofollow"
+msgstr ""
 
 #: print.module:305
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
-msgstr "Insturer roboter til ikke å følge utgående lenker på utskriftvennlige sider."
+msgstr ""
 
 #: print.module:310
 msgid "Add noarchive"
-msgstr "Legg til noarchive"
+msgstr ""
 
 #: print.module:313
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
-msgstr "Ikke-standard tag som instruerer søkemotorer til ikke å vise en \"Cashed\" lenke for dine utskriftsvennlige sider. Gjenkjennes av Googlebot."
+msgstr ""
 
 #: print.module:318
 msgid "Add nocache"
-msgstr "Legg til nocache"
+msgstr ""
 
 #: print.module:321
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr "Ikke-standard tag som instruerer søkemotorer til ikke å vise en \"Cashed\" lenke for dine utskriftsvennlige sider."
+msgstr ""
 
 #: print.module:449
 msgid "retrieved on"
-msgstr "hentet"
+msgstr ""
 
 #: print.module:456
 msgid "Published on"
-msgstr "Publisert på"
+msgstr ""
 
 #: print.module:457
 msgid "By"
-msgstr "av"
+msgstr ""
 
 #: print.module:458
 msgid "Created"
-msgstr "Laget"
+msgstr ""
 
 #: print.module:469
 msgid "Links:"
-msgstr "Lenker:"
+msgstr ""
 
 #: print.module:577
 msgid "Display a printer-friendly version of this page."
-msgstr "Vis en utskriftsvennlig versjon av denne siden."
+msgstr ""
 
 #: print.module:588
 msgid "Printer-friendly version"
-msgstr "Se utskriftsvennlig utgave"
+msgstr ""
 
 #: print.module:19
 msgid "access print"
-msgstr "tilgang print"
+msgstr ""
 
 #: print.module:19
 msgid "administer print"
-msgstr "administrer print"
+msgstr ""
 
 #: print.module:0
 msgid "print"
-msgstr "utskrift"
+msgstr "printen"
 
 #: print.info:0
 msgid "Printer-friendly pages"
-msgstr "Utskriftsvennlige sider"
+msgstr "Printervriendelijke pagina"
 

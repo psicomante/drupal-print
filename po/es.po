@@ -1,247 +1,245 @@
 # $Id$
 #
-# Norwegian translation of Drupal (general)
-# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Spanish translation of Drupal (general)
+# Copyright 2007 G.A.Z. <inet@nslabs.com.ar>
 # Generated from files:
 #  print.module,v 1.15.2.5.2.26 2007/11/08 23:56:59 jcnventura
 #  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: print\n"
+"Project-Id-Version: es\n"
 "POT-Creation-Date: 2007-11-13 02:03+0100\n"
-"PO-Revision-Date: 2007-11-15 16:28+0100\n"
-"Last-Translator: Sten Johnsen <sten@bedre-bilder.no>\n"
-"Language-Team: THINEA Webteknologi <sten@thinea.no>\n"
+"PO-Revision-Date: 2007-11-19 17:09-0300\n"
+"Last-Translator: G.A.Z. <inet@nslabs.com.ar>\n"
+"Language-Team: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Poedit-Language: Norwegian Bokmal\n"
-"X-Poedit-Country: NORWAY\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: print.module:31;38
 msgid "Printer-friendly"
-msgstr "Utskriftsvennlig"
+msgstr "Versión para imprimir"
 
 #: print.module:39 print.info:0
 msgid "Adds a printer-friendly version link to node pages."
-msgstr "Legger til en utskriftsvennlig versjon -lenke til nodesider"
+msgstr "Agregar un enlace <em>'versión para imprimir'</em> en las páginas de los nodos."
 
 #: print.module:121
 msgid "Show printer-friendly version link"
-msgstr "Vis en utskriftsvennlig versjon lenke"
+msgstr "Mostrar el enlace <em>versión para imprimir</em>"
 
 #: print.module:124
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
-msgstr "Viser lenken til en utskriftsvennlig versjon av innholdet. Flere innstillinger er tilgjengelig på !settings."
+msgstr "Mostrar el enlace de la versión para imprimir del contenido. Más opciones de configuración están disponibles en !settings."
 
 #: print.module:124;133
 msgid "settings page"
-msgstr "innstillinger"
+msgstr "página de opciones"
 
 #: print.module:130
 msgid "Show printer-friendly version link in individual comments"
-msgstr "Vis lenke til utskriftsvennlig versjon i individuelle kommentarer"
+msgstr "Mostrar el enlace <em>versión para imprimir</em> en los comentarios individuales"
 
 #: print.module:133
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr "Viser en lenke til en utskriftsvennlig versjon av kommentaren. Flere innstillinger er tilgjengelig i !settings."
+msgstr "Mostrar el enlace de la versión para imprimir del comentario. Más opciones de configuración están disponibles en !settings."
 
 #: print.module:176
 msgid "Printer-friendly page link"
-msgstr "Utskriftsvennlig side lenke"
+msgstr "Enlace de la versión para impresora"
 
 #: print.module:178;235
 msgid "Disabled"
-msgstr "Deaktivert"
+msgstr "Desactivado"
 
 #: print.module:178
 msgid "Enabled"
-msgstr "Aktivert"
+msgstr "Activado"
 
 #: print.module:179
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
-msgstr "Aktiver eller deaktiver utskriftsvennlig side lenke for hver node. Selv om lenken er slått av kan du allikevel se en utskriftsvennlig versjon av en node ved å gå til print/nid hvor nid er den numeriske id for noden."
+msgstr "Activar o desactivar el enlace a la versión para impresora de cada nodo. Aunque el enlace esté desactivado, se puede ver la versión para imprimir de un nodo visitando la dirección 'print/nid', donde nid es el identificador del nodo."
 
 #: print.module:184
 msgid "Show link in system (non-content) pages"
-msgstr "Vis lenke på systemsider (sider som ikke er innhold)"
+msgstr "Mostrar enlace en las páginas del sistema (no en el contenido)"
 
 #: print.module:187
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
-msgstr "Aktivering av dette valget vil legge til en lenke til utskriftsvennlig side på sider generert av Drupal eller av aktiverte moduler."
+msgstr "Configurando esta opción agregará un enlace <em>'versión para imprimir'</em> en las páginas creadas por Drupal o en los módulos habilitados."
 
 #: print.module:192
 msgid "Take control of the book module printer-friendly link"
-msgstr "Ta kontroll over bok-modulens utskriftsvennlig lenke"
+msgstr "Tomar el control del enlace <em>versión para imprimir</em> en el módulo book"
 
 #: print.module:195
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
-msgstr "Aktivere denne for å la lenke til utskriftsvennlig versjon av bok-noder håndteres av denne modulen. Krever Bok-modulen (kjerne)."
+msgstr "Active esta opción para tener un enlace <em>versión para imprimir'</em> en los nodos manejados por el módulo book. necesita tener habilitado el módulo book (del core)."
 
 #: print.module:200
 msgid "Logo URL"
-msgstr "Logo URL"
+msgstr "URL del logo"
 
 #: print.module:204
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
-msgstr "En alternativ logo som vises på utskriftvennlig versjon. Dersom den står tom, vil gjeldende temas logo bli benyttet."
+msgstr "Un logo alternativo para mostrar en las versiones <em>para imprimir</em> de las páginas. Si se deja vacío, es usado el logo del tema actual."
 
 #: print.module:209
 msgid "Stylesheet URL"
-msgstr "Stilark URL"
+msgstr "URL del estilo (CSS)"
 
 #: print.module:213
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
-msgstr "URL'en til din spesifikke CSS dersom du har en. Om ingen er spesifisert, vil standard CSS bli benyttet."
+msgstr "La URL para la hoja de estilo personalizada de la versión <em>para imprimir</em>. Cuando no se encuentra especificada, es usado el archivo del módulo CSS ."
 
 #: print.module:218
 msgid "Printer-friendly URLs list"
-msgstr "Utskrftsvennlig URL liste"
+msgstr "Lista de URLs de la versión para imprimir"
 
 #: print.module:221
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
-msgstr "Dersom satt vil en liste av sidens lenker vises nederst på siden."
+msgstr "Si está configurado, los enlaces en su página serán <em>desactivados</em>, mostrandose una lista de las URLs en el pie de la página."
 
 #: print.module:226
 msgid "Include comments in printer-friendly version"
-msgstr "Ta med kommentarer på utskriftsvennlige sider"
+msgstr "Incluir comentarios en la versión para imprimir"
 
 #: print.module:229
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
-msgstr "Når denne er aktivert vil brukerkommentarer også bli inkludert på en utskriftsvennlig side. Dette krever at Kommentar-modulen (Comment) er aktivert."
+msgstr "Cuando esta opción está habilitada, en la versión para imprimir también son incluídos los comentarios de los usuarios. Se requiere tener habilitado el módulo <em>comentarios</em>"
 
 #: print.module:234
 msgid "Open the printer-friendly version in a new window"
-msgstr "Åpne utskriftvennlig versjon i et nytt vindu"
+msgstr "Abrir la versión para imprimir en una nueva ventana"
 
 #: print.module:235
 msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "Benytt HTML destinasjon (validerer ikke XHTML Strict)"
+msgstr "Usar HTML target (no valida como XHTML stricto)"
 
 #: print.module:235
 msgid "Use Javascript (requires browser support)"
-msgstr "Benytt Javascript (krever nettleser støtte)"
+msgstr "Usar Javascript (requiere soporte del navegador)"
 
 #: print.module:237
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
-msgstr "Slår du på denne innstillingen vil den utskriftsvennlige versjonen åpnes i et nytt vindu eller fanekort."
+msgstr "Configurando esta opción, hará que la página de la versión para imprimir se abra en una nueva ventana o tab."
 
 #: print.module:242
 msgid "Send to printer"
-msgstr "Send til skriver"
+msgstr "Enviar a la impresora"
 
 #: print.module:245
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
-msgstr "Kaller automatisk nettleserens utskriftsfunksjon når utskriftsvennlig versjon vises."
+msgstr "Cuando la <em>versión para imprimir</em> se muestra, llama automáticamente a la función 'imprimir' del navegador."
 
 #: print.module:252;450
 msgid "Source URL"
-msgstr "Kilde URL "
+msgstr "URL de Origen"
 
 #: print.module:260
 msgid "Display source URL"
-msgstr "Vis kilde URL"
+msgstr "Mostrar URL de origen"
 
 #: print.module:263
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
-msgstr "Når denne muligheten er valgt vil URL'en til orginalsiden bli skrevet nederst på den utskriftsvennlige versjonen."
+msgstr "Cuando esta opción está seleccionada, la URL de la página original será mostrada en el pie de la versión para imprimir."
 
 #: print.module:268
 msgid "Add current time/date to the source URL"
-msgstr "Legg til gjeldende tid/dato til kilde URL"
+msgstr "Agregar la hora actual/el día a la URL de origen"
 
 #: print.module:271
 msgid "Display the current date and time in the Source URL line."
-msgstr "Viser dato og tid for når utskriften gjøres sammen med kilde URL nederst på siden."
+msgstr "Mostrar el día actual y la hora en la línea URL de Origen."
 
 #: print.module:276
 msgid "Force use of node ID in source URL"
-msgstr "Bruk node id i kilde URL"
+msgstr "Forzar el uso del ID del nodo en la URL de origen"
 
 #: print.module:279
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
-msgstr "Drupal vil forsøke å benytte sidens definerte alias dersom det er en. For å bruke fast URL, slå på dette valget."
+msgstr "En caso de estar disponible, Drupal intenta usar el alias definido para la página. Para forzar el uso de la URL corregida active esta opción."
 
 #: print.module:286
 msgid "Robots META tags"
-msgstr "Robot- META tager"
+msgstr "META tags Robots"
 
 #: print.module:294
 msgid "Add noindex"
-msgstr "Legg til noindex"
+msgstr "Agregar noindex"
 
 #: print.module:297
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
-msgstr "Instruer roboter til ikke å indeksere utskriftsvennlige sider. Anbefales for god søkemotor-karma."
+msgstr "Indique a los robots NO indexar las versiones para imprimir de las páginas. Recomendado para un <em>buen karma</em> en los servicios de búqueda (search engine)."
 
 #: print.module:302
 msgid "Add nofollow"
-msgstr "Legg til nofollow"
+msgstr "Agregar nofollow"
 
 #: print.module:305
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
-msgstr "Insturer roboter til ikke å følge utgående lenker på utskriftvennlige sider."
+msgstr "Indique a los robots no seguir enlaces salientes de las versiones para imprimir de las páginas."
 
 #: print.module:310
 msgid "Add noarchive"
-msgstr "Legg til noarchive"
+msgstr "Agregar noarchive"
 
 #: print.module:313
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
-msgstr "Ikke-standard tag som instruerer søkemotorer til ikke å vise en \"Cashed\" lenke for dine utskriftsvennlige sider. Gjenkjennes av Googlebot."
+msgstr "Tag <em>no standard</em> para indicar a los servicios de búsqueda no mostrar el enlace \"en cache\" de las versiones para imprimir de sus páginas. Reconocido por Googlebot."
 
 #: print.module:318
 msgid "Add nocache"
-msgstr "Legg til nocache"
+msgstr "Agregar nocache"
 
 #: print.module:321
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr "Ikke-standard tag som instruerer søkemotorer til ikke å vise en \"Cashed\" lenke for dine utskriftsvennlige sider."
+msgstr "Tag <em>no standard</em> para indicar a los servicios de búsqueda no mostrar el enlace \"en cache\" de las versiones para imprimir de sus páginas."
 
 #: print.module:449
 msgid "retrieved on"
-msgstr "hentet"
+msgstr "recibido en"
 
 #: print.module:456
 msgid "Published on"
-msgstr "Publisert på"
+msgstr "Publicado en"
 
 #: print.module:457
 msgid "By"
-msgstr "av"
+msgstr "Por"
 
 #: print.module:458
 msgid "Created"
-msgstr "Laget"
+msgstr "Creado"
 
 #: print.module:469
 msgid "Links:"
-msgstr "Lenker:"
+msgstr "Enlaces:"
 
 #: print.module:577
 msgid "Display a printer-friendly version of this page."
-msgstr "Vis en utskriftsvennlig versjon av denne siden."
+msgstr "Visualizar versión para impresora de esta página."
 
 #: print.module:588
 msgid "Printer-friendly version"
-msgstr "Se utskriftsvennlig utgave"
+msgstr "Versión para impresora"
 
 #: print.module:19
 msgid "access print"
-msgstr "tilgang print"
+msgstr "acceder a print"
 
 #: print.module:19
 msgid "administer print"
-msgstr "administrer print"
+msgstr "administrar print"
 
 #: print.module:0
 msgid "print"
-msgstr "utskrift"
+msgstr "imprimir"
 
 #: print.info:0
 msgid "Printer-friendly pages"
-msgstr "Utskriftsvennlige sider"
+msgstr "Páginas de versión para imprimir"
 

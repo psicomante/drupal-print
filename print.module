@@ -502,7 +502,7 @@ function print_rewrite_urls($matches) {
         else {
           // URL is relative, convert it into absolute URL
           $clean_url = (bool)variable_get('clean_url', '0');
-          if ((!$clean_url) && (preg_match("/^[\/]?\?q=.*/i", $url))) {
+          if ((!$clean_url) && (preg_match("/^[\/]?[index.php]?\?q=.*/i", $url))) {
             // If Clean URLs is disabled, and it starts with q=?, just prepend with the base URL
             $newurl = $base_url .'/'. trim(urldecode($url), "/");
           } 
