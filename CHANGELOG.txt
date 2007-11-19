@@ -1,4 +1,37 @@
+November 19, 2007
+      Commit #88581 by jcnventura at 23:23
+        Complete Spanish translation. Thanks gustz!
+      Commit #88487 by jcnventura at 10:21
+        Complete French translation. Thanks rondev!
+November 17, 2007
+      Commit #88352 by jcnventura at 23:59
+        Complete versions of the Hungarian and German translations. Thanks hinger and hailstorm!
+      Commit #88280 by jcnventura at 00:34
+        Try to solve #192855, by checking also for index.php in relative links
+November 15, 2007
+      Commit #88160 by jcnventura at 23:53
+        Sync print 5.x to 6.x
+      Commit #88158 by jcnventura at 23:52
+        Sync print 5.x to 4.7.x
+      Commit #88133 by jcnventura at 21:42
+        Final translation to russian. Thanks VladSavitsky!
+      Commit #88112 by jcnventura at 16:02
+        Remove TODOs in the .po files
+      Commit #88111 by jcnventura at 15:46
+        Updated Norwegian translation to final. Thanks stenjo!
+        Added (partial) Italian translation. Thanks ccattaneo74!
+      Commit #88081 by jcnventura at 12:18
+        Added (partial) Ukrainian translation. Thanks artem_sokolov!
+      Commit #88080 by jcnventura at 12:09
+        Added (partial) Romanian translation. Thanks baudolino!
+November 15, 2007
+      Commit #88080 by jcnventura at 12:09
+        Added (partial) Romanian translation. Thanks baudolino!
 November 13, 2007
+      Commit #87938 by jcnventura at 14:26
+        Make anchor tags (#id) links usable in the PF version again (after the base href fix broke it).
+      Commit #87887 by jcnventura at 02:05
+        Add setting to control the book PF link via this module
       Commit #87880 by jcnventura at 03:58
         Update all .po files to the latest print.pot from the potx module
 November 9, 2007
