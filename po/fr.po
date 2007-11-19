@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: print.module\n"
 "POT-Creation-Date: 2007-11-13 02:03+0100\n"
-"PO-Revision-Date: 2007-10-23 20:51+0100\n"
+"PO-Revision-Date: 2007-11-18 18:34+0100\n"
 "Last-Translator: Ronan LE LOC'H <rondev@free.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,11 +43,11 @@ msgstr "page des paramètres"
 
 #: print.module:130
 msgid "Show printer-friendly version link in individual comments"
-msgstr ""
+msgstr "Affiche le lien vers la version imprimable dans les commentaires individuels"
 
 #: print.module:133
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr ""
+msgstr "Affiche le lien vers la version imprimable des commentaires. D'autres paramètres sont possibles dans !settings."
 
 #: print.module:176
 msgid "Printer-friendly page link"
@@ -67,19 +67,19 @@ msgstr "Active ou désactive le lien 'version imprimable' pour chaque noeud. Mê
 
 #: print.module:184
 msgid "Show link in system (non-content) pages"
-msgstr ""
+msgstr "Affiche le lien dans les pages systemes (sans contenu)"
 
 #: print.module:187
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
-msgstr ""
+msgstr "Activer cette option ajoutera un lien vers la version imprimable sur les pages créées par Drupal ou les modules activés."
 
 #: print.module:192
 msgid "Take control of the book module printer-friendly link"
-msgstr ""
+msgstr "Prend le controle du lien vers la version imprimable du module Book"
 
 #: print.module:195
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
-msgstr ""
+msgstr "Si actif, permet la prise en charge des liens la version imprimable des noeuds \"Book\". Nécessite le module du core Book."
 
 #: print.module:200
 msgid "Logo URL"
@@ -107,11 +107,11 @@ msgstr "Si coché, une liste des URLS destination des liens dans votre page sera
 
 #: print.module:226
 msgid "Include comments in printer-friendly version"
-msgstr ""
+msgstr "Inclus les commentaires dans la version imprimable"
 
 #: print.module:229
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
-msgstr ""
+msgstr "Quand cette option est active, les commentaires d'utilisateur sont aussi inclus dans la version imprimable. Requiert le module Comment."
 
 #: print.module:234
 msgid "Open the printer-friendly version in a new window"
@@ -119,11 +119,11 @@ msgstr "Affiche une version imprimable dans une nouvelle fenêtre"
 
 #: print.module:235
 msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr ""
+msgstr "Utilise HTML target (n'est pas strictement validé comme du XHTML)"
 
 #: print.module:235
 msgid "Use Javascript (requires browser support)"
-msgstr ""
+msgstr "Utilise Javascript (requiert le support par l'explorateur)"
 
 #: print.module:237
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
