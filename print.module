@@ -764,7 +764,7 @@ function print_generate_book($nid) {
   }
 
   $depth = count(book_location($node)) + 1;
-  $node->body = book_recurse($nid, $depth, 'book_node_visitor_html_pre', 'book_node_visitor_html_post');
+  $node->body = book_recurse($nid, $depth, 'print_node_visitor_html_pre', 'book_node_visitor_html_post');
 
   // Convert the a href elements
   $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
@@ -777,4 +777,23 @@ function print_generate_book($nid) {
   $print["title"] = "";
 
   include_once(print_get_template($node->type));
+}
+
+/**
+ * My own version of book_node_visitor_html_pre so that CCK pages in book nodes
+ * come out right
+ */
+function print_node_visitor_html_pre($node, $depth, $nid) {
+  $node = node_build_content($node);
+
+  // Allow modules to make their own additions to the node.
+  node_invoke_nodeapi($node, 'print');
+
+  unset($node->content["book_navigation"]);
+
+  $output .= "<div id=\"node-". $node->nid ."\" class=\"section-$depth\">\n";
+  $output .= "<h1 class=\"book-heading\">". check_plain($node->title) ."</h1>\n";
+  $output .= drupal_render($node->content);
+
+  return $output;
 }
