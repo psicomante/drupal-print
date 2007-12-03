@@ -80,15 +80,18 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
  * Implementation of hook_link_alter().
  */
 function print_link_alter(&$node, &$links) {
-  $print_settings = variable_get('print_settings', print_settings_default());
+  foreach ($links AS $module => $link) {
+    if (strstr($module, 'book_printer')) {
+      $print_settings = variable_get('print_settings', print_settings_default());
 
-  if ($print_settings['book_link']) {
-    $link =& $links['book_printer'];
-    $format = print_format_link();
-    $format['attributes']['title'] = $link['attributes']['title'];
+      if ($print_settings['book_link']) {
+        $format = print_format_link();
+        $format['attributes']['title'] = $link['attributes']['title'];
 
-    $link['href'] = PRINT_PATH ."/". $link['href'];
-    $link['attributes'] = $format['attributes'];
+        $links[$module]['href'] = PRINT_PATH ."/". $link['href'];
+        $links[$module]['attributes'] = $format['attributes'];
+      }
+    }
   }
 }
 
