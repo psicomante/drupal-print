@@ -790,7 +790,7 @@ function print_node_visitor_html_pre($node, $depth, $nid) {
   $node = node_build_content($node);
 
   // Allow modules to make their own additions to the node.
-  node_invoke_nodeapi($node, 'print');
+  node_invoke_nodeapi($node, 'view');
 
   unset($node->content["book_navigation"]);
 
