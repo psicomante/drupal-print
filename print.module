@@ -84,15 +84,18 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
  * Implementation of hook_link_alter().
  */
 function print_link_alter(&$links, $node) {
-  $print_settings = variable_get('print_settings', print_settings_default());
+  foreach ($links AS $module => $link) {
+    if (strstr($module, 'book_printer')) {
+      $print_settings = variable_get('print_settings', print_settings_default());
 
-  if ($print_settings['book_link']) {
-    $link =& $links['book_printer'];
-    $format = print_format_link();
-    $format['attributes']['title'] = $link['attributes']['title'];
+      if ($print_settings['book_link']) {
+        $format = print_format_link();
+        $format['attributes']['title'] = $link['attributes']['title'];
 
-    $link['href'] = PRINT_PATH ."/". $link['href'];
-    $link['attributes'] = $format['attributes'];
+        $links[$module]['href'] = PRINT_PATH ."/". $link['href'];
+        $links[$module]['attributes'] = $format['attributes'];
+      }
+    }
   }
 }
 
@@ -533,7 +536,12 @@ function print_rewrite_urls($matches) {
         else {
           // URL is relative, convert it into absolute URL
           $clean_url = (bool)variable_get('clean_url', '0');
-          if ((!$clean_url) && (preg_match("/^[\/]?\?q=.*/i", $url))) {
+          if (substr($url, 0, 1) == "/") {
+            // If it starts with '/' just append it to the server name
+            $server = substr($base_url, 0, strpos($base_url, '/', 7));
+            $newurl = $server .'/'. trim(urldecode($url), "/");
+          }
+          elseif ((!$clean_url) && (preg_match("/^[index.php]?\?q=.*/i", $url))) {
             // If Clean URLs is disabled, and it starts with q=?, just prepend with the base URL
             $newurl = $base_url .'/'. trim(urldecode($url), "/");
           } 
@@ -759,7 +767,7 @@ function print_generate_book($nid) {
   }
 
   $tree = book_menu_subtree_data($node->book);
-  $node->body = book_export_traverse($tree, 'book_node_visitor_html_pre', 'book_node_visitor_html_post');
+  $node->body = book_export_traverse($tree, 'book_node_export');
 
   // Convert the a href elements
   $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
