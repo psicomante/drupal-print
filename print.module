@@ -58,7 +58,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
       ($type == 'node' && variable_get('print_display_'. $node->type, '1')))) {
     $links = array();
 
-    $format = print_format_link();
+    $format = theme('print_format_link');
 
     if ($type == 'comment') {
       $query = "comment=$node->cid";
@@ -67,6 +67,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
     $links['print'] = array('href' => PRINT_PATH ."/". $node->nid,
                             'title' => $format['text'],
                             'attributes' => $format['attributes'],
+                            'html' => $format['html'],
                             'query' => $query);
 
     return $links;
@@ -85,7 +86,7 @@ function print_link_alter(&$node, &$links) {
       $print_settings = variable_get('print_settings', print_settings_default());
 
       if ($print_settings['book_link']) {
-        $format = print_format_link();
+        $format = theme('print_format_link');
         $format['attributes']['title'] = $link['attributes']['title'];
 
         $links[$module]['href'] = PRINT_PATH ."/". $link['href'];
@@ -589,8 +590,9 @@ function print_friendly_urls($url = 0) {
  *
  * @return array of formatted attributes
  */
-function print_format_link() {
+function print_fill_attributes() {
   $print_settings = variable_get('print_settings', print_settings_default());
+
   $attributes = array('title' => t('Display a printer-friendly version of this page.'), 
                       'class' => 'print-page');
   switch ($print_settings['newwindow']) {
@@ -601,9 +603,13 @@ function print_format_link() {
     $attributes['onclick'] = 'window.open(this.href); return false';
     break;
   }
+  return $attributes;
+}
 
+function theme_print_format_link() {
   return array('text' => t('Printer-friendly version'),
-               'attributes' => $attributes);
+               'html' => FALSE,
+               'attributes' => print_fill_attributes());
 }
 
 /**
@@ -612,11 +618,13 @@ function print_format_link() {
  * @return string
  */
 function print_insert_link($path = NULL) {
-  if ($path === NULL) {
-    $path = PRINT_PATH ."/". $_GET['q'];
+  if (user_access('access print')) {
+    if ($path === NULL) {
+      $path = PRINT_PATH ."/". $_GET['q'];
+    }
+    $format = theme('print_format_link');
+    return '<span class="print">'. l($format['text'], $path, $format['attributes'], NULL, NULL, TRUE, $format['html']) .'</span>';
   }
-  $format = print_format_link();
-  return '<span class="print">'. l($format['text'], $path, $format['attributes'], NULL, NULL, TRUE, FALSE) .'</span>';
 }
 
 /**
