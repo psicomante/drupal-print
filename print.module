@@ -458,7 +458,7 @@ function _print_var_generator($node, $cid = NULL) {
   }
 
   $print["site_name"] = variable_get('site_name', 0) ? (t('Published on') ." ". variable_get('site_name', 0) ." (". l($base_url, $base_url) .")") : "";
-  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? t('By') ." ". $node->name : "";
+  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? t('By') ." ". ($node->name ? $node->name : variable_get('anonymous')) : "";
   $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? t('Created') ." ". format_date($node->created, 'small') : "";
 
   // Display the collected links at the bottom of the page. Code once taken from Kjartan Mannes' project.module
