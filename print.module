@@ -621,14 +621,9 @@ function print_insert_link($path = NULL) {
   if (user_access('access print')) {
     if ($path === NULL) {
       $path = PRINT_PATH ."/". $_GET['q'];
-      $query = NULL;
-      foreach ($_GET as $k => $v) {
-        if ($k != 'q') {
-          $query .= '&'. $k .'='. $v;
-        }
-      }
-      if ($query) {
-        $query = substr($query, 1);
+      $query = drupal_query_string_encode($_GET, array('q'));
+      if (empty($query)) {
+        $query = NULL;
       }
     }
     $format = theme('print_format_link');
