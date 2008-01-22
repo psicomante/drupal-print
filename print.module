@@ -412,6 +412,8 @@ function _print_robots_meta_generator() {
 function _print_var_generator($node, $cid = NULL) {
   global $base_url;
 
+  $themed = theme('print_text');
+
   // print module settings
   $print_settings = variable_get('print_settings', print_settings_default());
   $print_sourceurl_settings = variable_get('print_sourceurl_settings', print_sourceurl_settings_default());
@@ -450,16 +452,16 @@ function _print_var_generator($node, $cid = NULL) {
     if ($cid) {
       $print["source_url"] .= "#comment-$cid";
     }
-    $print["printdate"] = $print_sourceurl_settings['date'] ? (" (". t("retrieved on") ." ". format_date(time(), 'small') .")") : "";
-    $print["source_url"] = "<strong>". t('Source URL') . $print["printdate"] .":</strong> <a href=\"". $print["source_url"] ."\">". $print["source_url"] ."</a>";
+    $print["printdate"] = $print_sourceurl_settings['date'] ? (" (". $themed['retrieved'] ." ". format_date(time(), 'small') .")") : "";
+    $print["source_url"] = "<strong>". $themed['sourceURL'] . $print["printdate"] .":</strong> <a href=\"". $print["source_url"] ."\">". $print["source_url"] ."</a>";
   } 
   else {
     $print["source_url"] = "";
   }
 
-  $print["site_name"] = variable_get('site_name', 0) ? (t('Published on') ." ". variable_get('site_name', 0) ." (". l($base_url, $base_url) .")") : "";
-  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? t('By') ." ". ($node->name ? $node->name : variable_get('anonymous')) : "";
-  $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? t('Created') ." ". format_date($node->created, 'small') : "";
+  $print["site_name"] = variable_get('site_name', 0) ? ($themed['published'] ." ". variable_get('site_name', 0) ." (". l($base_url, $base_url) .")") : "";
+  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? $themed['by'] ." ". ($node->name ? $node->name : variable_get('anonymous')) : "";
+  $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? $themed['created'] ." ". format_date($node->created, 'small') : "";
 
   // Display the collected links at the bottom of the page. Code once taken from Kjartan Mannes' project.module
   if (!empty($print_settings['urls'])) {
@@ -470,7 +472,7 @@ function _print_var_generator($node, $cid = NULL) {
       for ($i = 0; $i < $max; $i++) {
         $print["pfp_links"] .= '['. ($i + 1) .'] '. $urls[$i] ."<br />\n";
       }
-      $print["pfp_links"] = "<p><strong>". t('Links:') ."</strong><br />". $print["pfp_links"] ."</p>";
+      $print["pfp_links"] = "<p><strong>". $themed['links'] ."</strong><br />". $print["pfp_links"] ."</p>";
     }
   }
 
@@ -610,6 +612,15 @@ function theme_print_format_link() {
   return array('text' => t('Printer-friendly version'),
                'html' => FALSE,
                'attributes' => print_fill_attributes());
+}
+
+function theme_print_text() {
+  return array('retrieved' => t('retrieved on'),
+               'sourceURL' => t('Source URL'),
+               'published' => t('Published on'),
+               'by' => t('By'),
+               'created' => t('Created'),
+               'links' => t('Links:'));
 }
 
 /**
