@@ -9,7 +9,7 @@
     <?php  print $print["css"] ?>
   </head>
   <body<?php  print $print["sendtoprinter"] ?>>
-    <?php  print $print["logo"] ?>
+    <div><?php  print $print["logo"] ?></div>
     <div class="print-site_name"><?php  print $print["site_name"] ?></div>
     <div class="print-title"><?php  print $print["title"] ?></div>
     <div class="print-submitted"><?php  print $print["submitted"] ?></div>

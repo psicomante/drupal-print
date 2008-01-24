@@ -62,7 +62,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
       ($type == 'node' && $print_display))) {
     $links = array();
 
-    $format = print_format_link();
+    $format = theme('print_format_link');
 
     if ($type == 'comment') {
       $query = "comment=$node->cid";
@@ -71,6 +71,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
     $links['print'] = array('href' => PRINT_PATH ."/". $node->nid,
                             'title' => $format['text'],
                             'attributes' => $format['attributes'],
+                            'html' => $format['html'],
                             'query' => $query);
 
     return $links;
@@ -89,7 +90,7 @@ function print_link_alter(&$links, $node) {
       $print_settings = variable_get('print_settings', print_settings_default());
 
       if ($print_settings['book_link']) {
-        $format = print_format_link();
+        $format = theme('print_format_link');
         $format['attributes']['title'] = $link['attributes']['title'];
 
         $links[$module]['href'] = PRINT_PATH ."/". $link['href'];
@@ -413,6 +414,8 @@ function _print_robots_meta_generator() {
 function _print_var_generator($node, $cid = NULL) {
   global $base_url;
 
+  $themed = theme('print_text');
+
   // print module settings
   $print_settings = variable_get('print_settings', print_settings_default());
   $print_sourceurl_settings = variable_get('print_sourceurl_settings', print_sourceurl_settings_default());
@@ -426,12 +429,12 @@ function _print_var_generator($node, $cid = NULL) {
   $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"". theme_get_setting("favicon") ."\" type=\"image/x-icon\"/>\n" : "";
 
   if (!empty($print_settings['css'])) {
-    $print["css"] = "<style type=\"text/css\">@import \"". $print_settings['css'] ."\";</style>\n";
+    $print["css"] = "<style type=\"text/css\" media=\"all\">@import \"". $print_settings['css'] ."\";</style>\n";
   } 
   else {
     ob_start();
     include_once(drupal_get_path('module', 'print') ."/print.css");
-    $print["css"] = "<style type=\"text/css\">". ob_get_contents() ."</style>\n";
+    $print["css"] = "<style type=\"text/css\" media=\"all\">". ob_get_contents() ."</style>\n";
     ob_end_clean();
   }
 
@@ -451,16 +454,16 @@ function _print_var_generator($node, $cid = NULL) {
     if ($cid) {
       $print["source_url"] .= "#comment-$cid";
     }
-    $print["printdate"] = $print_sourceurl_settings['date'] ? (" (". t("retrieved on") ." ". format_date(time(), 'small') .")") : "";
-    $print["source_url"] = "<strong>". t('Source URL') . $print["printdate"] .":</strong> <a href=\"". $print["source_url"] ."\">". $print["source_url"] ."</a>";
+    $print["printdate"] = $print_sourceurl_settings['date'] ? (" (". $themed['retrieved'] ." ". format_date(time(), 'small') .")") : "";
+    $print["source_url"] = "<strong>". $themed['sourceURL'] . $print["printdate"] .":</strong> <a href=\"". $print["source_url"] ."\">". $print["source_url"] ."</a>";
   } 
   else {
     $print["source_url"] = "";
   }
 
-  $print["site_name"] = variable_get('site_name', 0) ? (t('Published on') ." ". variable_get('site_name', 0) ." (". l($base_url, $base_url) .")") : "";
-  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? t('By') ." ". $node->name : "";
-  $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? t('Created') ." ". format_date($node->created, 'small') : "";
+  $print["site_name"] = variable_get('site_name', 0) ? ($themed['published'] ." ". variable_get('site_name', 0) ." (". l($base_url, $base_url) .")") : "";
+  $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? $themed['by'] ." ". ($node->name ? $node->name : variable_get('anonymous')) : "";
+  $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? $themed['created'] ." ". format_date($node->created, 'small') : "";
 
   // Display the collected links at the bottom of the page. Code once taken from Kjartan Mannes' project.module
   if (!empty($print_settings['urls'])) {
@@ -471,7 +474,7 @@ function _print_var_generator($node, $cid = NULL) {
       for ($i = 0; $i < $max; $i++) {
         $print["pfp_links"] .= '['. ($i + 1) .'] '. $urls[$i] ."<br />\n";
       }
-      $print["pfp_links"] = "<p><strong>". t('Links:') ."</strong><br />". $print["pfp_links"] ."</p>";
+      $print["pfp_links"] = "<p><strong>". $themed['links'] ."</strong><br />". $print["pfp_links"] ."</p>";
     }
   }
 
@@ -538,7 +541,13 @@ function print_rewrite_urls($matches) {
           $clean_url = (bool)variable_get('clean_url', '0');
           if (substr($url, 0, 1) == "/") {
             // If it starts with '/' just append it to the server name
-            $server = substr($base_url, 0, strpos($base_url, '/', 7));
+            $max = strpos($base_url, '/', 7);
+            if ($max === false) {
+              $server = $base_url;
+            }
+            else {
+              $server = substr($base_url, 0, $max);
+            }
             $newurl = $server .'/'. trim(urldecode($url), "/");
           }
           elseif ((!$clean_url) && (preg_match("/^[index.php]?\?q=.*/i", $url))) {
@@ -585,8 +594,9 @@ function print_friendly_urls($url = 0) {
  *
  * @return array of formatted attributes
  */
-function print_format_link() {
+function print_fill_attributes() {
   $print_settings = variable_get('print_settings', print_settings_default());
+
   $attributes = array('title' => t('Display a printer-friendly version of this page.'), 
                       'class' => 'print-page');
   switch ($print_settings['newwindow']) {
@@ -597,9 +607,22 @@ function print_format_link() {
     $attributes['onclick'] = 'window.open(this.href); return false';
     break;
   }
+  return $attributes;
+}
 
+function theme_print_format_link() {
   return array('text' => t('Printer-friendly version'),
-               'attributes' => $attributes);
+               'html' => FALSE,
+               'attributes' => print_fill_attributes());
+}
+
+function theme_print_text() {
+  return array('retrieved' => t('retrieved on'),
+               'sourceURL' => t('Source URL'),
+               'published' => t('Published on'),
+               'by' => t('By'),
+               'created' => t('Created'),
+               'links' => t('Links:'));
 }
 
 /**
@@ -608,11 +631,17 @@ function print_format_link() {
  * @return string
  */
 function print_insert_link($path = NULL) {
-  if ($path === NULL) {
-    $path = PRINT_PATH ."/". $_GET['q'];
+  if (user_access('access print')) {
+    if ($path === NULL) {
+      $path = PRINT_PATH ."/". $_GET['q'];
+      $query = drupal_query_string_encode($_GET, array('q'));
+      if (empty($query)) {
+        $query = NULL;
+      }
+    }
+    $format = theme('print_format_link');
+    return '<span class="print">'. l($format['text'], $path, array('attributes' => $format['attributes'], 'query' => $query, 'absolute' => TRUE, 'html' => $format['html'])) .'</span>';
   }
-  $format = print_format_link();
-  return '<span class="print">'. l($format['text'], $path, array('attributes' => $format['attributes'], 'absolute' => TRUE)) .'</span>';
 }
 
 /**
@@ -668,7 +697,7 @@ function print_generate_node($nid, $cid = NULL) {
   $node->printing = true;
   // Turn off Pagination by the Paging module
   unset($node->pages);
-  unset($node->pages_count);
+  unset($node->page_count);
 
   unset($node->teaser);
   $node = (object)$node;
@@ -690,6 +719,10 @@ function print_generate_node($nid, $cid = NULL) {
     //Print only the requested comment (or if $cid is NULL, all of them)
     $comments = comment_render($node, $cid);
     
+    //Remove the comment forms
+    $comments = preg_replace("/<form.*?id=\"comment-.*?\">.*?<\/form>/sim", "", $comments);
+    //Remove the 'Post new comment' title
+    $comments = preg_replace("/<h2 class=\"title\">Post new comment<\/h2>/", "", $comments);
     //Remove the comment title hyperlink
     $comments = preg_replace("/(<h3.*?>)(<a.*?>)(.*?)<\/a>(<\/h3>)/", "$1$3$4", $comments);
     //Remove the comment links
