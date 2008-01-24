@@ -1,4 +1,40 @@
+January 5, 2008
+      Commit #94314 by jcnventura at 21:05
+        Add div tags around the logo image (fix for #206568)
+January 2, 2008
+      Commit #93687 by jcnventura at 14:01
+        Fix #202243: Use the anonymous setting for pages with a blank author variable
+December 14, 2007
+      Commit #91367 by jcnventura at 15:49
+        Added ability to theme the print_format_link function (fix for #198397)
+        Added access check to the print_insert_link function
+December 4, 2007
+      Commit #90227 by jcnventura at 19:04
+        Minor fix to #192855, use full base_url if it does not include subdirs
+December 3, 2007
+      Commit #90155 by jcnventura at 23:21
+        Sync print 5.x to 4.7.x
+      Commit #90154 by jcnventura at 23:11
+        Sync 5.x to 6.x
+      Commit #90151 by jcnventura at 22:47
+        Proper fix to the book_node_visitor_html_pre which was incorrectly committed with 'print' instead of 'view'
+      Commit #90126 by jcnventura at 17:31
+        Fix #195917: Use correct module check in hook_link_alter
+December 2, 2007
+      Commit #90019 by jcnventura at 20:25
+        Add replacement book_node_visitor_html_pre so that CCK pages in book nodes print correctly
+November 22, 2007
+      Commit #88906 by jcnventura at 11:27
+        Fix #192855: If relative links start with '/' just append them to the server name (commit to 5.x-3.x-dev)
+      Commit #88843 by jcnventura at 01:27
+        Fix #192855: If relative links start with '/' just append them to the server name
 November 19, 2007
+      Commit #88585 by jcnventura at 23:53
+        Sync print 5.x to 4.7.x
+      Commit #88584 by jcnventura at 23:49
+        Sync print 5.x to 4.7.x
+      Commit #88583 by jcnventura at 23:35
+        Update changelog
       Commit #88581 by jcnventura at 23:23
         Complete Spanish translation. Thanks gustz!
       Commit #88487 by jcnventura at 10:21
