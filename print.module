@@ -20,6 +20,20 @@ function print_perm() {
 }
 
 /**
+ * Implementation of hook_theme()
+ */
+function print_theme() {
+  return array(
+    'print_format_link' => array(
+      'arguments' => array(),
+    ),
+    'print_text' => array(
+      'arguments' => array(),
+    ),
+  );
+}
+
+/**
  * Implementation of hook_menu()
  */
 function print_menu() {
@@ -722,7 +736,7 @@ function print_generate_node($nid, $cid = NULL) {
     //Remove the comment forms
     $comments = preg_replace("/<form.*?id=\"comment-.*?\">.*?<\/form>/sim", "", $comments);
     //Remove the 'Post new comment' title
-    $comments = preg_replace("/<h2 class=\"title\">Post new comment<\/h2>/", "", $comments);
+    $comments = preg_replace("/<h2.*?>Post new comment<\/h2>/", "", $comments);
     //Remove the comment title hyperlink
     $comments = preg_replace("/(<h3.*?>)(<a.*?>)(.*?)<\/a>(<\/h3>)/", "$1$3$4", $comments);
     //Remove the comment links
