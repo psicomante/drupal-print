@@ -15,6 +15,7 @@
     <div class="print-submitted"><?php  print $print["submitted"] ?></div>
     <div class="print-created"><?php  print $print["created"] ?></div>
     <p />
+    <div class="print-taxonomy"><?php print $print["taxonomy"] ?></div>
     <div class="print-content"><?php  print $node->body; ?></div>
     <div class="print-footer"><?php  print $print["footer_message"] ?></div>
     <hr class="print-hr" />
