@@ -704,6 +704,7 @@ function print_generate_node($nid, $cid = NULL) {
   $node->printing = true;
   // Turn off Pagination by the Paging module
   unset($node->pages);
+  unset($node->pages_count);
   unset($node->page_count);
 
   unset($node->teaser);
