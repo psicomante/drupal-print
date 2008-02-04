@@ -3,6 +3,7 @@
   <head>
     <title><?php  print $print["title"] ?></title>
     <?php  print $print["head"] ?>
+    <?php  print $print["scripts"] ?>
     <?php  print $print["robots_meta"] ?>
     <?php  print $print["base_href"] ?>
     <?php  print $print["favicon"] ?>
