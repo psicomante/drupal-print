@@ -472,6 +472,8 @@ function print_rewrite_urls($matches) {
       $matches[1]=substr_replace($matches[1], "%20", $i, 1);
     }
   }
+  // remove whitespace immediately before and after the '=' sign
+  $matches[1]=preg_replace("/\s*=\s*/", "=", $matches[1]);
 
   // first, split the html into the different tag attributes
   $attribs = preg_split("/\s+/m", $matches[1]);
