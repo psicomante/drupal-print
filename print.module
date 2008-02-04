@@ -568,6 +568,9 @@ function print_rewrite_urls($matches) {
     }
   }
 
+  //Revert all %20 in strings back to spaces
+  $matches[1] = str_replace("%20", " ", $matches[1]);
+
   $ret = '<'. $matches[1] .'>';
   if ($attribs[0] == "a") {
     $ret .= $matches[2] .'</a>';
