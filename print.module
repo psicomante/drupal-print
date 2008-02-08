@@ -444,14 +444,12 @@ function _print_var_generator($node, $cid = NULL) {
   $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"". theme_get_setting("favicon") ."\" type=\"image/x-icon\"/>\n" : "";
 
   if (!empty($print_settings['css'])) {
-    $print["css"] = "<style type=\"text/css\" media=\"all\">@import \"". $print_settings['css'] ."\";</style>\n";
+    $css_file = $print_settings['css'];
   } 
   else {
-    ob_start();
-    include_once(drupal_get_path('module', 'print') ."/print.css");
-    $print["css"] = "<style type=\"text/css\" media=\"all\">". ob_get_contents() ."</style>\n";
-    ob_end_clean();
+    $css_file = drupal_get_path('module', 'print') ."/print.css";
   }
+  $print["css"] = "<style type=\"text/css\" media=\"all\">@import \"". $css_file ."\";</style>\n";
 
   $print["sendtoprinter"] = $print_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
     
