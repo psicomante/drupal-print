@@ -8,9 +8,9 @@
 
 define("PRINT_PATH", "print");
 
-/********************************************************************
- * Drupal Hooks
- ********************************************************************/
+//*******************************************************************
+// Drupal Hooks
+//*******************************************************************
 
 /**
  * Implementation of hook_perm()
@@ -71,7 +71,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
                             'query' => $query);
 
     return $links;
-  } 
+  }
   else {
     return;
   }
@@ -139,9 +139,9 @@ function print_form_alter($form_id, &$form) {
   }
 }
 
-/********************************************************************
- * Admin Settings: Print
- ********************************************************************/
+//*******************************************************************
+// Admin Settings: Print
+//*******************************************************************
 
 /**
  * Default values of the print_settings variable
@@ -328,9 +328,9 @@ function print_main_settings() {
   return system_settings_form($form);
 }
 
-/********************************************************************
- * Module Functions :: Controller
- ********************************************************************/
+//*******************************************************************
+// Module Functions :: Controller
+//*******************************************************************
 
 /**
  * Print module path catcher
@@ -353,7 +353,7 @@ function print_controller() {
   }
   if (is_numeric($nid)) {
     print_generate_node($nid, $cid);
-  } 
+  }
   else {
     $ret = preg_match("/^book\/export\/html\/(.*)/i", $args, $matches);
     if ($ret == 1) {
@@ -367,9 +367,9 @@ function print_controller() {
   }
 }
 
-/********************************************************************
- * Module Functions : Auxiliary
- ********************************************************************/
+//*******************************************************************
+// Module Functions : Auxiliary
+//*******************************************************************
 
 /**
  * Generates a meta tag to tell robots what they may index based on module settings
@@ -396,7 +396,7 @@ function _print_robots_meta_generator() {
   if (sizeof($robots_meta) > 0) {
     $robots_meta = isset($robots_meta[1]) ? implode(', ', $robots_meta) : $robots_meta[0];
     $robots_meta = '<meta name="robots" content="'. $robots_meta ."\" />\n";
-  } 
+  }
   else {
     $robots_meta = '';
   }
@@ -429,7 +429,7 @@ function _print_var_generator($node, $cid = NULL) {
 
   if (!empty($print_settings['css'])) {
     $css_file = $print_settings['css'];
-  } 
+  }
   else {
     $css_file = drupal_get_path('module', 'print') ."/print.css";
   }
@@ -444,7 +444,7 @@ function _print_var_generator($node, $cid = NULL) {
   if ($print_sourceurl_settings['enabled'] == 1) {
     if (empty($print_sourceurl_settings['forcenode'])) {
       $print["source_url"] = url("node/$node->nid", NULL, NULL, TRUE);
-    } 
+    }
     else {
       $print["source_url"] = $base_url .'/'. (((bool)variable_get('clean_url', '0')) ? '' : '?q=') .'node/'. $node->nid;
     }
@@ -453,7 +453,7 @@ function _print_var_generator($node, $cid = NULL) {
     }
     $print["printdate"] = $print_sourceurl_settings['date'] ? (" (". $themed['retrieved'] ." ". format_date(time(), 'small') .")") : "";
     $print["source_url"] = "<strong>". $themed['sourceURL'] . $print["printdate"] .":</strong> <a href=\"". $print["source_url"] ."\">". $print["source_url"] ."</a>";
-  } 
+  }
   else {
     $print["source_url"] = "";
   }
@@ -486,7 +486,7 @@ function _print_var_generator($node, $cid = NULL) {
 }
 
 /**
- * We need to manipulate URLs so that they are recorded as absolute in the 
+ * We need to manipulate URLs so that they are recorded as absolute in the
  *  Printer-friendly URLs list, and to add a [n] footnote marker.
  *
  * @return string containing the changed <a> tag
@@ -499,7 +499,7 @@ function print_rewrite_urls($matches) {
   $pfurls = (!empty($print_settings['urls']));
 
   //Temporarily convert spaces to %20 so that it isn't split below
-  $in_string = false; 
+  $in_string = false;
   for ($i=0; $i < strlen($matches[1]); $i++) {
     if ($matches[1][$i] == '"') {
       $in_string = !$in_string;
@@ -524,7 +524,7 @@ function print_rewrite_urls($matches) {
       if (strpos($url, '://') || preg_match("/^mailto:.*?@.*?\..*?$/iu", $url)) {
         // URL is absolute, do nothing
         $newurl = urldecode($url);
-      } 
+      }
       else {
         if (substr($url, 0, 1) == "#") {
           // URL is an anchor tag
@@ -539,7 +539,7 @@ function print_rewrite_urls($matches) {
           // Because base href is the original page, change the link to
           // still be usable inside the print page
           $matches[1] = str_replace($url, $_GET['q'] . $url, $matches[1]);
-        } 
+        }
         else {
           // URL is relative, convert it into absolute URL
           $clean_url = (bool)variable_get('clean_url', '0');
@@ -557,7 +557,7 @@ function print_rewrite_urls($matches) {
           elseif ((!$clean_url) && (preg_match("/^[index.php]?\?q=.*/i", $url))) {
             // If Clean URLs is disabled, and it starts with q=?, just prepend with the base URL
             $newurl = $base_url .'/'. trim(urldecode($url), "/");
-          } 
+          }
           else {
             $newurl = url(trim(urldecode($url), "/"), NULL, NULL, TRUE);
           }
@@ -584,7 +584,7 @@ function print_rewrite_urls($matches) {
 /**
  * Auxiliary function to store the Printer-friendly URLs list as static.
  *
- * @return string containing the list of URLs previously stored if $url is 0, 
+ * @return string containing the list of URLs previously stored if $url is 0,
  *         or the current count otherwise.
  */
 function print_friendly_urls($url = 0) {
@@ -611,7 +611,7 @@ function print_fill_attributes() {
   $print_settings = variable_get('print_settings', print_settings_default());
   $robots_settings = variable_get('print_robot_settings', print_robot_settings_default());
 
-  $attributes = array('title' => t('Display a printer-friendly version of this page.'), 
+  $attributes = array('title' => t('Display a printer-friendly version of this page.'),
                       'class' => 'print-page');
   switch ($print_settings['newwindow']) {
   case 1:
@@ -693,9 +693,9 @@ function print_get_template($type = NULL) {
   return drupal_get_path('module', 'print') ."/print.tpl.php";
 }
 
-/********************************************************************
- * Module Functions : Content renderers
- ********************************************************************/
+//*******************************************************************
+// Module Functions : Content renderers
+//*******************************************************************
 
 /**
  * Outputs a printer-friendly page. Used for content types
