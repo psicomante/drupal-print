@@ -12,6 +12,9 @@
   <body<?php  print $print["sendtoprinter"] ?>>
     <div><?php  print $print["logo"] ?></div>
     <div class="print-site_name"><?php  print $print["site_name"] ?></div>
+    <p />
+    <div class="print-breadcrumb"><?php  print $print["breadcrumb"] ?></div>
+    <hr class="print-hr" />
     <div class="print-title"><?php  print $print["title"] ?></div>
     <div class="print-submitted"><?php  print $print["submitted"] ?></div>
     <div class="print-created"><?php  print $print["created"] ?></div>

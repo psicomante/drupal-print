@@ -421,7 +421,6 @@ function _print_var_generator($node, $cid = NULL) {
   $print["language"] = $GLOBALS['locale'];
   $print["title"] = $node->title;
   $print["robots_meta"] = _print_robots_meta_generator();
-//  $print["base_href"] = "<base href=\"".$base_url."/node/".$node->nid."\" />\n";
   $print["base_href"] = "<base href=\"". url("node/$node->nid", NULL, NULL, TRUE) ."\" />\n";
   $print["head"] = drupal_get_html_head();
   $print["scripts"] = drupal_get_js();
@@ -461,6 +460,15 @@ function _print_var_generator($node, $cid = NULL) {
   $print["site_name"] = variable_get('site_name', 0) ? ($themed['published'] ." ". variable_get('site_name', 0) ." (". l($base_url, $base_url) .")") : "";
   $print["submitted"] = theme_get_setting("toggle_node_info_$node->type") ? $themed['by'] ." ". ($node->name ? $node->name : variable_get('anonymous', t('Anonymous'))) : "";
   $print["created"] = theme_get_setting("toggle_node_info_$node->type") ? $themed['created'] ." ". format_date($node->created, 'small') : "";
+
+  menu_set_active_item("node/$node->nid");
+  $breadcrumb = drupal_get_breadcrumb();
+  if (!empty($breadcrumb)) {
+    $print["breadcrumb"] = implode(" > ", drupal_get_breadcrumb());
+  }
+  else {
+    $print["breadcrumb"] = "";
+  }
 
   // Display the collected links at the bottom of the page. Code once taken from Kjartan Mannes' project.module
   if (!empty($print_settings['urls'])) {
