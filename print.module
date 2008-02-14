@@ -464,7 +464,8 @@ function _print_var_generator($node, $cid = NULL) {
   menu_set_active_item("node/$node->nid");
   $breadcrumb = drupal_get_breadcrumb();
   if (!empty($breadcrumb)) {
-    $print["breadcrumb"] = implode(" > ", drupal_get_breadcrumb());
+    $breadcrumb[] = menu_get_active_title();
+    $print["breadcrumb"] = implode(" > ", $breadcrumb);
   }
   else {
     $print["breadcrumb"] = "";
@@ -592,7 +593,7 @@ function print_friendly_urls($url = 0) {
   static $urls = array();
   if ($url) {
     $url_idx = array_search($url, $urls);
-    if ($url_idx) {
+    if ($url_idx !== FALSE) {
       return ($url_idx + 1);
     }
     else {
