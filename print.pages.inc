@@ -83,7 +83,7 @@ function _print_robots_meta_generator() {
  * @return string
  */
 function _print_var_generator($node, $cid = NULL) {
-  global $base_url, $base_path;
+  global $base_url, $base_path, $language;
 
   $path = empty($node->nid) ? $node->path : "node/$node->nid";
 
@@ -93,7 +93,7 @@ function _print_var_generator($node, $cid = NULL) {
   $print_settings = variable_get('print_settings', print_settings_default());
   $print_sourceurl_settings = variable_get('print_sourceurl_settings', print_sourceurl_settings_default());
 
-  $print["language"] = $GLOBALS['locale'];
+  $print["language"] = $language->language;
   $print["title"] = $node->title;
   $print["robots_meta"] = _print_robots_meta_generator();
   $print["base_href"] = "<base href=\"". url($path, array('absolute' => TRUE)) ."\" />\n";
