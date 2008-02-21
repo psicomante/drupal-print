@@ -90,7 +90,7 @@ function _print_robots_meta_generator() {
  * @return string
  */
 function _print_var_generator($node, $cid = NULL) {
-  global $base_url, $base_path, $language;
+  global $base_url, $language;
 
   $path = empty($node->nid) ? $node->path : "node/$node->nid";
 
@@ -112,9 +112,9 @@ function _print_var_generator($node, $cid = NULL) {
     $css_file = $print_settings['css'];
   }
   else {
-    $css_file = $base_path . drupal_get_path('module', 'print') ."/print.css";
+    $css_file = $base_url ."/". drupal_get_path('module', 'print') ."/print.css";
   }
-  $print["css"] = "<style type=\"text/css\" media=\"all\">@import \"". $css_file ."\";</style>\n";
+  $print["css"] = "<style type=\"text/css\" media=\"all\">@import url(\"". $css_file ."\");</style>\n";
 
   $print["sendtoprinter"] = $print_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
     
