@@ -6,49 +6,18 @@
  * Display printer-friendly versions of Drupal pages
  */
 
-define("PRINT_PATH", "print");
-
-/**
- * Default values of the print_settings variable
- */
-function print_settings_default() {
-  return array('show_link' => 1, 'show_sys_link' => 1, 'book_link' => 1, 'logo_url' => '', 'css' => '', 'urls' => 1, 'comments' => 0, 'newwindow' => 0, 'sendtoprinter' => 0);
-}
-
-/**
- * Default values of the print_sourceurl_settings variable
- */
-function print_sourceurl_settings_default() {
-  return array('enabled' => 1, 'date' => 0, 'forcenode' => 0);
-}
-
-/**
- * Default values of the print_robot_settings variable
- */
-function print_robot_settings_default() {
-  return array('noindex' => 1, 'nofollow' => 1, 'noarchive' => 0, 'nocache' => 0);
-}
+define("PRINTPDF_PATH", "printpdf");
 
 //*******************************************************************
 // Drupal Hooks
 //*******************************************************************
 
 /**
- * Implementation of hook_perm()
- */
-function print_perm() {
-  return array('access print', 'administer print');
-}
-
-/**
  * Implementation of hook_theme()
  */
-function print_theme() {
+function print_pdf_theme() {
   return array(
-    'print_format_link' => array(
-      'arguments' => array(),
-    ),
-    'print_text' => array(
+    'print_pdf_format_link' => array(
       'arguments' => array(),
     ),
   );
@@ -57,23 +26,15 @@ function print_theme() {
 /**
  * Implementation of hook_menu()
  */
-function print_menu() {
+function print_pdf_menu() {
   $items = array();
 
-  $items[PRINT_PATH] = array(
-    'title' => 'Printer-friendly',
-    'page callback' => 'print_controller_html',
+  $items[PRINTPDF_PATH] = array(
+    'title' => 'Printer-friendly PDF',
+    'page callback' => 'print_pdf_controller',
     'access arguments' => array('access print'),
     'type' => MENU_CALLBACK,
-    'file' => 'print.pages.inc',
-  );
-  $items['admin/settings/print'] = array(
-    'title' => 'Printer-friendly',
-    'description' => 'Adds a printer-friendly version link to node pages.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('print_main_settings'),
-    'access arguments'  => array('administer print'),
-    'file' => 'print.admin.inc',
+    'file' => 'print.pdf.inc',
   );
 
   return $items;
@@ -82,7 +43,7 @@ function print_menu() {
 /**
  * Implementation of hook_link().
  */
-function print_link($type, $node = NULL, $teaser = FALSE) {
+function print_pdf_link($type, $node = NULL, $teaser = FALSE) {
   static $print_display = FALSE;
   static $print_display_comment = FALSE;
 
@@ -93,19 +54,19 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
 
   $print_settings = variable_get('print_settings', print_settings_default());
   // No link is shown for several motives...
-  if ( !($teaser) && ($node->type != 'book') && (!$node->book) &&
+  if ( !($teaser) && (!$node->book) &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && $print_display_comment) ||
       ($type == 'node' && $print_display))) {
     $links = array();
 
-    $format = theme('print_format_link');
+    $format = theme('print_pdf_format_link');
 
     if ($type == 'comment') {
       $query = "comment=$node->cid";
     }
 
-    $links['print'] = array('href' => PRINT_PATH ."/". $node->nid,
+    $links['print_pdf'] = array('href' => PRINTPDF_PATH ."/". $node->nid,
                             'title' => $format['text'],
                             'attributes' => $format['attributes'],
                             'html' => $format['html'],
@@ -119,28 +80,9 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
 }
 
 /**
- * Implementation of hook_link_alter().
- */
-function print_link_alter(&$links, $node) {
-  foreach ($links AS $module => $link) {
-    if (strstr($module, 'book_printer')) {
-      $print_settings = variable_get('print_settings', print_settings_default());
-
-      if ($print_settings['book_link']) {
-        $format = theme('print_format_link');
-        $format['attributes']['title'] = $link['attributes']['title'];
-
-        $links[$module]['href'] = PRINT_PATH ."/". $link['href'];
-        $links[$module]['attributes'] = $format['attributes'];
-      }
-    }
-  }
-}
-
-/**
  * Implementation of hook_help()
  */
-function print_help($path, $arg) {
+function print_pdf_help($path, $arg) {
   $print_settings = variable_get('print_settings', print_settings_default());
 
   if (($print_settings['show_link']) && ($print_settings['show_sys_link']) &&
@@ -150,7 +92,7 @@ function print_help($path, $arg) {
     if ($output === FALSE) {
       $output = TRUE;
     
-      return print_insert_link();
+      return print_pdf_insert_link();
     }
   }
 }
@@ -158,7 +100,7 @@ function print_help($path, $arg) {
 /**
  * Implementation of hook_form_alter()
  */
-function print_form_alter(&$form, $form_state, $form_id) {
+function print_pdf_form_alter(&$form, $form_state, $form_id) {
   // Add the node-type settings option to activate the printer-friendly version link
   if ('node_type_form' == $form_id) {
     $form['workflow']['print_display'] = array(
@@ -183,11 +125,11 @@ function print_form_alter(&$form, $form_state, $form_id) {
  *
  * @return array of formatted attributes
  */
-function _print_fill_attributes() {
+function _print_pdf_fill_attributes() {
   $print_settings = variable_get('print_settings', print_settings_default());
   $robots_settings = variable_get('print_robot_settings', print_robot_settings_default());
 
-  $attributes = array('title' => t('Display a printer-friendly version of this page.'),
+  $attributes = array('title' => t('Display a PDF version of this page.'),
                       'class' => 'print-page');
   switch ($print_settings['newwindow']) {
   case 1:
@@ -203,19 +145,10 @@ function _print_fill_attributes() {
   return $attributes;
 }
 
-function theme_print_format_link() {
-  return array('text' => t('Printer-friendly version'),
+function theme_print_pdf_format_link() {
+  return array('text' => t('(as PDF)'),
                'html' => FALSE,
-               'attributes' => _print_fill_attributes());
-}
-
-function theme_print_text() {
-  return array('retrieved' => t('retrieved on'),
-               'sourceURL' => t('Source URL'),
-               'published' => t('Published on'),
-               'by' => t('By'),
-               'created' => t('Created'),
-               'links' => t('Links:'));
+               'attributes' => _print_pdf_fill_attributes());
 }
 
 /**
@@ -223,16 +156,16 @@ function theme_print_text() {
  *
  * @return string
  */
-function print_insert_link($path = NULL) {
+function print_pdf_insert_link($path = NULL) {
   if (user_access('access print')) {
     if ($path === NULL) {
-      $path = PRINT_PATH ."/". $_GET['q'];
+      $path = PRINTPDF_PATH ."/". $_GET['q'];
       $query = drupal_query_string_encode($_GET, array('q'));
       if (empty($query)) {
         $query = NULL;
       }
     }
-    $format = theme('print_format_link');
+    $format = theme('print_pdf_format_link');
     return '<span class="print">'. l($format['text'], $path, array('attributes' => $format['attributes'], 'query' => $query, 'absolute' => TRUE, 'html' => $format['html'])) .'</span>';
   }
 }

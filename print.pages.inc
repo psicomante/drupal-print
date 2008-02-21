@@ -5,12 +5,17 @@
 // Module Functions :: Controller
 //*******************************************************************
 
+function print_controller_html() {
+  $print = print_controller();
+  include_once(_print_get_template($print["type"]));
+}
+
 /**
  * Print module path catcher
  */
 function print_controller() {
   // Remove the print/ prefix
-  $args = substr($_GET['q'], strlen(PRINT_PATH)+1);
+  $args = substr($_GET['q'], strpos($_GET['q'], '/')+1);
 
   $cid = $_GET['comment'];
 
@@ -25,19 +30,21 @@ function print_controller() {
     }
   }
   if (is_numeric($nid)) {
-    _print_generate_node($nid, $cid);
+    $print = _print_generate_node($nid, $cid);
   }
   else {
     $ret = preg_match("/^book\/export\/html\/(.*)/i", $args, $matches);
     if ($ret == 1) {
       // This is a book PF page link, handle trough the book handling functions
-      _print_generate_book($matches[1]);
+      $print = _print_generate_book($matches[1]);
     }
     else {
       // If no content node was found, handle the page printing with the 'printable' engine
-      _print_generate_path($args);
+      $print = _print_generate_path($args);
     }
   }
+
+  return $print;
 }
 
 //*******************************************************************
@@ -165,6 +172,9 @@ function _print_var_generator($node, $cid = NULL) {
     $terms = taxonomy_link('taxonomy terms', $node);
     $print["taxonomy"] = theme('links', $terms);
   }
+
+  $print["type"] = $node->type;
+  $print["content"] = $node->body;
 
   return $print;
 }
@@ -379,7 +389,7 @@ function _print_generate_node($nid, $cid = NULL) {
 
   $print = _print_var_generator($node, $cid);
 
-  include_once(_print_get_template($node->type));
+  return $print;
 }
 
 /**
@@ -422,7 +432,7 @@ function _print_generate_path($path) {
 
   $print = _print_var_generator($node);
 
-  include_once(_print_get_template());
+  return $print;
 }
 
 
@@ -451,5 +461,5 @@ function _print_generate_book($nid) {
   // The title is already displayed by the book_recurse, so avoid duplication
   $print["title"] = "";
 
-  include_once(_print_get_template($node->type));
+  return $print;
 }
