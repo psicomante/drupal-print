@@ -15,7 +15,9 @@ function print_pdf_controller() {
 }
 
 function _print_pdf_dompdf($print, $filename, $directives = array()) {
-  require_once(drupal_get_path('module', 'print') . '/dompdf/dompdf_config.inc.php');
+  $pdfgen = array_values(file_scan_directory(drupal_get_path('module', 'print'), '^dompdf_config.inc.php$'));
+  require_once($pdfgen[0]->filename);
+
   ob_start();
   include_once(_print_get_template($print["type"]));
   $html = ob_get_contents();
@@ -42,7 +44,8 @@ function _print_pdf_dompdf($print, $filename, $directives = array()) {
 }
 
 function _print_pdf_tcpdf($print, $filename) {
-  require_once(drupal_get_path('module', 'print') . '/tcpdf/tcpdf.php');
+  $pdfgen = array_values(file_scan_directory(drupal_get_path('module', 'print'), '^tcpdf.php$'));
+  require_once($pdfgen[0]->filename);
 
   $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
   $pdf->Open();

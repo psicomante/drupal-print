@@ -130,7 +130,7 @@ function _print_pdf_fill_attributes() {
   $robots_settings = variable_get('print_robot_settings', print_robot_settings_default());
 
   $attributes = array('title' => t('Display a PDF version of this page.'),
-                      'class' => 'print-page');
+                      'class' => 'print_pdf-page');
   switch ($print_settings['newwindow']) {
   case 1:
     $attributes['target'] = '_blank';
@@ -146,7 +146,7 @@ function _print_pdf_fill_attributes() {
 }
 
 function theme_print_pdf_format_link() {
-  return array('text' => t('(as PDF)'),
+  return array('text' => t('PDF version'),
                'html' => FALSE,
                'attributes' => _print_pdf_fill_attributes());
 }
