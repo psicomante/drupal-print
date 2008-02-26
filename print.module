@@ -183,7 +183,7 @@ function print_form_alter(&$form, $form_state, $form_id) {
  *
  * @return array of formatted attributes
  */
-function _print_fill_attributes() {
+function print_fill_attributes() {
   $print_settings = variable_get('print_settings', print_settings_default());
   $robots_settings = variable_get('print_robot_settings', print_robot_settings_default());
 
@@ -206,7 +206,7 @@ function _print_fill_attributes() {
 function theme_print_format_link() {
   return array('text' => t('Printer-friendly version'),
                'html' => FALSE,
-               'attributes' => _print_fill_attributes());
+               'attributes' => print_fill_attributes());
 }
 
 function theme_print_text() {

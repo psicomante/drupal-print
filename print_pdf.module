@@ -125,8 +125,8 @@ function print_pdf_form_alter(&$form, $form_state, $form_id) {
  *
  * @return array of formatted attributes
  */
-function _print_pdf_fill_attributes() {
-  $attributes = _print_fill_attributes();
+function print_pdf_fill_attributes() {
+  $attributes = print_fill_attributes();
   $attributes['title'] = t('Display a PDF version of this page.');
   $attributes['class'] = 'print-pdf';
 
@@ -136,7 +136,7 @@ function _print_pdf_fill_attributes() {
 function theme_print_pdf_format_link() {
   return array('text' => t('PDF version'),
                'html' => FALSE,
-               'attributes' => _print_pdf_fill_attributes());
+               'attributes' => print_pdf_fill_attributes());
 }
 
 /**
