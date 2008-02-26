@@ -44,20 +44,20 @@ function print_pdf_menu() {
  * Implementation of hook_link().
  */
 function print_pdf_link($type, $node = NULL, $teaser = FALSE) {
-  static $print_display = FALSE;
-  static $print_display_comment = FALSE;
+  static $print_pdf_display = FALSE;
+  static $print_pdf_display_comment = FALSE;
 
   if ($print_display == FALSE) {
-    $print_display_comment = variable_get('print_display_comment_'. $node->type, '0');
-    $print_display = variable_get('print_display_'. $node->type, '1');
+    $print_pdf_display_comment = variable_get('print_pdf_display_comment_'. $node->type, '0');
+    $print_pdf_display = variable_get('print_pdf_display_'. $node->type, '1');
   }
 
   $print_settings = variable_get('print_settings', print_settings_default());
   // No link is shown for several motives...
-  if ( !($teaser) && (!$node->book) &&
+  if ( !($teaser) &&
       ($print_settings['show_link']) && user_access('access print') &&
-      (($type == 'comment' && $print_display_comment) ||
-      ($type == 'node' && $print_display))) {
+      (($type == 'comment' && $print_pdf_display_comment) ||
+      ($type == 'node' && $print_pdf_display))) {
     $links = array();
 
     $format = theme('print_pdf_format_link');
@@ -101,21 +101,21 @@ function print_pdf_help($path, $arg) {
  * Implementation of hook_form_alter()
  */
 function print_pdf_form_alter(&$form, $form_state, $form_id) {
-  // Add the node-type settings option to activate the printer-friendly version link
+  // Add the node-type settings option to activate the PDF version link
   if ('node_type_form' == $form_id) {
-    $form['workflow']['print_display'] = array(
+    $form['workflow']['print_pdf_display'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Show printer-friendly version link'),
+      '#title' => t('Show PDF version link'),
       '#return_value' => 1,
-      '#default_value' => variable_get('print_display_'. $form['#node_type']->type, '1'),
-      '#description' => t('Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
+      '#default_value' => variable_get('print_pdf_display_'. $form['#node_type']->type, '1'),
+      '#description' => t('Displays the link to a PDF version of the content. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
     );
-    $form['comment']['print_display_comment'] = array(
+    $form['comment']['print_pdf_display_comment'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Show printer-friendly version link in individual comments'),
+      '#title' => t('Show PDF version link in individual comments'),
       '#return_value' => 1,
-      '#default_value' => variable_get('print_display_comment_'. $form['#node_type']->type, '0'),
-      '#description' => t('Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
+      '#default_value' => variable_get('print_pdf_display_comment_'. $form['#node_type']->type, '0'),
+      '#description' => t('Displays the link to a PDF version of the comment. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
     );
   }
 }
@@ -126,22 +126,10 @@ function print_pdf_form_alter(&$form, $form_state, $form_id) {
  * @return array of formatted attributes
  */
 function _print_pdf_fill_attributes() {
-  $print_settings = variable_get('print_settings', print_settings_default());
-  $robots_settings = variable_get('print_robot_settings', print_robot_settings_default());
+  $attributes = _print_fill_attributes();
+  $attributes['title'] = t('Display a PDF version of this page.');
+  $attributes['class'] = 'print-pdf';
 
-  $attributes = array('title' => t('Display a PDF version of this page.'),
-                      'class' => 'print_pdf-page');
-  switch ($print_settings['newwindow']) {
-  case 1:
-    $attributes['target'] = '_blank';
-    break;
-  case 2:
-    $attributes['onclick'] = 'window.open(this.href); return false';
-    break;
-  }
-  if (!empty($robots_settings['nofollow'])) {
-    $attributes['rel'] = 'nofollow';
-  }
   return $attributes;
 }
 
