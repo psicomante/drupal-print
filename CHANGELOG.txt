@@ -1,3 +1,72 @@
+February 15, 2008
+      Commit #101072 by jcnventura at 02:15
+        Correct print vars when using the printable engine
+February 14, 2008
+      Commit #100725 by jcnventura at 02:52
+        Add current page title to printed breadcrumb
+        Fix #216728 better: if first link was duplicate a new ref was generated
+February 12, 2008
+      Commit #100419 by jcnventura at 03:07
+        Added breadcrumb to PF page
+February 9, 2008
+      Commit #99912 by jcnventura at 02:16
+        Better support for Drupal sites that do not reside in the server root.
+        Fix the 'printable' engine to display the page title.
+      Commit #99891 by jcnventura at 00:58
+        Fix #218963 by mkalkbrenner: Fix wrong usage of node_invoke_nodeapi
+      Commit #99875 by jcnventura at 00:21
+        Cleanup code (ran latest coder module)
+February 8, 2008
+      Commit #99777 by jcnventura at 16:48
+        Replace module CSS import with an @import statement
+February 5, 2008
+      Commit #99390 by jcnventura at 12:10
+        Fix 217928: add default value to variable_get('anonymous')
+February 4, 2008
+      Commit #99298 by jcnventura at 18:56
+        Fix #217439: Add defined javascript to the PF page
+      Commit #99292 by jcnventura at 18:37
+        Fix #198688: remove added %20
+      Commit #99283 by jcnventura at 17:51
+        Remove whitespace immediately before and after the '=' sign
+      Commit #99275 by jcnventura at 17:14
+        Fix #216728 by jpereza: Don't show duplicate URLs in the URL list
+      Commit #99272 by jcnventura at 17:03
+        Fix #216716: do not process hreflang attributes
+January 28, 2008
+      Commit #97997 by jcnventura at 18:41
+        Support paging module official release (Fix #215103)
+January 25, 2008
+      Commit #97414 by jcnventura at 13:27
+        Add rel=nofollow tag to PF link (#213951)
+        Add taxonomy terms to the PF page (#214081)
+      Commit #97406 by jcnventura at 11:01
+        Update pot to latest code
+      Commit #97405 by jcnventura at 11:00
+        Right fix for #213425
+January 24, 2008
+      Commit #97277 by jcnventura at 17:36
+        Sync 5.x to 6.x
+      Commit #97276 by jcnventura at 17:33
+        Sync 5.x to 4.7.x
+      Commit #97252 by jcnventura at 12:12
+        Remove comment forms from PF page (fix for #213425)
+January 23, 2008
+      Commit #97112 by jcnventura at 18:02
+        Fix wrong Paginate hack (replace pages_count with page_count)
+January 22, 2008
+      Commit #96919 by jcnventura at 13:14
+        Added ability to change the output strings through theming (as per #206365)
+      Commit #96914 by jcnventura at 12:46
+        Slightly better solution to #211349.
+      Commit #96913 by jcnventura at 12:40
+        Added Portuguese (Brazil) translation (thanks psychopath_mind!)
+January 21, 2008
+      Commit #96693 by jcnventura at 12:45
+        Fix #211349: Add current query params to PF link
+January 8, 2008
+      Commit #94766 by jcnventura at 19:09
+        Update changelog
 January 5, 2008
       Commit #94314 by jcnventura at 21:05
         Add div tags around the logo image (fix for #206568)

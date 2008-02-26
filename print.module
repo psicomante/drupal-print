@@ -676,11 +676,19 @@ function print_get_template($type = NULL) {
   if ($type) {
     // If the node type is known, then try to find that type's template file
     // First in the theme directory
+    $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.node-$type.tpl.php";
+    if (file_exists($filename)) {
+      return $filename;
+    }
     $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.$type.tpl.php";
     if (file_exists($filename)) {
       return $filename;
     }
     // Then in the module directory
+    $filename = drupal_get_path('module', 'print') ."/print.node-$type.tpl.php";
+    if (file_exists($filename)) {
+      return $filename;
+    }
     $filename = drupal_get_path('module', 'print') ."/print.$type.tpl.php";
     if (file_exists($filename)) {
       return $filename;
