@@ -258,7 +258,7 @@ function _print_rewrite_urls($matches) {
   $matches[1] = str_replace("%20", " ", $matches[1]);
 
   $ret = '<'. $matches[1] .'>';
-  if ($attribs[0] == "a") {
+  if (strtolower($attribs[0]) == "a") {
     $ret .= $matches[2] .'</a>';
     if (($pfurls) && ($newurl)) {
       $ret .= ' <span class="print-footnote">['. _print_friendly_urls(trim(stripslashes($newurl))) .']</span>';
