@@ -71,8 +71,22 @@ function print_menu() {
     'title' => 'Printer-friendly',
     'description' => 'Adds a printer-friendly version link to node pages.',
     'page callback' => 'drupal_get_form',
+    'page arguments' => array('print_html_settings'),
+    'access arguments'  => array('administer print'),
+    'file' => 'print.admin.inc',
+  );
+  $items['admin/settings/print/html'] = array(
+    'title' => 'Web page',
+    'weight' => 0,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/settings/print/common'] = array(
+    'title' => 'Settings',
+    'page callback' => 'drupal_get_form',
     'page arguments' => array('print_main_settings'),
     'access arguments'  => array('administer print'),
+    'weight' => 10,
+    'type' => MENU_LOCAL_TASK,
     'file' => 'print.admin.inc',
   );
 

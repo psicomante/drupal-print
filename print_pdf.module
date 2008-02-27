@@ -8,6 +8,13 @@
 
 define("PRINTPDF_PATH", "printpdf");
 
+/**
+ * Default values of the print_pdf_settings variable
+ */
+function print_pdf_settings_default() {
+  return array('show_link' => 0, 'show_sys_link' => 1, 'book_link' => 1, 'pdf_tool' => 0);
+}
+
 //*******************************************************************
 // Drupal Hooks
 //*******************************************************************
@@ -36,6 +43,15 @@ function print_pdf_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'print.pdf.inc',
   );
+  $items['admin/settings/print/pdf'] = array(
+    'title' => 'PDF',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('print_pdf_settings'),
+    'access arguments'  => array('administer print'),
+    'weight' => 2,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'print_pdf.admin.inc',
+  );
 
   return $items;
 }
@@ -47,15 +63,15 @@ function print_pdf_link($type, $node = NULL, $teaser = FALSE) {
   static $print_pdf_display = FALSE;
   static $print_pdf_display_comment = FALSE;
 
-  if ($print_display == FALSE) {
+  if ($print_pdf_display == FALSE) {
     $print_pdf_display_comment = variable_get('print_pdf_display_comment_'. $node->type, '0');
     $print_pdf_display = variable_get('print_pdf_display_'. $node->type, '1');
   }
 
-  $print_settings = variable_get('print_settings', print_settings_default());
+  $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());
   // No link is shown for several motives...
   if ( !($teaser) &&
-      ($print_settings['show_link']) && user_access('access print') &&
+      ($print_pdf_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && $print_pdf_display_comment) ||
       ($type == 'node' && $print_pdf_display))) {
     $links = array();
@@ -83,9 +99,9 @@ function print_pdf_link($type, $node = NULL, $teaser = FALSE) {
  * Implementation of hook_help()
  */
 function print_pdf_help($path, $arg) {
-  $print_settings = variable_get('print_settings', print_settings_default());
+  $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());
 
-  if (($print_settings['show_link']) && ($print_settings['show_sys_link']) &&
+  if (($print_pdf_settings['show_link']) && ($print_pdf_settings['show_sys_link']) &&
       user_access('access print') && (preg_match("/^node\//i", $path) == 0)) {
     static $output = FALSE;
 

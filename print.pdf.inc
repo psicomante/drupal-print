@@ -4,6 +4,8 @@
 require_once(drupal_get_path('module', 'print') . '/print.pages.inc');
 
 function print_pdf_controller() {
+  $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());  
+
   $print = print_controller();
   // Img elements must be set to absolute
   $pattern = "@<(img\s[^>]*?)>@is";
@@ -11,12 +13,20 @@ function print_pdf_controller() {
   $print["logo"] = preg_replace_callback($pattern, "_print_rewrite_urls", $print["logo"]);
   $print["footer_message"] = preg_replace_callback($pattern, "_print_rewrite_urls", $print["footer_message"]);
 
-  _print_pdf_dompdf($print, $args .".pdf");
+  if (basename($print_pdf_settings['pdf_tool']) == "dompdf_config.inc.php") {
+    _print_pdf_dompdf($print, $args .".pdf");
+  }
+  elseif (basename($print_pdf_settings['pdf_tool']) == "tcpdf.php") {
+    _print_pdf_tcpdf($print, $args .".pdf");
+  }
+  else {
+    return drupal_not_found();
+  }
 }
 
 function _print_pdf_dompdf($print, $filename, $directives = array()) {
-  $pdfgen = array_values(file_scan_directory(drupal_get_path('module', 'print'), '^dompdf_config.inc.php$'));
-  require_once($pdfgen[0]->filename);
+  $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());  
+  require_once($print_pdf_settings['pdf_tool']);
 
   ob_start();
   include_once(_print_get_template($print["type"]));
@@ -44,8 +54,8 @@ function _print_pdf_dompdf($print, $filename, $directives = array()) {
 }
 
 function _print_pdf_tcpdf($print, $filename) {
-  $pdfgen = array_values(file_scan_directory(drupal_get_path('module', 'print'), '^tcpdf.php$'));
-  require_once($pdfgen[0]->filename);
+  $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());  
+  require_once($print_pdf_settings['pdf_tool']);
 
   $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
   $pdf->Open();

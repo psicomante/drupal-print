@@ -16,30 +16,6 @@ function print_main_settings() {
       '#tree' => TRUE,
     );
 
-  $form['print_settings']['show_link'] = array(
-    '#type' => 'radios',
-    '#title' => t('Printer-friendly page link'),
-    '#default_value' => $print_settings['show_link'],
-    '#options' => array(t("Disabled"), t("Enabled")),
-    '#description' => t("Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."),
-  );
-
-  $form['print_settings']['show_sys_link'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show link in system (non-content) pages'),
-    '#return_value' => 1,
-    '#default_value' => $print_settings['show_sys_link'],
-    '#description' => t('Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules.'),
-  );
-
-  $form['print_settings']['book_link'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Take control of the book module printer-friendly link'),
-    '#return_value' => 1,
-    '#default_value' => $print_settings['book_link'],
-    '#description' => t('Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module.'),
-  );
-
   $form['print_settings']['logo_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Logo URL'),
@@ -82,14 +58,6 @@ function print_main_settings() {
     '#description' => t('Setting this option will make the printer-friendly version open in a new window/tab.'),
   );
 
-  $form['print_settings']['sendtoprinter'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Send to printer'),
-    '#return_value' => 1,
-    '#default_value' => $print_settings['sendtoprinter'],
-    '#description' => t('Automatically calls the browser\'s print function when the printer-friendly version is displayed.'),
-  );
-
   $print_sourceurl_settings = variable_get('print_sourceurl_settings', print_sourceurl_settings_default());
 
   $form['print_sourceurl_settings'] = array(
@@ -124,13 +92,56 @@ function print_main_settings() {
     '#description' => t('Drupal will attempt to use the page\'s defined alias in case there is one. To force the use of the fixed URL, activate this option.'),
   );
 
+  return system_settings_form($form);
+}
+
+function print_html_settings() {
+  $print_settings = variable_get('print_settings', print_settings_default());
+
+  $form['print_settings'] = array(
+      '#type' => 'fieldset',
+      '#tree' => TRUE,
+    );
+
+  $form['print_settings']['show_link'] = array(
+    '#type' => 'radios',
+    '#title' => t('Printer-friendly page link'),
+    '#default_value' => $print_settings['show_link'],
+    '#options' => array(t("Disabled"), t("Enabled")),
+    '#description' => t("Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."),
+  );
+
+  $form['print_settings']['show_sys_link'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show link in system (non-content) pages'),
+    '#return_value' => 1,
+    '#default_value' => $print_settings['show_sys_link'],
+    '#description' => t('Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules.'),
+  );
+
+  $form['print_settings']['book_link'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Take control of the book module printer-friendly link'),
+    '#return_value' => 1,
+    '#default_value' => $print_settings['book_link'],
+    '#description' => t('Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module.'),
+  );
+
+  $form['print_settings']['sendtoprinter'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Send to printer'),
+    '#return_value' => 1,
+    '#default_value' => $print_settings['sendtoprinter'],
+    '#description' => t('Automatically calls the browser\'s print function when the printer-friendly version is displayed.'),
+  );
+
   $print_robot_settings = variable_get('print_robot_settings', print_robot_settings_default());
 
   $form['print_robot_settings'] = array(
       '#type' => 'fieldset',
       '#title' => t('Robots META tags'),
       '#collapsible' => true,
-      '#collapsed' => true,
+      '#collapsed' => false,
       '#tree' => TRUE,
   );
 
