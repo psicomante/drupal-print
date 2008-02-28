@@ -442,18 +442,18 @@ function _print_var_generator($node, $cid = NULL) {
   $print["logo"] = $print["logo"] ? "<img class=\"print-logo\" src=\"". $print["logo"] ."\" alt=\"\" />\n" : "";
 
   /* Grab and format the src URL */
+  if (empty($print_sourceurl_settings['forcenode'])) {
+    $print["url"] = url($path, NULL, NULL, TRUE);
+  }
+  else {
+    $print["url"] = $base_url .'/'. (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . $path;
+  }
+  if ($cid) {
+    $print["url"] .= "#comment-$cid";
+  }
   if ($print_sourceurl_settings['enabled'] == 1) {
-    if (empty($print_sourceurl_settings['forcenode'])) {
-      $print["source_url"] = url($path, NULL, NULL, TRUE);
-    }
-    else {
-      $print["source_url"] = $base_url .'/'. (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . $path;
-    }
-    if ($cid) {
-      $print["source_url"] .= "#comment-$cid";
-    }
     $print["printdate"] = $print_sourceurl_settings['date'] ? (" (". $themed['retrieved'] ." ". format_date(time(), 'small') .")") : "";
-    $print["source_url"] = "<strong>". $themed['sourceURL'] . $print["printdate"] .":</strong> <a href=\"". $print["source_url"] ."\">". $print["source_url"] ."</a>";
+    $print["source_url"] = "<strong>". $themed['sourceURL'] . $print["printdate"] .":</strong> <a href=\"". $print["url"] ."\">". $print["url"] ."</a>";
   }
   else {
     $print["source_url"] = "";
