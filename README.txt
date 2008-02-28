@@ -191,3 +191,8 @@ print print_insert_link();
 
 Simply post a new issue in Drupal's issue system: http://drupal.org/project/issues/print
 If possible, send me an e-mail with the link to your Drupal system where I can see the problem you are reporting.
+
+********************************************************************
+
+The print, pdf and mail icons are copyright Plone Foundation. Thanks for
+letting me use them!
