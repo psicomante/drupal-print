@@ -1,3 +1,26 @@
+March 4, 2008
+      Commit #104186 by jcnventura at 11:42
+        Better fix for #227127: use number of patterns instead of comparing to a
+      Commit #104150 by jcnventura at 03:13
+        Separation of the configuration variables for the HTML and common sections
+        Ability to configure use of text, icon or both in the PF links
+February 28, 2008
+      Commit #103576 by jcnventura at 17:21
+        Adding icons. Thanks to the Plone Foundation
+      Commit #103516 by jcnventura at 01:49
+        Fix #227625: add print['url'] var with absolute source url
+      Commit #103514 by jcnventura at 01:26
+        Add PDF module settings
+February 27, 2008
+      Commit #103327 by jcnventura at 00:25
+        Handle uppercase 'a' tags
+February 26, 2008
+      Commit #103286 by jcnventura at 20:52
+        Properly document the PDF tools installation steps
+        Rename the print_fill_attributes function back to the previous name
+      Commit #103278 by jcnventura at 20:10
+        Correct the support for the PDF per-node-type settings
+        Support print.node-.tpl.php filenames
 February 22, 2008
       Commit #102401 by jcnventura at 02:55
         Auto-discovery of the PDF generation tools
