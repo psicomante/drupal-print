@@ -537,8 +537,8 @@ function print_rewrite_urls($matches) {
   $matches[1] = str_replace("%20", " ", $matches[1]);
 
   $ret = '<'. $matches[1] .'>';
-  if (strtolower($attribs[0]) == "a") {
-    $ret .= $matches[2] .'</a>';
+  if (count($matches) == 4) {
+    $ret .= $matches[2] . $matches[3];
     if (($pfurls) && ($newurl)) {
       $ret .= ' <span class="print-footnote">['. print_friendly_urls(trim(stripslashes($newurl))) .']</span>';
     }
@@ -733,7 +733,7 @@ function print_generate_node($nid, $cid = NULL) {
   node_invoke_nodeapi($node, 'view', false, true);
 
   // Convert the a href elements
-  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
+  $pattern = "@<(a\s[^>]*?)>(.*?)(</a>)@is";
   $node->body = preg_replace_callback($pattern, "print_rewrite_urls", $node->body);
 
   init_theme();
@@ -776,7 +776,7 @@ function print_generate_path($path) {
   $node->body = preg_replace("/\s*<div class=\"links\">.*?<\/div>/sim", "", $node->body);
 
   // Convert the a href elements
-  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
+  $pattern = "@<(a\s[^>]*?)>(.*?)(</a>)@is";
   $node->body = preg_replace_callback($pattern, "print_rewrite_urls", $node->body);
 
   init_theme();
