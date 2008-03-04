@@ -1,3 +1,19 @@
+March 4, 2008
+      Commit #104198 by jcnventura at 13:19
+        Enable use of the visibility_api module when it is installed
+      Commit #104195 by jcnventura at 12:50
+        Remove all the print variables on uninstall
+      Commit #104185 by jcnventura at 11:42
+        Better fix for #227127: use number of patterns instead of comparing to a
+February 28, 2008
+      Commit #103517 by jcnventura at 02:08
+        Fix #227625: add print['url'] var with absolute source url
+February 27, 2008
+      Commit #103328 by jcnventura at 00:26
+        Handle uppercase 'a' tags
+February 26, 2008
+      Commit #103274 by jcnventura at 19:50
+        Support print.node-.tpl.php filenames
 February 15, 2008
       Commit #101072 by jcnventura at 02:15
         Correct print vars when using the printable engine
