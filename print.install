@@ -8,5 +8,10 @@ function print_uninstall() {
   variable_del('print_settings');
   variable_del('print_display_comment');
   variable_del('print_sourceurl_settings');
+  variable_del('print_html_settings');
   variable_del('print_robot_settings');
+  $settings = db_query("SELECT name FROM {variable} WHERE name LIKE 'print\_display\_%'");
+  while ($variable = db_fetch_object($settings)) {
+    variable_del($variable->name);
+  }
 }

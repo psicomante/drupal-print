@@ -98,6 +98,7 @@ function _print_var_generator($node, $cid = NULL) {
 
   // print module settings
   $print_settings = variable_get('print_settings', print_settings_default());
+  $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
   $print_sourceurl_settings = variable_get('print_sourceurl_settings', print_sourceurl_settings_default());
 
   $print["language"] = $language->language;
@@ -116,7 +117,7 @@ function _print_var_generator($node, $cid = NULL) {
   }
   $print["css"] = "<style type=\"text/css\" media=\"all\">@import url(\"". $css_file ."\");</style>\n";
 
-  $print["sendtoprinter"] = $print_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
+  $print["sendtoprinter"] = $print_html_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
     
   $print["logo"] = !empty($print_settings['logo_url']) ? $print_settings['logo_url'] : theme_get_setting('logo');
   $print["logo"] = $print["logo"] ? "<img class=\"print-logo\" src=\"". $print["logo"] ."\" alt=\"\" />\n" : "";

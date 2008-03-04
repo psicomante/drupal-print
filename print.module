@@ -12,7 +12,23 @@ define("PRINT_PATH", "print");
  * Default values of the print_settings variable
  */
 function print_settings_default() {
-  return array('show_link' => 1, 'show_sys_link' => 1, 'book_link' => 1, 'logo_url' => '', 'css' => '', 'urls' => 1, 'comments' => 0, 'newwindow' => 0, 'sendtoprinter' => 0);
+  return array('logo_url' => '',
+               'css' => '',
+               'urls' => 1,
+               'comments' => 0,
+               'newwindow' => 0,
+              );
+}
+
+/**
+ * Default values of the print_html_settings variable
+ */
+function print_html_settings_default() {
+  return array('show_link' => 1,
+               'show_sys_link' => 1,
+               'book_link' => 1,
+               'sendtoprinter' => 0,
+              );
 }
 
 /**
@@ -105,10 +121,10 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
     $print_display = variable_get('print_display_'. $node->type, '1');
   }
 
-  $print_settings = variable_get('print_settings', print_settings_default());
+  $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
   // No link is shown for several motives...
   if ( !($teaser) && ($node->type != 'book') && (!$node->book) &&
-      ($print_settings['show_link']) && user_access('access print') &&
+      ($print_html_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && $print_display_comment) ||
       ($type == 'node' && $print_display))) {
     $links = array();
@@ -138,9 +154,9 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
 function print_link_alter(&$links, $node) {
   foreach ($links AS $module => $link) {
     if (strstr($module, 'book_printer')) {
-      $print_settings = variable_get('print_settings', print_settings_default());
+      $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
 
-      if ($print_settings['book_link']) {
+      if ($print_html_settings['book_link']) {
         $format = theme('print_format_link');
         $format['attributes']['title'] = $link['attributes']['title'];
 
@@ -155,9 +171,9 @@ function print_link_alter(&$links, $node) {
  * Implementation of hook_help()
  */
 function print_help($path, $arg) {
-  $print_settings = variable_get('print_settings', print_settings_default());
+  $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
 
-  if (($print_settings['show_link']) && ($print_settings['show_sys_link']) &&
+  if (($print_html_settings['show_link']) && ($print_html_settings['show_sys_link']) &&
       user_access('access print') && (preg_match("/^node\//i", $path) == 0)) {
     static $output = FALSE;
 
@@ -218,8 +234,23 @@ function print_fill_attributes() {
 }
 
 function theme_print_format_link() {
-  return array('text' => t('Printer-friendly version'),
-               'html' => FALSE,
+  global $base_path;
+
+  $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
+  $text = t('Printer-friendly version');
+  $img = '<img width="16px" height="16px" style="vertical-align:middle" src="'. $base_path . drupal_get_path('module', 'print') .'/icons/print_icon.gif" alt="'. $text .'">';
+  $html = TRUE;
+  switch ($print_html_settings['show_link']) {
+  case 2:
+    $text = $img;
+    break;
+  case 3:
+    $text = $img .' '. $text;
+    break;
+  }
+
+  return array('text' => $text,
+               'html' => $html,
                'attributes' => print_fill_attributes());
 }
 

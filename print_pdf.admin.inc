@@ -23,7 +23,7 @@ function print_pdf_settings() {
       '#type' => 'radios',
       '#title' => t('PDF version link'),
       '#default_value' => $print_pdf_settings['show_link'],
-      '#options' => array(t("Disabled"), t("Enabled")),
+      '#options' => array(t("None (Disabled)"), t("Text only"), t("Icon only"), t("Icon and Text")),
       '#description' => t("Enable or disable the PDF version link for each node. Even if the link is disabled, you can still view the PDF version of a node by going to printpdf/nid where nid is the numeric id of the node."),
     );
 

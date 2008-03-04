@@ -96,42 +96,42 @@ function print_main_settings() {
 }
 
 function print_html_settings() {
-  $print_settings = variable_get('print_settings', print_settings_default());
+  $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
 
-  $form['print_settings'] = array(
+  $form['print_html_settings'] = array(
       '#type' => 'fieldset',
       '#tree' => TRUE,
     );
 
-  $form['print_settings']['show_link'] = array(
+  $form['print_html_settings']['show_link'] = array(
     '#type' => 'radios',
     '#title' => t('Printer-friendly page link'),
-    '#default_value' => $print_settings['show_link'],
-    '#options' => array(t("Disabled"), t("Enabled")),
+    '#default_value' => $print_html_settings['show_link'],
+    '#options' => array(t("None (Disabled)"), t("Text only"), t("Icon only"), t("Icon and Text")),
     '#description' => t("Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."),
   );
 
-  $form['print_settings']['show_sys_link'] = array(
+  $form['print_html_settings']['show_sys_link'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show link in system (non-content) pages'),
     '#return_value' => 1,
-    '#default_value' => $print_settings['show_sys_link'],
+    '#default_value' => $print_html_settings['show_sys_link'],
     '#description' => t('Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules.'),
   );
 
-  $form['print_settings']['book_link'] = array(
+  $form['print_html_settings']['book_link'] = array(
     '#type' => 'checkbox',
     '#title' => t('Take control of the book module printer-friendly link'),
     '#return_value' => 1,
-    '#default_value' => $print_settings['book_link'],
+    '#default_value' => $print_html_settings['book_link'],
     '#description' => t('Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module.'),
   );
 
-  $form['print_settings']['sendtoprinter'] = array(
+  $form['print_html_settings']['sendtoprinter'] = array(
     '#type' => 'checkbox',
     '#title' => t('Send to printer'),
     '#return_value' => 1,
-    '#default_value' => $print_settings['sendtoprinter'],
+    '#default_value' => $print_html_settings['sendtoprinter'],
     '#description' => t('Automatically calls the browser\'s print function when the printer-friendly version is displayed.'),
   );
 

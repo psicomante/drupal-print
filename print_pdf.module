@@ -150,8 +150,23 @@ function print_pdf_fill_attributes() {
 }
 
 function theme_print_pdf_format_link() {
-  return array('text' => t('PDF version'),
-               'html' => FALSE,
+  global $base_path;
+
+  $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());
+  $text = t('PDF version');
+  $img = '<img width="16px" height="16px" style="vertical-align:middle" src="'. $base_path . drupal_get_path('module', 'print') .'/icons/pdf_icon.gif" alt="'. $text .'">';
+  $html = TRUE;
+  switch ($print_pdf_settings['show_link']) {
+  case 2:
+    $text = $img;
+    break;
+  case 3:
+    $text = $img .' '. $text;
+    break;
+  }
+
+  return array('text' => $text,
+               'html' => $html,
                'attributes' => print_pdf_fill_attributes());
 }
 
