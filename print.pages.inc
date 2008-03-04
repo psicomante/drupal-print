@@ -259,8 +259,8 @@ function _print_rewrite_urls($matches) {
   $matches[1] = str_replace("%20", " ", $matches[1]);
 
   $ret = '<'. $matches[1] .'>';
-  if (strtolower($attribs[0]) == "a") {
-    $ret .= $matches[2] .'</a>';
+  if (count($matches) == 4) {
+    $ret .= $matches[2] . $matches[3];
     if (($pfurls) && ($newurl)) {
       $ret .= ' <span class="print-footnote">['. _print_friendly_urls(trim(stripslashes($newurl))) .']</span>';
     }
@@ -383,7 +383,7 @@ function _print_generate_node($nid, $cid = NULL) {
   node_invoke_nodeapi($node, 'alter', false, true);
 
   // Convert the a href elements
-  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
+  $pattern = "@<(a\s[^>]*?)>(.*?)(</a>)@is";
   $node->body = preg_replace_callback($pattern, "_print_rewrite_urls", $node->body);
 
   init_theme();
@@ -426,7 +426,7 @@ function _print_generate_path($path) {
   $node->body = preg_replace("/\s*<div class=\"links\">.*?<\/div>/sim", "", $node->body);
 
   // Convert the a href elements
-  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
+  $pattern = "@<(a\s[^>]*?)>(.*?)(</a>)@is";
   $node->body = preg_replace_callback($pattern, "_print_rewrite_urls", $node->body);
 
   init_theme();
@@ -453,7 +453,7 @@ function _print_generate_book($nid) {
   $node->body = book_export_traverse($tree, 'book_node_export');
 
   // Convert the a href elements
-  $pattern = "@<(a\s[^>]*?)>(.*?)</a>@is";
+  $pattern = "@<(a\s[^>]*?)>(.*?)(</a>)@is";
   $node->body = preg_replace_callback($pattern, "_print_rewrite_urls", $node->body);
 
   init_theme();
