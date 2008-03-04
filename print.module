@@ -53,6 +53,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
   $print_settings = variable_get('print_settings', print_settings_default());
   // No link is shown for several motives...
   if ( !($teaser) && ($node->type != 'book') && (!$node->parent) &&
+      !(module_exists('visibility_api') && visibility_api_access('print')) &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && variable_get('print_display_comment', '0')) ||
       ($type == 'node' && variable_get('print_display_'. $node->type, '1')))) {
@@ -103,6 +104,7 @@ function print_help($path) {
   $print_settings = variable_get('print_settings', print_settings_default());
 
   if (($print_settings['show_link']) && ($print_settings['show_sys_link']) &&
+      !(module_exists('visibility_api') && visibility_api_access('print')) &&
       user_access('access print') && (preg_match("/^node\//i", $path) == 0)) {
     static $output = FALSE;
 
@@ -324,6 +326,11 @@ function print_main_settings() {
     '#default_value' => $print_robot_settings['nocache'],
     '#description' => t('Non-standard tag to instruct search engines to not show a "Cached" link for your printer-friendly pages')
   );
+
+  //Visibility API module
+  if (module_exists('visibility_api')) {
+    visibility_api_form_configuration('print', $form['general']);
+  }
 
   return system_settings_form($form);
 }
