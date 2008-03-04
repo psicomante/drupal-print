@@ -1,3 +1,16 @@
+March 4, 2008
+      Commit #104184 by jcnventura at 11:41
+        Better fix for #227127: use number of patterns instead of comparing to a
+February 28, 2008
+      Commit #103518 by jcnventura at 02:09
+        Fix #227625: add print['url'] var with absolute source url
+February 27, 2008
+      Commit #103329 by jcnventura at 00:26
+        Handle uppercase 'a' tags
+February 26, 2008
+      Commit #103277 by jcnventura at 19:55
+        Support print.node-.tpl.php filenames
+        Right fix for #213425
 February 25, 2008
       Commit #103073 by jcnventura at 19:51
         Fix module_exist call which differs from Drupal 5
