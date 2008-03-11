@@ -793,6 +793,8 @@ function print_generate_path($path) {
   global $base_url;
 
   $path = drupal_get_normal_path($path);
+  $_GET['q'] = $path;
+  _menu_append_contextual_items();
 
   menu_set_active_item($path);
   // Adapted from index.php.
