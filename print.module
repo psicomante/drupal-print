@@ -240,7 +240,7 @@ function print_main_settings() {
   $form['print_settings']['newwindow'] = array(
     '#type' => 'radios',
     '#title' => t('Open the printer-friendly version in a new window'),
-    '#options' => array(t("Disabled"), t("Use HTML target (does not validate as XHTML Strict)"), t("Use Javascript (requires browser support)")),
+    '#options' => array(t("Disabled"), t("Use HTML target (does not validate as XHTML Strict)"), t("Use Javascript (requires browser support)"), t("Use Greybox Redux (requires the greybox module)")),
     '#default_value' => $print_settings['newwindow'],
     '#description' => t('Setting this option will make the printer-friendly version open in a new window/tab.'),
   );
@@ -632,6 +632,9 @@ function print_fill_attributes() {
     break;
   case 2:
     $attributes['onclick'] = 'window.open(this.href); return false';
+    break;
+  case 3:
+    $attributes['class'] .= " greybox";
     break;
   }
   if (!empty($robots_settings['nofollow'])) {
