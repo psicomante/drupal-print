@@ -634,7 +634,7 @@ function print_fill_attributes() {
     $attributes['onclick'] = 'window.open(this.href); return false';
     break;
   case 3:
-    $attributes['class'] .= " greybox";
+    $attributes['class'] .= ' '. variable_get('greybox_class_text', 'greybox');
     break;
   }
   if (!empty($robots_settings['nofollow'])) {
