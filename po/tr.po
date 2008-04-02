@@ -1,0 +1,264 @@
+# Turkish translation for drupalprint
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the drupalprint package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: drupalprint\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-03-21 00:16+0100\n"
+"PO-Revision-Date: 2008-04-02 11:50+0100\n"
+"Last-Translator: Joao Ventura <joao@venturas.org>\n"
+"Language-Team: Turkish <tr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-04-01 22:24+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: print.module:31;38
+msgid "Printer-friendly"
+msgstr "Yazdır"
+
+#: print.module:39
+#: print.info:0
+#, fuzzy
+msgid "Adds a printer-friendly version link to node pages."
+msgstr "Yazdır bağlantısı node sayfalarında göster"
+
+#: print.module:129
+msgid "Show printer-friendly version link"
+msgstr "Yazdır bağlantısı göster"
+
+#: print.module:132
+#, fuzzy
+msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
+msgstr "İçerik için yazıcı dostu sayfa gösterir. Ayar bölümünde Eklentiyi istediğiniz gibi şekillendirebilrsiniz"
+
+#: print.module:132;141
+msgid "settings page"
+msgstr "ayar sayfası"
+
+#: print.module:138
+msgid "Show printer-friendly version link in individual comments"
+msgstr ""
+
+#: print.module:141
+msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
+msgstr ""
+
+#: print.module:184
+msgid "Printer-friendly page link"
+msgstr "Yazdır bağlantısını göster"
+
+#: print.module:186;243
+msgid "Disabled"
+msgstr "Devre Dışı bırak"
+
+#: print.module:186
+msgid "Enabled"
+msgstr "Etkin"
+
+#: print.module:187
+msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
+msgstr ""
+
+#: print.module:192
+#, fuzzy
+msgid "Show link in system (non-content) pages"
+msgstr "Yazdır bağlantısını yönetici sayfalarında göster"
+
+#: print.module:195
+msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
+msgstr ""
+
+#: print.module:200
+msgid "Take control of the book module printer-friendly link"
+msgstr "Kitap Eklentisi içinde kullan"
+
+#: print.module:203
+msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
+msgstr ""
+
+#: print.module:208
+msgid "Logo URL"
+msgstr "Logo adresi"
+
+#: print.module:212
+msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
+msgstr "Yazıcı için ayrı logo kullanabilirsiniz. Boş bırakırsanız ön tanımlı logo kullanılır."
+
+#: print.module:217
+msgid "Stylesheet URL"
+msgstr "Stylesheet adresi"
+
+#: print.module:221
+msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
+msgstr ""
+
+#: print.module:226
+msgid "Printer-friendly URLs list"
+msgstr "Bağlantıları yazıcıya uygun görüntüle"
+
+#: print.module:229
+msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
+msgstr "Etkinleştirirseniz bağlantılar yazıcı dostu sayfanın altında özet biçimde görüntülenir."
+
+#: print.module:234
+msgid "Include comments in printer-friendly version"
+msgstr "Yorumlarıda yazdır"
+
+#: print.module:237
+msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
+msgstr ""
+
+#: print.module:242
+#, fuzzy
+msgid "Open the printer-friendly version in a new window"
+msgstr "Yazıcı dastu sayfayı yeni pencerede aç"
+
+#: print.module:243
+#, fuzzy
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "HTML \\\"target\\\" uzantısını kullan (Uyarı: XHTML 1.0 Strict için uydun değil)"
+
+#: print.module:243
+#, fuzzy
+msgid "Use Javascript (requires browser support)"
+msgstr "Javascript kullan (tarayıcıda Javascript etkin olması gerekir)"
+
+#: print.module:243
+#, fuzzy
+msgid "Use Greybox Redux (requires the greybox module)"
+msgstr "Greybox Redux kullan (greybox eklentisi gerekli)"
+
+#: print.module:245
+msgid "Setting this option will make the printer-friendly version open in a new window/tab."
+msgstr ""
+
+#: print.module:250
+msgid "Send to printer"
+msgstr "Yazıcıya gönder"
+
+#: print.module:253
+msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
+msgstr ""
+
+#: print.module:260;654
+msgid "Source URL"
+msgstr "Kaynak adres"
+
+#: print.module:268
+msgid "Display source URL"
+msgstr "Kaynak adresi görüntüle"
+
+#: print.module:271
+msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
+msgstr ""
+
+#: print.module:276
+msgid "Add current time/date to the source URL"
+msgstr "Kaynak adrese tarih/zaman ekle"
+
+#: print.module:279
+msgid "Display the current date and time in the Source URL line."
+msgstr "Kaynak adresin yanına tarih ve zaman ekler"
+
+#: print.module:284
+msgid "Force use of node ID in source URL"
+msgstr ""
+
+#: print.module:287
+msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
+msgstr ""
+
+#: print.module:294
+#, fuzzy
+msgid "Robots META tags"
+msgstr "Robots META tags"
+
+#: print.module:302
+#, fuzzy
+msgid "Add noindex"
+msgstr "noindex ekle"
+
+#: print.module:305
+msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
+msgstr ""
+
+#: print.module:310
+msgid "Add nofollow"
+msgstr "nofollow ekle"
+
+#: print.module:313
+msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
+msgstr ""
+
+#: print.module:318
+#, fuzzy
+msgid "Add noarchive"
+msgstr "noarchive ekle"
+
+#: print.module:321
+msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
+msgstr ""
+
+#: print.module:326
+#, fuzzy
+msgid "Add nocache"
+msgstr "nocache ekle"
+
+#: print.module:329
+msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
+msgstr ""
+
+#: print.module:472
+msgid "Anonymous"
+msgstr "Misafir"
+
+#: print.module:627
+msgid "Display a printer-friendly version of this page."
+msgstr ""
+
+#: print.module:647
+msgid "Printer-friendly version"
+msgstr ""
+
+#: print.module:653
+msgid "retrieved on"
+msgstr "basım tarihi"
+
+#: print.module:655
+msgid "Published on"
+msgstr "Yayın adresi"
+
+#: print.module:656
+msgid "By"
+msgstr "Yazar"
+
+#: print.module:657
+msgid "Created"
+msgstr "Oluşturulma"
+
+#: print.module:658
+msgid "Links:"
+msgstr "Bağlantı"
+
+#: print.module:19
+msgid "access print"
+msgstr "erişim print"
+
+#: print.module:19
+msgid "administer print"
+msgstr "yönet print"
+
+#: print.module:0
+msgid "print"
+msgstr "yazdır"
+
+#: print.info:0
+#, fuzzy
+msgid "Printer-friendly pages"
+msgstr "Yazıcı dostu sayfalar"
+
