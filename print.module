@@ -67,6 +67,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
       $queryArr['comment'] = $node->cid;
     }
     $query = drupal_query_string_encode($queryArr, array('q'));
+    if (empty($query)) $query = NULL;
 
     $links['print'] = array('href' => PRINT_PATH ."/". $node->nid,
                             'title' => $format['text'],
@@ -241,7 +242,7 @@ function print_main_settings() {
   $form['print_settings']['newwindow'] = array(
     '#type' => 'radios',
     '#title' => t('Open the printer-friendly version in a new window'),
-    '#options' => array(t("Disabled"), t("Use HTML target (does not validate as XHTML Strict)"), t("Use Javascript (requires browser support)"), t("Use Greybox Redux (requires the greybox module)")),
+    '#options' => array(t("Disabled"), t("Use HTML target (does not validate as XHTML Strict)"), t("Use Javascript (requires browser support)"), t("Use Greybox Redux (requires the greybox module)"), t("Use Thickbox (requires the thickbox module)")),
     '#default_value' => $print_settings['newwindow'],
     '#description' => t('Setting this option will make the printer-friendly version open in a new window/tab.'),
   );
@@ -641,6 +642,9 @@ function print_fill_attributes() {
   case 3:
     $attributes['class'] .= ' '. variable_get('greybox_class_text', 'greybox');
     break;
+  case 4:
+    $attributes['class'] .= ' thickbox';
+    break;
   }
   if (!empty($robots_settings['nofollow'])) {
     $attributes['rel'] = 'nofollow';
@@ -738,6 +742,7 @@ function print_generate_node($nid, $cid = NULL) {
     // Access is denied
     return drupal_access_denied();
   }
+  drupal_set_title($node->title);
 
   //alert other modules that we are generating a printer-friendly page, so they can choose to show/hide info
   $node->printing = true;
