@@ -53,7 +53,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
   $print_settings = variable_get('print_settings', print_settings_default());
   // No link is shown for several motives...
   $nodetype = isset($node->type) ? $node->type : '';
-  if ( !($teaser) && ($nodetype != 'book') && (!$node->parent) &&
+  if ( !($teaser) && ($nodetype != 'book') && (!isset($node->parent)) &&
       !(module_exists('visibility_api') && visibility_api_access('print')) &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && variable_get('print_display_comment', '0')) ||

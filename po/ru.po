@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2008-03-21 00:16+0100\n"
-"PO-Revision-Date: 2008-03-21 03:06+0100\n"
-"Last-Translator: Joao Ventura <joao@venturas.org>\n"
+"POT-Creation-Date: 2008-04-14 02:24+0200\n"
+"PO-Revision-Date: 2008-04-17 11:18+0100\n"
+"Last-Translator: \n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,211 +28,215 @@ msgstr "Страница для печати"
 msgid "Adds a printer-friendly version link to node pages."
 msgstr "Добавляет ссылку на страницу для печати на страницы документов."
 
-#: print.module:129
+#: print.module:131
 msgid "Show printer-friendly version link"
 msgstr "Показать ссылку на страницу для печати"
 
-#: print.module:132
+#: print.module:134
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
 msgstr "Показывает ссылку на страницу для печати материала. Дальнейшая настройка возможна на !settings."
 
-#: print.module:132;141
+#: print.module:134;143
 msgid "settings page"
 msgstr "страница настройки"
 
-#: print.module:138
+#: print.module:140
 msgid "Show printer-friendly version link in individual comments"
 msgstr "Показывать ссылку на страницу для печати в личных комментариях"
 
-#: print.module:141
+#: print.module:143
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
 msgstr "Показывает ссылку на страницу для печати комментариев. Дальнейшая настройка возможна на !settings."
 
-#: print.module:184
+#: print.module:186
 msgid "Printer-friendly page link"
 msgstr "Ссылка на страницу для печати"
 
-#: print.module:186;243
+#: print.module:188;245
 msgid "Disabled"
 msgstr "Отключено"
 
-#: print.module:186
+#: print.module:188
 msgid "Enabled"
 msgstr "Включено"
 
-#: print.module:187
+#: print.module:189
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
 msgstr "Разрешить или запретить страницу для печати для каждого документа. Даже если блок ссылок отключён, вы сможете увидеть страницу для печати, если откроете страницу print/nid, где nid - ID документа."
 
-#: print.module:192
+#: print.module:194
 msgid "Show link in system (non-content) pages"
 msgstr "Показать ссылку на системных страницах"
 
-#: print.module:195
+#: print.module:197
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
 msgstr "Установка этого параметра добавит ссылку на страницу для печати на страницы, созданные Друпал или установленными модулями."
 
-#: print.module:200
+#: print.module:202
 msgid "Take control of the book module printer-friendly link"
 msgstr "Перехватить управление ссылкой на страницу для печати модуля Book (Книга)"
 
-#: print.module:203
+#: print.module:205
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr "Активируйте, если вам нужно иметь ссылку на страницу для печати в документах модуля Book (Книга). Модуль ядра Book (Книга) должен быть установлен."
 
-#: print.module:208
+#: print.module:210
 msgid "Logo URL"
 msgstr "URL логотипа"
 
-#: print.module:212
+#: print.module:214
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr "Альтернативный логотип, который показывается на странице для печати. Если не задано - используется логотип из текущей темы."
 
-#: print.module:217
+#: print.module:219
 msgid "Stylesheet URL"
 msgstr "URL каскадной таблицы стилей"
 
-#: print.module:221
+#: print.module:223
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr "URL на вашу таблицу стилей для печати, если она есть. Если ничего не задано, используется встроенный CSS-файл модуля."
 
-#: print.module:226
+#: print.module:228
 msgid "Printer-friendly URLs list"
 msgstr "Список URL страниц для печати"
 
-#: print.module:229
+#: print.module:231
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr "Если установлено, список URL-адресов назначения для ссылок страницы будет показан внизу страницы."
 
-#: print.module:234
+#: print.module:236
 msgid "Include comments in printer-friendly version"
 msgstr "Включить комментарии в версию для печати"
 
-#: print.module:237
+#: print.module:239
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr "Когда этот параметр установлен, комментарии пользователей также включаются в версию для печати. Модуль Comment должен быть установлен."
 
-#: print.module:242
+#: print.module:244
 msgid "Open the printer-friendly version in a new window"
 msgstr "Открывать Версию для печати в новом окне"
 
-#: print.module:243
+#: print.module:245
 msgid "Use HTML target (does not validate as XHTML Strict)"
 msgstr "Использовать HTML-назначение (target) - не пройдёт валидацию как XHTML Strict."
 
-#: print.module:243
+#: print.module:245
 msgid "Use Javascript (requires browser support)"
 msgstr "Использовать Javascript (требует поддержки браузера)"
 
-#: print.module:243
+#: print.module:245
 msgid "Use Greybox Redux (requires the greybox module)"
 msgstr ""
 
 #: print.module:245
+msgid "Use Thickbox (requires the thickbox module)"
+msgstr ""
+
+#: print.module:247
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr "Установка этого параметра заставит страницу для печати открываться в новом окне/вкладке."
 
-#: print.module:250
+#: print.module:252
 msgid "Send to printer"
 msgstr "Распечатать"
 
-#: print.module:253
+#: print.module:255
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Автоматически вызывает функцию печати браузера, когда страница для печати отображается."
 
-#: print.module:260;654
+#: print.module:262;663
 msgid "Source URL"
 msgstr "Источник"
 
-#: print.module:268
+#: print.module:270
 msgid "Display source URL"
 msgstr "Показать URL источника"
 
-#: print.module:271
+#: print.module:273
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr "Когда этот параметр выбран, то URL страницы-оригинала будет показан внизу страницы для печати."
 
-#: print.module:276
+#: print.module:278
 msgid "Add current time/date to the source URL"
 msgstr "Добавить текущую дату/время к URL источника"
 
-#: print.module:279
+#: print.module:281
 msgid "Display the current date and time in the Source URL line."
 msgstr "Показывает текущую дату и время в строке URL источника."
 
-#: print.module:284
+#: print.module:286
 msgid "Force use of node ID in source URL"
 msgstr "Форсировать использование ID документа в URL источника"
 
-#: print.module:287
+#: print.module:289
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr "Друпал будет стараться использовать определённый синоним страниц в случае, если он один. Чтобы форсировать использование фиксированных URL - включите этот параметр."
 
-#: print.module:294
+#: print.module:296
 msgid "Robots META tags"
 msgstr "Robots META-ярлыки"
 
-#: print.module:302
+#: print.module:304
 msgid "Add noindex"
 msgstr "Добавить запрет индексирования (noindex)"
 
-#: print.module:305
+#: print.module:307
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr "Говорит роботам не индексировать страницы для печати. Рекомендуется для улучшения поисковой репутации."
 
-#: print.module:310
+#: print.module:312
 msgid "Add nofollow"
 msgstr "Добавить не следовать по ссылкам (nofollow)"
 
-#: print.module:313
+#: print.module:315
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr "Говорит роботам не следовать по внешним ссылкам страниц для печати."
 
-#: print.module:318
+#: print.module:320
 msgid "Add noarchive"
 msgstr "Добавить не архивировать (noarchive)"
 
-#: print.module:321
+#: print.module:323
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr "Не стандартный ярлык, который говорит поисковым системам не показывать ссылку \"Сохранено в кеше\" для ваших страниц для печати. Узнаётся роботом Googlebot."
 
-#: print.module:326
+#: print.module:328
 msgid "Add nocache"
 msgstr "Добавить запрет кеширования (nocache)"
 
-#: print.module:329
+#: print.module:331
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr "Не стандартный ярлык, который говорит поисковым системам не показывать ссылку \"Сохранено в кеше\" для ваших страниц для печати. "
 
-#: print.module:472
+#: print.module:476
 msgid "Anonymous"
 msgstr ""
 
-#: print.module:627
+#: print.module:633
 msgid "Display a printer-friendly version of this page."
 msgstr "Показать страницу для печати для этой страницы."
 
-#: print.module:647
+#: print.module:656
 msgid "Printer-friendly version"
 msgstr "Страница для печати"
 
-#: print.module:653
+#: print.module:662
 msgid "retrieved on"
 msgstr "получено"
 
-#: print.module:655
+#: print.module:664
 msgid "Published on"
 msgstr "Опубликовано"
 
-#: print.module:656
+#: print.module:665
 msgid "By"
 msgstr "Автор"
 
-#: print.module:657
+#: print.module:666
 msgid "Created"
 msgstr "Создано"
 
-#: print.module:658
+#: print.module:667
 msgid "Links:"
 msgstr "Ссылки:"
 

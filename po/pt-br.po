@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: print-5.x-3.1\n"
-"POT-Creation-Date: 2008-03-21 00:16+0100\n"
-"PO-Revision-Date: 2008-03-21 04:06+0100\n"
-"Last-Translator: Joao Ventura <joao@venturas.org>\n"
+"POT-Creation-Date: 2008-04-14 02:24+0200\n"
+"PO-Revision-Date: 2008-04-17 11:19+0100\n"
+"Last-Translator: \n"
 "Language-Team: Open Source Community - psychopath.mind <search@google>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,211 +27,215 @@ msgstr "Versão para impressão"
 msgid "Adds a printer-friendly version link to node pages."
 msgstr "Adiciona um link nas páginas de conteúdo para a versão de impressão"
 
-#: print.module:129
+#: print.module:131
 msgid "Show printer-friendly version link"
 msgstr "Apresenta um link para a versão de impressão"
 
-#: print.module:132
+#: print.module:134
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
 msgstr "Apresenta um link para a versão de impressão do conteúdo. Pode ser configurado posteriormente em !settings."
 
-#: print.module:132;141
+#: print.module:134;143
 msgid "settings page"
 msgstr "página de configuração"
 
-#: print.module:138
+#: print.module:140
 msgid "Show printer-friendly version link in individual comments"
 msgstr "Apresentar um link para a versão de impressão em cada comentário"
 
-#: print.module:141
+#: print.module:143
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
 msgstr "Apresenta um link para a versão de impressão do comentário. Pode ser configurado posteriormente em !settings."
 
-#: print.module:184
+#: print.module:186
 msgid "Printer-friendly page link"
 msgstr "Link para a página da versão de impressão"
 
-#: print.module:186;243
+#: print.module:188;245
 msgid "Disabled"
 msgstr "Desativado"
 
-#: print.module:186
+#: print.module:188
 msgid "Enabled"
 msgstr "Ativado"
 
-#: print.module:187
+#: print.module:189
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
 msgstr "Ativar ou desativar o link para a versão de impressão nas páginas de conteúdo. Mesmo que o link seja desativado, ainda será possível visualizar a versão de impressão de um nó acessando print/nid onde nid é o identificador numérico do nó."
 
-#: print.module:192
+#: print.module:194
 msgid "Show link in system (non-content) pages"
 msgstr "Apresentar link em páginas de sistema (que não são conteúdo)"
 
-#: print.module:195
+#: print.module:197
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
 msgstr "Esta opção ao ser ativada, adiciona um link à versão para impressão em páginas criadas pelo Drupal ou módulos ativos."
 
-#: print.module:200
+#: print.module:202
 msgid "Take control of the book module printer-friendly link"
 msgstr "Assumir o controle do link à versão para impressão do módulo Livro"
 
-#: print.module:203
+#: print.module:205
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr "Ativar para que o link da versão para impressão em páginas do tipo livro seja tratado por este módulo. Requer o módulo book (core)."
 
-#: print.module:208
+#: print.module:210
 msgid "Logo URL"
 msgstr "URL do logótipo"
 
-#: print.module:212
+#: print.module:214
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr "Um logótipo alternativo para ser mostrado na versão para impressão. Caso omitido é usado o logótipo do tema atual."
 
-#: print.module:217
+#: print.module:219
 msgid "Stylesheet URL"
 msgstr "URL da folha de estilo (CSS)"
 
-#: print.module:221
+#: print.module:223
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr "O URL para a folha de estilo personalizada, caso exista. Em caso de omissão, a folha de estilo distribuída com este módulo é usada."
 
-#: print.module:226
+#: print.module:228
 msgid "Printer-friendly URLs list"
 msgstr "Lista de URLs na versão para impressão"
 
-#: print.module:229
+#: print.module:231
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr "Se ativar esta opção, uma lista com os URL de destino das hiperligações existentes na página será mostrada no fundo da mesma."
 
-#: print.module:234
+#: print.module:236
 msgid "Include comments in printer-friendly version"
 msgstr "Incluir comentários na versão para impressão"
 
-#: print.module:237
+#: print.module:239
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr "Quando esta opção está ativa, os comentários dos usuários também serão incluídos na versão para impressão. É necessário o módulo de comentários."
 
-#: print.module:242
+#: print.module:244
 msgid "Open the printer-friendly version in a new window"
 msgstr "Abrir a versão para impressão em uma nova janela"
 
-#: print.module:243
+#: print.module:245
 msgid "Use HTML target (does not validate as XHTML Strict)"
 msgstr "Usar HTML target (não valida como XHTML Strict)"
 
-#: print.module:243
+#: print.module:245
 msgid "Use Javascript (requires browser support)"
 msgstr "Usar Javascript (requer suporte pelo browser)"
 
-#: print.module:243
+#: print.module:245
 msgid "Use Greybox Redux (requires the greybox module)"
 msgstr "Usar Greybox Redux (requer o módulo greybox)"
 
 #: print.module:245
+msgid "Use Thickbox (requires the thickbox module)"
+msgstr "Usar Thickbox  (requer o módulo Thickbox)"
+
+#: print.module:247
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr "Ativando esta opção irá fazer a versão para impressão abrir em uma nova janela ou aba."
 
-#: print.module:250
+#: print.module:252
 msgid "Send to printer"
 msgstr "Enviar para a impressora"
 
-#: print.module:253
+#: print.module:255
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Chama automaticamente a função do navegador para enviar a versão para impressão na impressora."
 
-#: print.module:260;654
+#: print.module:262;663
 msgid "Source URL"
 msgstr "URL de origem"
 
-#: print.module:268
+#: print.module:270
 msgid "Display source URL"
 msgstr "Mostrar URL de origem"
 
-#: print.module:271
+#: print.module:273
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr "Quando esta opção é escolhida, o URL da página original será mostrado na parte de baixo da versão para impressão."
 
-#: print.module:276
+#: print.module:278
 msgid "Add current time/date to the source URL"
 msgstr "Adicionar data/hora atual para URL de origem"
 
-#: print.module:279
+#: print.module:281
 msgid "Display the current date and time in the Source URL line."
 msgstr "Mostra a hora e data atuais na linha do URL de origem."
 
-#: print.module:284
+#: print.module:286
 msgid "Force use of node ID in source URL"
 msgstr "Forçar o uso do identificador numérico do nó no URL de origem"
 
-#: print.module:287
+#: print.module:289
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr "O Drupal irá tentar usar o nome alternativo da página, caso exista. Para forçar o uso de um URL fixo, ative esta opção."
 
-#: print.module:294
+#: print.module:296
 msgid "Robots META tags"
 msgstr "Etiquetas meta para Robôs (motores de pesquisa)"
 
-#: print.module:302
+#: print.module:304
 msgid "Add noindex"
 msgstr "Especificar noindex"
 
-#: print.module:305
+#: print.module:307
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr "Instruir os robôs para não indexar as páginas de versão para impressão. Recomendado para um bom karma com os motores de pesquisa."
 
-#: print.module:310
+#: print.module:312
 msgid "Add nofollow"
 msgstr "Especificar nofollow"
 
-#: print.module:313
+#: print.module:315
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr "Instruir aos robôs para não seguir as hiperligações de saída nas páginas de versão para imprimir."
 
-#: print.module:318
+#: print.module:320
 msgid "Add noarchive"
 msgstr "Especificar noarchive"
 
-#: print.module:321
+#: print.module:323
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr "Etiqueta não padronizada que indica aos motores de pesquisa que não se deve mostrar uma ligação para a versão \"em cache\" das páginas de versão para impressão. Reconhecido pelo Googlebot."
 
-#: print.module:326
+#: print.module:328
 msgid "Add nocache"
 msgstr "Especificar nocache"
 
-#: print.module:329
+#: print.module:331
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr "Etiqueta não padronizada que indica aos motores de pesquisa que não se deve mostrar uma ligação para a versão \"em cache\" das páginas de versão para impressão."
 
-#: print.module:472
+#: print.module:476
 msgid "Anonymous"
 msgstr "Anônimo"
 
-#: print.module:627
+#: print.module:633
 msgid "Display a printer-friendly version of this page."
 msgstr "Apresentar uma versão para impressão desta página"
 
-#: print.module:647
+#: print.module:656
 msgid "Printer-friendly version"
 msgstr "Versão para impressão"
 
-#: print.module:653
+#: print.module:662
 msgid "retrieved on"
 msgstr "Recuperadas em"
 
-#: print.module:655
+#: print.module:664
 msgid "Published on"
 msgstr "Publicado em"
 
-#: print.module:656
+#: print.module:665
 msgid "By"
 msgstr "Por"
 
-#: print.module:657
+#: print.module:666
 msgid "Created"
 msgstr "Criado"
 
-#: print.module:658
+#: print.module:667
 msgid "Links:"
 msgstr "Links:"
 
