@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: print.module\n"
 "POT-Creation-Date: 2008-04-14 02:24+0200\n"
-"PO-Revision-Date: 2008-04-17 11:20+0100\n"
+"PO-Revision-Date: 2008-04-21 23:47+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <drupal@kula.waw.pl>\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr "Wyłączone"
 
 #: print.module:188
 msgid "Enabled"
-msgstr ""
+msgstr "Włączone"
 
 #: print.module:189
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
