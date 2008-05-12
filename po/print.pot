@@ -4,16 +4,16 @@
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
 #  print.admin.inc,v 1.5.2.3 2008/05/10 01:41:26 jcnventura
-#  print.pages.inc,v 1.9.2.3 2008/05/10 01:41:26 jcnventura
-#  print.module,v 1.15.2.5.2.29.2.44 2008/05/10 01:41:26 jcnventura
+#  print.pages.inc,v 1.9.2.4 2008/05/11 23:51:08 jcnventura
+#  print.module,v 1.15.2.5.2.29.2.45 2008/05/11 23:51:08 jcnventura
 #  print.info,v 1.1.2.2.4.1 2008/05/06 23:10:08 jcnventura
-#  print.install,v 1.1.2.1.2.2 2008/05/10 01:41:26 jcnventura
+#  print.install,v 1.1.2.1.2.3 2008/05/11 23:51:08 jcnventura
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-05-12 01:37+0200\n"
+"POT-Creation-Date: 2008-05-12 12:22+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr ""
 
-#: print.admin.inc:98 print.pages.inc:127
+#: print.admin.inc:98 print.pages.inc:171
 msgid "Source URL"
 msgstr ""
 
@@ -194,27 +194,27 @@ msgstr ""
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr ""
 
-#: print.pages.inc:122
-msgid "Anonymous"
-msgstr ""
-
-#: print.pages.inc:126
-msgid "retrieved on %date"
-msgstr ""
-
-#: print.pages.inc:128
+#: print.pages.inc:149
 msgid "Published on %site_name"
 msgstr ""
 
-#: print.pages.inc:129
+#: print.pages.inc:168
+msgid "retrieved on %date"
+msgstr ""
+
+#: print.pages.inc:181
+msgid "Anonymous"
+msgstr ""
+
+#: print.pages.inc:182
 msgid "By %author"
 msgstr ""
 
-#: print.pages.inc:130
+#: print.pages.inc:186
 msgid "Created %date"
 msgstr ""
 
-#: print.pages.inc:131
+#: print.pages.inc:216
 msgid "Links"
 msgstr ""
 
