@@ -30,7 +30,6 @@ function print_pdf_settings() {
     $form['print_pdf_settings']['show_sys_link'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show link in system (non-content) pages'),
-      '#return_value' => 1,
       '#default_value' => $print_pdf_settings['show_sys_link'],
       '#description' => t('Setting this option will add a PDF version page link on pages created by Drupal or the enabled modules.'),
     );
@@ -38,7 +37,6 @@ function print_pdf_settings() {
     $form['print_pdf_settings']['book_link'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show link in book nodes'),
-      '#return_value' => 1,
       '#default_value' => $print_pdf_settings['book_link'],
       '#description' => t('Activate this to add a PDF version link in book nodes. Requires the (core) book module.'),
     );
@@ -72,11 +70,16 @@ function print_pdf_tools() {
     return -1;
   }
   else {
-    $tools = array_combine($tools, $tools);
+    // Instead of array_combine(), use this to maintain PHP4 compatibility
+    $tools2 = array();
+    foreach ($tools as $key => $val) {
+      $tools2[$val] = $tools[$key];
+    }
+
     return array(
       '#type' => 'radios',
       '#title' => t('PDF generation tool'),
-      '#options' => $tools,
+      '#options' => $tools2,
       '#default_value' => $print_pdf_settings['pdf_tool'],
       '#description' => t('This option selects the PDF generation tool being used by this module to create the PDF version.'),
       '#required' => TRUE,
