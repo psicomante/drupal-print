@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: drupalprint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2008-04-14 02:24+0200\n"
-"PO-Revision-Date: 2008-04-21 23:39+0100\n"
+"POT-Creation-Date: 2008-05-13 01:13+0200\n"
+"PO-Revision-Date: 2008-05-13 01:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,235 +17,259 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-04-21 20:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: print.module:31;38
-msgid "Printer-friendly"
-msgstr "Printer-friendly"
-
-#: print.module:39
-#: print.info:0
-msgid "Adds a printer-friendly version link to node pages."
-msgstr "Tambahkan versi printer-friendly link pada halaman."
-
-#: print.module:131
-msgid "Show printer-friendly version link"
-msgstr "Perlihatkan versi printer-friendly link"
-
-#: print.module:134
-msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
-msgstr "Tampilkan link ke konten versi printer-friendly. Konfigurasi selanjutnya ada di !settings."
-
-#: print.module:134;143
-msgid "settings page"
-msgstr "Halaman Set"
-
-#: print.module:140
-msgid "Show printer-friendly version link in individual comments"
-msgstr "Perlihatkan versi printer friendly link per komentar"
-
-#: print.module:143
-msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr "Tampilkan link ke komentar versi printer friendly. Konfigurasi selanjutnya ada di !settings."
-
-#: print.module:186
+#: print.admin.inc:27
 msgid "Printer-friendly page link"
 msgstr "Link halaman printer-friendly"
 
-#: print.module:188;245
-msgid "Disabled"
-msgstr "Tidak aktif"
+#: print.admin.inc:29
+msgid "None (Disabled)"
+msgstr ""
 
-#: print.module:188
-msgid "Enabled"
-msgstr "Aktif"
+#: print.admin.inc:29
+msgid "Text only"
+msgstr ""
 
-#: print.module:189
+#: print.admin.inc:29
+msgid "Icon only"
+msgstr ""
+
+#: print.admin.inc:29
+msgid "Icon and Text"
+msgstr ""
+
+#: print.admin.inc:30
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
 msgstr "Aktifkan atau non aktifkan link printer-friendly pada setiap node. Bahkan jika link tidak aktif, anda masih bisa melihat node versi printer-friendly dengan pergi ke print/nid dimana nid adalah nomor id node."
 
-#: print.module:194
+#: print.admin.inc:35
 msgid "Show link in system (non-content) pages"
 msgstr "Tampilkan link dalam halaman sistem (tanpa konten)"
 
-#: print.module:197
+#: print.admin.inc:37
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
 msgstr "Set opsi ini akan menambahkan link versi printer-friendly link pada halaman-halaman yand dibuat oleh Drupal atau modul aktif."
 
-#: print.module:202
+#: print.admin.inc:42
 msgid "Take control of the book module printer-friendly link"
 msgstr "Ambil alih printer-friendly link modul book"
 
-#: print.module:205
+#: print.admin.inc:44
 #, fuzzy
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr "Aktifkan ini untuk menangani link printer-friendly pada node book. Membutuhkan modul book (inti)."
 
-#: print.module:210
+#: print.admin.inc:49
 msgid "Logo URL"
 msgstr "URL Logo"
 
-#: print.module:214
+#: print.admin.inc:53
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr "Logo alternatif untuk ditampilkan pada versi printer-friendly. Jika kosong, logo tema sekarang akan digunakan."
 
-#: print.module:219
+#: print.admin.inc:58
 msgid "Stylesheet URL"
 msgstr "URL stylesheet"
 
-#: print.module:223
+#: print.admin.inc:62
 #, fuzzy
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr "URL ke custom print cascading stylesheet anda, jika ada. Jika tidak, modul default CSS akan digunakan."
 
-#: print.module:228
+#: print.admin.inc:67
 msgid "Printer-friendly URLs list"
 msgstr "Daftar URL yang printer-friendly"
 
-#: print.module:231
+#: print.admin.inc:69
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr "Jika di set, daftar URL tujuan untuk halaman links akan ditampilkan pada bagian bawah halaman."
 
-#: print.module:236
+#: print.admin.inc:74
 msgid "Include comments in printer-friendly version"
 msgstr "Ikut sertakan komenter pada versi printer-friendly"
 
-#: print.module:239
+#: print.admin.inc:76
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr "Jika opsi ini aktif, komentar user juga kan diikut sertakan pada versi printer-friendly. Membutuhkan modul comment."
 
-#: print.module:244
+#: print.admin.inc:81
 msgid "Open the printer-friendly version in a new window"
 msgstr "Buka versi printer-friendly pada jendela baru."
 
-#: print.module:245
+#: print.admin.inc:82
+msgid "Disabled"
+msgstr "Tidak aktif"
+
+#: print.admin.inc:82
 msgid "Use HTML target (does not validate as XHTML Strict)"
 msgstr "Gunakan HTML target (tidak di validasi sebagai XHTML Strict)"
 
-#: print.module:245
+#: print.admin.inc:82
 msgid "Use Javascript (requires browser support)"
 msgstr "Gunakan Javascript (Membutuhkan browser yang mendukung)"
 
-#: print.module:245
+#: print.admin.inc:82
 msgid "Use Greybox Redux (requires the greybox module)"
 msgstr "Gunakan Greybox Redux (Membutuhkan modul greybox)"
 
-#: print.module:245
+#: print.admin.inc:82
 msgid "Use Thickbox (requires the thickbox module)"
 msgstr "Gunakan Thickbox (Membutuhkan modul thickbox)"
 
-#: print.module:247
+#: print.admin.inc:84
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr "Mengatur opsi ini akan membuat versi printer-friendly dibuka pada jendela/tab baru."
 
-#: print.module:252
+#: print.admin.inc:89
 msgid "Send to printer"
 msgstr "Kirim ke printer"
 
-#: print.module:255
+#: print.admin.inc:91
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Otomatis panggil fungsi cetak browser ketika versi printer-friendly ditampilkan."
 
-#: print.module:262;663
+#: print.admin.inc:98
+#: print.pages.inc:171
 msgid "Source URL"
 msgstr "URL sumber"
 
-#: print.module:270
+#: print.admin.inc:106
 msgid "Display source URL"
 msgstr "Tampilkan URL sumber"
 
-#: print.module:273
+#: print.admin.inc:108
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr "Juka opsi ini dipilih, URL halaman asli akan ditampilkan pada bagian bawah versi printer-friendly."
 
-#: print.module:278
+#: print.admin.inc:113
 msgid "Add current time/date to the source URL"
 msgstr "Tambahkan jam/tanggal sekarang pada URL sumber"
 
-#: print.module:281
+#: print.admin.inc:115
 msgid "Display the current date and time in the Source URL line."
 msgstr "Tampilkan tanggal dan jam sekarang dalam URL sumber."
 
-#: print.module:286
+#: print.admin.inc:120
 msgid "Force use of node ID in source URL"
 msgstr "Paksa gunakan node ID dalam URL source"
 
-#: print.module:289
+#: print.admin.inc:122
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr "Drupal akan berusaha untuk menggunakan alias halaman jika ada. Untuk memaksa digunakan URL tetap, aktifkan opsi ini."
 
-#: print.module:296
+#: print.admin.inc:129
 #, fuzzy
 msgid "Robots META tags"
 msgstr "Robots META tags"
 
-#: print.module:304
+#: print.admin.inc:137
 msgid "Add noindex"
 msgstr "Tambahkan noindex"
 
-#: print.module:307
+#: print.admin.inc:139
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr "Intruksikan robot untuk tidak meng-index halaman-halaman printer-friendly. Direkomendasikan untuk search engine karma yang baik."
 
-#: print.module:312
+#: print.admin.inc:144
 msgid "Add nofollow"
 msgstr "Tambahkan nofollow"
 
-#: print.module:315
+#: print.admin.inc:146
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr "Intruksikan robot untuk tidak mengikuti links keluar pada halaman-halaman printer-friendly."
 
-#: print.module:320
+#: print.admin.inc:151
 msgid "Add noarchive"
 msgstr "Tambahkan noarchive"
 
-#: print.module:323
+#: print.admin.inc:153
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr "Tag nonstandar untuk menginstruksikan search engine untuk tidak menampilkan link \"Cached\" untuk halaman-halaman printer-friendly anda. Dikenali oleh Googlebot."
 
-#: print.module:328
+#: print.admin.inc:158
 msgid "Add nocache"
 msgstr "Tambahkan nocache"
 
-#: print.module:331
+#: print.admin.inc:160
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr "Tag nonstandar untuk menginstruksikan search engine untuk tidak menampilkan link \"Cached\" untuk halaman-halaman printer-friendly."
 
-#: print.module:476
+#: print.pages.inc:149
+#, fuzzy
+msgid "Published on %site_name"
+msgstr "Dipublikasikan pada %site_name"
+
+#: print.pages.inc:168
+#, fuzzy
+msgid "retrieved on %date"
+msgstr "diambil pada %date"
+
+#: print.pages.inc:181
 msgid "Anonymous"
 msgstr "Anonim"
 
-#: print.module:633
-msgid "Display a printer-friendly version of this page."
-msgstr "Tampilkan versi printer-friendly halaman ini."
+#: print.pages.inc:182
+#, fuzzy
+msgid "By %author"
+msgstr "Oleh %author"
 
-#: print.module:656
+#: print.pages.inc:186
+#, fuzzy
+msgid "Created %date"
+msgstr "Dibuat %date"
+
+#: print.pages.inc:216
+#, fuzzy
+msgid "Links"
+msgstr "Links"
+
+#: print.module:63
+msgid "Printer-friendly"
+msgstr "Printer-friendly"
+
+#: print.module:70
+#: print.info:0
+msgid "Printer-friendly pages"
+msgstr "Halaman-halaman printer-friendly"
+
+#: print.module:71
+#: print.info:0
+#, fuzzy
+msgid "Adds a printer-friendly version link to content and administrative pages."
+msgstr "Tambahkan versi printer-friendly link pada halaman."
+
+#: print.module:179
+msgid "Show printer-friendly version link"
+msgstr "Perlihatkan versi printer-friendly link"
+
+#: print.module:181
+msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
+msgstr "Tampilkan link ke konten versi printer-friendly. Konfigurasi selanjutnya ada di !settings."
+
+#: print.module:181;189
+msgid "settings page"
+msgstr "Halaman Set"
+
+#: print.module:187
+msgid "Show printer-friendly version link in individual comments"
+msgstr "Perlihatkan versi printer friendly link per komentar"
+
+#: print.module:189
+msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
+msgstr "Tampilkan link ke komentar versi printer friendly. Konfigurasi selanjutnya ada di !settings."
+
+#: print.module:256
 msgid "Printer-friendly version"
 msgstr "Versi printer-friendly"
 
-#: print.module:662
-msgid "retrieved on"
-msgstr "Diambil pada"
+#: print.module:258
+msgid "Display a printer-friendly version of this page."
+msgstr "Tampilkan versi printer-friendly halaman ini."
 
-#: print.module:664
-msgid "Published on"
-msgstr "Dipublikasikan pada"
-
-#: print.module:665
-msgid "By"
-msgstr "Oleh"
-
-#: print.module:666
-msgid "Created"
-msgstr "Dibuat"
-
-#: print.module:667
-msgid "Links:"
-msgstr "Links:"
-
-#: print.module:19
+#: print.module:51
 msgid "access print"
 msgstr "akses print"
 
-#: print.module:19
+#: print.module:51
 msgid "administer print"
 msgstr "atur print"
 
@@ -253,7 +277,15 @@ msgstr "atur print"
 msgid "print"
 msgstr "print"
 
-#: print.info:0
-msgid "Printer-friendly pages"
-msgstr "Halaman-halaman printer-friendly"
+#: print.install:8
+msgid "Printer-friendly Page settings are available under !link"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Printer-friendly Pages"
+#~ msgstr "Halaman-halaman printer-friendly"
+#~ msgid "By"
+#~ msgstr "Oleh"
+#~ msgid "Enabled"
+#~ msgstr "Aktif"
 

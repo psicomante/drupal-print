@@ -1,4 +1,61 @@
+May 12, 2008
+      Commit #115837 by jcnventura at 10:25
+        Slightly better template vars handling
+May 11, 2008
+      Commit #115797 by jcnventura at 23:51
+        Improve translability of template strings
+May 10, 2008
+      Commit #115596 by jcnventura at 01:41
+        Improve the documentation
+May 7, 2008
+      Commit #115220 by jcnventura at 22:18
+        Add selection between text, icon or both.
+        Created two .inc files to harmonize with the 6.x version
+May 6, 2008
+      Commit #115020 by jcnventura at 23:10
+        Changes to comply with http://www.drupaltoughlove.com/review/printer-friendly-pages
+April 21, 2008
+      Commit #112141 by jcnventura at 23:13
+        Try to fix #230013: only call preg_replace with comment author link if there's anything to replace
+      Commit #112140 by jcnventura at 23:09
+        Added Indonesian translation. Thanks SepedaTua!
+        Added Slovak translation. Thanks empError!
+        Fix #230013: correct German translation
+April 17, 2008
+      Commit #111186 by jcnventura at 11:02
+        Fix #242914: Remove duplicate PF link in top outlined pages
+        Added Polish translation. Thanks sir_kula!
+        Added Swedish translation. Thanks seals!
+April 3, 2008
+      Commit #108929 by jcnventura at 13:45
+        Add thickbox module support.
+        Fix #239896: Make sure drupal_get_title() returns the original page's title
+April 2, 2008
+      Commit #108768 by jcnventura at 10:32
+        Added Turkish translation. Thanks turkyilmaz1963
+      Commit #108752 by jcnventura at 09:21
+        Merge all warning removal changes from 6.x to 5.x
+March 27, 2008
+      Commit #107834 by jcnventura at 11:16
+        Remove hard-coding of the greybox class name, now changes to what greybox uses (#233203)
+March 24, 2008
+      Commit #107381 by jcnventura at 18:34
+        Updated Romanian translation. Thanks Andrei
+March 21, 2008
+      Commit #106901 by jcnventura at 04:04
+        Updated translation files to match current code
+March 14, 2008
+      Commit #105779 by jcnventura at 02:47
+        Fix #233203: Add option to open in new window using the jQuery Greybox Redux module
+March 11, 2008
+      Commit #105369 by jcnventura at 05:13
+        Fix #232650 by nterbogt: fake the menu item better
+March 5, 2008
+      Commit #104498 by jcnventura at 22:41
+        Fix #230318 by shaisachs: include page query in PF link
 March 4, 2008
+      Commit #104276 by jcnventura at 18:36
+        Update changelog for release 5.x-3.3
       Commit #104198 by jcnventura at 13:19
         Enable use of the visibility_api module when it is installed
       Commit #104195 by jcnventura at 12:50

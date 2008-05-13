@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-14 02:24+0200\n"
-"PO-Revision-Date: 2008-04-17 11:18+0100\n"
+"POT-Creation-Date: 2008-05-13 01:13+0200\n"
+"PO-Revision-Date: 2008-05-13 01:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -20,232 +20,256 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-03-21 02:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: print.module:31;38
-msgid "Printer-friendly"
-msgstr "aranjat pentru tipărire"
-
-#: print.module:39
-#: print.info:0
-msgid "Adds a printer-friendly version link to node pages."
-msgstr "Adaugă un link către versiunea gata de tipărire în pagină"
-
-#: print.module:131
-msgid "Show printer-friendly version link"
-msgstr "Arată link pentru versiunea gata de tipărire"
-
-#: print.module:134
-msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
-msgstr ""
-
-#: print.module:134;143
-msgid "settings page"
-msgstr "pagina configurări"
-
-#: print.module:140
-msgid "Show printer-friendly version link in individual comments"
-msgstr ""
-
-#: print.module:143
-msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr ""
-
-#: print.module:186
+#: print.admin.inc:27
 msgid "Printer-friendly page link"
 msgstr "link către varianta gata de tipărire"
 
-#: print.module:188;245
-msgid "Disabled"
-msgstr "Dezactivat"
+#: print.admin.inc:29
+msgid "None (Disabled)"
+msgstr ""
 
-#: print.module:188
-msgid "Enabled"
-msgstr "Activat"
+#: print.admin.inc:29
+msgid "Text only"
+msgstr ""
 
-#: print.module:189
+#: print.admin.inc:29
+msgid "Icon only"
+msgstr ""
+
+#: print.admin.inc:29
+msgid "Icon and Text"
+msgstr ""
+
+#: print.admin.inc:30
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
 msgstr "Activează sau dezactivează linkul 'afişează pentru tipărire' pentru fiecare nod. Chiar dacă linkul e dezactivat, se poate vedea varianta gata de tipărit dacă mergeţi la adresa 'print/nid', unde nid este identificatorul numeric al nodului."
 
-#: print.module:194
+#: print.admin.inc:35
 msgid "Show link in system (non-content) pages"
 msgstr ""
 
-#: print.module:197
+#: print.admin.inc:37
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
-msgstr ""
+msgstr "Activarea acestei opţiuni va adăuga un link către versiunea gata de tipărire pe paginile create de Drupal sau modulele active."
 
-#: print.module:202
+#: print.admin.inc:42
+#, fuzzy
 msgid "Take control of the book module printer-friendly link"
-msgstr ""
+msgstr "Preia controlul asupra link-ului versiune gata de tipar formatat de modulul Book"
 
-#: print.module:205
+#: print.admin.inc:44
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr ""
 
-#: print.module:210
+#: print.admin.inc:49
 msgid "Logo URL"
 msgstr "URL logo"
 
-#: print.module:214
+#: print.admin.inc:53
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr ""
 
-#: print.module:219
+#: print.admin.inc:58
 msgid "Stylesheet URL"
 msgstr "URL stylesheet"
 
-#: print.module:223
+#: print.admin.inc:62
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr ""
 
-#: print.module:228
+#: print.admin.inc:67
 msgid "Printer-friendly URLs list"
 msgstr ""
 
-#: print.module:231
+#: print.admin.inc:69
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr ""
 
-#: print.module:236
+#: print.admin.inc:74
 msgid "Include comments in printer-friendly version"
 msgstr ""
 
-#: print.module:239
+#: print.admin.inc:76
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr ""
 
-#: print.module:244
+#: print.admin.inc:81
 msgid "Open the printer-friendly version in a new window"
 msgstr ""
 
-#: print.module:245
+#: print.admin.inc:82
+msgid "Disabled"
+msgstr "Dezactivat"
+
+#: print.admin.inc:82
 msgid "Use HTML target (does not validate as XHTML Strict)"
 msgstr ""
 
-#: print.module:245
+#: print.admin.inc:82
 msgid "Use Javascript (requires browser support)"
 msgstr ""
 
-#: print.module:245
+#: print.admin.inc:82
 msgid "Use Greybox Redux (requires the greybox module)"
 msgstr ""
 
-#: print.module:245
+#: print.admin.inc:82
 msgid "Use Thickbox (requires the thickbox module)"
 msgstr ""
 
-#: print.module:247
+#: print.admin.inc:84
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr ""
 
-#: print.module:252
+#: print.admin.inc:89
 msgid "Send to printer"
 msgstr ""
 
-#: print.module:255
+#: print.admin.inc:91
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr ""
 
-#: print.module:262;663
+#: print.admin.inc:98
+#: print.pages.inc:171
 msgid "Source URL"
 msgstr "URL sursă"
 
-#: print.module:270
+#: print.admin.inc:106
 msgid "Display source URL"
 msgstr ""
 
-#: print.module:273
+#: print.admin.inc:108
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr ""
 
-#: print.module:278
+#: print.admin.inc:113
 msgid "Add current time/date to the source URL"
 msgstr ""
 
-#: print.module:281
+#: print.admin.inc:115
 msgid "Display the current date and time in the Source URL line."
 msgstr ""
 
-#: print.module:286
+#: print.admin.inc:120
 msgid "Force use of node ID in source URL"
 msgstr ""
 
-#: print.module:289
+#: print.admin.inc:122
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr ""
 
-#: print.module:296
+#: print.admin.inc:129
 msgid "Robots META tags"
 msgstr ""
 
-#: print.module:304
+#: print.admin.inc:137
 msgid "Add noindex"
 msgstr ""
 
-#: print.module:307
+#: print.admin.inc:139
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr ""
 
-#: print.module:312
+#: print.admin.inc:144
 msgid "Add nofollow"
 msgstr ""
 
-#: print.module:315
+#: print.admin.inc:146
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr ""
 
-#: print.module:320
+#: print.admin.inc:151
 msgid "Add noarchive"
 msgstr ""
 
-#: print.module:323
+#: print.admin.inc:153
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr ""
 
-#: print.module:328
+#: print.admin.inc:158
 msgid "Add nocache"
 msgstr ""
 
-#: print.module:331
+#: print.admin.inc:160
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
 msgstr ""
 
-#: print.module:476
+#: print.pages.inc:149
+#, fuzzy
+msgid "Published on %site_name"
+msgstr "Publicat la %site_name"
+
+#: print.pages.inc:168
+msgid "retrieved on %date"
+msgstr ""
+
+#: print.pages.inc:181
 msgid "Anonymous"
 msgstr ""
 
-#: print.module:633
-msgid "Display a printer-friendly version of this page."
-msgstr "Afişează o versiune a paginii gata de tipărire."
+#: print.pages.inc:182
+#, fuzzy
+msgid "By %author"
+msgstr "De %author"
 
-#: print.module:656
+#: print.pages.inc:186
+#, fuzzy
+msgid "Created %date"
+msgstr "Creat %date"
+
+#: print.pages.inc:216
+#, fuzzy
+msgid "Links"
+msgstr "Linkuri"
+
+#: print.module:63
+msgid "Printer-friendly"
+msgstr "aranjat pentru tipărire"
+
+#: print.module:70
+#: print.info:0
+msgid "Printer-friendly pages"
+msgstr ""
+
+#: print.module:71
+#: print.info:0
+#, fuzzy
+msgid "Adds a printer-friendly version link to content and administrative pages."
+msgstr "Adaugă un link către versiunea gata de tipărire în pagină"
+
+#: print.module:179
+msgid "Show printer-friendly version link"
+msgstr "Arată link pentru versiunea gata de tipărire"
+
+#: print.module:181
+msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
+msgstr "Afişează link către versiunea gata de tipărire a conţinutului. Opţiuni suplimentare de configurare sunt disponibile în !settings."
+
+#: print.module:181;189
+msgid "settings page"
+msgstr "pagina configurări"
+
+#: print.module:187
+msgid "Show printer-friendly version link in individual comments"
+msgstr ""
+
+#: print.module:189
+msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
+msgstr ""
+
+#: print.module:256
 msgid "Printer-friendly version"
 msgstr "versiune gata de tipărire"
 
-#: print.module:662
-msgid "retrieved on"
-msgstr ""
+#: print.module:258
+msgid "Display a printer-friendly version of this page."
+msgstr "Afişează o versiune a paginii gata de tipărire."
 
-#: print.module:664
-msgid "Published on"
-msgstr "Publicat la"
-
-#: print.module:665
-msgid "By"
-msgstr "De"
-
-#: print.module:666
-msgid "Created"
-msgstr "Creat"
-
-#: print.module:667
-msgid "Links:"
-msgstr "Linkuri:"
-
-#: print.module:19
+#: print.module:51
 msgid "access print"
 msgstr ""
 
-#: print.module:19
+#: print.module:51
 msgid "administer print"
 msgstr ""
 
@@ -253,7 +277,12 @@ msgstr ""
 msgid "print"
 msgstr "tipărire"
 
-#: print.info:0
-msgid "Printer-friendly pages"
+#: print.install:8
+msgid "Printer-friendly Page settings are available under !link"
 msgstr ""
+
+#~ msgid "By"
+#~ msgstr "De"
+#~ msgid "Enabled"
+#~ msgstr "Activat"
 
