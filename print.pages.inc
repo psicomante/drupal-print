@@ -224,6 +224,7 @@ function _print_var_generator($node, $cid = NULL) {
   }
 
   $print["content"] = $node->body;
+  $print["node"] = $node;
   $print["footer_message"] = filter_xss_admin(variable_get('site_footer', FALSE)) ."\n". theme('blocks', 'footer') ;
 
   return $print;
