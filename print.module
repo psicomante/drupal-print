@@ -22,7 +22,7 @@ function print_settings_default() {
                'css' => '',
                'urls' => 1,
                'comments' => 0,
-               'newwindow' => 0,
+               'newwindow' => 1,
               );
 }
 
@@ -31,8 +31,10 @@ function print_settings_default() {
  */
 function print_html_settings_default() {
   return array('show_link' => 1,
+               'link_class' => 'print-page',
                'show_sys_link' => 1,
                'book_link' => 1,
+               'new_window' => 0,
                'sendtoprinter' => 0,
               );
 }
@@ -122,19 +124,16 @@ function print_menu() {
  */
 function print_link($type, $node = NULL, $teaser = FALSE) {
   $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
-  static $print_display = FALSE;
+  static $print_display_comment = FALSE;
 
-  if ($print_display == FALSE) {
-    if (isset($node->type)) {
-      $node_type = $node->type;
-      $print_display_comment = variable_get('print_display_comment_'. $node->type, 0);
-      $print_display = variable_get('print_display_'. $node->type, 1);
-    }
-    else {
-      $node_type = '';
-      $print_display_comment = 0;
-      $print_display = 1;
-    }
+  if (($print_display_comment == FALSE) && (isset($node->type))) {
+    $node_type = $node->type;
+    $print_display_comment = variable_get('print_display_comment_'. $node->type, 0);
+    $print_display = variable_get('print_display_'. $node->type, 1);
+  }
+  else {
+    $node_type = '';
+    $print_display = 1;
   }
 
   // No link is shown for several motives...
@@ -193,7 +192,7 @@ function print_help($path, $arg) {
   switch ($path) {
     case 'admin/help#print':
       // Return a line-break version of the module README
-      return filter_filter('process', 2, NULL, file_get_contents(drupal_get_path('module', 'print') ."/README.txt") );
+      return filter_filter('process', 1, NULL, file_get_contents(drupal_get_path('module', 'print') ."/README.txt") );
   }
 
   $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
@@ -234,34 +233,51 @@ function print_form_alter(&$form, $form_state, $form_id) {
 /**
  * Auxiliary function to fill the Printer-friendly link attributes
  *
+ * @param $title
+ *   text to displayed by the link when hovering over it with the mouse
+ * @param $class
+ *   class attribute to be used in the link
  * @return
  *   array of formatted attributes
  */
-function _print_format_link_aux($type = 0, $text = '', $img = '', $title = '', $class = '') {
+function print_fill_attributes($title = '', $class = '', $new_window = FALSE) {
   $print_settings = variable_get('print_settings', print_settings_default());
   $robots_settings = variable_get('print_robot_settings', print_robot_settings_default());
 
-  $attributes = array('title' => $title,
-                      'class' => $class,
-                     );
-  switch ($print_settings['newwindow']) {
-  case 1:
-    $attributes['target'] = '_blank';
-    break;
-  case 2:
-    $attributes['onclick'] = 'window.open(this.href); return false';
-    break;
-  case 3:
-    $attributes['class'] .= ' '. variable_get('greybox_class_text', 'greybox');
-    break;
-  case 4:
-    $attributes['class'] .= ' thickbox';
-    break;
+  $attributes = array();
+  $attributes['title'] = $title;
+  $attributes['class'] = $class;
+
+  if ($new_window) {
+    switch ($print_settings['newwindow']) {
+    case 0:
+      $attributes['target'] = '_blank';
+      break;
+    case 1:
+      $attributes['onclick'] = 'window.open(this.href); return false';
+      break;
+    }
   }
   if (!empty($robots_settings['nofollow'])) {
     $attributes['rel'] = 'nofollow';
   }
+  return $attributes;
+}
 
+/**
+ * Auxiliary function to set the link text and html flag
+ *
+ * @param $type
+ *   type of link: 0 or 1 for a text-only link, 2 for icon-only and 3 for
+ *   both text and icon
+ * @param $text
+ *   text to be displayed on the link to the printer-friendly page
+ * @param $img
+ *   path to the icon file
+ * @return
+ *   array with the link text and html flag
+ */
+function _print_format_link_aux($type = 0, $text = '', $img = '') {
   if ($type >= 2) {
     $img = '<img width="16px" height="16px" style="vertical-align:middle" src="'. $img .'" alt="'. $text .'" />';
     $html = TRUE;
@@ -280,7 +296,6 @@ function _print_format_link_aux($type = 0, $text = '', $img = '', $title = '', $
   
   return array('text' => $text,
                'html' => $html,
-               'attributes' => $attributes,
               );
 }
 
@@ -296,12 +311,13 @@ function theme_print_format_link() {
   $text = t('Printer-friendly version');
   $img = base_path() . drupal_get_path('module', 'print') .'/icons/print_icon.gif';
   $title = t('Display a printer-friendly version of this page.');
-  $class = 'print-page';
-  $format = _print_format_link_aux($print_html_settings['show_link'], $text, $img, $title, $class);
+  $class = $print_html_settings['link_class'];
+  $new_window = $print_html_settings['new_window'];
+  $format = _print_format_link_aux($print_html_settings['show_link'], $text, $img);
 
   return array('text' => $format['text'],
                'html' => $format['html'],
-               'attributes' => $format['attributes'],
+               'attributes' => print_fill_attributes($title, $class, $new_window),
               );
 }
 

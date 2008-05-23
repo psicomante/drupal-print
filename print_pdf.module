@@ -12,7 +12,15 @@ define("PRINTPDF_PATH", "printpdf");
  * Default values of the print_pdf_settings variable
  */
 function print_pdf_settings_default() {
-  return array('show_link' => 0, 'show_sys_link' => 1, 'book_link' => 1, 'pdf_tool' => 0);
+  return array('show_link' => 0,
+               'link_class' => 'print-pdf',
+               'show_sys_link' => 0,
+               'book_link' => 1,
+               'pdf_tool' => 0,
+               'content_disposition' => 2,
+               'paper_size' => 'A4',
+               'page_orientation' => 'portrait',
+              );
 }
 
 //*******************************************************************
@@ -61,48 +69,55 @@ function print_pdf_menu() {
  */
 function print_pdf_link($type, $node = NULL, $teaser = FALSE) {
   $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());
-  static $print_pdf_display = FALSE;
+  static $print_pdf_display_comment = FALSE;
 
-  if ($print_pdf_display == FALSE) {
-    if (isset($node->type)) {
-      $node_type = $node->type;
-      $print_pdf_display_comment = variable_get('print_pdf_display_comment_'. $node->type, 0);
-      $print_pdf_display = variable_get('print_pdf_display_'. $node->type, 1);
-    }
-    else {
-      $node_type = '';
-      $print_pdf_display_comment = 0;
-      $print_pdf_display = 1;
-    }
+  if (($print_pdf_display_comment == FALSE) && (isset($node->type))) {
+    $node_type = $node->type;
+    $print_pdf_display_comment = variable_get('print_pdf_display_comment_'. $node->type, 0);
+    $print_pdf_display = variable_get('print_pdf_display_'. $node->type, 1);
+  }
+  else {
+    $node_type = '';
+    $print_pdf_display = 1;
   }
 
-  // No link is shown for several motives...
-  if ( !($teaser) &&
+  if (!$teaser) {
+    $links = array();
+    $format = theme('print_pdf_format_link');
+    // Show book link
+    if (($print_pdf_settings['book_link']) && user_access('access printer-friendly version') &&
+        (($node_type == 'book') || isset($node->book))) {
+
+      $links['book_pdf'] = array('href' => PRINTPDF_PATH ."/book/export/html/". $node->nid,
+                                 'title' => strip_tags($format['text']),
+                                 'attributes' => $format['attributes'],
+                                );
+
+      return $links;
+    }
+    // No link is shown for several motives...
+    elseif (($node_type != 'book') && (!isset($node->book)) &&
       ($print_pdf_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && $print_pdf_display_comment) ||
       ($type == 'node' && $print_pdf_display))) {
-    $links = array();
 
-    $format = theme('print_pdf_format_link');
+      $query_arr = $_GET;
+      if ($type == 'comment') {
+        $query_arr['comment'] = $node->cid;
+      }
+      $query = drupal_query_string_encode($query_arr, array('q'));
 
-    $query_arr = $_GET;
-    if ($type == 'comment') {
-      $query_arr['comment'] = $node->cid;
+      $links['print_pdf'] = array('href' => PRINTPDF_PATH ."/". $node->nid,
+                                  'title' => $format['text'],
+                                  'attributes' => $format['attributes'],
+                                  'html' => $format['html'],
+                                  'query' => $query,
+                                 );
+
+      return $links;
     }
-    $query = drupal_query_string_encode($query_arr, array('q'));
-
-    $links['print_pdf'] = array('href' => PRINTPDF_PATH ."/". $node->nid,
-                                'title' => $format['text'],
-                                'attributes' => $format['attributes'],
-                                'html' => $format['html'],
-                                'query' => $query,
-                               );
-
-    return $links;
   }
-  else {
-    return;
-  }
+  return;
 }
 
 /**
@@ -144,17 +159,25 @@ function print_pdf_form_alter(&$form, $form_state, $form_id) {
   }
 }
 
+/**
+ * Format the PDF version link
+ *
+ * @return
+ *   array of formatted attributes
+ * @ingroup themeable
+ */
 function theme_print_pdf_format_link() {
   $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());
   $text = t('PDF version');
   $img = base_path() . drupal_get_path('module', 'print') .'/icons/pdf_icon.gif';
   $title = t('Display a PDF version of this page.');
-  $class = 'print-pdf';
-  $format = _print_format_link_aux($print_pdf_settings['show_link'], $text, $img, $title, $class);
+  $class = $print_pdf_settings['link_class'];
+  $new_window = ($print_pdf_settings['content_disposition'] == 1);
+  $format = _print_format_link_aux($print_pdf_settings['show_link'], $text, $img);
 
   return array('text' => $format['text'],
                'html' => $format['html'],
-               'attributes' => $format['attributes'],
+               'attributes' => print_fill_attributes($title, $class, $new_window),
               );
 }
 
