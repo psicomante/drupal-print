@@ -1,3 +1,10 @@
+May 21, 2008
+      Commit #117197 by jcnventura at 11:02
+        Enable access to print['node'] inside the template
+May 13, 2008
+      Commit #115972 by jcnventura at 02:06
+        Added Danish translation. Thanks topsys!
+        Update Changelog for 5.x-3.5
 May 12, 2008
       Commit #115837 by jcnventura at 10:25
         Slightly better template vars handling
