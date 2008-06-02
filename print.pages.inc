@@ -149,7 +149,7 @@ function _print_var_generator($node, $cid = NULL) {
   $print["logo"] = $logo_url ? "<img class=\"print-logo\" src=\"". $logo_url ."\" alt=\"\" />\n" : "";
 
   $published_site = variable_get('site_name', 0);
-  if ($published_site_name) {
+  if ($published_site) {
     $published = (empty($themed["published"])) ? t('Published on %site_name', array('%site_name' => $published_site)) : ($themed['published'] ." ". $published_site);
     $print["site_name"] = $published ." (". l($base_url, $base_url) .")";
   }
