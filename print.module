@@ -95,7 +95,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
 
   // No link is shown for several motives...
   if ( !($teaser) && ($node_type != 'book') && (!isset($node->parent)) &&
-      !(module_exists('visibility_api') && visibility_api_access('print')) &&
+      (!(module_exists('visibility_api')) || visibility_api_access('print')) &&
       ($print_settings['show_link']) && user_access('access print') &&
       (($type == 'comment' && variable_get('print_display_comment', 0)) ||
       ($type == 'node' && $print_display))) {
@@ -156,7 +156,7 @@ function print_help($path) {
   $print_settings = variable_get('print_settings', print_settings_default());
 
   if (($print_settings['show_link']) && ($print_settings['show_sys_link']) &&
-      !(module_exists('visibility_api') && visibility_api_access('print')) &&
+      (!module_exists('visibility_api') || visibility_api_access('print')) &&
       user_access('access print') && (preg_match("/^node\//i", $path) == 0)) {
     static $output = FALSE;
 
