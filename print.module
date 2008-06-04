@@ -223,7 +223,7 @@ function _print_format_link_aux($type = 0, $text = '', $img = '', $title = '', $
   }
 
   if ($type >= 2) {
-    $img = '<img width="16px" height="16px" style="vertical-align:middle" src="'. $img .'" alt="'. $text .'" />';
+    $img = theme('image', $img, $text, '', array('style' => 'vertical-align: middle'));
     $html = TRUE;
     switch ($type) {
     case 2:
@@ -254,7 +254,7 @@ function _print_format_link_aux($type = 0, $text = '', $img = '', $title = '', $
 function theme_print_format_link() {
   $print_settings = variable_get('print_settings', print_settings_default());
   $text = t('Printer-friendly version');
-  $img = base_path() . drupal_get_path('module', 'print') .'/icons/print_icon.gif';
+  $img = drupal_get_path('module', 'print') .'/icons/print_icon.gif';
   $title = t('Display a printer-friendly version of this page.');
   $class = 'print-page';
   $format = _print_format_link_aux($print_settings['show_link'], $text, $img, $title, $class);
