@@ -92,3 +92,8 @@ MORE INFORMATION
 
 For more information, consult the modules' documentation at
 http://drupal.org/node/190171.
+
+ACKNOWLEDGMENTS
+---------------
+The print, pdf and mail icons are copyright Plone Foundation. Thanks for
+letting me use them!

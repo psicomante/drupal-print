@@ -17,50 +17,52 @@
  * @see _print_get_template()
  */
 function print_controller_html() {
-  $print = print_controller();
+  // Remove the print/ prefix
+  $path = substr($_GET['q'], strpos($_GET['q'], '/')+1);
+  $cid = isset($_GET['comment']) ? $_GET['comment'] : NULL;
+
+  $print = print_controller($path, $cid);
   include_once(_print_get_template($print["type"]));
 }
 
 /**
- * Select the print generator function based on the current path
+ * Select the print generator function based on the page type
  *
  * Depending on the type of node, this functions chooses the appropriate
  * generator function.
  *
+ * @param $path
+ *   path of the original page
+ * @param $cid
+ *   comment ID of the individual comment to be rendered
  * @return
  *   array with the fields to be used in the template
  * @see _print_generate_node()
  * @see _print_generate_path()
  * @see _print_generate_book()
  */
-function print_controller() {
-  // Remove the print/ prefix
-  $args = substr($_GET['q'], strpos($_GET['q'], '/')+1);
-
-  $cid = isset($_GET['comment']) ? $_GET['comment'] : NULL;
-
-  $nid = $args;
-  if (!is_numeric($nid)) {
+function print_controller($path, $cid) {
+  if (!is_numeric($path)) {
     // Indirect call with print/alias
     // If there is a path alias with these arguments, generate a printer-friendly version for it
-    $path = drupal_get_normal_path($args);
+    $path = drupal_get_normal_path($path);
     $ret = preg_match("/^node\/(.*)/i", $path, $matches);
     if ($ret == 1) {
-      $nid = $matches[1];
+      $path = $matches[1];
     }
   }
-  if (is_numeric($nid)) {
-    $print = _print_generate_node($nid, $cid);
+  if (is_numeric($path)) {
+    $print = _print_generate_node($path, $cid);
   }
   else {
-    $ret = preg_match("/^book\/export\/html\/(.*)/i", $args, $matches);
+    $ret = preg_match("/^book\/export\/html\/(.*)/i", $path, $matches);
     if ($ret == 1) {
       // This is a book PF page link, handle trough the book handling functions
       $print = _print_generate_book($matches[1]);
     }
     else {
       // If no content node was found, handle the page printing with the 'printable' engine
-      $print = _print_generate_path($args);
+      $print = _print_generate_path($path);
     }
   }
 
@@ -128,24 +130,30 @@ function _print_var_generator($node, $cid = NULL) {
   $print["head"] = drupal_get_html_head();
   $print["scripts"] = drupal_get_js();
   $print["robots_meta"] = _print_robots_meta_generator();
-  $print["base_href"] = "<base href=\"". url($path, NULL, NULL, TRUE) ."\" />\n";
-  $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"". theme_get_setting("favicon") ."\" type=\"image/x-icon\"/>\n" : "";
+  $print["url"] = url($path, NULL, NULL, TRUE);
+  $print["base_href"] = "<base href=\"". $print["url"] ."\" />\n";
+  $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"". theme_get_setting("favicon") ."\" type=\"image/x-icon\" />\n" : "";
 
+  $css_files = array();
   if (!empty($print_settings['css'])) {
-    $css_file = $print_settings['css'];
+    $css_files[] = strip_tags($print_settings['css']);
   }
   else {
-    $css_file = base_path() . drupal_get_path('module', 'print') ."/print.css";
+    $css_files[] = base_path() . drupal_get_path('module', 'print') ."/print.css";
   }
-  $print["css"] = "<style type=\"text/css\" media=\"all\">@import \"". $css_file ."\";</style>\n";
   // Add CCK's CSS file to properly display the fields
   if (module_exists('content')) {
-    $print["css"] .= "<style type=\"text/css\" media=\"all\">@import \"". base_path() . drupal_get_path('module', 'content') ."/content.css\";</style>\n";
+    $css_files[] = base_path() . drupal_get_path('module', 'content') ."/content.css";
   }
+
+    $print["css"] = "";
+    foreach ($css_files as $value) {
+      $print["css"] .= "<link type=\"text/css\" rel=\"stylesheet\" media=\"all\" href=\"". $value ."\" />\n";
+    }
 
   $print["sendtoprinter"] = $print_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
     
-  $logo_url = !empty($print_settings['logo_url']) ? $print_settings['logo_url'] : theme_get_setting('logo');
+  $logo_url = !empty($print_settings['logo_url']) ? strip_tags($print_settings['logo_url']) : theme_get_setting('logo');
   $print["logo"] = $logo_url ? "<img class=\"print-logo\" src=\"". $logo_url ."\" alt=\"\" />\n" : "";
 
   $published_site = variable_get('site_name', 0);
@@ -160,20 +168,20 @@ function _print_var_generator($node, $cid = NULL) {
   if ($print_sourceurl_settings['enabled'] == 1) {
     /* Grab and format the src URL */
     if (empty($print_sourceurl_settings['forcenode'])) {
-      $print["source_url"] = url($path, NULL, NULL, TRUE);
+      $url = $print["url"];
     }
     else {
-      $print["source_url"] = $base_url .'/'. (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . $path;
+      $url = $base_url .'/'. (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . $path;
     }
     if ($cid) {
-      $print["source_url"] .= "#comment-$cid";
+      $url .= "#comment-$cid";
     }
     $retrieved_date = format_date(time(), 'small');
     $retrieved = (empty($themed["retrieved"])) ? t('retrieved on %date', array('%date' => $retrieved_date)) : ($themed["retrieved"] ." ". $retrieved_date);
     $print["printdate"] = $print_sourceurl_settings['date'] ? " ($retrieved)" : "";
 
     $source_url = (empty($themed["sourceURL"])) ? t('Source URL') : $themed["sourceURL"];
-    $print["source_url"] = "<strong>". $source_url . $print["printdate"] .":</strong> ". l($print["source_url"], $print["source_url"]);
+    $print["source_url"] = "<strong>". $source_url . $print["printdate"] .":</strong> ". l($url, $url);
   }
   else {
     $print["source_url"] = "";
@@ -182,13 +190,19 @@ function _print_var_generator($node, $cid = NULL) {
   if (isset($node->type)) {
     $node_type = $node->type;
 
-    $by_author = ($node->name ? $node->name : variable_get('anonymous', t('Anonymous')));
-    $by = (empty($themed["by"])) ? t('By %author', array('%author' => $by_author)) : ($themed["by"] ." ". $by_author);
-    $print["submitted"] = theme_get_setting("toggle_node_info_$node_type") ? $by : "";
+    if (theme_get_setting("toggle_node_info_$node_type")) {
+      $by_author = ($node->name ? $node->name : variable_get('anonymous', t('Anonymous')));
+      $by = (empty($themed["by"])) ? t('By %author', array('%author' => $by_author)) : ($themed["by"] ." ". $by_author);
+      $print["submitted"] = $by;
 
-    $created_datetime = format_date($node->created, 'small');
-    $created = (empty($themed["created"])) ? t('Created %date', array('%date' => $created_datetime)) : ($themed["created"] ." ". $created_datetime);
-    $print["created"] = theme_get_setting("toggle_node_info_$node_type") ? $created : "";
+      $created_datetime = format_date($node->created, 'small');
+      $created = (empty($themed["created"])) ? t('Created %date', array('%date' => $created_datetime)) : ($themed["created"] ." ". $created_datetime);
+      $print["created"] = $created;
+    }
+    else {
+      $print["submitted"] = "";
+      $print["created"] = "";
+    }
 
     $print["type"] = $node->type;
   }
@@ -366,36 +380,27 @@ function _print_friendly_urls($url = 0) {
  *   filename of the most suitable template
  */
 function _print_get_template($type = NULL) {
-  if ($type) {
-    // If the node type is known, then try to find that type's template file
+  $filenames = array();
+  // If the node type is known, then try to find that type's template file
+  if (!empty($type)) {
+    $filenames[] = "print.node-$type.tpl.php";
+    $filenames[] = "print.$type.tpl.php";
+  }
+  // Finally search for a generic template file
+  $filenames[] = "print.tpl.php";
+
+  foreach ($filenames as $value) {
     // First in the theme directory
-    $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.node-$type.tpl.php";
-    if (file_exists($filename)) {
-      return $filename;
-    }
-    $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.$type.tpl.php";
-    if (file_exists($filename)) {
-      return $filename;
+    $file = drupal_get_path('theme', $GLOBALS['theme_key']) ."/". $value;
+    if (file_exists($file)) {
+      return $file;
     }
     // Then in the module directory
-    $filename = drupal_get_path('module', 'print') ."/print.node-$type.tpl.php";
-    if (file_exists($filename)) {
-      return $filename;
-    }
-    $filename = drupal_get_path('module', 'print') ."/print.$type.tpl.php";
-    if (file_exists($filename)) {
-      return $filename;
+    $file = drupal_get_path('module', 'print') ."/". $value;
+    if (file_exists($file)) {
+      return $file;
     }
   }
-  // Search for a generic template file
-  // First in the theme directory
-  $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.tpl.php";
-  if (file_exists($filename)) {
-    return $filename;
-  }
-  // Then in the module directory
-  // This one must always exist (provided with the module!)
-  return drupal_get_path('module', 'print') ."/print.tpl.php";
 }
 
 /**
@@ -424,7 +429,7 @@ function _print_generate_node($nid, $cid = NULL) {
   unset($node->pages_count);
   unset($node->page_count);
 
-  unset($node->teaser);
+    unset($node->teaser);
   $node = (object)$node;
   if ($cid === NULL) {
     // Adapted (simplified) version of node_view for Drupal 5.x

@@ -30,6 +30,15 @@ function print_main_settings() {
     '#description' => t("Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."),
   );
 
+  $form['print_settings']['link_class'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Link class'),
+    '#default_value' => $print_settings['link_class'],
+    '#size' => 60,
+    '#maxlength' => 250,
+    '#description' => t('This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces.'),
+  );
+
   $form['print_settings']['show_sys_link'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show link in system (non-content) pages'),
@@ -76,12 +85,19 @@ function print_main_settings() {
     '#description' => t('When this option is active, user comments are also included in the printer-friendly version. Requires the comment module.'),
   );
 
+  $form['print_settings']['new_window'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Open the printer-friendly version in a new window'),
+    '#default_value' => $print_settings['new_window'],
+    '#description' => t('Setting this option will make the printer-friendly version open in a new window/tab.'),
+  );
+
   $form['print_settings']['newwindow'] = array(
     '#type' => 'radios',
-    '#title' => t('Open the printer-friendly version in a new window'),
-    '#options' => array(t("Disabled"), t("Use HTML target (does not validate as XHTML Strict)"), t("Use Javascript (requires browser support)"), t("Use Greybox Redux (requires the greybox module)"), t("Use Thickbox (requires the thickbox module)")),
+    '#title' => t('New window method'),
+    '#options' => array(t("Use HTML target (does not validate as XHTML Strict)"), t("Use Javascript (requires browser support)")),
     '#default_value' => $print_settings['newwindow'],
-    '#description' => t('Setting this option will make the printer-friendly version open in a new window/tab.'),
+    '#description' => t('Choose the method used to open pages in a new window/tab.'),
   );
 
   $form['print_settings']['sendtoprinter'] = array(
