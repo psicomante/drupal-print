@@ -17,50 +17,56 @@
  * @see _print_get_template()
  */
 function print_controller_html() {
-  $print = print_controller();
-  include_once(_print_get_template($print["type"]));
+  // Remove the print/ prefix
+  $path = substr($_GET['q'], strpos($_GET['q'], '/')+1);
+  $cid = isset($_GET['comment']) ? $_GET['comment'] : NULL;
+
+  $print = print_controller($path, $cid);
+  include_once(_print_get_template("html", $print["type"]));
 }
 
 /**
- * Select the print generator function based on the current path
+ * Select the print generator function based on the page type
  *
  * Depending on the type of node, this functions chooses the appropriate
  * generator function.
  *
+ * @param $path
+ *   path of the original page
+ * @param $cid
+ *   comment ID of the individual comment to be rendered
+ * @param $teaser
+ *   if set to TRUE, outputs only the node's teaser
+ * @param $message
+ *   optional sender's message (used by the send e-mail module)
  * @return
  *   array with the fields to be used in the template
  * @see _print_generate_node()
  * @see _print_generate_path()
  * @see _print_generate_book()
  */
-function print_controller() {
-  // Remove the print/ prefix
-  $args = substr($_GET['q'], strpos($_GET['q'], '/')+1);
-
-  $cid = isset($_GET['comment']) ? $_GET['comment'] : NULL;
-
-  $nid = $args;
-  if (!is_numeric($nid)) {
+function print_controller($path, $cid, $teaser = FALSE, $message = NULL) {
+  if (!is_numeric($path)) {
     // Indirect call with print/alias
     // If there is a path alias with these arguments, generate a printer-friendly version for it
-    $path = drupal_get_normal_path($args);
+    $path = drupal_get_normal_path($path);
     $ret = preg_match("/^node\/(.*)/i", $path, $matches);
     if ($ret == 1) {
-      $nid = $matches[1];
+      $path = $matches[1];
     }
   }
-  if (is_numeric($nid)) {
-    $print = _print_generate_node($nid, $cid);
+  if (is_numeric($path)) {
+    $print = _print_generate_node($path, $cid, $teaser, $message);
   }
   else {
-    $ret = preg_match("/^book\/export\/html\/(.*)/i", $args, $matches);
+    $ret = preg_match("/^book\/export\/html\/(.*)/i", $path, $matches);
     if ($ret == 1) {
       // This is a book PF page link, handle trough the book handling functions
-      $print = _print_generate_book($matches[1]);
+      $print = _print_generate_book($matches[1], $teaser, $message);
     }
     else {
       // If no content node was found, handle the page printing with the 'printable' engine
-      $print = _print_generate_path($args);
+      $print = _print_generate_path($path, $teaser, $message);
     }
   }
 
@@ -106,13 +112,15 @@ function _print_robots_meta_generator() {
  *
  * @param $node
  *   generated node with a printer-friendly node body
+ * @param $message
+ *   optional sender's message (used by the send e-mail module)
  * @param $cid
  *   id of current comment being generated (NULL when not generating 
  *   an individual comment)
  * @return
  *   array with the fields to be used in the template
  */
-function _print_var_generator($node, $cid = NULL) {
+function _print_var_generator($node, $message = NULL, $cid = NULL) {
   global $base_url, $language;
 
   $path = empty($node->nid) ? $node->path : "node/$node->nid";
@@ -131,15 +139,36 @@ function _print_var_generator($node, $cid = NULL) {
   $print["robots_meta"] = _print_robots_meta_generator();
   $print["url"] = url($path, array('absolute' => TRUE));
   $print["base_href"] = "<base href=\"". $print["url"] ."\" />\n";
-  $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"". theme_get_setting("favicon") ."\" type=\"image/x-icon\"/>\n" : "";
+  $print["favicon"] = theme_get_setting("toggle_favicon") ? "<link rel=\"shortcut icon\" href=\"". theme_get_setting("favicon") ."\" type=\"image/x-icon\" />\n" : "";
 
+  $css_files = array();
   if (!empty($print_settings['css'])) {
-    $css_file = strip_tags($print_settings['css']);
+    $css_files[] = strip_tags($print_settings['css']);
   }
   else {
-    $css_file = base_path() . drupal_get_path('module', 'print') ."/print.css";
+    $css_files[] = base_path() . drupal_get_path('module', 'print') ."/print.css";
   }
-  $print["css"] = "<style type=\"text/css\" media=\"all\">@import \"". $css_file ."\";</style>\n";
+  // Add CCK's CSS file to properly display the fields
+  if (module_exists('content')) {
+    $css_files[] = base_path() . drupal_get_path('module', 'content') ."/content.css";
+  }
+
+  // If we are sending a message via e-mail, the CSS must be embedded
+  if (!empty($message)) {
+    ob_start();
+    foreach ($css_files as $value) {
+      include($value);
+    }
+    $style = ob_get_contents();
+    ob_end_clean();
+    $print["css"] = "<style type=\"text/css\" media=\"all\">". $style ."</style>\n";
+  }
+  else {
+    $print["css"] = "";
+    foreach ($css_files as $value) {
+      $print["css"] .= "<link type=\"text/css\" rel=\"stylesheet\" media=\"all\" href=\"". $value ."\" />\n";
+    }
+  }
 
   $print["sendtoprinter"] = $print_html_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
     
@@ -233,6 +262,7 @@ function _print_var_generator($node, $cid = NULL) {
 
   $print["content"] = $node->body;
   $print["node"] = $node;
+  $print["message"] = $message;
   $print["footer_message"] = filter_xss_admin(variable_get('site_footer', FALSE)) ."\n". theme('blocks', 'footer') ;
 
   return $print;
@@ -364,34 +394,42 @@ function _print_friendly_urls($url = 0) {
  * a content specific template in the theme or module dir before falling back
  * on a generic template also in those dirs.
  *
+ * @param format
+ *   format of the PF page being rendered (html, pdf, etc.)
  * @param $type
  *   name of the node type being rendered in a PF page
  * @return
  *   filename of the most suitable template
  */
-function _print_get_template($type = NULL) {
-  if ($type) {
-    // If the node type is known, then try to find that type's template file
+function _print_get_template($format = NULL, $type = NULL) {
+  $filenames = array();
+  // First try to find a template defined both for the format and then the type
+  if (!empty($format) && !empty($type)) {
+    $filenames[] = "print_$format.node-$type.tpl.php";
+  }
+  // Then only for the format
+  if (!empty($format)) {
+    $filenames[] = "print_$format.tpl.php";
+  }
+  // If the node type is known, then try to find that type's template file
+  if (!empty($type)) {
+    $filenames[] = "print.node-$type.tpl.php";
+  }
+  // Finally search for a generic template file
+  $filenames[] = "print.tpl.php";
+
+  foreach ($filenames as $value) {
     // First in the theme directory
-    $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.node-$type.tpl.php";
-    if (file_exists($filename)) {
-      return $filename;
+    $file = drupal_get_path('theme', $GLOBALS['theme_key']) ."/". $value;
+    if (file_exists($file)) {
+      return $file;
     }
     // Then in the module directory
-    $filename = drupal_get_path('module', 'print') ."/print.node-$type.tpl.php";
-    if (file_exists($filename)) {
-      return $filename;
+    $file = drupal_get_path('module', 'print') ."/". $value;
+    if (file_exists($file)) {
+      return $file;
     }
   }
-  // Search for a generic template file
-  // First in the theme directory
-  $filename = drupal_get_path('theme', $GLOBALS['theme_key']) ."/print.tpl.php";
-  if (file_exists($filename)) {
-    return $filename;
-  }
-  // Then in the module directory
-  // This one must always exist (provided with the module!)
-  return drupal_get_path('module', 'print') ."/print.tpl.php";
 }
 
 /**
@@ -401,10 +439,14 @@ function _print_get_template($type = NULL) {
  *   node ID of the node to be rendered into a printer-friendly page
  * @param $cid
  *   comment ID of the individual comment to be rendered
+ * @param $teaser
+ *   if set to TRUE, outputs only the node's teaser
+ * @param $message
+ *   optional sender's message (used by the send e-mail module)
  * @return
  *   filled array ready to be used in the template
  */
-function _print_generate_node($nid, $cid = NULL) {
+function _print_generate_node($nid, $cid = NULL, $teaser = FALSE, $message = NULL) {
   // We can take a node id
   $node = node_load(array('nid' => $nid));
   if (!node_access('view', $node)) {
@@ -419,12 +461,17 @@ function _print_generate_node($nid, $cid = NULL) {
   unset($node->pages);
   unset($node->page_count);
 
-  unset($node->teaser);
+  if ($teaser) {
+    unset($node->body);
+  }
+  else {
+    unset($node->teaser);
+  }
   $node = (object)$node;
   if ($cid === NULL) {
     // Adapted (simplified) version of node_view for Drupal 5.x
     //Render the node content
-    $node = node_build_content($node, FALSE, TRUE);
+    $node = node_build_content($node, $teaser, TRUE);
     // Disable fivestar widget output
     unset($node->content["fivestar_widget"]);
     // Disable service links module output
@@ -467,7 +514,7 @@ function _print_generate_node($nid, $cid = NULL) {
 
   init_theme();
 
-  $print = _print_var_generator($node, $cid);
+  $print = _print_var_generator($node, $message, $cid);
 
   return $print;
 }
@@ -477,17 +524,21 @@ function _print_generate_node($nid, $cid = NULL) {
  * 
  * @param $path
  *   path of the node to be rendered into a printer-friendly page
+ * @param $teaser
+ *   if set to TRUE, outputs only the node's teaser
+ * @param $message
+ *   optional sender's message (used by the send e-mail module)
  * @return
  *   filled array ready to be used in the template
  */
-function _print_generate_path($path) {
+function _print_generate_path($path, $teaser = FALSE, $message = NULL) {
   $path = drupal_get_normal_path($path);
 
   menu_set_active_item($path);
   // Adapted from index.php.
   $node = new stdClass();
   $node->body = menu_execute_active_handler($path);
-  $node->title = menu_get_active_title();
+  $node->title = drupal_get_title();
   $node->path = $path;
 
   // It may happen that a drupal_not_found is called in the above call
@@ -513,7 +564,7 @@ function _print_generate_path($path) {
 
   init_theme();
 
-  $print = _print_var_generator($node);
+  $print = _print_var_generator($node, $message);
 
   return $print;
 }
@@ -524,10 +575,14 @@ function _print_generate_path($path) {
  * 
  * @param $nid
  *   node ID of the node to be rendered into a printer-friendly page
+ * @param $teaser
+ *   if set to TRUE, outputs only the node's teaser
+ * @param $message
+ *   optional sender's message (used by the send e-mail module)
  * @return
  *   filled array ready to be used in the template
  */
-function _print_generate_book($nid) {
+function _print_generate_book($nid, $teaser = FALSE, $message = NULL) {
   $node = node_load(array('nid' => $nid));
   if (!node_access('view', $node) || (!user_access('access printer-friendly version'))) {
     // Access is denied
@@ -543,7 +598,7 @@ function _print_generate_book($nid) {
 
   init_theme();
 
-  $print = _print_var_generator($node);
+  $print = _print_var_generator($node, $message);
   // The title is already displayed by the book_recurse, so avoid duplication
   $print["title"] = "";
 
