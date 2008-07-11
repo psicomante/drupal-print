@@ -1,292 +1,244 @@
 # $Id$
 #
-# Nederlands translation of Drupal (general)
-# Copyright 2004 Hendrik Eeckhaut <Hendrik.Eeckhaut@UGent.be>
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
 #  print.module,v 1.15.2.5.2.26 2007/11/08 23:56:59 jcnventura
 #  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-13 01:13+0200\n"
-"PO-Revision-Date: 2008-05-13 01:26+0100\n"
-"Last-Translator: \n"
-"Language-Team: Nederlands <nl@li.org>\n"
+"Project-Id-Version: print-module\n"
+"POT-Creation-Date: 2007-12-13 21:58+0100\n"
+"PO-Revision-Date: 2007-11-30 20:59+0100\n"
+"Last-Translator: Joep Bär <info - a t - promes -dot-nl>\n"
+"Language-Team: Dutch\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-03-21 02:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: print.admin.inc:27
+#: print.module:31;38
+msgid "Printer-friendly"
+msgstr "Printervriendelijk"
+
+#: print.module:39 print.info:0
+msgid "Adds a printer-friendly version link to node pages."
+msgstr "Voegt een printervriendelijke versie aan pagina's toe"
+
+#: print.module:121
+msgid "Show printer-friendly version link"
+msgstr "Maak een printervriendelijke versie van deze pagina."
+
+#: print.module:124
+msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
+msgstr "Toont een link naar een printervriendelijke versie van de inhoud. Verdere instellingen zijn te vinden op !settings."
+
+#: print.module:124;133
+msgid "settings page"
+msgstr "instellingenpagina"
+
+#: print.module:130
+msgid "Show printer-friendly version link in individual comments"
+msgstr "Toont een printervriendelijke link in individuele commentaren"
+
+#: print.module:133
+msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
+msgstr "Toont een link naar een printervriendelijke versie van reacties. Verdere instellingen zijn te vinden op !settings."
+
+#: print.module:176
 msgid "Printer-friendly page link"
-msgstr "Printervriendelijke pagina-links"
+msgstr "Printervriendelijke pagina link"
 
-#: print.admin.inc:29
-msgid "None (Disabled)"
-msgstr ""
-
-#: print.admin.inc:29
-msgid "Text only"
-msgstr ""
-
-#: print.admin.inc:29
-msgid "Icon only"
-msgstr ""
-
-#: print.admin.inc:29
-msgid "Icon and Text"
-msgstr ""
-
-#: print.admin.inc:30
-msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
-msgstr "Schakelt de 'printervriendelijke pagina'-link in of uit voor elke node. Zelfs indien een link uitgeschakeld is, kan u nog steeds een printervriendelijke versie te zien krijgen door naar 'print/nid' te gaan; waarbij nid de nummer id is van de node."
-
-#: print.admin.inc:35
-msgid "Show link in system (non-content) pages"
-msgstr "Toon link in systeempagina's"
-
-#: print.admin.inc:37
-msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
-msgstr "Het selecteren van deze optie zal een printervriendelijke versie link aan pagina's aangemaakt met Drupal of een van haar modules toevoegen."
-
-#: print.admin.inc:42
-msgid "Take control of the book module printer-friendly link"
-msgstr "De controle over de book module printerviendelijke link overnemen"
-
-#: print.admin.inc:44
-msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
-msgstr ""
-
-#: print.admin.inc:49
-msgid "Logo URL"
-msgstr "Logo URL"
-
-#: print.admin.inc:53
-msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
-msgstr "Een alternatief logo om weer te geven op printervriendelijke pagina's. Als deze optie leeggelaten wordt wordt het huidige logo gebruikt."
-
-#: print.admin.inc:58
-msgid "Stylesheet URL"
-msgstr "URL-adres stijlbestand"
-
-#: print.admin.inc:62
-msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
-msgstr "De url naar de aangepaste css bestanden voor de printweergave. Wanneer geen"
-
-#: print.admin.inc:67
-msgid "Printer-friendly URLs list"
-msgstr "Printervriendelijke URL lijst"
-
-#: print.admin.inc:69
-msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
-msgstr ""
-
-#: print.admin.inc:74
-msgid "Include comments in printer-friendly version"
-msgstr "Toon commentaar in de printervriendelijke versie"
-
-#: print.admin.inc:76
-msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
-msgstr "Selecteer deze optie wanneer je gebruikers commentaren op de printer vriendelijke versie wilt. De 'comment' module is hiervoor vereist."
-
-#: print.admin.inc:81
-msgid "Open the printer-friendly version in a new window"
-msgstr "Open de printerversie in een nieuw venster"
-
-#: print.admin.inc:82
+#: print.module:178;235
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: print.admin.inc:82
-msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "Gebruik HTML target (valideert niet als geldig XHTML Strict)"
-
-#: print.admin.inc:82
-msgid "Use Javascript (requires browser support)"
-msgstr "Gebruik Javascript (vereist browser support)"
-
-#: print.admin.inc:82
-msgid "Use Greybox Redux (requires the greybox module)"
-msgstr ""
-
-#: print.admin.inc:82
-msgid "Use Thickbox (requires the thickbox module)"
-msgstr ""
-
-#: print.admin.inc:84
-msgid "Setting this option will make the printer-friendly version open in a new window/tab."
-msgstr ""
-
-#: print.admin.inc:89
-msgid "Send to printer"
-msgstr "Stuur naar printer"
-
-#: print.admin.inc:91
-msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
-msgstr ""
-
-#: print.admin.inc:98
-#: print.pages.inc:171
-msgid "Source URL"
-msgstr "Bron URL"
-
-#: print.admin.inc:106
-msgid "Display source URL"
-msgstr "Toon bron URL"
-
-#: print.admin.inc:108
-msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
-msgstr "Selecteer deze optie wanneer je de URL van de originele pagina wilt zien aan de onderkant van de printer vriendelijke versie"
-
-#: print.admin.inc:113
-msgid "Add current time/date to the source URL"
-msgstr "Voeg de huidige tijd/datum toe aan de bron URL"
-
-#: print.admin.inc:115
-msgid "Display the current date and time in the Source URL line."
-msgstr "Toon de huidige datum en tijd in de bron URL"
-
-#: print.admin.inc:120
-msgid "Force use of node ID in source URL"
-msgstr "Verplicht gebruik van de node ID in de bron URL"
-
-#: print.admin.inc:122
-msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
-msgstr ""
-
-#: print.admin.inc:129
-msgid "Robots META tags"
-msgstr "Robots META tags"
-
-#: print.admin.inc:137
-msgid "Add noindex"
-msgstr ""
-
-#: print.admin.inc:139
-msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
-msgstr ""
-
-#: print.admin.inc:144
-msgid "Add nofollow"
-msgstr ""
-
-#: print.admin.inc:146
-msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
-msgstr ""
-
-#: print.admin.inc:151
-msgid "Add noarchive"
-msgstr ""
-
-#: print.admin.inc:153
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
-msgstr ""
-
-#: print.admin.inc:158
-msgid "Add nocache"
-msgstr ""
-
-#: print.admin.inc:160
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr ""
-
-#: print.pages.inc:149
-#, fuzzy
-msgid "Published on %site_name"
-msgstr "Gepubliceerd op %site_name"
-
-#: print.pages.inc:168
-#, fuzzy
-msgid "retrieved on %date"
-msgstr "opgehaald op %date"
-
-#: print.pages.inc:181
-msgid "Anonymous"
-msgstr "Anoniem"
-
-#: print.pages.inc:182
-#, fuzzy
-msgid "By %author"
-msgstr "Door %author"
-
-#: print.pages.inc:186
-#, fuzzy
-msgid "Created %date"
-msgstr "Aangemaakt %date"
-
-#: print.pages.inc:216
-#, fuzzy
-msgid "Links"
-msgstr "Links"
-
-#: print.module:63
-msgid "Printer-friendly"
-msgstr "Printvriendelijk"
-
-#: print.module:70
-#: print.info:0
-msgid "Printer-friendly pages"
-msgstr "Printervriendelijke pagina"
-
-#: print.module:71
-#: print.info:0
-#, fuzzy
-msgid "Adds a printer-friendly version link to content and administrative pages."
-msgstr "Voeg een link naar printvriendelijke versie toe aan node pagina's"
+#: print.module:178
+msgid "Enabled"
+msgstr "Ingeschakeld"
 
 #: print.module:179
-msgid "Show printer-friendly version link"
-msgstr "Toon link naar printvriendelijke versie"
+msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
+msgstr "Schakel de printervriendelijke pagina link in/uit. Zelf als de link is uitgeschakeld, kunt u de print-versie van een node bekijken door naar print/nid te gaan, waarbij nid de numerieke id van de node is."
 
-#: print.module:181
-msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
-msgstr "Toon de link naar een printvriendelijke versie van de content. Verdere configuratie is mogelijk op !settings"
-
-#: print.module:181;189
-#, fuzzy
-msgid "settings page"
-msgstr "Configuratie"
+#: print.module:184
+msgid "Show link in system (non-content) pages"
+msgstr "Toon link in systeempagina's (geen inhoudpagina's)"
 
 #: print.module:187
-msgid "Show printer-friendly version link in individual comments"
-msgstr "Toon een link naar de printvriendelijke versie in individuele reacties"
+msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
+msgstr "Het aanvinken van deze optie plaatst een link naar een printervriendelijke versie van door Drupal of de ingeschakelde modules gemaakte pagina's."
 
-#: print.module:189
-msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr "Toon de link naar een printvriendelijke versie van de reactie. Verdere configuratie is mogelijk op !settings"
+#: print.module:192
+msgid "Take control of the book module printer-friendly link"
+msgstr "Controleer de printervriendelijke link van boekpagina's"
 
-#: print.module:256
-msgid "Printer-friendly version"
-msgstr "printer vriendelijke versie"
+#: print.module:195
+msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
+msgstr "Vink dit aan om deze module een printervriendelijke link in boekpagina's te laten aanmaken. Hiervoor is de Book module nodig."
 
-#: print.module:258
+#: print.module:200
+msgid "Logo URL"
+msgstr "URL van het logo"
+
+#: print.module:204
+msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
+msgstr "Een alternatief logo om op de printervriendelijke versie af te drukken. Indien leeg gelaten, wordt het logo van het huidige thema gebruikt."
+
+#: print.module:209
+msgid "Stylesheet URL"
+msgstr "URL stijlbestand"
+
+#: print.module:213
+msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
+msgstr "Het URL van uw eigen print.css bestand, indien aanwezig. Indien niets is gespecificeerd, wordt het standaard CSS-bestand gebruikt."
+
+#: print.module:218
+msgid "Printer-friendly URLs list"
+msgstr "Overzicht van printervriendelijke URL's"
+
+#: print.module:221
+msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
+msgstr "Indien ingeschakeld, worden de links op de pagina uitgeschakeld en een lijst van de bestemmings URL's onderaan de pagina getoond."
+
+#: print.module:226
+msgid "Include comments in printer-friendly version"
+msgstr "Toon ook de commentaren in printervriendelijke links"
+
+#: print.module:229
+msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
+msgstr "Als deze optie actief is worden ook commentaren van gebruikers afgedrukt. Hiervoor moet de module Comment ingeschakeld zijn."
+
+#: print.module:234
+msgid "Open the printer-friendly version in a new window"
+msgstr "Open de printervriendelijke versie in een nieuw venster"
+
+#: print.module:235
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "Gebruik HTML (wordt niet gevalideerd bij XHTML Strict)"
+
+#: print.module:235
+msgid "Use Javascript (requires browser support)"
+msgstr "Gebruik Javascript (browser ondersteuning vereist)"
+
+#: print.module:237
+msgid "Setting this option will make the printer-friendly version open in a new window/tab."
+msgstr "Door het inschakelen van deze optie opent de printervriendelijke versie in een nieuw venster/tab."
+
+#: print.module:242
+msgid "Send to printer"
+msgstr "Stuur naar de printer"
+
+#: print.module:245
+msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
+msgstr "Schakelt automatisch de print functie van de browser in voor het tonen van de printervriendelijke versie."
+
+#: print.module:252;450
+msgid "Source URL"
+msgstr "Bron-URL"
+
+#: print.module:260
+msgid "Display source URL"
+msgstr "Toon de bron URL"
+
+#: print.module:263
+msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
+msgstr "Als deze optie is ingeschakeld, dan wordt de URL van de originele pagina onderaan de printervriendelijke versie getoond."
+
+#: print.module:268
+msgid "Add current time/date to the source URL"
+msgstr "Voeg de actuele datum/tijd aan de bron URL toe"
+
+#: print.module:271
+msgid "Display the current date and time in the Source URL line."
+msgstr "Toon de actuele datum en tijd op de regel met de bron URL."
+
+#: print.module:276
+msgid "Force use of node ID in source URL"
+msgstr "Forceer het gebruik van de node ID in de bron URL"
+
+#: print.module:279
+msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
+msgstr "Indien aanwezig zal Drupal proberen de pagina-alias te gebruiken. Schakel deze optie in om de originele URL te gebruiken."
+
+#: print.module:286
+msgid "Robots META tags"
+msgstr "Robots META-tags"
+
+#: print.module:294
+msgid "Add noindex"
+msgstr "Voeg 'noindex' toe"
+
+#: print.module:297
+msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
+msgstr "Instrueer robots printervriendelijke pagina's niet te indexeren. Aanbevolen voor goede zoekmachine-karma."
+
+#: print.module:302
+msgid "Add nofollow"
+msgstr "Voeg 'nofollow' toe"
+
+#: print.module:305
+msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
+msgstr "Instrueer robots geen uitgaande links van printervriendelijke pagina's te gebruiken."
+
+#: print.module:310
+msgid "Add noarchive"
+msgstr "Voeg noarchive toe"
+
+#: print.module:313
+msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
+msgstr "Niet-standaard tag om zoekmachines te instrueren geen \"Cached\" links voor uw printervriendelijke pagina's te tonen. Wordt herkend door Googlebot."
+
+#: print.module:318
+msgid "Add nocache"
+msgstr "Voeg nocache toe"
+
+#: print.module:321
+msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
+msgstr "Niet-standaard tag om zoekmachines te instrueren geen \"Cached\" links voor uw printervriendelijke pagina's te tonen"
+
+#: print.module:449
+msgid "retrieved on"
+msgstr "opgehaald op"
+
+#: print.module:456
+msgid "Published on"
+msgstr "Gepubliceerd op"
+
+#: print.module:457
+msgid "By"
+msgstr "Door"
+
+#: print.module:458
+msgid "Created"
+msgstr "Aangemaakt"
+
+#: print.module:469
+msgid "Links:"
+msgstr "Links:"
+
+#: print.module:577
 msgid "Display a printer-friendly version of this page."
-msgstr "Toon de printer vriendelijke versie van deze pagina"
+msgstr "Maak een printervriendelijke versie van deze pagina."
 
-#: print.module:51
+#: print.module:588
+msgid "Printer-friendly version"
+msgstr "Printervriendelijke versie"
+
+#: print.module:19
 msgid "access print"
-msgstr ""
+msgstr "toegang tot print"
 
-#: print.module:51
+#: print.module:19
 msgid "administer print"
-msgstr "print configureren"
+msgstr "beheer print"
 
 #: print.module:0
 msgid "print"
-msgstr "printen"
+msgstr "print"
 
-#: print.install:8
-msgid "Printer-friendly Page settings are available under !link"
-msgstr ""
-
-#, fuzzy
-#~ msgid "Printer-friendly Pages"
-#~ msgstr "Printervriendelijke pagina"
-#~ msgid "By"
-#~ msgstr "door"
-#~ msgid "Enabled"
-#~ msgstr "Ingeschakeld"
-
+#: print.info:0
+msgid "Printer-friendly pages"
+msgstr "Printervriendelijke pagina's"
