@@ -22,8 +22,11 @@ require_once(drupal_get_path('module', 'print') .'/print.pages.inc');
  */
 function print_settings_default() {
   return array('show_link' => 1,
+               'node_link_visibility' => 0,
+               'node_link_pages' => '',
                'link_class' => 'print-page',
-               'show_sys_link' => 1,
+               'sys_link_visibility' => 1,
+               'sys_link_pages' => '<front>',
                'book_link' => 1,
                'new_window' => 0,
                'logo_url' => '',
@@ -52,7 +55,7 @@ function print_sourceurl_settings_default() {
  *   array with the values
  */
 function print_robot_settings_default() {
-  return array('noindex' => 1, 'nofollow' => 1, 'noarchive' => 0, 'nocache' => 0);
+  return array('noindex' => 1, 'nofollow' => 1, 'noarchive' => 0);
 }
 
 /**
@@ -94,8 +97,9 @@ function print_menu($may_cache) {
  */
 function print_link($type, $node = NULL, $teaser = FALSE) {
   $print_settings = variable_get('print_settings', print_settings_default());
+  static $print_display_comment = FALSE;
 
-  if (isset($node->type)) {
+  if (($print_display_comment == FALSE) && (isset($node->type))) {
     $node_type = $node->type;
     $print_display_comment = variable_get('print_display_comment', 0);
     $print_display = variable_get('print_display_'. $node->type, 1);
@@ -108,8 +112,9 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
 
   // No link is shown for several motives...
   if ( !($teaser) && ($node_type != 'book') && (!isset($node->parent)) &&
-      (!(module_exists('visibility_api')) || visibility_api_access('print')) &&
       ($print_settings['show_link']) && user_access('access print') &&
+      !(($print_settings['node_link_visibility']) xor
+       (_print_match_path("node/". $node->nid, $print_settings['node_link_pages']))) &&
       (($type == 'comment' && $print_display_comment) ||
       ($type == 'node' && $print_display))) {
     $links = array();
@@ -168,9 +173,10 @@ function print_help($path) {
 
   $print_settings = variable_get('print_settings', print_settings_default());
 
-  if (($print_settings['show_link']) && ($print_settings['show_sys_link']) &&
-      (!module_exists('visibility_api') || visibility_api_access('print')) &&
-      user_access('access print') && (preg_match("/^node\//i", $path) == 0)) {
+  if (($print_settings['show_link']) && user_access('access print') &&
+      !(($print_settings['sys_link_visibility']) xor
+       (_print_match_path($path, $print_settings['sys_link_pages']))) &&
+      (preg_match("/^node\//i", $path) == 0)) {
     static $output = FALSE;
 
     if ($output === FALSE) {
@@ -236,7 +242,7 @@ function print_fill_attributes($title = '', $class = '', $new_window = FALSE) {
       break;
     }
   }
-  if (!empty($robots_settings['nofollow'])) {
+  if (!empty($robots_settings['noindex'])) {
     $attributes['rel'] = 'nofollow';
   }
   return $attributes;
@@ -340,4 +346,24 @@ function print_insert_link($path = NULL) {
     $format = theme('print_format_link');
     return '<span class="print">'. l($format['text'], $path, $format['attributes'], $query, NULL, TRUE, $format['html']) .'</span>';
   }
+}
+
+/**
+ * Check if a path matches any pattern in a set of patterns.
+ *
+ * @param $path
+ *   The path to match.
+ * @param $patterns
+ *   String containing a set of patterns separated by \n, \r or \r\n.
+ *
+ * @return
+ *   Boolean value: TRUE if the path matches a pattern, FALSE otherwise.
+ */
+function _print_match_path($path, $patterns) {
+  static $regexps;
+
+  if (!isset($regexps[$patterns])) {
+    $regexps[$patterns] = '/^('. preg_replace(array('/(\r\n?|\n)/', '/\\\\\*/', '/(^|\|)\\\\<front\\\\>($|\|)/'), array('|', '.*', '\1'. preg_quote(variable_get('site_frontpage', 'node'), '/') .'\2'), preg_quote($patterns, '/')) .')$/';
+  }
+  return preg_match($regexps[$patterns], $path);
 }

@@ -47,12 +47,6 @@ print.tpl.php or the print.css files found in this directory.
    3. print.tpl.php in the theme directory
    4. print.tpl.php in the module directory (supplied by the module)
 
-- As an interim solution to those that want to disable the PF link in
-  specific nodes, by installing the 'Visibility API' module, it is possible
-  to list a set of paths in which the link should (or not) be displayed.
-  WARNING: This solution may be replaced by an in-module solution in the
-           future.
-
 API
 ---
 

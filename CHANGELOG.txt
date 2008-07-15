@@ -1,3 +1,13 @@
+July 15, 2008
+        Removed visibility API, now using an in-module solution similar to the one used in the 6.x version
+        With the new agreement between the major search engines, robots=nocache is obsolete
+        To make the job easier for themers, added access to the $node var inside the template
+        Fix #276627: Accept paths of the form node/nnn/args
+        Fix #282385: Remove whitespace between icon and text, use margin instead
+July 11, 2008
+        #195148 by promes: Dutch tranlation of 5.x-3.0
+June 13, 2008
+        Fix #270095 by suit4: prevent validation error when the class field is empty
 June 6, 2008
         Simplify CSS inclusion code a bit.
         Separate open in new window option

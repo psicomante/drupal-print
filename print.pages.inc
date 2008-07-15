@@ -22,6 +22,7 @@ function print_controller_html() {
   $cid = isset($_GET['comment']) ? $_GET['comment'] : NULL;
 
   $print = print_controller($path, $cid);
+  $node = $print["node"];
   include_once(_print_get_template($print["type"]));
 }
 
@@ -51,7 +52,8 @@ function print_controller($path, $cid) {
       $path = $matches[1];
     }
   }
-  if (is_numeric($path)) {
+  $parts = explode("/", $path);
+  if (is_numeric($parts[0])) {
     $print = _print_generate_node($path, $cid);
   }
   else {
@@ -87,9 +89,6 @@ function _print_robots_meta_generator() {
   }
   if (!empty($robots_settings['noarchive'])) {
     $robots_meta[] = 'noarchive';
-  }
-  if (!empty($robots_settings['nocache'])) {
-    $robots_meta[] = 'nocache';
   }
 
   if (count($robots_meta) > 0) {

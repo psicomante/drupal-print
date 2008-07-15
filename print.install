@@ -23,3 +23,45 @@ function print_uninstall() {
     variable_del($variable->name);
   }
 }
+
+/**
+ * Update to version 5.x-3.6
+ */
+function print_update_5300() {
+  global $conf;
+
+  $ret = array();
+  if (isset($conf['print_settings'])) {
+    $print_settings = variable_get('print_settings', '');
+    $print_settings['node_link_visibility'] = 0;
+    $print_settings['node_link_pages'] = '';
+    $print_settings['link_class'] = 'print-page';
+    $print_settings['sys_link_visibility'] = ($print_settings['show_sys_link']) ? 0 : 1;
+    $print_settings['sys_link_pages'] = '';
+    $oldwindow = $print_settings['newwindow'];
+    $print_settings['newwindow'] = 1;
+    $print_settings['new_window'] = 0;
+    switch ($oldwindow) {
+      case 1: // Use HTML target
+        $print_settings['newwindow'] = 0;
+        // no break on purpose
+      case 2: // Use Javascript
+        $print_settings['new_window'] = 1;
+        break;
+      case 3: // Use Greybox Redux
+        $print_settings['link_class'] .= ' '. variable_get('greybox_class_text', 'greybox');
+        break;
+      case 4: // Use Thickbox
+        $print_settings['link_class'] .= ' thickbox';
+        break;
+    }
+    unset($print_settings['show_sys_link']);
+    variable_set('print_settings', $print_settings);
+  }
+  if (isset($conf['print_robot_settings'])) {
+    $robots_settings = variable_get('print_robot_settings', '');
+    unset($robots_settings['nocache']);
+    variable_set('print_robot_settings', $robots_settings);
+  }
+  return $ret;
+}
