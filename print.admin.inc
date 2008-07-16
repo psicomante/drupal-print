@@ -16,7 +16,7 @@
  */
 function print_main_settings() {
   $print_settings = variable_get('print_settings', print_settings_default());
-  
+
   $form['print_settings'] = array(
       '#type' => 'fieldset',
       '#tree' => TRUE,

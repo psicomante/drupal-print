@@ -1,21 +1,18 @@
-# Danish translation for drupalprint
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
-# This file is distributed under the same license as the drupalprint package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# $Id$
+#
+# Danish translation of Drupal (print)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: drupalprint\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2008-05-13 01:13+0200\n"
-"PO-Revision-Date: 2008-05-13 01:24+0100\n"
+"POT-Creation-Date: 2008-07-15 23:44+0200\n"
+"PO-Revision-Date: 2008-07-16 02:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-05-12 00:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
 
 #: print.admin.inc:27
 #, fuzzy
@@ -45,276 +42,282 @@ msgid "Enable or disable the printer-friendly page link for each node. Even if t
 msgstr "Aktiver eller deaktiver printer venlig side linket for hver side. Selvom linket er deaktiveret, kan du stadig se print versionen af side ved at gå til print/nid, hvor nid er det numeriske  id for siden."
 
 #: print.admin.inc:35
+msgid "Link visibility"
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on every page except the listed pages."
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on only the listed pages."
+msgstr ""
+
+#: print.admin.inc:44;68
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr ""
+
+#: print.admin.inc:49
+msgid "Link class"
+msgstr ""
+
+#: print.admin.inc:53
+msgid "This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces."
+msgstr ""
+
+#: print.admin.inc:58
 #, fuzzy
 msgid "Show link in system (non-content) pages"
 msgstr "Vis linket i system (ikke indholds) sider"
 
-#: print.admin.inc:37
+#: print.admin.inc:67
 #, fuzzy
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
 msgstr "Ved at aktivere denne indstilling vil der blive tilføjet et printer venlig versions side link på sider oprettet af Drupal eller af aktive moduler."
 
-#: print.admin.inc:42
+#: print.admin.inc:73
 #, fuzzy
 msgid "Take control of the book module printer-friendly link"
 msgstr "Tag kontrol over bog modul printer venlig linket"
 
-#: print.admin.inc:44
+#: print.admin.inc:75
 #, fuzzy
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr "Aktiver denne for at have et printer venlig link i bog sider styret af dette modul. Kræver (core) bog modul."
 
-#: print.admin.inc:49
+#: print.admin.inc:80
 msgid "Logo URL"
 msgstr "Logo URL"
 
-#: print.admin.inc:53
+#: print.admin.inc:84
 #, fuzzy
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr "Vis et alternativt logo i den printer venlige version. Hvis dette er tomt, vil det nuværende tema logo blive brugt."
 
-#: print.admin.inc:58
+#: print.admin.inc:89
 #, fuzzy
 msgid "Stylesheet URL"
 msgstr "Stylesheet URL"
 
-#: print.admin.inc:62
+#: print.admin.inc:93
 #, fuzzy
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr "URL'en til dit brugerdefinerede cascading stylesheet, hvis et findes. Når intet er specifiseret, vil dette moduls CSS fil blive brugt."
 
-#: print.admin.inc:67
+#: print.admin.inc:98
 #, fuzzy
 msgid "Printer-friendly URLs list"
 msgstr "Printer venlig URL liste"
 
-#: print.admin.inc:69
+#: print.admin.inc:100
 #, fuzzy
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr "Hvis aktiveret, vil en liste af destinations URL'er for side links blive vist i bunden af siden."
 
-#: print.admin.inc:74
+#: print.admin.inc:105
 #, fuzzy
 msgid "Include comments in printer-friendly version"
 msgstr "Inkluder kommentare i printer venlig version"
 
-#: print.admin.inc:76
+#: print.admin.inc:107
 #, fuzzy
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr "Når denne er aktiveret, vil bruger kommentarer også blive indkluderet i den printer venlige version. Kræver kommentar modulet."
 
-#: print.admin.inc:81
+#: print.admin.inc:112
 msgid "Open the printer-friendly version in a new window"
 msgstr "Åben den printer venlige version i et nyt vindue"
 
-#: print.admin.inc:82
-#, fuzzy
-msgid "Disabled"
-msgstr "Deaktiveret"
-
-#: print.admin.inc:82
-#, fuzzy
-msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "Brug HTML target (bliver ikke valideret som XHTML Strict)"
-
-#: print.admin.inc:82
-#, fuzzy
-msgid "Use Javascript (requires browser support)"
-msgstr "Brug Javascript (kræver browser support)"
-
-#: print.admin.inc:82
-#, fuzzy
-msgid "Use Greybox Redux (requires the greybox module)"
-msgstr "Brug Greybox Redux (kræver greybox modulet)"
-
-#: print.admin.inc:82
-#, fuzzy
-msgid "Use Thickbox (requires the thickbox module)"
-msgstr "Brug Thickbox (kræver thickbox modulet)"
-
-#: print.admin.inc:84
+#: print.admin.inc:114
 #, fuzzy
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr "Ved at aktivere dette, vil den printer venlige version åbne i et nyt vindue/tab."
 
-#: print.admin.inc:89
+#: print.admin.inc:119
+msgid "New window method"
+msgstr ""
+
+#: print.admin.inc:120
+#, fuzzy
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "Brug HTML target (bliver ikke valideret som XHTML Strict)"
+
+#: print.admin.inc:120
+#, fuzzy
+msgid "Use Javascript (requires browser support)"
+msgstr "Brug Javascript (kræver browser support)"
+
+#: print.admin.inc:122
+msgid "Choose the method used to open pages in a new window/tab."
+msgstr ""
+
+#: print.admin.inc:127
 #, fuzzy
 msgid "Send to printer"
 msgstr "Send til printer"
 
-#: print.admin.inc:91
+#: print.admin.inc:129
 #, fuzzy
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Kalder automatisk browserens print funktion når den printer venlige version bliver vist."
 
-#: print.admin.inc:98
-#: print.pages.inc:171
+#: print.admin.inc:136
+#: print.pages.inc:182
 #, fuzzy
 msgid "Source URL"
 msgstr "Destinations URL"
 
-#: print.admin.inc:106
+#: print.admin.inc:144
 #, fuzzy
 msgid "Display source URL"
 msgstr "Vis destinations URL'en"
 
-#: print.admin.inc:108
+#: print.admin.inc:146
 #, fuzzy
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr "Når denne er valgt, vil den originale sides URL blive vist i bunden af den printer venlige version."
 
-#: print.admin.inc:113
+#: print.admin.inc:151
 #, fuzzy
 msgid "Add current time/date to the source URL"
 msgstr "Tilføj nuværende tid/dato til destinations URL'EN"
 
-#: print.admin.inc:115
+#: print.admin.inc:153
 #, fuzzy
 msgid "Display the current date and time in the Source URL line."
 msgstr "Vis nuværende dato og tid i destinations URL linien."
 
-#: print.admin.inc:120
+#: print.admin.inc:158
 #, fuzzy
 msgid "Force use of node ID in source URL"
 msgstr "Tving side ID'et i destinations URL'en"
 
-#: print.admin.inc:122
+#: print.admin.inc:160
 #, fuzzy
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr "Drupal vil prøve at bruge definerede side alias, hvis et skulle forfindes. For at tvinge brugen af en fast URL, aktiver denne."
 
-#: print.admin.inc:129
+#: print.admin.inc:167
 #, fuzzy
 msgid "Robots META tags"
 msgstr "Robot META tags"
 
-#: print.admin.inc:137
+#: print.admin.inc:175
 #, fuzzy
 msgid "Add noindex"
 msgstr "Tilføj noindex"
 
-#: print.admin.inc:139
+#: print.admin.inc:177
 #, fuzzy
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr "Instruer robotter til ikke at indeksere printer venlige sider. Anbefalet for god søgemaskine karma."
 
-#: print.admin.inc:144
+#: print.admin.inc:182
 #, fuzzy
 msgid "Add nofollow"
 msgstr "Tilføj nofollow"
 
-#: print.admin.inc:146
+#: print.admin.inc:184
 #, fuzzy
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr "Instruer robotter til ikke at følge udgående links på printer venlige sider."
 
-#: print.admin.inc:151
+#: print.admin.inc:189
 #, fuzzy
 msgid "Add noarchive"
 msgstr "Tilføj noarchive"
 
-#: print.admin.inc:153
+#: print.admin.inc:191
 #, fuzzy
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr "Ikke Standardiseret tag til at instruere søgemaskiner til ikke at vise \"Cached\" links for dine printer venlige sider. Genkendt af Googlebot."
 
-#: print.admin.inc:158
-#, fuzzy
-msgid "Add nocache"
-msgstr "Tilføj nocache"
-
-#: print.admin.inc:160
-#, fuzzy
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr "Ikke Standardiseret tag til at instruere søgemaskiner til ikke at vise \"Cached\" links for dine printer venlige sider"
-
-#: print.pages.inc:149
+#: print.pages.inc:160
 #, fuzzy
 msgid "Published on %site_name"
 msgstr "Publiseret den %site_name"
 
-#: print.pages.inc:168
+#: print.pages.inc:179
 #, fuzzy
 msgid "retrieved on %date"
 msgstr "fundet den %date"
 
-#: print.pages.inc:181
+#: print.pages.inc:193
 #, fuzzy
 msgid "Anonymous"
 msgstr "Anonym"
 
-#: print.pages.inc:182
+#: print.pages.inc:194
 #, fuzzy
 msgid "By %author"
 msgstr "Af %author"
 
-#: print.pages.inc:186
+#: print.pages.inc:198
 #, fuzzy
 msgid "Created %date"
 msgstr "Oprettet %date"
 
-#: print.pages.inc:216
+#: print.pages.inc:233
 #, fuzzy
 msgid "Links"
 msgstr "Links"
 
-#: print.module:63
+#: print.module:77
 #, fuzzy
 msgid "Printer-friendly"
 msgstr "Printer venlig"
 
-#: print.module:70
-#: print.info:0
+#: print.module:84
 #, fuzzy
-msgid "Printer-friendly pages"
+msgid "Printer-friendly Pages"
 msgstr "Printer venlige sider"
 
-#: print.module:71
+#: print.module:85
 #: print.info:0
 #, fuzzy
 msgid "Adds a printer-friendly version link to content and administrative pages."
 msgstr "Tilføjer et printer venlig versions link til siderne"
 
-#: print.module:179
+#: print.module:198
 msgid "Show printer-friendly version link"
 msgstr "Vis printer venlig versions link"
 
-#: print.module:181
+#: print.module:200
 #, fuzzy
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
 msgstr "Viser et link til printer venlig version af indholdet. Yderlig konfiguration er tilgængelig under indstillinger."
 
-#: print.module:181;189
+#: print.module:200;208
 #, fuzzy
 msgid "settings page"
 msgstr "indstillings side"
 
-#: print.module:187
+#: print.module:206
 #, fuzzy
 msgid "Show printer-friendly version link in individual comments"
 msgstr "Vis printer venlig versions link i individuel kommentar"
 
-#: print.module:189
+#: print.module:208
 #, fuzzy
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
 msgstr "Viser et link til printer venlig version af kommentarer. Yderlig konfiguration er tilgængelig under indstillinger."
 
-#: print.module:256
+#: print.module:295
 #, fuzzy
 msgid "Printer-friendly version"
 msgstr "Printer venlig version"
 
-#: print.module:258
+#: print.module:297
 #, fuzzy
 msgid "Display a printer-friendly version of this page."
 msgstr "Vis en printer venlig version af denne side"
 
-#: print.module:51
+#: print.module:65
 #, fuzzy
 msgid "access print"
 msgstr "adgang til print"
 
-#: print.module:51
+#: print.module:65
 #, fuzzy
 msgid "administer print"
 msgstr "Administrer print"
@@ -324,17 +327,46 @@ msgstr "Administrer print"
 msgid "print"
 msgstr "print"
 
-#: print.install:8
+#: print.install:13
 msgid "Printer-friendly Page settings are available under !link"
 msgstr ""
+
+#: print.info:0
+#, fuzzy
+msgid "Printer-friendly pages"
+msgstr "Printer venlige sider"
+
+#, fuzzy
+#~ msgid "Send to"
+#~ msgstr "Send til printer"
 
 #, fuzzy
 #~ msgid "Settings"
 #~ msgstr "indstillings side"
 
 #, fuzzy
-#~ msgid "Printer-friendly Pages"
-#~ msgstr "Printer venlige sider"
+#~ msgid "Disabled"
+#~ msgstr "Deaktiveret"
+
+#, fuzzy
+#~ msgid "Use Greybox Redux (requires the greybox module)"
+#~ msgstr "Brug Greybox Redux (kræver greybox modulet)"
+
+#, fuzzy
+#~ msgid "Use Thickbox (requires the thickbox module)"
+#~ msgstr "Brug Thickbox (kræver thickbox modulet)"
+
+#, fuzzy
+#~ msgid "Add nocache"
+#~ msgstr "Tilføj nocache"
+
+#, fuzzy
+#~ msgid ""
+#~ "Non-standard tag to instruct search engines to not show a \"Cached\" link "
+#~ "for your printer-friendly pages"
+#~ msgstr ""
+#~ "Ikke Standardiseret tag til at instruere søgemaskiner til ikke at vise "
+#~ "\"Cached\" links for dine printer venlige sider"
 
 #, fuzzy
 #~ msgid "Enabled"

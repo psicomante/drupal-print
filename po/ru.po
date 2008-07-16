@@ -1,23 +1,19 @@
 # $Id$
 #
-# russian translation of Drupal (general)
+# Russian translation of Drupal (print)
 # Copyright 2007 Vlad Savitsky <vs@solti.com.ua>
-# Generated from files:
-#  print.module,v 1.15.2.5.2.26 2007/11/08 23:56:59 jcnventura
-#  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2008-05-13 01:13+0200\n"
-"PO-Revision-Date: 2008-05-13 01:27+0100\n"
+"POT-Creation-Date: 2008-07-15 23:44+0200\n"
+"PO-Revision-Date: 2008-07-16 02:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.11.4\n"
 
 #: print.admin.inc:27
 msgid "Printer-friendly page link"
@@ -44,233 +40,242 @@ msgid "Enable or disable the printer-friendly page link for each node. Even if t
 msgstr "Разрешить или запретить страницу для печати для каждого документа. Даже если блок ссылок отключён, вы сможете увидеть страницу для печати, если откроете страницу print/nid, где nid - ID документа."
 
 #: print.admin.inc:35
+msgid "Link visibility"
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on every page except the listed pages."
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on only the listed pages."
+msgstr ""
+
+#: print.admin.inc:44;68
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr ""
+
+#: print.admin.inc:49
+msgid "Link class"
+msgstr ""
+
+#: print.admin.inc:53
+msgid "This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces."
+msgstr ""
+
+#: print.admin.inc:58
 msgid "Show link in system (non-content) pages"
 msgstr "Показать ссылку на системных страницах"
 
-#: print.admin.inc:37
+#: print.admin.inc:67
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
 msgstr "Установка этого параметра добавит ссылку на страницу для печати на страницы, созданные Друпал или установленными модулями."
 
-#: print.admin.inc:42
+#: print.admin.inc:73
 msgid "Take control of the book module printer-friendly link"
 msgstr "Перехватить управление ссылкой на страницу для печати модуля Book (Книга)"
 
-#: print.admin.inc:44
+#: print.admin.inc:75
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr "Активируйте, если вам нужно иметь ссылку на страницу для печати в документах модуля Book (Книга). Модуль ядра Book (Книга) должен быть установлен."
 
-#: print.admin.inc:49
+#: print.admin.inc:80
 msgid "Logo URL"
 msgstr "URL логотипа"
 
-#: print.admin.inc:53
+#: print.admin.inc:84
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr "Альтернативный логотип, который показывается на странице для печати. Если не задано - используется логотип из текущей темы."
 
-#: print.admin.inc:58
+#: print.admin.inc:89
 msgid "Stylesheet URL"
 msgstr "URL каскадной таблицы стилей"
 
-#: print.admin.inc:62
+#: print.admin.inc:93
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr "URL на вашу таблицу стилей для печати, если она есть. Если ничего не задано, используется встроенный CSS-файл модуля."
 
-#: print.admin.inc:67
+#: print.admin.inc:98
 msgid "Printer-friendly URLs list"
 msgstr "Список URL страниц для печати"
 
-#: print.admin.inc:69
+#: print.admin.inc:100
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr "Если установлено, список URL-адресов назначения для ссылок страницы будет показан внизу страницы."
 
-#: print.admin.inc:74
+#: print.admin.inc:105
 msgid "Include comments in printer-friendly version"
 msgstr "Включить комментарии в версию для печати"
 
-#: print.admin.inc:76
+#: print.admin.inc:107
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr "Когда этот параметр установлен, комментарии пользователей также включаются в версию для печати. Модуль Comment должен быть установлен."
 
-#: print.admin.inc:81
+#: print.admin.inc:112
 msgid "Open the printer-friendly version in a new window"
 msgstr "Открывать Версию для печати в новом окне"
 
-#: print.admin.inc:82
-msgid "Disabled"
-msgstr "Отключено"
-
-#: print.admin.inc:82
-msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "Использовать HTML-назначение (target) - не пройдёт валидацию как XHTML Strict."
-
-#: print.admin.inc:82
-msgid "Use Javascript (requires browser support)"
-msgstr "Использовать Javascript (требует поддержки браузера)"
-
-#: print.admin.inc:82
-#, fuzzy
-msgid "Use Greybox Redux (requires the greybox module)"
-msgstr "Использовать Greybox Redux (нужен модуль greybox)"
-
-#: print.admin.inc:82
-#, fuzzy
-msgid "Use Thickbox (requires the thickbox module)"
-msgstr "Использовать Thickbox (нужен модуль thickbox)"
-
-#: print.admin.inc:84
+#: print.admin.inc:114
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr "Установка этого параметра заставит страницу для печати открываться в новом окне/вкладке."
 
-#: print.admin.inc:89
+#: print.admin.inc:119
+msgid "New window method"
+msgstr ""
+
+#: print.admin.inc:120
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "Использовать HTML-назначение (target) - не пройдёт валидацию как XHTML Strict."
+
+#: print.admin.inc:120
+msgid "Use Javascript (requires browser support)"
+msgstr "Использовать Javascript (требует поддержки браузера)"
+
+#: print.admin.inc:122
+msgid "Choose the method used to open pages in a new window/tab."
+msgstr ""
+
+#: print.admin.inc:127
 msgid "Send to printer"
 msgstr "Распечатать"
 
-#: print.admin.inc:91
+#: print.admin.inc:129
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Автоматически вызывает функцию печати браузера, когда страница для печати отображается."
 
-#: print.admin.inc:98
-#: print.pages.inc:171
+#: print.admin.inc:136
+#: print.pages.inc:182
 msgid "Source URL"
 msgstr "Источник"
 
-#: print.admin.inc:106
+#: print.admin.inc:144
 msgid "Display source URL"
 msgstr "Показать URL источника"
 
-#: print.admin.inc:108
+#: print.admin.inc:146
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr "Когда этот параметр выбран, то URL страницы-оригинала будет показан внизу страницы для печати."
 
-#: print.admin.inc:113
+#: print.admin.inc:151
 msgid "Add current time/date to the source URL"
 msgstr "Добавить текущую дату/время к URL источника"
 
-#: print.admin.inc:115
+#: print.admin.inc:153
 msgid "Display the current date and time in the Source URL line."
 msgstr "Показывает текущую дату и время в строке URL источника."
 
-#: print.admin.inc:120
+#: print.admin.inc:158
 msgid "Force use of node ID in source URL"
 msgstr "Форсировать использование ID документа в URL источника"
 
-#: print.admin.inc:122
+#: print.admin.inc:160
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr "Друпал будет стараться использовать определённый синоним страниц в случае, если он один. Чтобы форсировать использование фиксированных URL - включите этот параметр."
 
-#: print.admin.inc:129
+#: print.admin.inc:167
 msgid "Robots META tags"
 msgstr "Robots META-ярлыки"
 
-#: print.admin.inc:137
+#: print.admin.inc:175
 msgid "Add noindex"
 msgstr "Добавить запрет индексирования (noindex)"
 
-#: print.admin.inc:139
+#: print.admin.inc:177
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr "Говорит роботам не индексировать страницы для печати. Рекомендуется для улучшения поисковой репутации."
 
-#: print.admin.inc:144
+#: print.admin.inc:182
 msgid "Add nofollow"
 msgstr "Добавить не следовать по ссылкам (nofollow)"
 
-#: print.admin.inc:146
+#: print.admin.inc:184
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr "Говорит роботам не следовать по внешним ссылкам страниц для печати."
 
-#: print.admin.inc:151
+#: print.admin.inc:189
 msgid "Add noarchive"
 msgstr "Добавить не архивировать (noarchive)"
 
-#: print.admin.inc:153
+#: print.admin.inc:191
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr "Не стандартный ярлык, который говорит поисковым системам не показывать ссылку \"Сохранено в кеше\" для ваших страниц для печати. Узнаётся роботом Googlebot."
 
-#: print.admin.inc:158
-msgid "Add nocache"
-msgstr "Добавить запрет кеширования (nocache)"
-
-#: print.admin.inc:160
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr "Не стандартный ярлык, который говорит поисковым системам не показывать ссылку \"Сохранено в кеше\" для ваших страниц для печати."
-
-#: print.pages.inc:149
+#: print.pages.inc:160
 #, fuzzy
 msgid "Published on %site_name"
 msgstr "Опубликовано %site_name"
 
-#: print.pages.inc:168
+#: print.pages.inc:179
 #, fuzzy
 msgid "retrieved on %date"
 msgstr "получено %date"
 
-#: print.pages.inc:181
+#: print.pages.inc:193
 msgid "Anonymous"
 msgstr "Анонимный"
 
-#: print.pages.inc:182
+#: print.pages.inc:194
 #, fuzzy
 msgid "By %author"
 msgstr "Автор %author"
 
-#: print.pages.inc:186
+#: print.pages.inc:198
 #, fuzzy
 msgid "Created %date"
 msgstr "Создано %date"
 
-#: print.pages.inc:216
+#: print.pages.inc:233
 #, fuzzy
 msgid "Links"
 msgstr "Ссылки"
 
-#: print.module:63
+#: print.module:77
 msgid "Printer-friendly"
 msgstr "Страница для печати"
 
-#: print.module:70
-#: print.info:0
-msgid "Printer-friendly pages"
+#: print.module:84
+#, fuzzy
+msgid "Printer-friendly Pages"
 msgstr "Страницы для печати"
 
-#: print.module:71
+#: print.module:85
 #: print.info:0
-#, fuzzy
 msgid "Adds a printer-friendly version link to content and administrative pages."
-msgstr "Добавляет ссылку на страницу для печати на страницы документов."
+msgstr ""
 
-#: print.module:179
+#: print.module:198
 msgid "Show printer-friendly version link"
 msgstr "Показать ссылку на страницу для печати"
 
-#: print.module:181
+#: print.module:200
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
 msgstr "Показывает ссылку на страницу для печати материала. Дальнейшая настройка возможна на !settings."
 
-#: print.module:181;189
+#: print.module:200;208
 msgid "settings page"
 msgstr "страница настройки"
 
-#: print.module:187
+#: print.module:206
 msgid "Show printer-friendly version link in individual comments"
 msgstr "Показывать ссылку на страницу для печати в личных комментариях"
 
-#: print.module:189
+#: print.module:208
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
 msgstr "Показывает ссылку на страницу для печати комментариев. Дальнейшая настройка возможна на !settings."
 
-#: print.module:256
+#: print.module:295
 msgid "Printer-friendly version"
 msgstr "Страница для печати"
 
-#: print.module:258
+#: print.module:297
 msgid "Display a printer-friendly version of this page."
 msgstr "Показать страницу для печати для этой страницы."
 
-#: print.module:51
+#: print.module:65
 msgid "access print"
 msgstr "доступ к печати"
 
-#: print.module:51
+#: print.module:65
 msgid "administer print"
 msgstr "управление печатью"
 
@@ -278,13 +283,32 @@ msgstr "управление печатью"
 msgid "print"
 msgstr "печать"
 
-#: print.install:8
+#: print.install:13
 msgid "Printer-friendly Page settings are available under !link"
 msgstr ""
 
+#: print.info:0
+msgid "Printer-friendly pages"
+msgstr "Страницы для печати"
+
+#~ msgid "Disabled"
+#~ msgstr "Отключено"
+
 #, fuzzy
-#~ msgid "Printer-friendly Pages"
-#~ msgstr "Страницы для печати"
+#~ msgid "Use Greybox Redux (requires the greybox module)"
+#~ msgstr "Использовать Greybox Redux (нужен модуль greybox)"
+
+#, fuzzy
+#~ msgid "Use Thickbox (requires the thickbox module)"
+#~ msgstr "Использовать Thickbox (нужен модуль thickbox)"
+#~ msgid "Add nocache"
+#~ msgstr "Добавить запрет кеширования (nocache)"
+#~ msgid ""
+#~ "Non-standard tag to instruct search engines to not show a \"Cached\" link "
+#~ "for your printer-friendly pages"
+#~ msgstr ""
+#~ "Не стандартный ярлык, который говорит поисковым системам не показывать "
+#~ "ссылку \"Сохранено в кеше\" для ваших страниц для печати."
 #~ msgid "By"
 #~ msgstr "Автор"
 #~ msgid "Enabled"

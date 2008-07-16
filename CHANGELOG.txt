@@ -1,3 +1,6 @@
+July 16, 2008
+        Updated all translations
+        Misc fixes from the coder module
 July 15, 2008
         Removed visibility API, now using an in-module solution similar to the one used in the 6.x version
         With the new agreement between the major search engines, robots=nocache is obsolete

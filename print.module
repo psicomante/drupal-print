@@ -114,7 +114,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
   if ( !($teaser) && ($node_type != 'book') && (!isset($node->parent)) &&
       ($print_settings['show_link']) && user_access('access print') &&
       !(($print_settings['node_link_visibility']) xor
-       (_print_match_path("node/". $node->nid, $print_settings['node_link_pages']))) &&
+      (_print_match_path("node/". $node->nid, $print_settings['node_link_pages']))) &&
       (($type == 'comment' && $print_display_comment) ||
       ($type == 'node' && $print_display))) {
     $links = array();
@@ -133,7 +133,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
                             'attributes' => $format['attributes'],
                             'html' => $format['html'],
                             'query' => $query,
-                           );
+                      );
 
     return $links;
   }
@@ -175,13 +175,13 @@ function print_help($path) {
 
   if (($print_settings['show_link']) && user_access('access print') &&
       !(($print_settings['sys_link_visibility']) xor
-       (_print_match_path($path, $print_settings['sys_link_pages']))) &&
+      (_print_match_path($path, $print_settings['sys_link_pages']))) &&
       (preg_match("/^node\//i", $path) == 0)) {
     static $output = FALSE;
 
     if ($output === FALSE) {
       $output = TRUE;
-    
+
       return print_insert_link();
     }
   }
@@ -277,7 +277,7 @@ function _print_format_link_aux($type = 0, $text = '', $img = '') {
   else {
     $html = FALSE;
   }
-  
+
   return array('text' => $text,
                'html' => $html,
               );
@@ -329,7 +329,7 @@ function theme_print_text() {
  * their defined pages/blocks.
  *
  * @param $path
- *   path of the original page (optional). If not specified, the current URL 
+ *   path of the original page (optional). If not specified, the current URL
  *   is used
  * @return
  *   string with the HTML link to the printer-friendly page

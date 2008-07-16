@@ -1,24 +1,18 @@
 # $Id$
 #
-# LANGUAGE translation of Drupal (general)
+# German translation of Drupal (print)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
-# Generated from files:
-#  print.module,v 1.15.2.5.2.26 2007/11/08 23:56:59 jcnventura
-#  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Drupal Print Modul\n"
-"POT-Creation-Date: 2008-05-13 01:13+0200\n"
-"PO-Revision-Date: 2008-05-13 01:25+0100\n"
+"POT-Creation-Date: 2008-07-15 23:44+0200\n"
+"PO-Revision-Date: 2008-07-16 02:32+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <drupal@gmx.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: print.admin.inc:27
 msgid "Printer-friendly page link"
@@ -26,7 +20,7 @@ msgstr "Link \"Druckversion\" anzeigen"
 
 #: print.admin.inc:29
 msgid "None (Disabled)"
-msgstr ""
+msgstr "Nichts (deaktiviert)"
 
 #: print.admin.inc:29
 msgid "Text only"
@@ -38,238 +32,250 @@ msgstr ""
 
 #: print.admin.inc:29
 msgid "Icon and Text"
-msgstr ""
+msgstr "Symbol und Text"
 
 #: print.admin.inc:30
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
 msgstr "Aktivieren oder deaktiveren Sie die druckoptimierte Version für jeden Inhalt. Selbst wenn dieser Link deaktivert ist, können Sie die Druckversion eines Node über die Adresszeile mit den Argumenten print/nid (nid = ID des Knotens) anzeigen lassen."
 
 #: print.admin.inc:35
+msgid "Link visibility"
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on every page except the listed pages."
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on only the listed pages."
+msgstr ""
+
+#: print.admin.inc:44;68
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr ""
+
+#: print.admin.inc:49
+msgid "Link class"
+msgstr ""
+
+#: print.admin.inc:53
+msgid "This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces."
+msgstr ""
+
+#: print.admin.inc:58
 msgid "Show link in system (non-content) pages"
 msgstr "Zeige eine Link auf allen Drupal Verwaltungsseiten an"
 
-#: print.admin.inc:37
+#: print.admin.inc:67
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
 msgstr "Diese Option fügt einen Link unterhalb des Titels ein der zu einer Druckversion von allen durch Drupal oder Modulen erzeugten Seiten ein."
 
-#: print.admin.inc:42
+#: print.admin.inc:73
 msgid "Take control of the book module printer-friendly link"
-msgstr "Ersetze den Link zur Druckversion im Book Module "
+msgstr "Ersetze den Link zur Druckversion im Book Module"
 
-#: print.admin.inc:44
+#: print.admin.inc:75
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr "Aktivieren Sie diese Option um eine Druckversion für einzelne Buchseiten mit Hilfe des Print-Moduls zu erhalten. Diese Funktion benötigt das Core Book Module."
 
-#: print.admin.inc:49
+#: print.admin.inc:80
 msgid "Logo URL"
 msgstr "Logo URL"
 
-#: print.admin.inc:53
+#: print.admin.inc:84
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr "Ein alternatives Logo zur Verwendung in der Druckversion. Ist das Feld leer, wird das aktuelle Logo des Themes benutzt."
 
-#: print.admin.inc:58
+#: print.admin.inc:89
 msgid "Stylesheet URL"
 msgstr "CSS Stylesheet URL"
 
-#: print.admin.inc:62
+#: print.admin.inc:93
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr "Der URL zu einem speziellen CSS Druck-Stylesheet. Ist das Feld leer, wird das Standard Monitor-Stylesheet verwendet."
 
-#: print.admin.inc:67
+#: print.admin.inc:98
 msgid "Printer-friendly URLs list"
 msgstr "Druckoptimierte URL-Liste"
 
-#: print.admin.inc:69
+#: print.admin.inc:100
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr "Wenn aktiviert, werden Links im Text am Ende der Seite in einer Liste zusammengefasst dargestellt."
 
-#: print.admin.inc:74
+#: print.admin.inc:105
 msgid "Include comments in printer-friendly version"
 msgstr "Füge Kommentare zur Druckversion hinzu"
 
-#: print.admin.inc:76
+#: print.admin.inc:107
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr "Wenn diese Option aktiviert ist, werden Kommentare zur Druckversion hinzugefügt. Diese Funktion benötigt ein aktives Comment Module."
 
-#: print.admin.inc:81
+#: print.admin.inc:112
 msgid "Open the printer-friendly version in a new window"
 msgstr "Öffnet die Druckversion in neuen Browserfenster/Tab"
 
-#: print.admin.inc:82
-msgid "Disabled"
-msgstr "Deaktiviert"
-
-#: print.admin.inc:82
-msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "Benutze das HTML \"target\" Attribut (Achtung: validiert nicht in XHTML 1.0 Strict)"
-
-#: print.admin.inc:82
-msgid "Use Javascript (requires browser support)"
-msgstr "Benutze Javascript (Javascript muß im Browser aktiviert sein)"
-
-#: print.admin.inc:82
-msgid "Use Greybox Redux (requires the greybox module)"
-msgstr "Verwende Greybox Redux (benötigt das Greybox-Modul)"
-
-#: print.admin.inc:82
-msgid "Use Thickbox (requires the thickbox module)"
-msgstr "Verwende Thickbox Redux (benötigt das Thickbox-Modul)"
-
-#: print.admin.inc:84
+#: print.admin.inc:114
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr "Ist diese Option aktiviert werden die Druckversion in einem neuen Browserfenster/Tab geöffnet."
 
-#: print.admin.inc:89
+#: print.admin.inc:119
+msgid "New window method"
+msgstr ""
+
+#: print.admin.inc:120
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "Benutze das HTML \"target\" Attribut (Achtung: validiert nicht in XHTML 1.0 Strict)"
+
+#: print.admin.inc:120
+msgid "Use Javascript (requires browser support)"
+msgstr "Benutze Javascript (Javascript muß im Browser aktiviert sein)"
+
+#: print.admin.inc:122
+msgid "Choose the method used to open pages in a new window/tab."
+msgstr ""
+
+#: print.admin.inc:127
 msgid "Send to printer"
 msgstr "An Drucker senden"
 
-#: print.admin.inc:91
+#: print.admin.inc:129
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Ruft automatisch die Druckfunktion des Browsers auf wenn die Druckversion angezeigt wird."
 
-#: print.admin.inc:98
-#: print.pages.inc:171
+#: print.admin.inc:136
+#: print.pages.inc:182
 msgid "Source URL"
 msgstr "Quellen URL"
 
-#: print.admin.inc:106
+#: print.admin.inc:144
 msgid "Display source URL"
 msgstr "Quellen URL anzeigen"
 
-#: print.admin.inc:108
+#: print.admin.inc:146
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr "Wenn diese Option ausgewählt ist, wird die URL der Orginalseite am Seitenende der Druckversion angezeigt."
 
-#: print.admin.inc:113
+#: print.admin.inc:151
 msgid "Add current time/date to the source URL"
 msgstr "Datum und Uhrzeit zur Quellen URL hinzufügen"
 
-#: print.admin.inc:115
+#: print.admin.inc:153
 msgid "Display the current date and time in the Source URL line."
 msgstr "Zeige Datum und Uhrzeit in der Quellen URL Zeile an."
 
-#: print.admin.inc:120
+#: print.admin.inc:158
 msgid "Force use of node ID in source URL"
 msgstr "Erzwinge die Verwendung der Node ID in der Quellen URL."
 
-#: print.admin.inc:122
+#: print.admin.inc:160
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr "Drupal wird versuchen, falls vorhanden, den URL-Alias dieser Seite zu nutzen. Um eine fixe URL zu erzwingen, aktivieren Sie bitte diese Option."
 
-#: print.admin.inc:129
+#: print.admin.inc:167
 msgid "Robots META tags"
 msgstr "Robots META-Tags"
 
-#: print.admin.inc:137
+#: print.admin.inc:175
 msgid "Add noindex"
 msgstr "\"noindex\" hinzufügen"
 
-#: print.admin.inc:139
+#: print.admin.inc:177
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr "Weist Suchmaschinen-Robots an die Druckversion nicht zu indexieren. Die Aktivierung wird empfohlen."
 
-#: print.admin.inc:144
+#: print.admin.inc:182
 msgid "Add nofollow"
 msgstr "\"nofollow\" hinzufügen"
 
-#: print.admin.inc:146
+#: print.admin.inc:184
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr "Weist Suchmaschinen-Robots an Links in der Druckversion nicht zu folgen."
 
-#: print.admin.inc:151
+#: print.admin.inc:189
 msgid "Add noarchive"
 msgstr "\"noarchive\" hinzufügen"
 
-#: print.admin.inc:153
+#: print.admin.inc:191
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr "Nicht standardisierter Tag, weist Suchmaschinen an keinen \"Cached\" Link für die Druckversion anzuzeigen. Diese Version wird von Googlebot erkannt."
 
-#: print.admin.inc:158
-msgid "Add nocache"
-msgstr "\"nocache\" hinzufügen"
-
-#: print.admin.inc:160
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr "Nicht standardisierter Tag, weist Suchmaschinen an keinen \"Cached\" Link für die Druckversion anzuzeigen. "
-
-#: print.pages.inc:149
+#: print.pages.inc:160
 #, fuzzy
 msgid "Published on %site_name"
 msgstr "Veröffentlicht am %site_name"
 
-#: print.pages.inc:168
+#: print.pages.inc:179
 #, fuzzy
 msgid "retrieved on %date"
 msgstr "abgerufen am %date"
 
-#: print.pages.inc:181
+#: print.pages.inc:193
 msgid "Anonymous"
 msgstr "Anonym"
 
-#: print.pages.inc:182
+#: print.pages.inc:194
 #, fuzzy
 msgid "By %author"
 msgstr "Von %author"
 
-#: print.pages.inc:186
+#: print.pages.inc:198
 #, fuzzy
 msgid "Created %date"
 msgstr "Erstellt %date"
 
-#: print.pages.inc:216
+#: print.pages.inc:233
 #, fuzzy
 msgid "Links"
 msgstr "Links"
 
-#: print.module:63
+#: print.module:77
 msgid "Printer-friendly"
 msgstr "Druckversion"
 
-#: print.module:70
-#: print.info:0
-msgid "Printer-friendly pages"
+#: print.module:84
+#, fuzzy
+msgid "Printer-friendly Pages"
 msgstr "Druckoptimierte Seiten"
 
-#: print.module:71
+#: print.module:85
 #: print.info:0
 #, fuzzy
 msgid "Adds a printer-friendly version link to content and administrative pages."
 msgstr "Fügt einen Link zur Druckversion von Inhalten ein."
 
-#: print.module:179
+#: print.module:198
 msgid "Show printer-friendly version link"
 msgstr "Zeige Link zur Druckversion"
 
-#: print.module:181
+#: print.module:200
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
 msgstr "Zeigt den Link zur druckoptimierten Version eines Inhaltstyps an. Die Konfiguration kann über die Einstellungen vorgenommen werden."
 
-#: print.module:181;189
+#: print.module:200;208
 msgid "settings page"
 msgstr "Einstellungen"
 
-#: print.module:187
+#: print.module:206
 msgid "Show printer-friendly version link in individual comments"
 msgstr "Zeige Link zur Druckversion für individuelle Kommentare."
 
-#: print.module:189
+#: print.module:208
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr "Zeige den Link zur Druckversion des Kommentars. Weitergehene Einstellungen sind über !settings möglich. "
+msgstr "Zeige den Link zur Druckversion des Kommentars. Weitergehene Einstellungen sind über !settings möglich."
 
-#: print.module:256
+#: print.module:295
 msgid "Printer-friendly version"
 msgstr "Druckversion"
 
-#: print.module:258
+#: print.module:297
 msgid "Display a printer-friendly version of this page."
 msgstr "Zeige die Druckversion dieser Seite an."
 
-#: print.module:51
+#: print.module:65
 msgid "access print"
 msgstr "Zugriff auf Druckversion"
 
-#: print.module:51
+#: print.module:65
 msgid "administer print"
 msgstr "Einstellungen verwalten"
 
@@ -277,16 +283,40 @@ msgstr "Einstellungen verwalten"
 msgid "print"
 msgstr "Print"
 
-#: print.install:8
-#, fuzzy
+#: print.install:13
 msgid "Printer-friendly Page settings are available under !link"
-msgstr "Link \"Druckversion\" anzeigen"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Printer-friendly Pages"
-#~ msgstr "Druckoptimierte Seiten"
-#~ msgid "By"
-#~ msgstr "Von"
+#: print.info:0
+msgid "Printer-friendly pages"
+msgstr "Druckoptimierte Seiten"
+
+#~ msgid "PDF generation tool"
+#~ msgstr "PDF Erstellungswerkzeug"
+#~ msgid "Web page"
+#~ msgstr "Webseite"
+#~ msgid "Show PDF version link"
+#~ msgstr "PDF Versions-Link anzeigen"
+#~ msgid "PDF version"
+#~ msgstr "PDF Version"
+#~ msgid "Printer-friendly PDF"
+#~ msgstr "Druckerfreundliches PDf"
+#~ msgid "Disabled"
+#~ msgstr "Deaktiviert"
+#~ msgid "Use Greybox Redux (requires the greybox module)"
+#~ msgstr "Verwende Greybox Redux (benötigt das Greybox-Modul)"
+#~ msgid "Use Thickbox (requires the thickbox module)"
+#~ msgstr "Verwende Thickbox Redux (benötigt das Thickbox-Modul)"
+#~ msgid "Add nocache"
+#~ msgstr "\"nocache\" hinzufügen"
+#~ msgid ""
+#~ "Non-standard tag to instruct search engines to not show a \"Cached\" link "
+#~ "for your printer-friendly pages"
+#~ msgstr ""
+#~ "Nicht standardisierter Tag, weist Suchmaschinen an keinen \"Cached\" Link "
+#~ "für die Druckversion anzuzeigen."
 #~ msgid "Enabled"
 #~ msgstr "Aktiviert"
+#~ msgid "By"
+#~ msgstr "Von"
 

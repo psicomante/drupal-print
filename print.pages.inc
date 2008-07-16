@@ -75,7 +75,7 @@ function print_controller($path, $cid) {
  * Generates a robots meta tag to tell them what they may index
  *
  * @return
- *   string with the meta robots tag 
+ *   string with the meta robots tag
  */
 function _print_robots_meta_generator() {
   $robots_settings = variable_get('print_robot_settings', print_robot_settings_default());
@@ -108,7 +108,7 @@ function _print_robots_meta_generator() {
  * @param $node
  *   generated node with a printer-friendly node body
  * @param $cid
- *   id of current comment being generated (NULL when not generating 
+ *   id of current comment being generated (NULL when not generating
  *   an individual comment)
  * @return
  *   array with the fields to be used in the template
@@ -151,7 +151,7 @@ function _print_var_generator($node, $cid = NULL) {
     }
 
   $print["sendtoprinter"] = $print_settings['sendtoprinter'] ? " onload=\"window.print();\"" : "";
-    
+
   $logo_url = !empty($print_settings['logo_url']) ? strip_tags($print_settings['logo_url']) : theme_get_setting('logo');
   $print["logo"] = $logo_url ? "<img class=\"print-logo\" src=\"". $logo_url ."\" alt=\"\" />\n" : "";
 
@@ -250,13 +250,13 @@ function _print_var_generator($node, $cid = NULL) {
 /**
  * Callback function for the preg_replace_callback for URL-capable patterns
  *
- * Manipulate URLs to make them absolute in the URLs list, and to add a 
+ * Manipulate URLs to make them absolute in the URLs list, and to add a
  * [n] footnote marker.
- * 
+ *
  * @param $matches
  *   array with the matched tag patterns, usually <a...>+text+</a>
  * @return
- *   tag with re-written URL and when appropriate the [n] index to the 
+ *   tag with re-written URL and when appropriate the [n] index to the
  *   URL list
  */
 function _print_rewrite_urls($matches) {
@@ -347,8 +347,8 @@ function _print_rewrite_urls($matches) {
  *
  * @param $url
  *   absolute URL to be inserted in the list
- * @return 
- *   list of URLs previously stored if $url is 0, or the current count 
+ * @return
+ *   list of URLs previously stored if $url is 0, or the current count
  *   otherwise.
  */
 function _print_friendly_urls($url = 0) {
@@ -368,7 +368,7 @@ function _print_friendly_urls($url = 0) {
 
 /**
  * Choose most appropriate template
- * 
+ *
  * Auxiliary function to resolve the most appropriate template trying to find
  * a content specific template in the theme or module dir before falling back
  * on a generic template also in those dirs.
@@ -404,7 +404,7 @@ function _print_get_template($type = NULL) {
 
 /**
  * Prepare a Printer-friendly-ready node body for content nodes
- * 
+ *
  * @param $nid
  *   node ID of the node to be rendered into a printer-friendly page
  * @param $cid
@@ -438,7 +438,7 @@ function _print_generate_node($nid, $cid = NULL) {
     unset($node->content["fivestar_widget"]);
     // Disable service links module output
     unset($node->content["service_links"]);
-  
+
     $node->body = drupal_render($node->content);
   }
 
@@ -447,7 +447,7 @@ function _print_generate_node($nid, $cid = NULL) {
   if (function_exists('comment_render') && (($cid != NULL) || ($print_settings['comments']))) {
     //Print only the requested comment (or if $cid is NULL, all of them)
     $comments = comment_render($node, $cid);
-    
+
     //Remove the comment forms
     $comments = preg_replace("/<form.*?id=\"comment-.*?\">.*?<\/form>/sim", "", $comments);
     //Remove the 'Post new comment' title
@@ -483,7 +483,7 @@ function _print_generate_node($nid, $cid = NULL) {
 
 /**
  * Prepare a Printer-friendly-ready node body for non-content pages
- * 
+ *
  * @param $path
  *   path of the node to be rendered into a printer-friendly page
  * @return
@@ -532,7 +532,7 @@ function _print_generate_path($path) {
 
 /**
  * Prepare a Printer-friendly-ready node body for book pages
- * 
+ *
  * @param $nid
  *   node ID of the node to be rendered into a printer-friendly page
  * @return
@@ -563,17 +563,17 @@ function _print_generate_book($nid) {
 
 /**
  * Generates printer-friendly HTML for a node. This function is a 'pre-node' visitor function for book_recurse()
- * 
+ *
  * My own version of book_node_visitor_html_pre so that CCK pages in book nodes
  * come out right
  *
  * @param $node
  *   the node to generate output for.
  * @param $depth
- *   the depth of the given node in the hierarchy. This is used only for 
+ *   the depth of the given node in the hierarchy. This is used only for
  *   generating output.
  * @param $nid
- *   the node id (nid) of the given node. This is used only for generating 
+ *   the node id (nid) of the given node. This is used only for generating
  *   output.
  * @return
  *   the HTML generated for the given node.

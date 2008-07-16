@@ -2,29 +2,18 @@
 #
 # Swedish translation of Drupal (print)
 # Copyright 2008 Magnus Gunnarsson <seals@passagen.se>
-# Generated from files:
-#  print.admin.inc,v 1.3 2008/03/14 02:58:32 jcnventura
-#  print.module,v 1.31 2008/03/19 04:34:18 jcnventura
-#  print_pdf.admin.inc,v 1.3 2008/03/19 04:34:18 jcnventura
-#  print.pages.inc,v 1.5 2008/03/19 04:34:18 jcnventura
-#  print_pdf.module,v 1.6 2008/03/19 04:34:18 jcnventura
-#  print.info,v 1.3 2007/10/28 22:46:23 jcnventura
-#  print_pdf.info,v 1.2 2008/03/04 12:03:59 jcnventura
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Printer Friendly 6.x\n"
-"POT-Creation-Date: 2008-05-13 01:13+0200\n"
-"PO-Revision-Date: 2008-05-13 01:28+0100\n"
+"POT-Creation-Date: 2008-07-15 23:44+0200\n"
+"PO-Revision-Date: 2008-07-16 02:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: drupalsverige.se\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Poedit-Language: Swedish\n"
-"X-Poedit-Country: SWEDEN\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: print.admin.inc:27
 msgid "Printer-friendly page link"
@@ -51,231 +40,242 @@ msgid "Enable or disable the printer-friendly page link for each node. Even if t
 msgstr "Aktivera eller avaktivera den utskskriftsvänliga sidlänken för varjenod. Även om länken är avaktiverad kan du fortfarande visa utskriftsversionen av noden genom att gå till print/nid där nid är nodens numeriska id."
 
 #: print.admin.inc:35
+msgid "Link visibility"
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on every page except the listed pages."
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on only the listed pages."
+msgstr ""
+
+#: print.admin.inc:44;68
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr ""
+
+#: print.admin.inc:49
+msgid "Link class"
+msgstr ""
+
+#: print.admin.inc:53
+msgid "This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces."
+msgstr ""
+
+#: print.admin.inc:58
 msgid "Show link in system (non-content) pages"
 msgstr "Visa länk i systemsidor (icke innehåll)"
 
-#: print.admin.inc:37
+#: print.admin.inc:67
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
 msgstr "Genom att välja det här alternativet läggs en länk till på en utskriftsvänlig sidversion på de sidor som skapats av Drupal eller de aktiverade modulenar."
 
-#: print.admin.inc:42
+#: print.admin.inc:73
 msgid "Take control of the book module printer-friendly link"
 msgstr "Ta kontroll över den utskriftsvänliga länken till modulen Book."
 
-#: print.admin.inc:44
+#: print.admin.inc:75
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr "Aktivera detta för att få en utskriftsvänlig länk i boknoder genom denna modul. Kräver modulen Book (finns i kärnan)."
 
-#: print.admin.inc:49
+#: print.admin.inc:80
 msgid "Logo URL"
 msgstr "Webbadress till logga"
 
-#: print.admin.inc:53
+#: print.admin.inc:84
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr "En alternativ logga att visa på den utskriftsvänliga versionen. Om detta är lämnat tomt kommer loggan för det nuvarande temat att användas."
 
-#: print.admin.inc:58
+#: print.admin.inc:89
 msgid "Stylesheet URL"
 msgstr "Webbadress till stilmall"
 
-#: print.admin.inc:62
+#: print.admin.inc:93
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr "Webbadressen till din anpassade utskrifts stilmall om den finns. Om ingen är angedd kommer modulens förinställda CSS-fil att användas."
 
-#: print.admin.inc:67
+#: print.admin.inc:98
 msgid "Printer-friendly URLs list"
 msgstr "Utskriftvänlig visning av webbadresser "
 
-#: print.admin.inc:69
+#: print.admin.inc:100
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr "Om angiven kommer webbadressen för sidlänken att visas längst ned på sidan."
 
-#: print.admin.inc:74
+#: print.admin.inc:105
 msgid "Include comments in printer-friendly version"
 msgstr "Inkludera kommentarer i utskriftsvänlig version."
 
-#: print.admin.inc:76
+#: print.admin.inc:107
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr "När det här alternativet är aktiverat är också kommentarer inkluderade i den utskriftsvänliga versionen. Kräver modulen Comment."
 
-#: print.admin.inc:81
+#: print.admin.inc:112
 msgid "Open the printer-friendly version in a new window"
 msgstr "Öppna den utskriftsvänliga versionen i ett nytt fönster."
 
-#: print.admin.inc:82
-msgid "Disabled"
-msgstr "Ej aktiverad"
-
-#: print.admin.inc:82
-msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "Använd HTML som riktmärke (valideras inte som XHTML Strict)"
-
-#: print.admin.inc:82
-msgid "Use Javascript (requires browser support)"
-msgstr "Använd JavaScript (kräver stöd av webbläsaren)"
-
-#: print.admin.inc:82
-msgid "Use Greybox Redux (requires the greybox module)"
-msgstr "Använd Greybox Redux (kräver modulen Greybox Redux)"
-
-#: print.admin.inc:82
-msgid "Use Thickbox (requires the thickbox module)"
-msgstr "Använd Thickbox (kräver modulen Thickbox)"
-
-#: print.admin.inc:84
+#: print.admin.inc:114
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr "Används den här inställningen öppnas den utskriftsvänliga versionen i ett nytt fönster/flik."
 
-#: print.admin.inc:89
+#: print.admin.inc:119
+msgid "New window method"
+msgstr ""
+
+#: print.admin.inc:120
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "Använd HTML som riktmärke (valideras inte som XHTML Strict)"
+
+#: print.admin.inc:120
+msgid "Use Javascript (requires browser support)"
+msgstr "Använd JavaScript (kräver stöd av webbläsaren)"
+
+#: print.admin.inc:122
+msgid "Choose the method used to open pages in a new window/tab."
+msgstr ""
+
+#: print.admin.inc:127
 msgid "Send to printer"
 msgstr "Skicka till skrivare"
 
-#: print.admin.inc:91
+#: print.admin.inc:129
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Kalla automatiskt på webbläsarens utskriftsfunktion när den utskriftsvänliga versionen visas."
 
-#: print.admin.inc:98
-#: print.pages.inc:171
+#: print.admin.inc:136
+#: print.pages.inc:182
 msgid "Source URL"
 msgstr "Källa till webbadress"
 
-#: print.admin.inc:106
+#: print.admin.inc:144
 msgid "Display source URL"
 msgstr "Visa källans webbadress"
 
-#: print.admin.inc:108
+#: print.admin.inc:146
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr "När det här alternativet är valt kommer webbadressen för originalsidan att visas längst ned på den utskriftvänliga versionen."
 
-#: print.admin.inc:113
+#: print.admin.inc:151
 msgid "Add current time/date to the source URL"
 msgstr "Lägg till aktuell tid/datum till webbadressens källa."
 
-#: print.admin.inc:115
+#: print.admin.inc:153
 msgid "Display the current date and time in the Source URL line."
 msgstr "Visa aktuella datumet och tiden i källan till webbadressen."
 
-#: print.admin.inc:120
+#: print.admin.inc:158
 msgid "Force use of node ID in source URL"
 msgstr "Tvinga användning av nodens ID i webbadressen källa"
 
-#: print.admin.inc:122
+#: print.admin.inc:160
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr "Drupal kommer att försöka använda sidans definierade alias om det finns något. Aktivera den här inställningen för att tvinga användandet av fastställd webbadress."
 
-#: print.admin.inc:129
+#: print.admin.inc:167
 msgid "Robots META tags"
 msgstr "META-taggar för robotar"
 
-#: print.admin.inc:137
+#: print.admin.inc:175
 msgid "Add noindex"
 msgstr "Lägg till noindex (inget index)"
 
-#: print.admin.inc:139
+#: print.admin.inc:177
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr "Instruera robotar att inte indexera utskriftsvänliga sidor. Rekommenderas för att underlätta för sökmotorerna."
 
-#: print.admin.inc:144
+#: print.admin.inc:182
 msgid "Add nofollow"
 msgstr "Lägg till nofollow (följ inte efter)"
 
-#: print.admin.inc:146
+#: print.admin.inc:184
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr "Instruera robotar att inte följa utgående länkar på utskriftsvänliga sidor."
 
-#: print.admin.inc:151
+#: print.admin.inc:189
 msgid "Add noarchive"
 msgstr "Lägg till noarchive (inget arkiv)"
 
-#: print.admin.inc:153
+#: print.admin.inc:191
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr "Icke standardiserad tagg för att instruera sökmotorer att inte visa \"cachade\" länkar för dina utskriftsvänliga sidor. Känns igen av Googlebot."
 
-#: print.admin.inc:158
-msgid "Add nocache"
-msgstr "Lägg till nocache (ingen cache)"
-
-#: print.admin.inc:160
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr "Icke standardiserad tagg för att instruera sökmotorer att inte visa \"cachade\" länkar för dina utskriftsvänliga sidor."
-
-#: print.pages.inc:149
+#: print.pages.inc:160
 #, fuzzy
 msgid "Published on %site_name"
 msgstr "Publicerad den %site_name"
 
-#: print.pages.inc:168
+#: print.pages.inc:179
 #, fuzzy
 msgid "retrieved on %date"
 msgstr "erhållen den %date"
 
-#: print.pages.inc:181
+#: print.pages.inc:193
 msgid "Anonymous"
 msgstr "Gäst"
 
-#: print.pages.inc:182
+#: print.pages.inc:194
 #, fuzzy
 msgid "By %author"
 msgstr "Av %author"
 
-#: print.pages.inc:186
+#: print.pages.inc:198
 #, fuzzy
 msgid "Created %date"
 msgstr "Skapad %date"
 
-#: print.pages.inc:216
+#: print.pages.inc:233
 #, fuzzy
 msgid "Links"
 msgstr "Länkar"
 
-#: print.module:63
+#: print.module:77
 msgid "Printer-friendly"
 msgstr "Utskriftsvänlig"
 
-#: print.module:70
-#: print.info:0
-msgid "Printer-friendly pages"
+#: print.module:84
+#, fuzzy
+msgid "Printer-friendly Pages"
 msgstr "Utskriftsvänliga sidor"
 
-#: print.module:71
+#: print.module:85
 #: print.info:0
-#, fuzzy
 msgid "Adds a printer-friendly version link to content and administrative pages."
-msgstr "Lägger till en länk till en utskriftsvänlig version för nodsidor."
+msgstr ""
 
-#: print.module:179
+#: print.module:198
 msgid "Show printer-friendly version link"
 msgstr "Visa länken utskriftsvänlig version"
 
-#: print.module:181
+#: print.module:200
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
 msgstr "Visa länken till en utskriftsvänlig version av innehållet. Fler inställningar finns tillgängliga på !settings."
 
-#: print.module:181;189
+#: print.module:200;208
 msgid "settings page"
 msgstr "inställningssidan"
 
-#: print.module:187
+#: print.module:206
 msgid "Show printer-friendly version link in individual comments"
 msgstr "Visa länk till utskriftvänlig version i varje individuell kommentar"
 
-#: print.module:189
+#: print.module:208
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
 msgstr "Visa länken till en utskriftsvänlig version av kommentaren. Fler inställningar finns tillgängliga på !settings."
 
-#: print.module:256
+#: print.module:295
 msgid "Printer-friendly version"
 msgstr "Utskriftsvänlig version"
 
-#: print.module:258
+#: print.module:297
 msgid "Display a printer-friendly version of this page."
 msgstr "Visa en utskriftsvänlig version av den här sidan."
 
-#: print.module:51
+#: print.module:65
 msgid "access print"
 msgstr "kom åt utskrift"
 
-#: print.module:51
+#: print.module:65
 msgid "administer print"
 msgstr "administrera utskrift"
 
@@ -283,10 +283,24 @@ msgstr "administrera utskrift"
 msgid "print"
 msgstr "print"
 
-#: print.install:8
+#: print.install:13
 msgid "Printer-friendly Page settings are available under !link"
 msgstr ""
 
+#: print.info:0
+msgid "Printer-friendly pages"
+msgstr "Utskriftsvänliga sidor"
+
+#~ msgid "Show link in book nodes"
+#~ msgstr "Visa länk i boknoder"
+#~ msgid "PDF generation tool"
+#~ msgstr "Verktyg för generering av PDF"
+#~ msgid ""
+#~ "This option selects the PDF generation tool being used by this module to "
+#~ "create the PDF version."
+#~ msgstr ""
+#~ "Detta alternativ väljer vertyg för generering av PDF som används av den "
+#~ "här modulen för att skapa PDF-versionen."
 #~ msgid "PDF version link"
 #~ msgstr "Länk till PDF-version"
 #~ msgid ""
@@ -303,8 +317,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Genom att välja det här alternativet läggs en länk till på en PDF-version "
 #~ "på de sidor som skapats av Drupal eller de aktiverade modulerna."
-#~ msgid "Show link in book nodes"
-#~ msgstr "Visa länk i boknoder"
 #~ msgid ""
 #~ "Activate this to add a PDF version link in book nodes. Requires the "
 #~ "(core) book module."
@@ -318,14 +330,6 @@ msgstr ""
 #~ "Inget verktyg för generering av PDF funnet! Var vänlig ladda ned ett "
 #~ "genereringsverktyg som stöder PHP PDF. Titta i den här modulens INSTALL."
 #~ "txt för mer information."
-#~ msgid "PDF generation tool"
-#~ msgstr "Verktyg för generering av PDF"
-#~ msgid ""
-#~ "This option selects the PDF generation tool being used by this module to "
-#~ "create the PDF version."
-#~ msgstr ""
-#~ "Detta alternativ väljer vertyg för generering av PDF som används av den "
-#~ "här modulen för att skapa PDF-versionen."
 #~ msgid "Web page"
 #~ msgstr "Webbsida"
 #~ msgid "Settings"
@@ -358,10 +362,20 @@ msgstr ""
 #~ msgstr "print_pdf"
 #~ msgid "Adds the capability to export pages as PDF."
 #~ msgstr "Lägg till möjligheten att exportera sidor som PDF."
-
-#, fuzzy
-#~ msgid "Printer-friendly Pages"
-#~ msgstr "Utskriftsvänliga sidor"
+#~ msgid "Disabled"
+#~ msgstr "Ej aktiverad"
+#~ msgid "Use Greybox Redux (requires the greybox module)"
+#~ msgstr "Använd Greybox Redux (kräver modulen Greybox Redux)"
+#~ msgid "Use Thickbox (requires the thickbox module)"
+#~ msgstr "Använd Thickbox (kräver modulen Thickbox)"
+#~ msgid "Add nocache"
+#~ msgstr "Lägg till nocache (ingen cache)"
+#~ msgid ""
+#~ "Non-standard tag to instruct search engines to not show a \"Cached\" link "
+#~ "for your printer-friendly pages"
+#~ msgstr ""
+#~ "Icke standardiserad tagg för att instruera sökmotorer att inte visa "
+#~ "\"cachade\" länkar för dina utskriftsvänliga sidor."
 #~ msgid "By"
 #~ msgstr "Av"
 #~ msgid "Printer-friendly pages as PDF"

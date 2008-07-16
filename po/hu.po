@@ -1,23 +1,18 @@
 # $Id$
 #
-# Hungarian translation of Drupal (general)
+# Hungarian translation of Drupal (print)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
-# Generated from files:
-#  print.module,v 1.15.2.5.2.26 2007/11/08 23:56:59 jcnventura
-#  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Drupal print-5.x-2.2\n"
-"POT-Creation-Date: 2008-05-13 01:13+0200\n"
-"PO-Revision-Date: 2008-05-13 01:25+0100\n"
+"POT-Creation-Date: 2008-07-15 23:44+0200\n"
+"PO-Revision-Date: 2008-07-16 02:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: CSEPPEK.hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Hungarian\n"
-"X-Poedit-Country: HUNGARY\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: print.admin.inc:27
@@ -45,231 +40,242 @@ msgid "Enable or disable the printer-friendly page link for each node. Even if t
 msgstr "A \"Nyomtatóbarát változat\" hivatkozás mutatásának beállítása egyes node-okora. Letiltott állapotban is megnézhető az egyes oldalak nyomtatóbarát verziói, ha a print/nid-re megy, ahol a nid a node azonosító száma."
 
 #: print.admin.inc:35
+msgid "Link visibility"
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on every page except the listed pages."
+msgstr ""
+
+#: print.admin.inc:37;60
+msgid "Show on only the listed pages."
+msgstr ""
+
+#: print.admin.inc:44;68
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr ""
+
+#: print.admin.inc:49
+msgid "Link class"
+msgstr ""
+
+#: print.admin.inc:53
+msgid "This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces."
+msgstr ""
+
+#: print.admin.inc:58
 msgid "Show link in system (non-content) pages"
 msgstr "Hivatkozás mutatása a rendszer lapokon"
 
-#: print.admin.inc:37
+#: print.admin.inc:67
 msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
 msgstr "A nyomtatóbarát változat hivatkozás megjelenítése azokon az oldalakon, amit a Drupal vagy a modulok hoztak létre."
 
-#: print.admin.inc:42
+#: print.admin.inc:73
 msgid "Take control of the book module printer-friendly link"
 msgstr "Könyvekbe rendezett tartalmak irányítása"
 
-#: print.admin.inc:44
+#: print.admin.inc:75
 msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr "A könyvekbe rendezett tartalamak \"Nyomtatóbarát változatát\" ez a modul irányítsa. A Book modul engedélyezése szükséges hozzá."
 
-#: print.admin.inc:49
+#: print.admin.inc:80
 msgid "Logo URL"
 msgstr "Logó címe"
 
-#: print.admin.inc:53
+#: print.admin.inc:84
 msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
 msgstr "Alternatív logó használata a nyomtatóbarát oldalakon, egyébként az alapértelmezett logó jelenik meg."
 
-#: print.admin.inc:58
+#: print.admin.inc:89
 msgid "Stylesheet URL"
 msgstr "CSS címe"
 
-#: print.admin.inc:62
+#: print.admin.inc:93
 msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
 msgstr "Alternatív CSS címe a nyomtatóbarát oldalakhoz, egyébként az alapértlemezett CSS lesz használva."
 
-#: print.admin.inc:67
+#: print.admin.inc:98
 msgid "Printer-friendly URLs list"
 msgstr "Nyomtatóbarát URL lista"
 
-#: print.admin.inc:69
+#: print.admin.inc:100
 msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
 msgstr "Az oldal összegyüjtött hivatkozásainak mutatása a nyomtatóbarát oldal alján."
 
-#: print.admin.inc:74
+#: print.admin.inc:105
 msgid "Include comments in printer-friendly version"
 msgstr "Hozzászólások megjelenítése a nyomtatóbarát oldalakon"
 
-#: print.admin.inc:76
+#: print.admin.inc:107
 msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
 msgstr "Hozzászólások megjelenítése a nyomtatóbarát oldalakon. A Comment modul engedélyezése szükséges hozzá."
 
-#: print.admin.inc:81
+#: print.admin.inc:112
 msgid "Open the printer-friendly version in a new window"
 msgstr "Nyomtatóbarát változat megjelenítése új ablakban"
 
-#: print.admin.inc:82
-msgid "Disabled"
-msgstr "Letiltva"
-
-#: print.admin.inc:82
-msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr "HTML kód használata. Nem felel meg az XHTML Strict szabványnak."
-
-#: print.admin.inc:82
-msgid "Use Javascript (requires browser support)"
-msgstr "Javascript kód használata. A böngészőnek támogatnia kell ezt a funkciót."
-
-#: print.admin.inc:82
-msgid "Use Greybox Redux (requires the greybox module)"
-msgstr ""
-
-#: print.admin.inc:82
-msgid "Use Thickbox (requires the thickbox module)"
-msgstr ""
-
-#: print.admin.inc:84
+#: print.admin.inc:114
 msgid "Setting this option will make the printer-friendly version open in a new window/tab."
 msgstr "Nyomtatóbarát változat megjelenítése új ablakban."
 
-#: print.admin.inc:89
+#: print.admin.inc:119
+msgid "New window method"
+msgstr ""
+
+#: print.admin.inc:120
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "HTML kód használata. Nem felel meg az XHTML Strict szabványnak."
+
+#: print.admin.inc:120
+msgid "Use Javascript (requires browser support)"
+msgstr "Javascript kód használata. A böngészőnek támogatnia kell ezt a funkciót."
+
+#: print.admin.inc:122
+msgid "Choose the method used to open pages in a new window/tab."
+msgstr ""
+
+#: print.admin.inc:127
 msgid "Send to printer"
 msgstr "Nyomtatóra küldés"
 
-#: print.admin.inc:91
+#: print.admin.inc:129
 msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
 msgstr "Automatikusan meghívja a böngésző nyomtatás funkcióját, amikor a nyomtatóbarát oldal megjelenik."
 
-#: print.admin.inc:98
-#: print.pages.inc:171
+#: print.admin.inc:136
+#: print.pages.inc:182
 msgid "Source URL"
 msgstr "Forráscím"
 
-#: print.admin.inc:106
+#: print.admin.inc:144
 msgid "Display source URL"
 msgstr "Forrás cím mutatása"
 
-#: print.admin.inc:108
+#: print.admin.inc:146
 msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
 msgstr "Forrás cím mutatása a nyomtatóbarát oldal alján."
 
-#: print.admin.inc:113
+#: print.admin.inc:151
 msgid "Add current time/date to the source URL"
 msgstr "Aktuális dátum és idő hozzáadása a forrás címhez"
 
-#: print.admin.inc:115
+#: print.admin.inc:153
 msgid "Display the current date and time in the Source URL line."
 msgstr "Aktuális dátum és idő mutatása a forrás címben."
 
-#: print.admin.inc:120
+#: print.admin.inc:158
 msgid "Force use of node ID in source URL"
 msgstr "A node ID használatának kikényszerítése a címben"
 
-#: print.admin.inc:122
+#: print.admin.inc:160
 msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
 msgstr "A Drupal megpróbálja az oldal aliasát használni, ha létezik. Engedélyezze ezt a funckiót, ha fix címeket kíván használni."
 
-#: print.admin.inc:129
+#: print.admin.inc:167
 msgid "Robots META tags"
 msgstr "META kulcsszavak keresőrobotoknak"
 
-#: print.admin.inc:137
+#: print.admin.inc:175
 msgid "Add noindex"
 msgstr "'noindex' hozzáadása"
 
-#: print.admin.inc:139
+#: print.admin.inc:177
 msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
 msgstr "A keresőrobotok ne indexeljék a nyomtatóbarát oldalakat. Ez egy elvárás a jó keresési karma eléréséhez."
 
-#: print.admin.inc:144
+#: print.admin.inc:182
 msgid "Add nofollow"
 msgstr "'nofollow' hozzáadása"
 
-#: print.admin.inc:146
+#: print.admin.inc:184
 msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
 msgstr "A keresőrobotok ne kövessék a hivatkozásokat a nyomtatóbarát oldalakon. "
 
-#: print.admin.inc:151
+#: print.admin.inc:189
 msgid "Add noarchive"
 msgstr "'noarchive' hozzáadása"
 
-#: print.admin.inc:153
+#: print.admin.inc:191
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr "Nem szabványos kulcsszó arra, hogy a keresőrobotok ne jelenítsék meg a \"Cached\" hivatkozást. A Google értelmezi ezt a kulcsszót."
 
-#: print.admin.inc:158
-msgid "Add nocache"
-msgstr "'nocache' hozzáadása"
-
-#: print.admin.inc:160
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr "Nem szabványos kulcsszó arra, hogy a keresőrobotok ne jelenítsék meg a \"Cached\" hivatkozást."
-
-#: print.pages.inc:149
+#: print.pages.inc:160
 #, fuzzy
 msgid "Published on %site_name"
 msgstr "Közzétéve %site_name"
 
-#: print.pages.inc:168
+#: print.pages.inc:179
 #, fuzzy
 msgid "retrieved on %date"
 msgstr "letöltve %date"
 
-#: print.pages.inc:181
+#: print.pages.inc:193
 msgid "Anonymous"
 msgstr ""
 
-#: print.pages.inc:182
+#: print.pages.inc:194
 #, fuzzy
 msgid "By %author"
 msgstr "Létrehozta %author"
 
-#: print.pages.inc:186
+#: print.pages.inc:198
 #, fuzzy
 msgid "Created %date"
 msgstr "Létrehozva %date"
 
-#: print.pages.inc:216
+#: print.pages.inc:233
 #, fuzzy
 msgid "Links"
 msgstr "Linkek"
 
-#: print.module:63
+#: print.module:77
 msgid "Printer-friendly"
 msgstr "Nyomtatóbarát"
 
-#: print.module:70
-#: print.info:0
-msgid "Printer-friendly pages"
+#: print.module:84
+#, fuzzy
+msgid "Printer-friendly Pages"
 msgstr "Nyomtatóbarát oldalak"
 
-#: print.module:71
+#: print.module:85
 #: print.info:0
-#, fuzzy
 msgid "Adds a printer-friendly version link to content and administrative pages."
-msgstr "A \"Nyomtatóbarát változat\" hivatkozás mutatása a node-okon."
+msgstr ""
 
-#: print.module:179
+#: print.module:198
 msgid "Show printer-friendly version link"
 msgstr "\"Nyomtatóbarát változat\" hivatkozás mutatása."
 
-#: print.module:181
+#: print.module:200
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
 msgstr "Megjeleníti a \"Nyomtatóbarát változat\" hivatkozást a tartalmon. További beállítások elérhetők a !settings oldalon."
 
-#: print.module:181;189
+#: print.module:200;208
 msgid "settings page"
 msgstr "beállítások oldal"
 
-#: print.module:187
+#: print.module:206
 msgid "Show printer-friendly version link in individual comments"
 msgstr "A \"Nyomtatóbarát változat\" hivatkozás mutatása minden egyes hozzászólásnál."
 
-#: print.module:189
+#: print.module:208
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
 msgstr "Megjeleníti a \"Nyomtatóbarát változat\" hivatkozást a hozzászólásoknál. További beállítások elérhetők a !settings oldalon."
 
-#: print.module:256
+#: print.module:295
 msgid "Printer-friendly version"
 msgstr "Nyomatatóbarát változat"
 
-#: print.module:258
+#: print.module:297
 msgid "Display a printer-friendly version of this page."
 msgstr "A \"Nyomtatóbarát változat\" hivatkozás mutatása ezen az oldalon."
 
-#: print.module:51
+#: print.module:65
 msgid "access print"
 msgstr "nyomtató hozzáférése"
 
-#: print.module:51
+#: print.module:65
 msgid "administer print"
 msgstr "nyomtatás beállítások"
 
@@ -277,13 +283,24 @@ msgstr "nyomtatás beállítások"
 msgid "print"
 msgstr "nyomtat"
 
-#: print.install:8
+#: print.install:13
 msgid "Printer-friendly Page settings are available under !link"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Printer-friendly Pages"
-#~ msgstr "Nyomtatóbarát oldalak"
+#: print.info:0
+msgid "Printer-friendly pages"
+msgstr "Nyomtatóbarát oldalak"
+
+#~ msgid "Disabled"
+#~ msgstr "Letiltva"
+#~ msgid "Add nocache"
+#~ msgstr "'nocache' hozzáadása"
+#~ msgid ""
+#~ "Non-standard tag to instruct search engines to not show a \"Cached\" link "
+#~ "for your printer-friendly pages"
+#~ msgstr ""
+#~ "Nem szabványos kulcsszó arra, hogy a keresőrobotok ne jelenítsék meg a "
+#~ "\"Cached\" hivatkozást."
 #~ msgid "By"
 #~ msgstr "Létrehozta"
 #~ msgid "Enabled"

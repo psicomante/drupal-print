@@ -1,22 +1,18 @@
 # $Id$
 #
-# Catalan translation of Drupal (general)
+# Catalan translation of Drupal (print)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
-# Generated from files:
-#  print.module,v 1.15.2.5.2.26 2007/11/08 23:56:59 jcnventura
-#  print.info,v 1.1.2.2 2007/08/24 00:32:39 jcnventura
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-05-13 01:13+0200\n"
-"PO-Revision-Date: 2008-05-13 01:24+0100\n"
+"POT-Creation-Date: 2008-07-15 23:44+0200\n"
+"PO-Revision-Date: 2008-07-16 02:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: Catala\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: print.admin.inc:27
 msgid "Printer-friendly page link"
@@ -24,248 +20,260 @@ msgstr "Enllaç a la versió per a imprimir"
 
 #: print.admin.inc:29
 msgid "None (Disabled)"
-msgstr ""
+msgstr "Cap (Desactivat)"
 
 #: print.admin.inc:29
 msgid "Text only"
-msgstr ""
+msgstr "Només text"
 
 #: print.admin.inc:29
 msgid "Icon only"
-msgstr ""
+msgstr "Només icona"
 
 #: print.admin.inc:29
 msgid "Icon and Text"
-msgstr ""
+msgstr "Icona i Text"
 
 #: print.admin.inc:30
 msgid "Enable or disable the printer-friendly page link for each node. Even if the link is disabled, you can still view the print version of a node by going to print/nid where nid is the numeric id of the node."
 msgstr "Activar o desactivar l'enllaç a la versió per a imprimir de cada node. Encara que l'enllaç estigui desactivat, es pot veure la versió per a imprimir d'un node visitant l'adreça 'print/nid', on nid es l'identificador del node."
 
 #: print.admin.inc:35
-msgid "Show link in system (non-content) pages"
+msgid "Link visibility"
 msgstr ""
 
-#: print.admin.inc:37
-msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
+#: print.admin.inc:37;60
+msgid "Show on every page except the listed pages."
 msgstr ""
 
-#: print.admin.inc:42
-msgid "Take control of the book module printer-friendly link"
+#: print.admin.inc:37;60
+msgid "Show on only the listed pages."
 msgstr ""
 
-#: print.admin.inc:44
-msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
+#: print.admin.inc:44;68
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
 msgstr ""
 
 #: print.admin.inc:49
-msgid "Logo URL"
+msgid "Link class"
 msgstr ""
 
 #: print.admin.inc:53
-msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
+msgid "This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces."
 msgstr ""
 
 #: print.admin.inc:58
-msgid "Stylesheet URL"
-msgstr "URL de l'estil (CSS)"
-
-#: print.admin.inc:62
-msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
-msgstr ""
+msgid "Show link in system (non-content) pages"
+msgstr "Mostra l'enllaç a les pàgines (sense contingut) del sistema"
 
 #: print.admin.inc:67
-msgid "Printer-friendly URLs list"
+msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
+msgstr "Marcant aquesta opció afegirà un enllaç a la versió impimible a les pàgines creades pel Drupal o d'altres mòduls."
+
+#: print.admin.inc:73
+msgid "Take control of the book module printer-friendly link"
+msgstr "Gestiona la versió imprimible del mòdul llibre"
+
+#: print.admin.inc:75
+msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
 msgstr ""
 
-#: print.admin.inc:69
-msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
-msgstr ""
-
-#: print.admin.inc:74
-msgid "Include comments in printer-friendly version"
-msgstr ""
-
-#: print.admin.inc:76
-msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
-msgstr ""
-
-#: print.admin.inc:81
-msgid "Open the printer-friendly version in a new window"
-msgstr ""
-
-#: print.admin.inc:82
-msgid "Disabled"
-msgstr "Desactivat"
-
-#: print.admin.inc:82
-msgid "Use HTML target (does not validate as XHTML Strict)"
-msgstr ""
-
-#: print.admin.inc:82
-msgid "Use Javascript (requires browser support)"
-msgstr ""
-
-#: print.admin.inc:82
-msgid "Use Greybox Redux (requires the greybox module)"
-msgstr ""
-
-#: print.admin.inc:82
-msgid "Use Thickbox (requires the thickbox module)"
-msgstr ""
+#: print.admin.inc:80
+msgid "Logo URL"
+msgstr "URL del logotip"
 
 #: print.admin.inc:84
-msgid "Setting this option will make the printer-friendly version open in a new window/tab."
-msgstr ""
+msgid "An alternative logo to display on the printer-friendly version. If left empty, the current theme's logo is used."
+msgstr "Logotip alternatiu per a mostrar a la versió imprimible. Si el deixeu buit, s'usa el logotip del tema actual."
 
 #: print.admin.inc:89
-msgid "Send to printer"
-msgstr ""
+msgid "Stylesheet URL"
+msgstr "URL del full d'estils"
 
-#: print.admin.inc:91
-msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
-msgstr ""
+#: print.admin.inc:93
+msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
+msgstr "URL al vostre full d'estils per a impressió, si existeix. Quan no se n'especifica cap, s'usa el CSS per defecte del mòdul."
 
 #: print.admin.inc:98
-#: print.pages.inc:171
-msgid "Source URL"
-msgstr ""
+msgid "Printer-friendly URLs list"
+msgstr "Llista d'URLs per a vista per impressió"
 
-#: print.admin.inc:106
-msgid "Display source URL"
-msgstr ""
+#: print.admin.inc:100
+msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
+msgstr "Si està activat, una llista de les URL de destí d'afegirà al peu de la pàgina."
 
-#: print.admin.inc:108
-msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
-msgstr ""
+#: print.admin.inc:105
+msgid "Include comments in printer-friendly version"
+msgstr "Inclou comentaris a la versió imprimible"
 
-#: print.admin.inc:113
-msgid "Add current time/date to the source URL"
-msgstr ""
+#: print.admin.inc:107
+msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
+msgstr "Quan aquesta opció està activada, els comentaris d'usuaris seran inclosos a la versió imprimible. Requereix el mòdul de comentaris."
 
-#: print.admin.inc:115
-msgid "Display the current date and time in the Source URL line."
+#: print.admin.inc:112
+msgid "Open the printer-friendly version in a new window"
+msgstr "Obre la versió imprimible en una finestra nova"
+
+#: print.admin.inc:114
+msgid "Setting this option will make the printer-friendly version open in a new window/tab."
+msgstr "Aquesta opció fa que la versió imprimible s'obri en una nova finestra/prestanya."
+
+#: print.admin.inc:119
+msgid "New window method"
 msgstr ""
 
 #: print.admin.inc:120
-msgid "Force use of node ID in source URL"
-msgstr ""
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "Utilitza HTML com a destí (no valida com a XHTML estricte)"
+
+#: print.admin.inc:120
+msgid "Use Javascript (requires browser support)"
+msgstr "Utilitza Javascript (el navegador ho ha de suportar)"
 
 #: print.admin.inc:122
-msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
+msgid "Choose the method used to open pages in a new window/tab."
 msgstr ""
+
+#: print.admin.inc:127
+msgid "Send to printer"
+msgstr "Envia a imprimir"
 
 #: print.admin.inc:129
-msgid "Robots META tags"
-msgstr ""
+msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
+msgstr "Imprimeix directament quan es mostri la versió imprimible."
 
-#: print.admin.inc:137
-msgid "Add noindex"
-msgstr ""
-
-#: print.admin.inc:139
-msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
-msgstr ""
+#: print.admin.inc:136
+#: print.pages.inc:182
+msgid "Source URL"
+msgstr "URL d'origen"
 
 #: print.admin.inc:144
-msgid "Add nofollow"
-msgstr ""
+msgid "Display source URL"
+msgstr "Mostra la URL d'origen"
 
 #: print.admin.inc:146
-msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
-msgstr ""
+msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
+msgstr "Aquesta opció fa que la URL de la pàgina original es mostri al peu de la versió imprimible."
 
 #: print.admin.inc:151
-msgid "Add noarchive"
-msgstr ""
+msgid "Add current time/date to the source URL"
+msgstr "Afegeix l'hora i data actuals a la URL d'origen"
 
 #: print.admin.inc:153
+msgid "Display the current date and time in the Source URL line."
+msgstr "Mostra la data i hora actuals a la línia de la URL d'origen."
+
+#: print.admin.inc:158
+msgid "Force use of node ID in source URL"
+msgstr "Força l'ús de l'ID del node a la URL d'origen"
+
+#: print.admin.inc:160
+#, fuzzy
+msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
+msgstr "Drupal intentarà utilitzar l'àlies de la pàgina en cas que n'hi hagi un. Per forçar l'ús d'una URL fixada, activa aquesta opció."
+
+#: print.admin.inc:167
+msgid "Robots META tags"
+msgstr "META etiquetes per a ROBOTS"
+
+#: print.admin.inc:175
+msgid "Add noindex"
+msgstr "Afegeix noindex"
+
+#: print.admin.inc:177
+msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
+msgstr "Indica als ROBOTS que no indexin les versions. Recomanat per al bon funcionament dels motors de cerca."
+
+#: print.admin.inc:182
+msgid "Add nofollow"
+msgstr "Afegeix nofollow"
+
+#: print.admin.inc:184
+msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
+msgstr "Indica als ROBOTS que no seguexin els enllaços de les versions imprimibles."
+
+#: print.admin.inc:189
+msgid "Add noarchive"
+msgstr "Afegeix noarchive"
+
+#: print.admin.inc:191
 msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
 msgstr ""
 
-#: print.admin.inc:158
-msgid "Add nocache"
-msgstr ""
-
-#: print.admin.inc:160
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages"
-msgstr ""
-
-#: print.pages.inc:149
+#: print.pages.inc:160
 #, fuzzy
 msgid "Published on %site_name"
 msgstr "Publicat el %site_name"
 
-#: print.pages.inc:168
+#: print.pages.inc:179
 msgid "retrieved on %date"
 msgstr ""
 
-#: print.pages.inc:181
+#: print.pages.inc:193
 msgid "Anonymous"
-msgstr ""
+msgstr "Anònim"
 
-#: print.pages.inc:182
+#: print.pages.inc:194
 #, fuzzy
 msgid "By %author"
 msgstr "Per %author"
 
-#: print.pages.inc:186
+#: print.pages.inc:198
 #, fuzzy
 msgid "Created %date"
 msgstr "Creat %date"
 
-#: print.pages.inc:216
+#: print.pages.inc:233
 #, fuzzy
 msgid "Links"
 msgstr "Enllaços"
 
-#: print.module:63
+#: print.module:77
 msgid "Printer-friendly"
 msgstr "Versió per a imprimir"
 
-#: print.module:70
-#: print.info:0
-msgid "Printer-friendly pages"
+#: print.module:84
+msgid "Printer-friendly Pages"
 msgstr ""
 
-#: print.module:71
+#: print.module:85
 #: print.info:0
 msgid "Adds a printer-friendly version link to content and administrative pages."
 msgstr ""
 
-#: print.module:179
+#: print.module:198
 msgid "Show printer-friendly version link"
 msgstr ""
 
-#: print.module:181
+#: print.module:200
 msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
 msgstr ""
 
-#: print.module:181;189
+#: print.module:200;208
 msgid "settings page"
 msgstr ""
 
-#: print.module:187
+#: print.module:206
 msgid "Show printer-friendly version link in individual comments"
 msgstr ""
 
-#: print.module:189
+#: print.module:208
 msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
 msgstr ""
 
-#: print.module:256
+#: print.module:295
 msgid "Printer-friendly version"
 msgstr "Versió per a imprimir"
 
-#: print.module:258
+#: print.module:297
 msgid "Display a printer-friendly version of this page."
 msgstr "Visualitzar versió per a imprimir d'aquesta pàgina."
 
-#: print.module:51
+#: print.module:65
 msgid "access print"
 msgstr ""
 
-#: print.module:51
+#: print.module:65
 msgid "administer print"
 msgstr ""
 
@@ -273,20 +281,40 @@ msgstr ""
 msgid "print"
 msgstr "print"
 
-#: print.install:8
+#: print.install:13
 msgid "Printer-friendly Page settings are available under !link"
 msgstr ""
 
+#: print.info:0
+msgid "Printer-friendly pages"
+msgstr ""
+
+#~ msgid "Show link in book nodes"
+#~ msgstr "Mostra l'enllaç als nodes de llibre"
+#~ msgid "PDF generation tool"
+#~ msgstr "Eina de generació de PDF"
+#~ msgid "PDF version link"
+#~ msgstr "enllaç a la versió PDF"
+
+#, fuzzy
+#~ msgid "print_mail"
+#~ msgstr "print_mail"
 #~ msgid "Display a PDF version of this page."
 #~ msgstr "Visualitzar versió PDF d'aquesta pàgina."
 #~ msgid "Printer-friendly PDF"
 #~ msgstr "Versió PDF"
 #~ msgid "print_pdf"
 #~ msgstr "print_pdf"
+#~ msgid "Disabled"
+#~ msgstr "Desactivat"
+#~ msgid "Use Greybox Redux (requires the greybox module)"
+#~ msgstr "Utilitza Greybox Redux (requereix el mòdul greybox)"
+#~ msgid "Use Thickbox (requires the thickbox module)"
+#~ msgstr "Utilitza Thickbox (requereix el mòdul thickbox)"
+#~ msgid "Enabled"
+#~ msgstr "Activat"
 #~ msgid "By"
 #~ msgstr "per"
 #~ msgid "Printer-friendly pages as PDF"
 #~ msgstr "Enllaç a la versió PDF"
-#~ msgid "Enabled"
-#~ msgstr "Activat"
 
