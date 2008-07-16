@@ -1,5 +1,13 @@
 <?php
-/* $Id$ */
+// $Id$
+
+/**
+ * @file
+ * Generates the PDF versions of the pages
+ *
+ * This file is included by the print_pdf module and includes the
+ * functions that interface with the PDF generation packages.
+ */
 
 require_once(drupal_get_path('module', 'print') .'/print.pages.inc');
 
@@ -17,6 +25,7 @@ function print_pdf_controller() {
   $print["logo"] = preg_replace_callback($pattern, "_print_rewrite_urls", $print["logo"]);
   $print["footer_message"] = preg_replace_callback($pattern, "_print_rewrite_urls", $print["footer_message"]);
 
+  $node = $print["node"];
   ob_start();
   include_once(_print_get_template("pdf", $print["type"]));
   $html = ob_get_contents();
@@ -39,9 +48,9 @@ function _print_pdf_dompdf($print, $html, $filename) {
 
   $url_array  = parse_url($print['url']);
 
-  $protocol = $url_array['scheme'] . "://";
+  $protocol = $url_array['scheme'] .'://';
   $host = $url_array['host'];
-  $path = dirname($url_array['path']) . "/";
+  $path = dirname($url_array['path']) .'/';
 
   $dompdf = new DOMPDF();
   $dompdf->set_base_path($path);
@@ -50,13 +59,25 @@ function _print_pdf_dompdf($print, $html, $filename) {
   $dompdf->set_protocol($protocol);
 
   $dompdf->load_html($html);
-  
+
   $dompdf->render();
   $dompdf->stream($filename, array("Attachment" => ($print_pdf_settings['content_disposition'] == 2)));
 }
 
 function _print_pdf_tcpdf($print, $html, $filename) {
+  global $base_url;
   $print_pdf_settings = variable_get('print_pdf_settings', print_pdf_settings_default());
+
+  define("K_TCPDF_EXTERNAL_CONFIG", TRUE);
+  define("K_PATH_MAIN", realpath(dirname($print_pdf_settings['pdf_tool'])) ."/");
+  define("K_PATH_URL", $base_url ."/". dirname($print_pdf_settings['pdf_tool']) ."/");
+  define("K_PATH_FONTS", K_PATH_MAIN ."fonts/");
+  define("K_PATH_CACHE", K_PATH_MAIN ."cache/");
+  define("K_PATH_IMAGES", K_PATH_MAIN ."images/");
+  define("K_BLANK_IMAGE", K_PATH_IMAGES ."_blank.png");
+  define("K_CELL_HEIGHT_RATIO", 1.25);
+  define("K_SMALL_RATIO", 2/3);
+
   require_once($print_pdf_settings['pdf_tool']);
 
   $font_name = "dejavusans";
@@ -65,7 +86,7 @@ function _print_pdf_tcpdf($print, $html, $filename) {
   $orientation = strtoupper($print_pdf_settings['page_orientation']{0});
 
   // create new PDF document
-  $pdf = new TCPDF($orientation , PDF_UNIT, $print_pdf_settings['paper_size'], TRUE);
+  $pdf = new TCPDF($orientation , "mm", $print_pdf_settings['paper_size'], TRUE);
 
   // set document information
   $pdf->SetAuthor(strip_tags($print["submitted"]));
@@ -73,35 +94,36 @@ function _print_pdf_tcpdf($print, $html, $filename) {
   $pdf->SetTitle($print["title"]);
   $keys = implode(" ", explode("\n", trim(strip_tags($print["taxonomy"]))));
   $pdf->SetKeywords($keys);
+  $pdf->setPDFVersion("1.6");
 
   // set header data
   $pdf->SetHeaderData("", 0, $print["title"], strip_tags($print["site_name"]));
 
   // set header and footer fonts
   $pdf->setHeaderFont(Array($font_name, '', $font_size));
-  $pdf->setFooterFont(Array($font_name, '', PDF_FONT_SIZE_DATA));
+  $pdf->setFooterFont(Array($font_name, '', 8));
 
   // set margins
-  $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-  $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-  $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-  
+  $pdf->SetMargins(15, 27, 15);
+  $pdf->SetHeaderMargin(5);
+  $pdf->SetFooterMargin(10);
+
   // set auto page breaks
-  $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+  $pdf->SetAutoPageBreak(TRUE, 25);
 
   // set image scale factor
-  $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+  $pdf->setImageScale(4);
 
   //initialize document
   $pdf->AliasNbPages();
-  
+
   // add a page
   $pdf->AddPage();
 
   preg_match("/<body>(.*)<\/body>/sim", $html, $matches);
   $matches[1] = preg_replace("/.*?(<[^<]*?print-content.*?>)/sim", "$1", $matches[1]);
 
-  $pdf->SetFont($font_name, 'B', $font_size * K_TITLE_MAGNIFICATION);
+  $pdf->SetFont($font_name, 'B', $font_size * 1.3);
   $pdf->writeHTML($print["title"]);
 
   if ($print["submitted"]) {
@@ -115,7 +137,7 @@ function _print_pdf_tcpdf($print, $html, $filename) {
   $pdf->SetFont($font_name, '', $font_size);
   $pdf->writeHTML($matches[1]);
 
-  //Close and output PDF document 
+  //Close and output PDF document
   $output_dest = ($print_pdf_settings['content_disposition'] == 2) ? 'D' : 'I';
   $pdf->Output($filename, $output_dest);
 }

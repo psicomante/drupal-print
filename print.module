@@ -59,7 +59,7 @@ function print_sourceurl_settings_default() {
  *   array with the values
  */
 function print_robot_settings_default() {
-  return array('noindex' => 1, 'nofollow' => 1, 'noarchive' => 0, 'nocache' => 0);
+  return array('noindex' => 1, 'nofollow' => 1, 'noarchive' => 0);
 }
 
 /**
@@ -143,7 +143,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
   if ( !($teaser) && ($node_type != 'book') && (!isset($node->book)) &&
       ($print_html_settings['show_link']) && user_access('access print') &&
       !(($print_html_settings['node_link_visibility']) xor
-       (drupal_match_path("node/". $node->nid, $print_html_settings['node_link_pages']))) &&
+      (drupal_match_path("node/". $node->nid, $print_html_settings['node_link_pages']))) &&
       (($type == 'comment' && $print_display_comment) ||
       ($type == 'node' && $print_display))) {
     $links = array();
@@ -162,7 +162,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
                             'attributes' => $format['attributes'],
                             'html' => $format['html'],
                             'query' => $query,
-                           );
+                      );
 
     return $links;
   }
@@ -203,14 +203,14 @@ function print_help($path, $arg) {
   $print_html_settings = variable_get('print_html_settings', print_html_settings_default());
 
   if (($print_html_settings['show_link']) && user_access('access print') &&
-      !(($print_html_settings['sys_link_visibility']) xor 
-       (drupal_match_path($path, $print_html_settings['sys_link_pages']))) &&
+      !(($print_html_settings['sys_link_visibility']) xor
+      (drupal_match_path($path, $print_html_settings['sys_link_pages']))) &&
       (preg_match("/^node\//i", $path) == 0)) {
     static $output = FALSE;
 
     if ($output === FALSE) {
       $output = TRUE;
-    
+
       return print_insert_link();
     }
   }
@@ -222,13 +222,20 @@ function print_help($path, $arg) {
 function print_form_alter(&$form, $form_state, $form_id) {
   // Add the node-type settings option to activate the printer-friendly version link
   if ($form_id == 'node_type_form') {
-    $form['workflow']['print_display'] = array(
+    $form['print'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Printer-friendly pages'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+
+    $form['print']['print_display'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show printer-friendly version link'),
       '#default_value' => variable_get('print_display_'. $form['#node_type']->type, 1),
       '#description' => t('Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings.', array('!settings' => l(t('settings page'), 'admin/settings/print' ))),
     );
-    $form['comment']['print_display_comment'] = array(
+    $form['print']['print_display_comment'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show printer-friendly version link in individual comments'),
       '#default_value' => variable_get('print_display_comment_'. $form['#node_type']->type, 0),
@@ -255,7 +262,9 @@ function print_fill_attributes($title = '', $class = '', $new_window = FALSE) {
 
   $attributes = array();
   $attributes['title'] = $title;
-  $attributes['class'] = $class;
+  if (!empty($class)) {
+    $attributes['class'] = $class;
+  }
 
   if ($new_window) {
     switch ($print_settings['newwindow']) {
@@ -267,7 +276,7 @@ function print_fill_attributes($title = '', $class = '', $new_window = FALSE) {
       break;
     }
   }
-  if (!empty($robots_settings['nofollow'])) {
+  if (!empty($robots_settings['noindex'])) {
     $attributes['rel'] = 'nofollow';
   }
   return $attributes;
@@ -288,21 +297,21 @@ function print_fill_attributes($title = '', $class = '', $new_window = FALSE) {
  */
 function _print_format_link_aux($type = 0, $text = '', $img = '') {
   if ($type >= 2) {
-    $img = theme('image', $img, $text, '', array('style' => 'vertical-align: middle'));
+    $img = theme('image', $img, $text, '', array('style' => 'margin-right: 4px;vertical-align: middle'));
     $html = TRUE;
     switch ($type) {
     case 2:
       $text = $img;
       break;
     case 3:
-      $text = $img .' '. $text;
+      $text = $img . $text;
       break;
     }
   }
   else {
     $html = FALSE;
   }
-  
+
   return array('text' => $text,
                'html' => $html,
               );
@@ -354,7 +363,7 @@ function theme_print_text() {
  * their defined pages/blocks.
  *
  * @param $path
- *   path of the original page (optional). If not specified, the current URL 
+ *   path of the original page (optional). If not specified, the current URL
  *   is used
  * @return
  *   string with the HTML link to the printer-friendly page
