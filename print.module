@@ -125,7 +125,7 @@ function print_link($type, $node = NULL, $teaser = FALSE) {
     if ($type == 'comment') {
       $query_arr['comment'] = $node->cid;
     }
-    $query = drupal_query_string_encode($query_arr, array('q'));
+    $query = print_query_string_encode($query_arr, array('q'));
     if (empty($query)) $query = NULL;
 
     $links['print'] = array('href' => PRINT_PATH ."/". $node->nid,
@@ -338,7 +338,7 @@ function print_insert_link($path = NULL) {
   if (user_access('access print')) {
     if ($path === NULL) {
       $path = PRINT_PATH ."/". $_GET['q'];
-      $query = drupal_query_string_encode($_GET, array('q'));
+      $query = print_query_string_encode($_GET, array('q'));
       if (empty($query)) {
         $query = NULL;
       }
@@ -366,4 +366,27 @@ function _print_match_path($path, $patterns) {
     $regexps[$patterns] = '/^('. preg_replace(array('/(\r\n?|\n)/', '/\\\\\*/', '/(^|\|)\\\\<front\\\\>($|\|)/'), array('|', '.*', '\1'. preg_quote(variable_get('site_frontpage', 'node'), '/') .'\2'), preg_quote($patterns, '/')) .')$/';
   }
   return preg_match($regexps[$patterns], $path);
+}
+
+/**
+ * Parse an array into a valid urlencoded query string.
+ * Modified from drupal_query_string_encode to prevent re-encoding of
+ * encoded original.
+ *
+ * @param $query
+ *   The array to be processed e.g. $_GET
+ * @param $exclude
+ *   The array filled with keys to be excluded.
+ * @return
+ *   urlencoded string which can be appended to/as the URL query string
+ */
+function print_query_string_encode($query, $exclude = array()) {
+  $params = array();
+  foreach ($query as $key => $value) {
+    if (in_array($key, $exclude)) {
+      continue;
+    }
+    $params[] = $key .'='. rawurlencode($value);
+  }
+  return implode('&', $params);
 }
