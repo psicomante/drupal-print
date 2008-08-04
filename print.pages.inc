@@ -343,10 +343,12 @@ function _print_rewrite_urls($matches) {
         $newurl = urldecode($url);
       }
       else {
-        if (substr($url, 0, 1) == '#') {
+        if ($url[0] == '#') {
           // URL is an anchor tag
           if ($pfurls) {
-            $path = substr($_GET['q'], strpos($_GET['q'], '/')+1);
+            $path = explode('/', $_GET['q']);
+            unset($path[0]);
+            $path = implode('/', $path);
             if (is_numeric($path)) {
               $path = "node/$path";
             }
@@ -360,7 +362,7 @@ function _print_rewrite_urls($matches) {
         else {
           // URL is relative, convert it into absolute URL
           $clean_url = (bool)variable_get('clean_url', '0');
-          if (substr($url, 0, 1) == '/') {
+          if ($url[0] == '/') {
             // If it starts with '/' just append it to the server name
             $newurl = $base_root .'/'. trim(urldecode($url), '/');
           }
@@ -412,7 +414,9 @@ function _print_friendly_urls($url = 0) {
       return count($urls);
     }
   }
-  return $urls;
+  $ret = $urls;
+  $urls = array();
+  return $ret;
 }
 
 /**
@@ -578,13 +582,15 @@ function _print_generate_path($path, $teaser = FALSE, $message = NULL) {
     return;
   }
 
-  switch ($node->body) {
-  case MENU_NOT_FOUND:
-    return drupal_not_found();
-    break;
-  case MENU_ACCESS_DENIED:
-    return drupal_access_denied();
-    break;
+  if (is_int($node->body)) {
+    switch ($node->body) {
+      case MENU_NOT_FOUND:
+        return drupal_not_found();
+        break;
+      case MENU_ACCESS_DENIED:
+        return drupal_access_denied();
+        break;
+    }
   }
 
   // Delete any links area
