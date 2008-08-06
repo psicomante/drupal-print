@@ -10,6 +10,7 @@
     <?php  print $print['css'] ?>
   </head>
   <body<?php  print $print['sendtoprinter'] ?>>
+    <?php if (!empty($print['message'])) print '<div class="print-message">'. $print['message'] .'</div><p />' ?>
     <div><?php  print $print['logo'] ?></div>
     <div class="print-site_name"><?php  print $print['site_name'] ?></div>
     <p />
@@ -19,8 +20,8 @@
     <div class="print-submitted"><?php  print $print['submitted'] ?></div>
     <div class="print-created"><?php  print $print['created'] ?></div>
     <p />
-    <div class="print-taxonomy"><?php print $print['taxonomy'] ?></div>
     <div class="print-content"><?php  print $print['content'] ?></div>
+    <div class="print-taxonomy"><?php print $print['taxonomy'] ?></div>
     <div class="print-footer"><?php  print $print['footer_message'] ?></div>
     <hr class="print-hr" />
     <div class="print-source_url"><?php  print $print['source_url'] ?></div>

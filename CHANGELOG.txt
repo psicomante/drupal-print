@@ -1,4 +1,18 @@
+August 5, 2008
+        Enable selection of none, theme or user-defined logo. Added also capability to upload logo directly from the settings form.
+        Added a new link area in the upper right corner of the content
+        Add option to select location of the links
+        Simplify settings forms by using collapsible fieldsets
+        Moved taxonomy to lower right corner of template
+        Replaced all inline styles with a core-loaded CSS file
+        Sync 6.x to 5.x
+July 30, 2008
+        Fix #280949: Add macros to the CSS input
+        Fix #285496: prevent re-encoding of the encoded query
+July 21, 2008
+        Remove DOS CR+LF
 July 16, 2008
+        Vietnamese translation.
         Updated all translations
         Misc fixes from the coder module
 July 15, 2008
