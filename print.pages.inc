@@ -231,7 +231,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   if (isset($node->type)) {
     $node_type = $node->type;
 
-    if (theme_get_setting('toggle_node_info_$node_type')) {
+    if (theme_get_setting("toggle_node_info_$node_type")) {
       $by_author = ($node->name ? $node->name : variable_get('anonymous', t('Anonymous')));
       $by = (empty($themed['by'])) ? t('By %author', array('%author' => $by_author)) : ($themed['by'] .' '. $by_author);
       $print['submitted'] = $by;
@@ -307,7 +307,6 @@ function _print_rewrite_urls($matches) {
 
   // Get value of Printer-friendly URLs setting
   $print_urls = variable_get('print_urls', PRINT_URLS_DEFAULT);
-  $pfurls = (!empty($print_urls));
 
   //Temporarily convert spaces to %20 so that it isn't split below
   $in_string = FALSE;
@@ -334,14 +333,14 @@ function _print_rewrite_urls($matches) {
       preg_match('/.*?=(.*)/is', $attribs[$i], $urls);
       $url = trim($urls[1], " \t\n\r\0\x0B\"'");
 
-      if (strpos($url, '://') || preg_match('/^mailto:.*?@.*?\..*?$/iu', $url)) {
+      if (strpos($url, '://') || preg_match('!^mailto:.*?@.*?\..*?$!iu', $url)) {
         // URL is absolute, do nothing
         $newurl = urldecode($url);
       }
       else {
         if ($url[0] == '#') {
           // URL is an anchor tag
-          if ($pfurls) {
+          if (!empty($print_urls)) {
             $path = explode('/', $_GET['q']);
             unset($path[0]);
             $path = implode('/', $path);
@@ -357,13 +356,12 @@ function _print_rewrite_urls($matches) {
         }
         else {
           // URL is relative, convert it into absolute URL
-          $clean_url = (bool)variable_get('clean_url', '0');
           if ($url[0] == '/') {
             // If it starts with '/' just append it to the server name
             $newurl = $base_root .'/'. trim(urldecode($url), '/');
           }
-          elseif ((!$clean_url) && (preg_match('/^(?:index.php)?\?q=.*/i', $url))) {
-            // If Clean URLs is disabled, and it starts with q=?, just prepend with the base URL
+          elseif (preg_match('!^(?:index.php)?\?q=!i', $url)) {
+            // If it starts with ?q=, just prepend with the base URL
             $newurl = $base_url .'/'. trim(urldecode($url), '/');
           }
           else {
@@ -381,7 +379,7 @@ function _print_rewrite_urls($matches) {
   $ret = '<'. $matches[1] .'>';
   if (count($matches) == 4) {
     $ret .= $matches[2] . $matches[3];
-    if (($pfurls) && (isset($newurl))) {
+    if ((!empty($print_urls)) && (isset($newurl))) {
       $ret .= ' <span class="print-footnote">['. _print_friendly_urls(trim(stripslashes($newurl))) .']</span>';
     }
   }
