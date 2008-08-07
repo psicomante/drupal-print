@@ -235,7 +235,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   if (isset($node->type)) {
     $node_type = $node->type;
 
-    if (theme_get_setting('toggle_node_info_$node_type')) {
+    if (theme_get_setting("toggle_node_info_$node_type")) {
       $by_author = ($node->name ? $node->name : variable_get('anonymous', t('Anonymous')));
       $by = (empty($themed['by'])) ? t('By %author', array('%author' => $by_author)) : ($themed['by'] .' '. $by_author);
       $print['submitted'] = $by;
