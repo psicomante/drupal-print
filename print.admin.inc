@@ -138,6 +138,11 @@ function _print_main_settings_validate($form_id, $form_values, $form) {
   }
 }
 
+/**
+ * Menu callback for the Printer-friendly pages HTML settings form.
+ *
+ * @ingroup forms
+ */
 function print_html_settings() {
   $form['settings'] = array(
     '#type' => 'fieldset',

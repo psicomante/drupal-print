@@ -308,29 +308,17 @@ function _print_rewrite_urls($matches) {
   // Get value of Printer-friendly URLs setting
   $print_urls = variable_get('print_urls', PRINT_URLS_DEFAULT);
 
-  //Temporarily convert spaces to %20 so that it isn't split below
-  $in_string = FALSE;
-  $length = strlen($matches[1]);
-  for ($i=0; $i < $length; $i++) {
-    if ($matches[1][$i] == '"') {
-      $in_string = !$in_string;
-    }
-    if (($matches[1][$i] == ' ') && ($in_string)) {
-      $matches[1] = substr_replace($matches[1], '%20', $i, 1);
-    }
-  }
-  // remove whitespace immediately before and after the '=' sign
-  $matches[1] = preg_replace('/\s*=\s*/', '=', $matches[1]);
-
   // first, split the html into the different tag attributes
-  $attribs = preg_split('/\s+/m', $matches[1]);
+  $pattern = '!\s*(\w+\s*=\s*"(?:\\\"|[^"])*")\s*|\s*(\w+\s*=\s*\'(?:\\\\\'|[^\'])*\')\s*|\s*(\w+\s*=\s*\w+)\s*|\s+!';
+  $attribs = preg_split($pattern, $matches[1], -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+  foreach ($attribs as $key => $value) {
+    $attribs[$key] = preg_replace('!(\w)\s*=\s*(.*)!', '$1=$2', $value);
+  }
 
   $size = count($attribs);
   for ($i=1; $i < $size; $i++) {
     // If the attribute is href or src, we may need to rewrite the URL in the value
-    if (preg_match('/^(?:href|src)\s*?=/i', $attribs[$i]) > 0) {
-      // We may need to rewrite the URL, so let's isolate it
-      preg_match('/.*?=(.*)/is', $attribs[$i], $urls);
+    if (preg_match('!^(?:href|src)\s*?=(.*)!i', $attribs[$i], $urls) > 0) {
       $url = trim($urls[1], " \t\n\r\0\x0B\"'");
 
       if (strpos($url, '://') || preg_match('!^mailto:.*?@.*?\..*?$!iu', $url)) {
@@ -372,9 +360,6 @@ function _print_rewrite_urls($matches) {
       }
     }
   }
-
-  //Revert all %20 in strings back to spaces
-  $matches[1] = str_replace('%20', ' ', $matches[1]);
 
   $ret = '<'. $matches[1] .'>';
   if (count($matches) == 4) {
