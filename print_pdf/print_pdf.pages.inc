@@ -99,7 +99,7 @@ function _print_pdf_dompdf($print, $html, $filename) {
  * @see print_pdf_controller()
  */
 function _print_pdf_tcpdf($print, $html, $filename) {
-  global $base_url, $base_root;
+  global $base_url;
   $print_pdf_pdf_tool = variable_get('print_pdf_pdf_tool', PRINT_PDF_PDF_TOOL_DEFAULT);
   $print_pdf_paper_size = variable_get('print_pdf_paper_size', PRINT_PDF_PAPER_SIZE_DEFAULT);
   $print_pdf_page_orientation = variable_get('print_pdf_page_orientation', PRINT_PDF_PAGE_ORIENTATION_DEFAULT);
@@ -108,8 +108,8 @@ function _print_pdf_tcpdf($print, $html, $filename) {
   $pdf_tool_path = realpath(dirname($print_pdf_pdf_tool));
 
   define('K_TCPDF_EXTERNAL_CONFIG', TRUE);
-  define('K_PATH_MAIN', $_SERVER['DOCUMENT_ROOT']);
-  define('K_PATH_URL', $base_root);
+  define('K_PATH_MAIN', dirname($_SERVER['SCRIPT_FILENAME']));
+  define('K_PATH_URL', $base_url);
   define('K_PATH_FONTS', $pdf_tool_path .'/fonts/');
   define('K_PATH_CACHE', $pdf_tool_path .'/cache/');
   define('K_PATH_IMAGES', '');
@@ -118,7 +118,12 @@ function _print_pdf_tcpdf($print, $html, $filename) {
   define('K_SMALL_RATIO', 2/3);
 
   require_once($print_pdf_pdf_tool);
-  require_once('print_pdf.class.inc');
+  if (version_compare(PHP_VERSION, '5.0.0', '>')) {
+    require_once('print_pdf.class.inc');
+  }
+  else {
+    require_once('print_pdf.class_php4.inc');
+  }
 
   $font = Array(
     variable_get('print_pdf_font_family', PRINT_PDF_FONT_FAMILY_DEFAULT),
@@ -254,7 +259,7 @@ function _print_pdf_tcpdf_content_aux(&$pdf, &$html, $font) {
  * @see theme_print_pdf_tcpdf_footer()
  */
 function _print_pdf_tcpdf_footer_aux(&$pdf, &$html, $font) {
-  preg_match('!<div class="print-footer">(.*?)</div>!si', $html, $tpl_footer);
+  preg_match('!<div class="print-footer">.*<div class="content">(.*?)</div>!si', $html, $tpl_footer);
 
   // set footer font
   $font[2] *= 0.8;
@@ -274,10 +279,10 @@ function _print_pdf_tcpdf_footer_aux(&$pdf, &$html, $font) {
  */
 function _print_pdf_tcpdf_footer2_aux(&$pdf) {
   //Position at 1.5 cm from bottom
-  $pdf->writeHTMLCell(0, 15, 0, -15, $pdf->footer, 0, 0, 0, TRUE, 'C');
+  $pdf->writeHTMLCell(0, 15, 15, 0, $pdf->footer, 0, 0, 0, TRUE, '');
 
   $ormargins = $pdf->getOriginalMargins();
-  $pagenumtxt = t('Page') .' '. $pdf->PageNo() .' / {nb}';
+  $pagenumtxt = t('Page') .' '. $pdf->PageNo() .' / '. $pdf->getAliasNbPages();
   //Print page number
   if ($pdf->getRTL()) {
     $pdf->SetX($ormargins['right']);
