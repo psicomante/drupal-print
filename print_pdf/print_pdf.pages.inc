@@ -118,7 +118,7 @@ function _print_pdf_tcpdf($print, $html, $filename) {
   define('K_SMALL_RATIO', 2/3);
 
   require_once($print_pdf_pdf_tool);
-  if (version_compare(PHP_VERSION, '5.0.0', '>')) {
+  if (strpos(PDF_PRODUCER, 'PHP4') === FALSE) {
     require_once('print_pdf.class.inc');
   }
   else {
