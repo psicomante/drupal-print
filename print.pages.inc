@@ -154,7 +154,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
     $css_files[] = strip_tags(strtr($print_css, $replace_pairs));
   }
   else {
-    $css_files[] = base_path() . drupal_get_path('module', 'print') .'/print.css';
+    $css_files[] = base_path() . drupal_get_path('module', 'print') .'/css/print.css';
   }
   // Add CCK's CSS file to properly display the fields
   if (module_exists('content')) {
