@@ -138,6 +138,8 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   $print_sourceurl_enabled = variable_get('print_sourceurl_enabled', PRINT_SOURCEURL_ENABLED_DEFAULT);
   $print_sourceurl_forcenode = variable_get('print_sourceurl_forcenode', PRINT_SOURCEURL_FORCENODE_DEFAULT);
   $print_sourceurl_date = variable_get('print_sourceurl_date', PRINT_SOURCEURL_DATE_DEFAULT);
+  $print_footer_options = variable_get('print_footer_options', PRINT_FOOTER_OPTIONS_DEFAULT);
+  $print_footer_user = variable_get('print_footer_user', PRINT_FOOTER_USER_DEFAULT);
 
   $print['language'] = $language->language;
   $print['title'] = $node->title;
@@ -148,30 +150,34 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   $print['base_href'] = "<base href='". $print['url'] ."' />\n";
   $print['favicon'] = theme_get_setting('toggle_favicon') ? "<link rel='shortcut icon' href='". theme_get_setting('favicon') ."' type='image/x-icon' />\n" : '';
 
-  $css_files = array();
   if (!empty($print_css)) {
     $replace_pairs = array('%b' => base_path(), '%t' => path_to_theme());
-    $css_files[] = strip_tags(strtr($print_css, $replace_pairs));
+    $user_css = strip_tags(strtr($print_css, $replace_pairs));
   }
   else {
-    $css_files[] = base_path() . drupal_get_path('module', 'print') .'/css/print.css';
+    drupal_add_css(drupal_get_path('module', 'print') .'/css/print.css');
   }
-  // If the current language is RTL add the RTL stylesheet.
-  if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL) {
-    $css_files[] = base_path() . drupal_get_path('module', 'print') .'/css/print-rtl.css';
-  }
-  // Add CCK's CSS file to properly display the fields
-  if (module_exists('content')) {
-    $css_files[] = base_path() . drupal_get_path('module', 'content') .'/theme/content.css';
+  $drupal_css = drupal_add_css();
+  foreach ($drupal_css as $key => $types) {
+    // Unset the theme's CSS
+    $drupal_css[$key]['theme'] = array();
   }
 
   // If we are sending a message via e-mail, the CSS must be embedded
   if (!empty($message)) {
     $style = '';
-    $pattern = '!^'. base_path() .'!';
-    foreach ($css_files as $filename) {
+    $css_files = array();
+    foreach ($drupal_css as $types) {
+      foreach ($types as $values) {
+        $css_files = array_merge($css_files, array_keys($values));
+      }
+    }
+    if (!empty($print_css)) {
       // Convert to a local path, by removing the base_path
-      $filename = preg_replace($pattern, '', $filename);
+      $pattern = '!^'. base_path() .'!';
+      $css_files[] = preg_replace($pattern, '', $user_css);
+    }
+    foreach ($css_files as $filename) {
       $res = file_get_contents($filename, TRUE);
       if ($res != FALSE) {
         $style .= $res;
@@ -180,9 +186,9 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
     $print['css'] = "<style type='text/css' media='all'>$style</style>\n";
   }
   else {
-    $print['css'] = '';
-    foreach ($css_files as $value) {
-      $print['css'] .= "<link type='text/css' rel='stylesheet' media='all' href='$value' />\n";
+    $print['css'] = drupal_get_css($drupal_css);
+    if (!empty($print_css)) {
+      $print['css'] .= "<link type='text/css' rel='stylesheet' media='all' href='$user_css' />\n";
     }
   }
 
@@ -200,6 +206,20 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
       break;
   }
   $print['logo'] = $logo_url ? "<img class='print-logo' src='$logo_url' alt='' />\n" : '';
+
+  switch ($print_footer_options) {
+    case 0: // none
+      $footer = '';
+      break;
+    case 1: // theme's
+      $footer = filter_xss_admin(variable_get('site_footer', FALSE)) ."\n". theme('blocks', 'footer');
+      $logo_url = theme_get_setting('logo');
+      break;
+    case 2: // user-specifed
+      $footer = $print_footer_user;
+      break;
+  }
+  $print['footer_message'] = $footer;
 
   $published_site = variable_get('site_name', 0);
   if ($published_site) {
@@ -290,7 +310,6 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   $print['content'] = $node->body;
   $print['node'] = $node;
   $print['message'] = $message;
-  $print['footer_message'] = filter_xss_admin(variable_get('site_footer', FALSE)) ."\n". theme('blocks', 'footer') ;
 
   return $print;
 }
