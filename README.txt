@@ -1,9 +1,12 @@
 DESCRIPTION
 -----------
 
-This module allows you to generate printer friendly versions of any node by
-navigating to www.example.com/print/nid, where nid is the node id of content
-to render.
+This module allows you to generate the following printer-friendly versions
+of any node:
+
+    * Web page printer-friendly version (at www.example.com/print/nid)
+
+where nid is the node id of content to render.
 
 A link is inserted in the each node (configurable in the content type
 settings), that opens a version of the page with no sidebars, search boxes,
@@ -28,24 +31,26 @@ CONFIGURATION
     For each content type it is possible to enable or disable the PF link
     via the "Show printer-friendly version link" checkbox. (default:
     enabled)
-
-  Administer > Content management > Comments > Settings (admin/content/comment/settings)
-    It is possible to enabled or disable the PF link in individual comments
-    via the "Show printer-friendly version link in individual comments"
-    checkbox. (default: disabled)
+    It is also possible to enable or disable the PF link in individual
+    comments via the "Show printer-friendly version link in individual
+    comments" checkbox. (default: disabled)
 
   Administer > Site configuration > Printer-friendly (admin/settings/print)
     This is where all the module-specific configuration options can be set.
 
 - To modify the template of printer friendly pages, simply edit the
-print.tpl.php or the print.css files found in this directory.
+print.tpl.php or the css/print.css files.
 
 - It is possible to set per-content-type and/or theme-specific templates
   which are searched for in the following order: 
-   1. print.node-__type__.tpl.php in the theme directory
-   2. print.node-__type__.tpl.php in the module directory 
-   3. print.tpl.php in the theme directory
-   4. print.tpl.php in the module directory (supplied by the module)
+   1. print_[format].node-[type].tpl.php in the theme directory
+   2. print_[format].node-[type].tpl.php in the module directory 
+   3. print_[format].tpl.php in the theme directory
+   4. print_[format].tpl.php in the module directory 
+   5. print.node-[type].tpl.php in the theme directory
+   6. print.node-[type].tpl.php in the module directory 
+   7. print.tpl.php in the theme directory
+   8. print.tpl.php in the module directory (supplied by the module)
 
 API
 ---
@@ -68,7 +73,6 @@ It is also possible to specify the link to the page yourself:
 
 will return the HTML pointing to the printer-friendly version of node 42.
 
-
 THEMEABLE FUNCTIONS
 -------------------
 
@@ -77,7 +81,7 @@ The following themeable functions are defined:
   theme_print_format_link()
   Returns an array of formatted attributes for the Printer-friendly link.
 
-  theme_print_text
+  theme_print_text()
   Returns an array of costumized text strings used in the printer-friendly
   page.
 
