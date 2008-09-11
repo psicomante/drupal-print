@@ -1,10 +1,31 @@
-August 5, 2008
+September 11, 2008
+        Update changelog
+        Update translations with current .pot
+September 10, 2008
+        Update documentation
+        Use module's CSS files
+        Footer can now be choice between none, site or user-defined
+September 4, 2008
+        Repair type-specific link settings
+September 3, 2008
+        Fix wrong fix to #299123
+September 2, 2008
+        Move CSS files to css directory.
+        Fix #301192: handle arrays in queries correctly
+        Fix #299123 and #299133: remove PHP notices
+August 14, 2008
+        Improved URL rewriting function
+August 7, 2008
+        Add the links CSS file for the normal link
+        Fix bug with visibility where the link was shown when no page was specified but the 'show only in listed pages' was selected
+August 6, 2008
         Enable selection of none, theme or user-defined logo. Added also capability to upload logo directly from the settings form.
         Added a new link area in the upper right corner of the content
         Add option to select location of the links
         Simplify settings forms by using collapsible fieldsets
         Moved taxonomy to lower right corner of template
         Replaced all inline styles with a core-loaded CSS file
+August 5, 2008
         Sync 6.x to 5.x
 July 30, 2008
         Fix #280949: Add macros to the CSS input
