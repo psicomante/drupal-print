@@ -49,7 +49,7 @@ function print_mail_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'print_mail.inc',
   );
-  $items['admin/settings/print/mail'] = array(
+  $items['admin/settings/print/email'] = array(
     'title' => 'e-mail',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('print_mail_settings'),
