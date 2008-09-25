@@ -23,8 +23,10 @@ function print_controller_html() {
   $cid = isset($_GET['comment']) ? (int)$_GET['comment'] : NULL;
 
   $print = print_controller($path, $cid);
-  $node = $print['node'];
-  include_once(_print_get_template('html', $print['type']));
+  if ($print !== FALSE) {
+    $node = $print['node'];
+    include_once(_print_get_template('html', $print['type']));
+  }
 }
 
 /**
@@ -488,12 +490,12 @@ function _print_generate_node($nid, $cid = NULL, $teaser = FALSE, $message = NUL
   if (!$node) {
     // Node not found
     drupal_not_found();
-    return;
+    return FALSE;
   }
   elseif (!node_access('view', $node)) {
     // Access is denied
     drupal_access_denied();
-    return;
+    return FALSE;
   }
   drupal_set_title($node->title);
 
@@ -589,18 +591,18 @@ function _print_generate_path($path, $teaser = FALSE, $message = NULL) {
 
   // It may happen that a drupal_not_found is called in the above call
   if (preg_match('/404 Not Found/', drupal_get_headers()) == 1) {
-    return;
+    return FALSE;
   }
 
   if (is_int($node->body)) {
     switch ($node->body) {
       case MENU_NOT_FOUND:
         drupal_not_found();
-        return;
+        return FALSE;
         break;
       case MENU_ACCESS_DENIED:
         drupal_access_denied();
-        return;
+        return FALSE;
         break;
     }
   }
@@ -637,12 +639,12 @@ function _print_generate_book($nid, $teaser = FALSE, $message = NULL) {
   if (!$node) {
     // Node not found
     drupal_not_found();
-    return;
+    return FALSE;
   }
   elseif (!node_access('view', $node) || (!user_access('see printer-friendly version'))) {
     // Access is denied
     drupal_access_denied();
-    return;
+    return FALSE;
   }
 
   $depth = count(book_location($node)) + 1;
