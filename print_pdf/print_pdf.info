@@ -1,0 +1,5 @@
+; $Id$
+name = "PDF version"
+description = "Adds the capability to export pages as PDF."
+dependencies = print
+package = "Printer, e-mail and PDF versions"
