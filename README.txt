@@ -6,6 +6,7 @@ of any node:
 
     * Web page printer-friendly version (at www.example.com/print/nid)
     * PDF version (at www.example.com/printpdf/nid)
+    * Send by-email (at www.example.com/printmail/nid)
 
 where nid is the node id of content to render.
 
@@ -56,7 +57,7 @@ print.tpl.php or the css/print.css files.
 API
 ---
 
-print_insert_link(), print_pdf_insert_link()
+print_insert_link(), print_mail_insert_link(), print_pdf_insert_link()
 
 The *_insert_link functions are available to content developers that prefer
 to place the printer-friendly link in a custom location. It is advisable to
@@ -82,6 +83,7 @@ THEMEABLE FUNCTIONS
 The following themeable functions are defined:
 
   * theme_print_format_link()
+  * theme_print_mail_format_link()
   * theme_print_pdf_format_link()
       Returns an array of formatted attributes for the Printer-friendly
       link.

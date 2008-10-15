@@ -16,6 +16,11 @@
  *   - @link print.pages.inc HTML generation @endlink
  *   - @link print.install (Un)Install routines @endlink
  *   - @link print.tpl.php Page generation template @endlink
+ * - Send by e-mail
+ *   - @link print_mail.module Module main file @endlink
+ *   - @link print_mail.admin.inc Settings form @endlink
+ *   - @link print_mail.inc Mail form and send mail routine @endlink
+ *   - @link print_mail.install (Un)Install routines @endlink
  * - PDF version
  *   - @link print_pdf.module Module main file @endlink
  *   - @link print_pdf.admin.inc Settings form @endlink
@@ -23,10 +28,4 @@
  *   - @link print_pdf.class.inc Auxiliary PHP5 class @endlink
  *   - @link print_pdf.class_php4.inc Auxiliary PHP4 class @endlink
  *   - @link print_pdf.install (Un)Install routines @endlink
- */
-/** - Send by e-mail
- *   - @link print_mail.module Module main file @endlink
- *   - @link print_mail.admin.inc Settings form @endlink
- *   - @link print_mail.inc Mail form and send mail routine @endlink
- *   - @link print_mail.install (Un)Install routines @endlink
  */
