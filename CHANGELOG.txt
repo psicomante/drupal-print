@@ -1,3 +1,23 @@
+October 15, 2008
+        Update changelog
+        Backport send by e-mail from the 6.x branch
+        Fix PDF links (final touches to PDF support in Drupal 5: #299523 and #314754)
+        Fix #258095: Add block with links to PF versions
+        Fix #318939: Add title tag to icons
+        Fix #314521: Use real path when private download method is enabled
+October 3, 2008
+        Add PDF support in the Drupal 5 version of the module
+September 26, 2008
+        Verify print_controller return value to avoid PHP warnings
+        Add simpletest tests to Drupal 5
+        Add option to use URL alias in the link
+September 22, 2008
+        Fix #311270: Use node_not_found() instead of node_access_denied() when appropriate
+        Make the code closer to Drupal's node_view()
+September 18, 2008
+        Fix #308620 by robertDouglass: cast cid to int
+September 13, 2008
+        Add API index file
 September 11, 2008
         Update changelog
         Update translations with current .pot
