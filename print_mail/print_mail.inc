@@ -89,10 +89,8 @@ function print_mail_form($form_state) {
     '#value' => t('Send e-mail'),
   );
   $form['btn_clear'] = array(
-    '#name' => 'clear',
-    '#type' => 'button',
-    '#value' => t('Clear form'),
-    '#attributes' => array('onclick' => 'this.form.reset(); return false;'),
+    '#type' => 'markup',
+    '#value' => '<input type="reset" name="clear" value="'. t('Clear form') .'" class="form-submit" />',
   );
   $form['btn_cancel'] = array(
     '#name' => 'cancel',
@@ -229,7 +227,7 @@ function print_mail_form_submit($form_id, $form_values) {
   $ret = drupal_mail('print_mail_sendpage', $to, $message['subject'], $message['body'], $from, $message['headers']);
   if ($ret) {
     flood_register_event('print_mail');
-    watchdog('print_mail', $form_values['fld_from_name'] .' ['. $form_values['fld_from_addr'] .'] sent '. $form_values['path'] .' to ['. $to .']');
+    watchdog('print_mail', t('%name [%from] sent %page to [%to]', array('%name' => $form_values['fld_from_name'], '%from' => $form_values['fld_from_addr'], '%page' => $form_values['path'], '%to' => $to)));
     $site_name = variable_get('site_name', t('us'));
     drupal_set_message(t('Thank you for spreading the word about !site.', array('!site' => $site_name)));
   }
