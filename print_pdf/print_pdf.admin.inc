@@ -161,6 +161,7 @@ function print_pdf_settings() {
       '#maxlength' => 3,
       '#description' => t('(TCPDF only) Set the font size to be used for normal text. This is the base value for the scaling applied to other text styles.'),
     );
+    $form['#validate']['_print_pdf_settings_validate'] = array();
   }
   else {
     $form['settings'] = array(
@@ -168,8 +169,6 @@ function print_pdf_settings() {
       '#value' => '<p>'. t("No PDF generation tool found! Please dowload a supported PHP PDF generation tool. Check this module's INSTALL.txt for more details.") .'</p>',
     );
   }
-
-  $form['#validate']['_print_pdf_settings_validate'] = array();
 
   return system_settings_form($form);
 }
