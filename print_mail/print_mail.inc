@@ -219,7 +219,7 @@ function print_mail_form_submit($form_id, $form_values) {
   $params['subject'] = $form_values['fld_subject'];
   $params['message'] = $form_values['txt_message'];
   $params['path'] = $form_values['path'];
-  $params['cid'] = isset($form_values['cid']) ? $form_values['cid'] : '';
+  $params['cid'] = isset($form_values['cid']) ? $form_values['cid'] : NULL;
   $params['teaser'] = $form_values['chk_teaser'];
 
   print_mail_mail('sendpage', $message, $params);
