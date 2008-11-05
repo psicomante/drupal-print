@@ -254,7 +254,7 @@ function theme_print_pdf_tcpdf_header(&$pdf, &$html, $font) {
   if ($logo_ret) {
     $logo = trim($matches[1], '\'"');
     $size = getimagesize($logo);
-    $ratio = $size[0] / $size[1];
+    $ratio = $size ? ($size[0] / $size[1]) : 0;
   }
 
   // set header font
