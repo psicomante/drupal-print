@@ -1,19 +1,197 @@
-# $Id$
-#
-# Hungarian translation of Drupal (print)
-# Copyright 2008 Hungarian translation team
+# Hungarian translation of print (6.x-1.0)
+# Copyright (c) 2008 by the Hungarian translation team
+# Generated from files:
+#  print_mail.inc,v 1.2.2.4 2008/09/02 20:08:27 jcnventura
+#  print.pages.inc,v 1.1.2.29 2008/09/10 08:13:05 jcnventura
+#  print.module,v 1.25.2.40 2008/09/10 10:37:34 jcnventura
+#  print_pdf.admin.inc,v 1.1.2.2 2008/08/21 22:03:40 jcnventura
+#  print_mail.admin.inc,v 1.1.2.2 2008/08/21 22:03:40 jcnventura
+#  print.admin.inc,v 1.1.2.15 2008/09/10 08:13:05 jcnventura
+#  print_mail.module,v 1.1.2.7 2008/09/10 10:37:34 jcnventura
+#  print_pdf.info,v 1.1.2.2 2008/08/21 22:03:40 jcnventura
+#  print_mail.info,v 1.1.2.2 2008/08/21 22:03:40 jcnventura
+#  print.info,v 1.3.2.4 2008/08/21 22:03:39 jcnventura
+#  print_pdf.module,v 1.1.2.8 2008/09/10 10:37:34 jcnventura
+#  print.install,v 1.1.4.9 2008/09/02 08:15:58 jcnventura
+#  print_pdf.pages.inc,v 1.3.2.5 2008/09/10 08:13:06 jcnventura
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: print (6.x-1.0)\n"
-"POT-Creation-Date: 2008-10-16 11:56+0200\n"
-"PO-Revision-Date: 2008-11-05 01:59+0100\n"
-"Last-Translator: Fehér János <http://aries.mindworks.hu>\n"
-"Language-Team: Drupal.hu Fordítói Csapat <forditas [at] drupal.hu>\n"
+"POT-Creation-Date: 2008-11-21 10:27-0600\n"
+"PO-Revision-Date: 2008-10-26 09:29-0500\n"
+"Last-Translator: Balogh Zoltán\n"
+"Language-Team: Hungarian http://forditas.mindworks.hu\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: print_mail/print_mail.inc:97
+msgid "Cancel"
+msgstr "Mégsem"
+
+#: print.pages.inc:259
+msgid "Anonymous"
+msgstr "Anonymous"
+
+#: print.module:96
+msgid "Settings"
+msgstr "Beállítások"
+
+#: print_pdf/print_pdf.admin.inc:86
+msgid "Show on every page except the listed pages."
+msgstr "A felsorolt oldalak kivételével mindenütt jelenjen meg."
+
+#: print_pdf/print_pdf.admin.inc:63,63
+msgid "Show on every page except the listed pages."
+msgstr "A felsorolt oldalak kivételével mindenütt jelenjen meg."
+
+#: print_mail/print_mail.admin.inc:73,73
+msgid "Show on every page except the listed pages."
+msgstr "A felsorolt oldalak kivételével mindenütt jelenjen meg."
+
+#: print_mail/print_mail.admin.inc:50,50
+msgid "Show on every page except the listed pages."
+msgstr "A felsorolt oldalak kivételével mindenütt jelenjen meg."
+
+#: print.admin.inc:223,223
+msgid "Show on every page except the listed pages."
+msgstr "A felsorolt oldalak kivételével mindenütt jelenjen meg."
+
+#: print.admin.inc:200,200
+msgid "Show on every page except the listed pages."
+msgstr "A felsorolt oldalak kivételével mindenütt jelenjen meg."
+
+#: print_pdf/print_pdf.admin.inc:86
+msgid "Show on only the listed pages."
+msgstr "Csak a felsorolt oldalakon jelenjen meg."
+
+#: print_pdf/print_pdf.admin.inc:63,63
+msgid "Show on only the listed pages."
+msgstr "Csak a felsorolt oldalakon jelenjen meg."
+
+#: print_mail/print_mail.admin.inc:73,73
+msgid "Show on only the listed pages."
+msgstr "Csak a felsorolt oldalakon jelenjen meg."
+
+#: print_mail/print_mail.admin.inc:50,50
+msgid "Show on only the listed pages."
+msgstr "Csak a felsorolt oldalakon jelenjen meg."
+
+#: print.admin.inc:223,223
+msgid "Show on only the listed pages."
+msgstr "Csak a felsorolt oldalakon jelenjen meg."
+
+#: print.admin.inc:200,200
+msgid "Show on only the listed pages."
+msgstr "Csak a felsorolt oldalakon jelenjen meg."
+
+#: print_pdf/print_pdf.admin.inc:94
+msgid ""
+"Enter one page per line as Drupal paths. The '*' character is a "
+"wildcard. Example paths are %blog for the blog page and %blog-wildcard "
+"for every personal blog. %front is the front page."
+msgstr ""
+"Soronként egy Drupal elérési útvonalat kell megadni. A „*” "
+"használható speciális helyettesítőként. Példák: „%blog” a "
+"blogok főoldalához és „%blog-wildcard” a személyes blogok "
+"főoldalaihoz. „%front” a címlapot jelenti."
+
+#: print_pdf/print_pdf.admin.inc:70,70
+msgid ""
+"Enter one page per line as Drupal paths. The '*' character is a "
+"wildcard. Example paths are %blog for the blog page and %blog-wildcard "
+"for every personal blog. %front is the front page."
+msgstr ""
+"Soronként egy Drupal elérési útvonalat kell megadni. A „*” "
+"használható speciális helyettesítőként. Példák: „%blog” a "
+"blogok főoldalához és „%blog-wildcard” a személyes blogok "
+"főoldalaihoz. „%front” a címlapot jelenti."
+
+#: print_mail/print_mail.admin.inc:81,81
+msgid ""
+"Enter one page per line as Drupal paths. The '*' character is a "
+"wildcard. Example paths are %blog for the blog page and %blog-wildcard "
+"for every personal blog. %front is the front page."
+msgstr ""
+"Soronként egy Drupal elérési útvonalat kell megadni. A „*” "
+"használható speciális helyettesítőként. Példák: „%blog” a "
+"blogok főoldalához és „%blog-wildcard” a személyes blogok "
+"főoldalaihoz. „%front” a címlapot jelenti."
+
+#: print_mail/print_mail.admin.inc:57,57
+msgid ""
+"Enter one page per line as Drupal paths. The '*' character is a "
+"wildcard. Example paths are %blog for the blog page and %blog-wildcard "
+"for every personal blog. %front is the front page."
+msgstr ""
+"Soronként egy Drupal elérési útvonalat kell megadni. A „*” "
+"használható speciális helyettesítőként. Példák: „%blog” a "
+"blogok főoldalához és „%blog-wildcard” a személyes blogok "
+"főoldalaihoz. „%front” a címlapot jelenti."
+
+#: print.admin.inc:231,231
+msgid ""
+"Enter one page per line as Drupal paths. The '*' character is a "
+"wildcard. Example paths are %blog for the blog page and %blog-wildcard "
+"for every personal blog. %front is the front page."
+msgstr ""
+"Soronként egy Drupal elérési útvonalat kell megadni. A „*” "
+"használható speciális helyettesítőként. Példák: „%blog” a "
+"blogok főoldalához és „%blog-wildcard” a személyes blogok "
+"főoldalaihoz. „%front” a címlapot jelenti."
+
+#: print.admin.inc:207,207
+msgid ""
+"Enter one page per line as Drupal paths. The '*' character is a "
+"wildcard. Example paths are %blog for the blog page and %blog-wildcard "
+"for every personal blog. %front is the front page."
+msgstr ""
+"Soronként egy Drupal elérési útvonalat kell megadni. A „*” "
+"használható speciális helyettesítőként. Példák: „%blog” a "
+"blogok főoldalához és „%blog-wildcard” a személyes blogok "
+"főoldalaihoz. „%front” a címlapot jelenti."
+
+#: print.module:321
+msgid "Printer-friendly version"
+msgstr "Nyomtatóbarát változat"
+
+#: print_mail/print_mail.inc:66
+msgid "Subject"
+msgstr "Tárgy"
+
+#: print_mail/print_mail.inc:54
+msgid "Your name"
+msgstr "Név"
+
+#: print_mail/print_mail.admin.inc:93
+msgid "Hourly threshold"
+msgstr "Óránkénti korlátozás"
+
+#: print_mail/print_mail.inc:27
+msgid ""
+"You cannot send more than %number messages per hour. Please try again "
+"later."
+msgstr ""
+"Óránként legfeljebb %number darab üzenetet lehet küldeni. "
+"Később érdemes újra próbálkozni."
+
+#: print_mail/print_mail.inc:88
+msgid "Send e-mail"
+msgstr "Email elküldése"
+
+#: print.admin.inc:83
+msgid ""
+"If you don't have direct file access to the server, use this field to "
+"upload your logo."
+msgstr ""
+"A kiszolgáló közvetlen hozzáférésének hiányában ezt a mezőt "
+"használva lehet feltölteni egy logót."
+
+#: print_mail/print_mail.module:53
+msgid "e-mail"
+msgstr "email"
 
 #: print.admin.inc:20
 msgid "Common Settings"
@@ -24,28 +202,44 @@ msgid "Stylesheet URL"
 msgstr "Stíluslap webcíme"
 
 #: print.admin.inc:29
-msgid "The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used."
-msgstr "Az egyedi stíluslap webcíme a nyomtatóbarát változathoz, ha van. Ha nincs megadva, akkor az alapértlemezett modul stíluslapja lesz felhasználva."
+msgid ""
+"The URL to your custom print cascading stylesheet, if any. When none "
+"is specified, the default module CSS file is used."
+msgstr ""
+"Az egyedi stíluslap webcíme a nyomtatóbarát változathoz, ha van. "
+"Ha nincs megadva, akkor az alapértlemezett modul stíluslapja lesz "
+"felhasználva."
 
 #: print.admin.inc:30
 msgid "Macros: %b (base path: \"%base\"), %t (path to theme: \"%theme\")"
-msgstr "Makrók: %b (alap útvonal: „%base”), %t (útvonal a sminkhez: „%theme”)"
+msgstr ""
+"Makrók: %b (alap útvonal: „%base”), %t (útvonal a sminkhez: "
+"„%theme”)"
 
 #: print.admin.inc:35
 msgid "Printer-friendly URLs list"
 msgstr "Nyomtatóbarát webcímek listája"
 
 #: print.admin.inc:37
-msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
-msgstr "Ha be van kapcsolva, az oldalról összegyűjtött webcímek megjelennek a nyomtatóbarát változat alján."
+msgid ""
+"If set, a list of the destination URLs for the page links will be "
+"displayed at the bottom of the page."
+msgstr ""
+"Ha be van kapcsolva, az oldalról összegyűjtött webcímek "
+"megjelennek a nyomtatóbarát változat alján."
 
 #: print.admin.inc:42
 msgid "Include comments in printer-friendly version"
 msgstr "Hozzászólások megjelenítése a nyomtatóbarát változaton"
 
 #: print.admin.inc:44
-msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
-msgstr "Ha ez a lehetőség be van kapcsolva, a felhasználók hozzászólásai is megjelennek a nyomtatóbarát változaton. A Comment modul szükséges hozzá."
+msgid ""
+"When this option is active, user comments are also included in the "
+"printer-friendly version. Requires the comment module."
+msgstr ""
+"Ha ez a lehetőség be van kapcsolva, a felhasználók "
+"hozzászólásai is megjelennek a nyomtatóbarát változaton. A "
+"Comment modul szükséges hozzá."
 
 #: print.admin.inc:49
 msgid "New window method"
@@ -57,11 +251,15 @@ msgstr "HTML kód használata. Nem felel meg az XHTML Strict szabványnak."
 
 #: print.admin.inc:50
 msgid "Use Javascript (requires browser support)"
-msgstr "Javascript használata (a böngészőnek támogatnia kell ezt a funkciót)"
+msgstr ""
+"Javascript használata (a böngészőnek támogatnia kell ezt a "
+"funkciót)"
 
 #: print.admin.inc:52
 msgid "Choose the method used to open pages in a new window/tab."
-msgstr "Az oldalak új ablakban/fülön történő megnyitási módjának kiválasztása."
+msgstr ""
+"Az oldalak új ablakban/fülön történő megnyitási módjának "
+"kiválasztása."
 
 #: print.admin.inc:57
 msgid "Logo options"
@@ -71,7 +269,11 @@ msgstr "Logó lehetőségek"
 msgid "Logo type"
 msgstr "Logó típusa"
 
-#: print.admin.inc:65;96
+#: print.admin.inc:96
+msgid "None (Disabled)"
+msgstr "Nincs (Tiltott)"
+
+#: print.admin.inc:65,65
 msgid "None (Disabled)"
 msgstr "Nincs (Tiltott)"
 
@@ -79,13 +281,26 @@ msgstr "Nincs (Tiltott)"
 msgid "Current theme's logo"
 msgstr "Az aktuális smink logója"
 
-#: print.admin.inc:65;96;103
+#: print.admin.inc:103
+msgid "User-specified"
+msgstr "Felhasználó által megadott"
+
+#: print.admin.inc:96,96
+msgid "User-specified"
+msgstr "Felhasználó által megadott"
+
+#: print.admin.inc:65,65
 msgid "User-specified"
 msgstr "Felhasználó által megadott"
 
 #: print.admin.inc:67
-msgid "Select the type of logo to display on the printer-friendly version. In case of a user-specified location, insert the path or URL below."
-msgstr "A nyomtatóbarát változaton megjelenő logó típusának kiválasztása. Egy felhasználó által megadott esetben az útvonalat vagy a webcímet lejjebb meg kell adni."
+msgid ""
+"Select the type of logo to display on the printer-friendly version. In "
+"case of a user-specified location, insert the path or URL below."
+msgstr ""
+"A nyomtatóbarát változaton megjelenő logó típusának "
+"kiválasztása. Egy felhasználó által megadott esetben az "
+"útvonalat vagy a webcímet lejjebb meg kell adni."
 
 #: print.admin.inc:72
 msgid "Logo URL"
@@ -94,10 +309,6 @@ msgstr "Logó webcíme"
 #: print.admin.inc:80
 msgid "Upload logo"
 msgstr "Logó feltöltése"
-
-#: print.admin.inc:83
-msgid "If you don't have direct file access to the server, use this field to upload your logo."
-msgstr "A kiszolgáló közvetlen hozzáférésének hiányában ezt a mezőt használva lehet feltölteni egy logót."
 
 #: print.admin.inc:88
 msgid "Footer options"
@@ -112,11 +323,19 @@ msgid "Site's footer"
 msgstr "A honlap lábléce"
 
 #: print.admin.inc:98
-msgid "Select the type of footer to display on the printer-friendly version. In case of a user-specified footer, insert it below."
-msgstr "A nyomtatóbarát változaton megjelenő lábléc típusának kiválasztása. Egy felhasználó által megadott lábléc esetében azt lejjebb meg kell adni."
+msgid ""
+"Select the type of footer to display on the printer-friendly version. "
+"In case of a user-specified footer, insert it below."
+msgstr ""
+"A nyomtatóbarát változaton megjelenő lábléc típusának "
+"kiválasztása. Egy felhasználó által megadott lábléc esetében "
+"azt lejjebb meg kell adni."
 
-#: print.admin.inc:111
-#: print.pages.inc:250
+#: print.pages.inc:248
+msgid "Source URL"
+msgstr "Forrás webcím"
+
+#: print.admin.inc:111,111
 msgid "Source URL"
 msgstr "Forrás webcím"
 
@@ -125,8 +344,12 @@ msgid "Display source URL"
 msgstr "Forráswebcím megjelenítése"
 
 #: print.admin.inc:120
-msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
-msgstr "Ha ez a lehetőség be van kapcsolva, az eredeti oldal webcíme megjelenik a nyomtatóbarát változat alján."
+msgid ""
+"When this option is selected, the URL for the original page will be "
+"displayed at the bottom of the printer-friendly version."
+msgstr ""
+"Ha ez a lehetőség be van kapcsolva, az eredeti oldal webcíme "
+"megjelenik a nyomtatóbarát változat alján."
 
 #: print.admin.inc:125
 msgid "Add current time/date to the source URL"
@@ -138,11 +361,18 @@ msgstr "Aktuális dátum és idő mutatása a forráswebcím sorában."
 
 #: print.admin.inc:132
 msgid "Force use of node ID in source URL"
-msgstr "A tartalomazonosító használatának kikényszerítése a forráswebcímben"
+msgstr ""
+"A tartalomazonosító használatának kikényszerítése a "
+"forráswebcímben"
 
 #: print.admin.inc:134
-msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
-msgstr "A Drupal megpróbálja az oldal álnevét használni, ha az létezik. A közvetlen webcímek kikényszerítéséhez be kell kapcsolni ezt a lehetőséget."
+msgid ""
+"Drupal will attempt to use the page's defined alias in case there is "
+"one. To force the use of the fixed URL, activate this option."
+msgstr ""
+"A Drupal megpróbálja az oldal álnevét használni, ha az létezik. "
+"A közvetlen webcímek kikényszerítéséhez be kell kapcsolni ezt a "
+"lehetőséget."
 
 #: print.admin.inc:170
 msgid "Web page options"
@@ -152,263 +382,410 @@ msgstr "Beállítások"
 msgid "Printer-friendly page link"
 msgstr "Nyomtatóbarát változatra való hivatkozás"
 
-#: print.admin.inc:177
-#: print_mail/print_mail.admin.inc:27
 #: print_pdf/print_pdf.admin.inc:40
 msgid "Links area"
 msgstr "Hivatkozások területe"
 
-#: print.admin.inc:177
-#: print_mail/print_mail.admin.inc:27
+#: print_mail/print_mail.admin.inc:27,27
+msgid "Links area"
+msgstr "Hivatkozások területe"
+
+#: print.admin.inc:177,177
+msgid "Links area"
+msgstr "Hivatkozások területe"
+
 #: print_pdf/print_pdf.admin.inc:40
 msgid "Content corner"
 msgstr "Tartalom sarka"
 
-#: print.admin.inc:178
-msgid "Choose the location of the link(s) to the printer-friendly page. The Links area is usually below the node content, whereas the Content corner is placed in the upper-right corner of the node content. Unselect all options to disable the link. Even if the link is disabled, you can still view the print version of a node by going to !path/nid where nid is the numeric id of the node."
-msgstr "A nyomtatóbarát változat hivatkozások megjelenési helyének kiválasztása. A „Hivatkozások területe” gyakran a tartalom alatt helyezkedik el, míg a „Tartalom sarka” a tartalom jobb felső sarkába helyezi a hivatkozásokat. A hivatkozások letiltásához egyik lehetőséget sem kell kiválasztani. A nyomtatóbarát változat akkor is megtekinthető, ha a hivatkozások le vannak tiltva, mégpedig a !path/nid útvonalon, ahol nid a tartalom numerikus azonosítója."
+#: print_mail/print_mail.admin.inc:27,27
+msgid "Content corner"
+msgstr "Tartalom sarka"
 
-#: print.admin.inc:183
-#: print_mail/print_mail.admin.inc:33
+#: print.admin.inc:177,177
+msgid "Content corner"
+msgstr "Tartalom sarka"
+
+#: print.admin.inc:178
+msgid ""
+"Choose the location of the link(s) to the printer-friendly page. The "
+"Links area is usually below the node content, whereas the Content "
+"corner is placed in the upper-right corner of the node content. "
+"Unselect all options to disable the link. Even if the link is "
+"disabled, you can still view the print version of a node by going to "
+"!path/nid where nid is the numeric id of the node."
+msgstr ""
+"A nyomtatóbarát változat hivatkozások megjelenési helyének "
+"kiválasztása. A „Hivatkozások területe” gyakran a tartalom "
+"alatt helyezkedik el, míg a „Tartalom sarka” a tartalom jobb "
+"felső sarkába helyezi a hivatkozásokat. A hivatkozások "
+"letiltásához egyik lehetőséget sem kell kiválasztani. A "
+"nyomtatóbarát változat akkor is megtekinthető, ha a hivatkozások "
+"le vannak tiltva, mégpedig a !path/nid útvonalon, ahol nid a "
+"tartalom numerikus azonosítója."
+
 #: print_pdf/print_pdf.admin.inc:46
 msgid "Advanced link options"
 msgstr "Haladó hivatkozási lehetőségek"
 
-#: print.admin.inc:190
-#: print_mail/print_mail.admin.inc:40
+#: print_mail/print_mail.admin.inc:33,33
+msgid "Advanced link options"
+msgstr "Haladó hivatkozási lehetőségek"
+
+#: print.admin.inc:183,183
+msgid "Advanced link options"
+msgstr "Haladó hivatkozási lehetőségek"
+
 #: print_pdf/print_pdf.admin.inc:53
 msgid "Link style"
 msgstr "Hivatkozás stílusa"
 
-#: print.admin.inc:192
-#: print_mail/print_mail.admin.inc:42
+#: print_mail/print_mail.admin.inc:40,40
+msgid "Link style"
+msgstr "Hivatkozás stílusa"
+
+#: print.admin.inc:190,190
+msgid "Link style"
+msgstr "Hivatkozás stílusa"
+
 #: print_pdf/print_pdf.admin.inc:55
 msgid "Text only"
 msgstr "Csak szöveg"
 
-#: print.admin.inc:192
-#: print_mail/print_mail.admin.inc:42
+#: print_mail/print_mail.admin.inc:42,42
+msgid "Text only"
+msgstr "Csak szöveg"
+
+#: print.admin.inc:192,192
+msgid "Text only"
+msgstr "Csak szöveg"
+
 #: print_pdf/print_pdf.admin.inc:55
 msgid "Icon only"
 msgstr "Csak ikon"
 
-#: print.admin.inc:192
-#: print_mail/print_mail.admin.inc:42
+#: print_mail/print_mail.admin.inc:42,42
+msgid "Icon only"
+msgstr "Csak ikon"
+
+#: print.admin.inc:192,192
+msgid "Icon only"
+msgstr "Csak ikon"
+
 #: print_pdf/print_pdf.admin.inc:55
 msgid "Icon and Text"
 msgstr "Ikon és szöveg"
 
-#: print.admin.inc:193
-#: print_mail/print_mail.admin.inc:43
+#: print_mail/print_mail.admin.inc:42,42
+msgid "Icon and Text"
+msgstr "Ikon és szöveg"
+
+#: print.admin.inc:192,192
+msgid "Icon and Text"
+msgstr "Ikon és szöveg"
+
 #: print_pdf/print_pdf.admin.inc:56
 msgid "Select the visual style of the link."
 msgstr "A hivatkozás vizuális stílusának kiválasztása"
 
-#: print.admin.inc:198
-#: print_mail/print_mail.admin.inc:48
+#: print_mail/print_mail.admin.inc:43,43
+msgid "Select the visual style of the link."
+msgstr "A hivatkozás vizuális stílusának kiválasztása"
+
+#: print.admin.inc:193,193
+msgid "Select the visual style of the link."
+msgstr "A hivatkozás vizuális stílusának kiválasztása"
+
 #: print_pdf/print_pdf.admin.inc:61
 msgid "Link visibility"
 msgstr "Hivatkozás láthatósága"
 
-#: print.admin.inc:200;223
-#: print_mail/print_mail.admin.inc:50;73
-#: print_pdf/print_pdf.admin.inc:63;86
-msgid "Show on every page except the listed pages."
-msgstr "A felsorolt oldalak kivételével mindenütt jelenjen meg."
+#: print_mail/print_mail.admin.inc:48,48
+msgid "Link visibility"
+msgstr "Hivatkozás láthatósága"
 
-#: print.admin.inc:200;223
-#: print_mail/print_mail.admin.inc:50;73
-#: print_pdf/print_pdf.admin.inc:63;86
-msgid "Show on only the listed pages."
-msgstr "Csak a felsorolt oldalakon jelenjen meg."
+#: print.admin.inc:198,198
+msgid "Link visibility"
+msgstr "Hivatkozás láthatósága"
 
-#: print.admin.inc:207;231
-#: print_mail/print_mail.admin.inc:57;81
-#: print_pdf/print_pdf.admin.inc:70;94
-msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
-msgstr "Soronként egy Drupal elérési útvonalat kell megadni. A „*” használható speciális helyettesítőként. Példák: „%blog” a blogok főoldalához és „%blog-wildcard” a személyes blogok főoldalaihoz. „%front” a címlapot jelenti."
-
-#: print.admin.inc:212
-#: print_mail/print_mail.admin.inc:62
 #: print_pdf/print_pdf.admin.inc:75
 msgid "Link class"
 msgstr "Hivatkozás osztálya"
 
-#: print.admin.inc:216
-#: print_mail/print_mail.admin.inc:66
-#: print_pdf/print_pdf.admin.inc:79
-msgid "This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces."
-msgstr "Ezt használhatják a smink készítők, hogy megváltoztassák a hivatkozás stílusát, vagy a jQuery modulok az új ablakban történő megnyitáshoz (pl. greybox vagy thickbox). Több osztályt is meg lehet adni, szóközökkel elválasztva."
+#: print_mail/print_mail.admin.inc:62,62
+msgid "Link class"
+msgstr "Hivatkozás osztálya"
 
-#: print.admin.inc:221
-#: print_mail/print_mail.admin.inc:71
+#: print.admin.inc:212,212
+msgid "Link class"
+msgstr "Hivatkozás osztálya"
+
+#: print_pdf/print_pdf.admin.inc:79
+msgid ""
+"This can be used by themers to change the link style or by jQuery "
+"modules to open in a new window (e.g. greybox or thickbox). Multiple "
+"classes can be specified, separated by spaces."
+msgstr ""
+"Ezt használhatják a smink készítők, hogy megváltoztassák a "
+"hivatkozás stílusát, vagy a jQuery modulok az új ablakban "
+"történő megnyitáshoz (pl. greybox vagy thickbox). Több osztályt "
+"is meg lehet adni, szóközökkel elválasztva."
+
+#: print_mail/print_mail.admin.inc:66,66
+msgid ""
+"This can be used by themers to change the link style or by jQuery "
+"modules to open in a new window (e.g. greybox or thickbox). Multiple "
+"classes can be specified, separated by spaces."
+msgstr ""
+"Ezt használhatják a smink készítők, hogy megváltoztassák a "
+"hivatkozás stílusát, vagy a jQuery modulok az új ablakban "
+"történő megnyitáshoz (pl. greybox vagy thickbox). Több osztályt "
+"is meg lehet adni, szóközökkel elválasztva."
+
+#: print.admin.inc:216,216
+msgid ""
+"This can be used by themers to change the link style or by jQuery "
+"modules to open in a new window (e.g. greybox or thickbox). Multiple "
+"classes can be specified, separated by spaces."
+msgstr ""
+"Ezt használhatják a smink készítők, hogy megváltoztassák a "
+"hivatkozás stílusát, vagy a jQuery modulok az új ablakban "
+"történő megnyitáshoz (pl. greybox vagy thickbox). Több osztályt "
+"is meg lehet adni, szóközökkel elválasztva."
+
 #: print_pdf/print_pdf.admin.inc:84
 msgid "Show link in system (non-content) pages"
 msgstr "Hivatkozás mutatása a rendszer (nem tartalom) oldalakon"
 
+#: print_mail/print_mail.admin.inc:71,71
+msgid "Show link in system (non-content) pages"
+msgstr "Hivatkozás mutatása a rendszer (nem tartalom) oldalakon"
+
+#: print.admin.inc:221,221
+msgid "Show link in system (non-content) pages"
+msgstr "Hivatkozás mutatása a rendszer (nem tartalom) oldalakon"
+
 #: print.admin.inc:230
-msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
-msgstr "Ezt a lehetőséget bekapcsolva a nyomtatóbarát változat hivatkozás megjelenik azokon az oldalakon, amit a Drupal vagy az engedélyezett modulok hoztak létre."
+msgid ""
+"Setting this option will add a printer-friendly version page link on "
+"pages created by Drupal or the enabled modules."
+msgstr ""
+"Ezt a lehetőséget bekapcsolva a nyomtatóbarát változat "
+"hivatkozás megjelenik azokon az oldalakon, amit a Drupal vagy az "
+"engedélyezett modulok hoztak létre."
 
 #: print.admin.inc:236
-#: print_mail/print_mail.admin.inc:86
-#: print_pdf/print_pdf.admin.inc:99
-msgid "Use URL alias instead of node ID"
+msgid "Take control of the book module printer-friendly link"
 msgstr ""
+"Könyvekbe rendezett tartalmak nyomtatóbarát változatának "
+"irányítása"
 
 #: print.admin.inc:238
-#: print_mail/print_mail.admin.inc:88
-#: print_pdf/print_pdf.admin.inc:101
-msgid "Enabling this will create the link using the URL alias instead of the node ID."
+msgid ""
+"Activate this to have the printer-friendly link in book nodes handled "
+"by this module. Requires the (core) book module."
 msgstr ""
+"A könyvekbe rendezett tartalmak nyomtatóbarát változatát ez a "
+"modul kezelje. A Könyv modul engedélyezése szükséges hozzá."
 
 #: print.admin.inc:243
-msgid "Take control of the book module printer-friendly link"
-msgstr "Könyvekbe rendezett tartalmak nyomtatóbarát változatának irányítása"
-
-#: print.admin.inc:245
-msgid "Activate this to have the printer-friendly link in book nodes handled by this module. Requires the (core) book module."
-msgstr "A könyvekbe rendezett tartalmak nyomtatóbarát változatát ez a modul kezelje. A Könyv modul engedélyezése szükséges hozzá."
-
-#: print.admin.inc:250
 msgid "Open the printer-friendly version in a new window"
 msgstr "Nyomtatóbarát változat megjelenítése új ablakban"
 
-#: print.admin.inc:252
-msgid "Setting this option will make the printer-friendly version open in a new window/tab."
-msgstr "Ha ez a lehetőség be van kapcsolva, a nyomtatóbarát változat új ablakban/fülön jelenik meg."
+#: print.admin.inc:245
+msgid ""
+"Setting this option will make the printer-friendly version open in a "
+"new window/tab."
+msgstr ""
+"Ha ez a lehetőség be van kapcsolva, a nyomtatóbarát változat új "
+"ablakban/fülön jelenik meg."
 
-#: print.admin.inc:257
+#: print.admin.inc:250
 msgid "Send to printer"
 msgstr "Nyomtatóra küldés"
 
-#: print.admin.inc:259
-msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
-msgstr "Automatikusan meghívja a böngésző nyomtatás funkcióját, amikor a nyomtatóbarát változat megjelenik."
+#: print.admin.inc:252
+msgid ""
+"Automatically calls the browser's print function when the "
+"printer-friendly version is displayed."
+msgstr ""
+"Automatikusan meghívja a böngésző nyomtatás funkcióját, amikor "
+"a nyomtatóbarát változat megjelenik."
 
-#: print.admin.inc:264
+#: print.admin.inc:257
 msgid "Robots META tags"
 msgstr "META kulcsszavak a keresőrobotoknak"
 
-#: print.admin.inc:271
+#: print.admin.inc:264
 msgid "Add noindex"
 msgstr "noindex hozzáadása"
 
-#: print.admin.inc:273
-msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
-msgstr "A keresőrobotok ne indexeljék a nyomtatóbarát oldalakat. Ez egy elvárás a jó kereső motoroktól."
+#: print.admin.inc:266
+msgid ""
+"Instruct robots to not index printer-friendly pages. Recommended for "
+"good search engine karma."
+msgstr ""
+"A keresőrobotok ne indexeljék a nyomtatóbarát oldalakat. Ez egy "
+"elvárás a jó kereső motoroktól."
 
-#: print.admin.inc:278
+#: print.admin.inc:271
 msgid "Add nofollow"
 msgstr "nofollow hozzáadása"
 
-#: print.admin.inc:280
-msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
-msgstr "A keresőrobotok ne kövessék a hivatkozásokat a nyomtatóbarát oldalakon."
+#: print.admin.inc:273
+msgid ""
+"Instruct robots to not follow outgoing links on printer-friendly "
+"pages."
+msgstr ""
+"A keresőrobotok ne kövessék a hivatkozásokat a nyomtatóbarát "
+"oldalakon."
 
-#: print.admin.inc:285
+#: print.admin.inc:278
 msgid "Add noarchive"
 msgstr "noarchive hozzáadása"
 
-#: print.admin.inc:287
-msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
-msgstr "Nem szabványos kulcsszó arra, hogy a keresőrobotok ne jelenítsék meg a „Cached” hivatkozást. A Googlebot értelmezi ezt a kulcsszót."
+#: print.admin.inc:280
+msgid ""
+"Non-standard tag to instruct search engines to not show a \"Cached\" "
+"link for your printer-friendly pages. Recognized by Googlebot."
+msgstr ""
+"Nem szabványos kulcsszó arra, hogy a keresőrobotok ne jelenítsék "
+"meg a „Cached” hivatkozást. A Googlebot értelmezi ezt a "
+"kulcsszót."
 
-#: print.pages.inc:228
+#: print.pages.inc:226
 msgid "Published on %site_name"
 msgstr "%site_name webhelyen lett közzétéve"
 
-#: print.pages.inc:247
+#: print.pages.inc:245
 msgid "retrieved on %date"
 msgstr "letöltve: %date"
 
-#: print.pages.inc:261
-msgid "Anonymous"
-msgstr "Anonymous"
-
-#: print.pages.inc:262
+#: print.pages.inc:260
 msgid "By %author"
 msgstr "Létrehozta %author"
 
-#: print.pages.inc:266
+#: print.pages.inc:264
 msgid "Created %date"
 msgstr "Létrehozva: %date"
 
-#: print.pages.inc:302
+#: print.pages.inc:300
 msgid "Links"
 msgstr "Hivatkozások"
 
-#: print.module:115;258
-#: print.info:0
-#: print_mail/print_mail.info:0
 #: print_pdf/print_pdf.info:0
 msgid "Printer, e-mail and PDF versions"
 msgstr "Nyomtató, email és PDF változatok"
 
-#: print.module:265
+#: print_mail/print_mail.info:0,0
+msgid "Printer, e-mail and PDF versions"
+msgstr "Nyomtató, email és PDF változatok"
+
+#: print.info:0,0
+msgid "Printer, e-mail and PDF versions"
+msgstr "Nyomtató, email és PDF változatok"
+
+#: print.module:217,217
+msgid "Printer, e-mail and PDF versions"
+msgstr "Nyomtató, email és PDF változatok"
+
+#: print.module:224
 msgid "Show printer-friendly version link"
 msgstr "Nyomtatóbarát változatra való hivatkozás mutatása."
 
-#: print.module:267
-msgid "Displays the link to a printer-friendly version of the content. Further configuration is available on the !settings."
-msgstr "Megjelenít egy hivatkozást a tartalom nyomtatóbarát változatához. További beállítások elérhetők a !settings oldalon."
+#: print.module:226
+msgid ""
+"Displays the link to a printer-friendly version of the content. "
+"Further configuration is available on the !settings."
+msgstr ""
+"Megjelenít egy hivatkozást a tartalom nyomtatóbarát "
+"változatához. További beállítások elérhetők a !settings "
+"oldalon."
 
-#: print.module:267;273
-#: print_mail/print_mail.module:168;174
-#: print_pdf/print_pdf.module:212;218
+#: print_pdf/print_pdf.module:204
 msgid "settings page"
 msgstr "beállítások oldal"
 
-#: print.module:271
+#: print_pdf/print_pdf.module:198,198
+msgid "settings page"
+msgstr "beállítások oldal"
+
+#: print_mail/print_mail.module:166,166
+msgid "settings page"
+msgstr "beállítások oldal"
+
+#: print_mail/print_mail.module:160,160
+msgid "settings page"
+msgstr "beállítások oldal"
+
+#: print.module:232,232
+msgid "settings page"
+msgstr "beállítások oldal"
+
+#: print.module:226,226
+msgid "settings page"
+msgstr "beállítások oldal"
+
+#: print.module:230
 msgid "Show printer-friendly version link in individual comments"
-msgstr "A nyomtatóbarát változat hivatkozás mutatása minden hozzászólásnál"
+msgstr ""
+"A nyomtatóbarát változat hivatkozás mutatása minden "
+"hozzászólásnál"
 
-#: print.module:273
-msgid "Displays the link to a printer-friendly version of the comment. Further configuration is available on the !settings."
-msgstr "Megjeleníti a nyomtatóbarát változat hivatkozást a hozzászólásoknál. További beállítások elérhetők a !settings oldalon."
+#: print.module:232
+msgid ""
+"Displays the link to a printer-friendly version of the comment. "
+"Further configuration is available on the !settings."
+msgstr ""
+"Megjeleníti a nyomtatóbarát változat hivatkozást a "
+"hozzászólásoknál. További beállítások elérhetők a !settings "
+"oldalon."
 
-#: print.module:362
-msgid "Printer-friendly version"
-msgstr "Nyomtatóbarát változat"
-
-#: print.module:364
+#: print.module:323
 msgid "Display a printer-friendly version of this page."
 msgstr "Az oldal nyomtatóbarát változatának megjelenítése."
 
-#: print.module:53
+#: print.module:52
 msgid "access print"
 msgstr "nyomtatáshoz hozzáférés"
 
-#: print.module:53
+#: print.module:52
 msgid "administer print"
 msgstr "nyomtatás kezelése"
 
-#: print.module:77
+#: print.module:76
 msgid "Printer-friendly"
 msgstr "Nyomtatóbarát"
 
-#: print.module:84
+#: print.module:83
 msgid "Printer-friendly pages"
 msgstr "Nyomtatóbarát oldalak"
 
-#: print.module:85
 #: print.info:0
-msgid "Adds a printer-friendly version link to content and administrative pages."
-msgstr "Nyomtatóbarát változat hivatkozást ad a tartalmakhoz és az adminisztrációs oldalakhoz."
+msgid ""
+"Adds a printer-friendly version link to content and administrative "
+"pages."
+msgstr ""
+"Nyomtatóbarát változat hivatkozást ad a tartalmakhoz és az "
+"adminisztrációs oldalakhoz."
 
-#: print.module:92
+#: print.module:84,84
+msgid ""
+"Adds a printer-friendly version link to content and administrative "
+"pages."
+msgstr ""
+"Nyomtatóbarát változat hivatkozást ad a tartalmakhoz és az "
+"adminisztrációs oldalakhoz."
+
+#: print.module:91
 msgid "Web page"
 msgstr "Weboldal"
-
-#: print.module:97
-msgid "Settings"
-msgstr "Beállítások"
 
 #: print.module:0
 msgid "print"
 msgstr "nyomtatás"
 
-#: (duplicate) print.install:14
+#: print.install:14
 msgid "Printer-friendly Page settings are available under !link"
 msgstr "A nyomtatóbarát oldal beállításai itt érhetők el: !link"
 
@@ -425,58 +802,85 @@ msgid "Send by e-mail link"
 msgstr "Küldés emailben hivatkozás"
 
 #: print_mail/print_mail.admin.inc:28
-msgid "Choose the location of the link(s) to the send by e-mail page. The Links area is usually below the node content, whereas the Content corner is placed in the upper-right corner of the node content. Unselect all options to disable the link. Even if the link is disabled, you can still send a node by e-mail by going to !path/nid where nid is the numeric id of the node."
-msgstr "A küldés emailben hivatkozások megjelenési helyének kiválasztása. A „Hivatkozások területe” gyakran a tartalom alatt helyezkedik el, míg a „Tartalom sarka” a tartalom jobb felső sarkába helyezi a hivatkozásokat. A hivatkozások letiltásához egyik lehetőséget sem kell kiválasztani. A tartalom akkor is elküldhető emailben, ha a hivatkozások le vannak tiltva, mégpedig a !path/nid útvonalon, ahol nid a tartalom numerikus azonosítója."
+msgid ""
+"Choose the location of the link(s) to the send by e-mail page. The "
+"Links area is usually below the node content, whereas the Content "
+"corner is placed in the upper-right corner of the node content. "
+"Unselect all options to disable the link. Even if the link is "
+"disabled, you can still send a node by e-mail by going to !path/nid "
+"where nid is the numeric id of the node."
+msgstr ""
+"A küldés emailben hivatkozások megjelenési helyének "
+"kiválasztása. A „Hivatkozások területe” gyakran a tartalom "
+"alatt helyezkedik el, míg a „Tartalom sarka” a tartalom jobb "
+"felső sarkába helyezi a hivatkozásokat. A hivatkozások "
+"letiltásához egyik lehetőséget sem kell kiválasztani. A tartalom "
+"akkor is elküldhető emailben, ha a hivatkozások le vannak tiltva, "
+"mégpedig a !path/nid útvonalon, ahol nid a tartalom numerikus "
+"azonosítója."
 
 #: print_mail/print_mail.admin.inc:80
-msgid "Setting this option will add a send by-email link on pages created by Drupal or the enabled modules."
-msgstr "Ezt a lehetőséget bekapcsolva a küldés emailben hivatkozás megjelenik azokon az oldalakon, amit a Drupal vagy a bekapcsolt modulok hoztak létre."
+msgid ""
+"Setting this option will add a send by-email link on pages created by "
+"Drupal or the enabled modules."
+msgstr ""
+"Ezt a lehetőséget bekapcsolva a küldés emailben hivatkozás "
+"megjelenik azokon az oldalakon, amit a Drupal vagy a bekapcsolt "
+"modulok hoztak létre."
 
-#: print_mail/print_mail.admin.inc:93
-#: print_pdf/print_pdf.admin.inc:106
+#: print_pdf/print_pdf.admin.inc:99
 msgid "Show link in book nodes"
 msgstr "Hivatkozás mutatása könyvlapokon"
 
-#: print_mail/print_mail.admin.inc:95
-msgid "Activate this to add a send by e-mail link in book nodes. Requires the (core) book module."
-msgstr "Bekapcsolt állapotban a könyvlapokon is megjelenik a küldés emailben hivatkozás. A Könyv modul engedélyezése szükséges hozzá."
+#: print_mail/print_mail.admin.inc:86,86
+msgid "Show link in book nodes"
+msgstr "Hivatkozás mutatása könyvlapokon"
 
-#: print_mail/print_mail.admin.inc:100
-msgid "Hourly threshold"
-msgstr "Óránkénti korlátozás"
+#: print_mail/print_mail.admin.inc:88
+msgid ""
+"Activate this to add a send by e-mail link in book nodes. Requires the "
+"(core) book module."
+msgstr ""
+"Bekapcsolt állapotban a könyvlapokon is megjelenik a küldés "
+"emailben hivatkozás. A Könyv modul engedélyezése szükséges "
+"hozzá."
 
-#: print_mail/print_mail.admin.inc:103
+#: print_mail/print_mail.admin.inc:96
 msgid "The maximum number of e-mails a user can send per hour."
 msgstr "Felhasználónként az egy óra alatt elküldhető emailek száma."
 
-#: print_mail/print_mail.admin.inc:108
 #: print_mail/print_mail.inc:78
 msgid "Send only the teaser"
 msgstr "Csak a bevezető küldése"
 
-#: print_mail/print_mail.admin.inc:110
-msgid "If selected, the default choice will be to send only the node's teaser instead of the full content."
-msgstr "Ha ez be van kapcsolva, akkor alapértelmezés szerint csak a tartalom előnézetét küldi el a teljes tartalom helyett."
+#: print_mail/print_mail.admin.inc:101,101
+msgid "Send only the teaser"
+msgstr "Csak a bevezető küldése"
 
-#: print_mail/print_mail.admin.inc:115
+#: print_mail/print_mail.admin.inc:103
+msgid ""
+"If selected, the default choice will be to send only the node's teaser "
+"instead of the full content."
+msgstr ""
+"Ha ez be van kapcsolva, akkor alapértelmezés szerint csak a tartalom "
+"előnézetét küldi el a teljes tartalom helyett."
+
+#: print_mail/print_mail.admin.inc:108
 msgid "Enable teaser/full mode choice"
 msgstr "Előnézet/teljes tartalom kiválasztásának engedélyezése"
 
-#: print_mail/print_mail.admin.inc:117
-msgid "If checked, the user will be able to choose between sending the full content or only the teaser at send time."
-msgstr "Ha ez be van kapcsolva, akkor a felhasználó a küldés előtt választhat, hogy a teljes tartalmat, vagy csak a bevezetőt küldi el."
-
-#: print_mail/print_mail.inc:27
-msgid "You cannot send more than %number messages per hour. Please try again later."
-msgstr "Óránként legfeljebb %number darab üzenetet lehet küldeni. Később érdemes újra próbálkozni."
+#: print_mail/print_mail.admin.inc:110
+msgid ""
+"If checked, the user will be able to choose between sending the full "
+"content or only the teaser at send time."
+msgstr ""
+"Ha ez be van kapcsolva, akkor a felhasználó a küldés előtt "
+"választhat, hogy a teljes tartalmat, vagy csak a bevezetőt küldi "
+"el."
 
 #: print_mail/print_mail.inc:49
 msgid "Your e-mail"
 msgstr "Feladó email címe"
-
-#: print_mail/print_mail.inc:54
-msgid "Your name"
-msgstr "Név"
 
 #: print_mail/print_mail.inc:59
 msgid "Send to"
@@ -484,100 +888,101 @@ msgstr "Címzett"
 
 #: print_mail/print_mail.inc:62
 msgid "Enter multiple addresses separated by commas and/or different lines."
-msgstr "Vesszővel elválasztva, vagy különböző sorokban több címet is meg lehet adni."
-
-#: print_mail/print_mail.inc:66
-msgid "Subject"
-msgstr "Tárgy"
+msgstr ""
+"Vesszővel elválasztva, vagy különböző sorokban több címet is "
+"meg lehet adni."
 
 #: print_mail/print_mail.inc:71
 msgid "Your message"
 msgstr "Az üzenet"
 
-#: print_mail/print_mail.inc:89
-msgid "Send e-mail"
-msgstr "Email elküldése"
-
-#: print_mail/print_mail.inc:93
+#: print_mail/print_mail.inc:92
 msgid "Clear form"
 msgstr "Űrlap törlése"
 
-#: print_mail/print_mail.inc:98
-msgid "Cancel"
-msgstr "Mégsem"
-
-#: print_mail/print_mail.inc:109
+#: print_mail/print_mail.inc:110
 msgid "Someone"
 msgstr "Valaki"
 
-#: print_mail/print_mail.inc:111
+#: print_mail/print_mail.inc:112
 msgid "an interesting site"
 msgstr "egy érdekes webhely"
 
-#: print_mail/print_mail.inc:112
+#: print_mail/print_mail.inc:113
 msgid "!user has sent you a message from !site"
 msgstr "!user üzenetet küldött erről a webhelyről: !site"
 
-#: print_mail/print_mail.inc:186
+#: print_mail/print_mail.inc:187
 msgid "You must enter a subject."
 msgstr "Meg kell adni a tárgyat."
 
-#: print_mail/print_mail.inc:190
+#: print_mail/print_mail.inc:191
 msgid "You must enter a message."
 msgstr "Meg kell adni az üzenetet."
 
-#: print_mail/print_mail.inc:225
+#: print_mail/print_mail.inc:226
 msgid "us"
 msgstr "mi"
 
-#: print_mail/print_mail.inc:226
+#: print_mail/print_mail.inc:227
 msgid "Thank you for spreading the word about !site."
 msgstr "Köszönet a webhely (!site) népszerűsítéséért."
 
-#: print_mail/print_mail.inc:237
+#: print_mail/print_mail.inc:238
 msgid "Message from sender:"
 msgstr "A feladó üzenete:"
 
-#: print_mail/print_mail.inc:224
+#: print_mail/print_mail.inc:268
+msgid "The form has been reset to the default values."
+msgstr "Az űrlap vissza lett állítva az alapértelmezett értékekre."
+
 #: print_mail/print_mail.module:0
 msgid "print_mail"
 msgstr "print_mail"
 
-#: print_mail/print_mail.inc:224
+#: print_mail/print_mail.inc:225,225
+msgid "print_mail"
+msgstr "print_mail"
+
+#: print_mail/print_mail.inc:225
 msgid "%name [%from] sent %page to [%to]"
 msgstr "%page elküldve %name [%from] által ide: [%to]"
 
-#: print_mail/print_mail.module:166
+#: print_mail/print_mail.module:158
 msgid "Show send by e-mail link"
 msgstr "Küldés emailben hivatkozás mutatása"
 
-#: print_mail/print_mail.module:168
-msgid "Displays a link to send the content by e-mail. Further configuration is available on the !settings."
-msgstr "Megjelenít egy hivatkozást a tartalom elküldéséhez emailben. További beállítások elérhetők a !settings oldalon."
+#: print_mail/print_mail.module:160
+msgid ""
+"Displays a link to send the content by e-mail. Further configuration "
+"is available on the !settings."
+msgstr ""
+"Megjelenít egy hivatkozást a tartalom elküldéséhez emailben. "
+"További beállítások elérhetők a !settings oldalon."
 
-#: print_mail/print_mail.module:172
+#: print_mail/print_mail.module:164
 msgid "Show send by e-mail link in individual comments"
 msgstr "A küldés emailben hivatkozás mutatása minden hozzászólásnál"
 
-#: print_mail/print_mail.module:174
-msgid "Displays a link to send the comment by e-mail. Further configuration is available on the !settings."
-msgstr "Megjelenít egy hivatkozást a hozzászólás elküldéséhez emailben. További beállítások elérhetők a !settings oldalon."
+#: print_mail/print_mail.module:166
+msgid ""
+"Displays a link to send the comment by e-mail. Further configuration "
+"is available on the !settings."
+msgstr ""
+"Megjelenít egy hivatkozást a hozzászólás elküldéséhez "
+"emailben. További beállítások elérhetők a !settings oldalon."
 
-#: print_mail/print_mail.module:190
+#: print_mail/print_mail.module:182
 msgid "Send to friend"
 msgstr "Oldal küldése ismerősnek"
 
-#: print_mail/print_mail.module:192
+#: print_mail/print_mail.module:184
 msgid "Send this page by e-mail."
 msgstr "Az oldal elküldése emailben."
 
-#: print_mail/print_mail.module:46
+#: print_mail/print_mail.module:45
 msgid "Send page by e-mail"
 msgstr "Oldal küldése emailben"
-
-#: print_mail/print_mail.module:54
-msgid "e-mail"
-msgstr "email"
 
 #: print_mail/print_mail.info:0
 msgid "Send by e-mail"
@@ -596,139 +1001,204 @@ msgid "PDF generation tool"
 msgstr "PDF-et előállító eszköz"
 
 #: print_pdf/print_pdf.admin.inc:32
-msgid "This option selects the PDF generation tool being used by this module to create the PDF version."
-msgstr "Ez határozza meg, hogy a PDF előállító modul melyik eszközt használja a PDF változat elkészítéséhez."
+msgid ""
+"This option selects the PDF generation tool being used by this module "
+"to create the PDF version."
+msgstr ""
+"Ez határozza meg, hogy a PDF előállító modul melyik eszközt "
+"használja a PDF változat elkészítéséhez."
 
 #: print_pdf/print_pdf.admin.inc:38
 msgid "PDF version link"
 msgstr "PDF változat hivatkozása"
 
 #: print_pdf/print_pdf.admin.inc:41
-msgid "Choose the location of the link(s) to the PDF version. The Links area is usually below the node content, whereas the Content corner is placed in the upper-right corner of the node content. Unselect all options to disable the link. Even if the link is disabled, you can still view the PDF version of a node by going to !path/nid where nid is the numeric id of the node."
-msgstr "A PDF változat hivatkozások megjelenési helyének kiválasztása. A „Hivatkozások területe” gyakran a tartalom alatt helyezkedik el, míg a „Tartalom sarka” a tartalom jobb felső sarkába helyezi a hivatkozásokat. A hivatkozások letiltásához egyik lehetőséget sem kell kiválasztani. A PDF változat akkor is megtekinthető, ha a hivatkozások le vannak tiltva, mégpedig a !path/nid útvonalon, ahol nid a tartalom numerikus azonosítója."
+msgid ""
+"Choose the location of the link(s) to the PDF version. The Links area "
+"is usually below the node content, whereas the Content corner is "
+"placed in the upper-right corner of the node content. Unselect all "
+"options to disable the link. Even if the link is disabled, you can "
+"still view the PDF version of a node by going to !path/nid where nid "
+"is the numeric id of the node."
+msgstr ""
+"A PDF változat hivatkozások megjelenési helyének kiválasztása. A "
+"„Hivatkozások területe” gyakran a tartalom alatt helyezkedik el, "
+"míg a „Tartalom sarka” a tartalom jobb felső sarkába helyezi a "
+"hivatkozásokat. A hivatkozások letiltásához egyik lehetőséget "
+"sem kell kiválasztani. A PDF változat akkor is megtekinthető, ha a "
+"hivatkozások le vannak tiltva, mégpedig a !path/nid útvonalon, ahol "
+"nid a tartalom numerikus azonosítója."
 
 #: print_pdf/print_pdf.admin.inc:93
-msgid "Setting this option will add a PDF version page link on pages created by Drupal or the enabled modules."
-msgstr "Ezt a lehetőséget bekapcsolva a PDF változat hivatkozás megjelenik azokon az oldalakon, amit a Drupal vagy az engedélyezett modulok hoztak létre."
+msgid ""
+"Setting this option will add a PDF version page link on pages created "
+"by Drupal or the enabled modules."
+msgstr ""
+"Ezt a lehetőséget bekapcsolva a PDF változat hivatkozás megjelenik "
+"azokon az oldalakon, amit a Drupal vagy az engedélyezett modulok "
+"hoztak létre."
 
-#: print_pdf/print_pdf.admin.inc:108
-msgid "Activate this to add a PDF version link in book nodes. Requires the (core) book module."
-msgstr "Ha ez be van kapcsolva, akkor a könyvlapokon is megjelenik a PDF változat hivatkozás. A book modul engedélyezése szükséges hozzá."
+#: print_pdf/print_pdf.admin.inc:101
+msgid ""
+"Activate this to add a PDF version link in book nodes. Requires the "
+"(core) book module."
+msgstr ""
+"Ha ez be van kapcsolva, akkor a könyvlapokon is megjelenik a PDF "
+"változat hivatkozás. A book modul engedélyezése szükséges "
+"hozzá."
 
-#: print_pdf/print_pdf.admin.inc:113
+#: print_pdf/print_pdf.admin.inc:106
 msgid "Open PDF in"
 msgstr "A PDF megnyitása"
 
-#: print_pdf/print_pdf.admin.inc:114
+#: print_pdf/print_pdf.admin.inc:107
 msgid "Same browser window"
 msgstr "Ugyanabban a böngészőablakban"
 
-#: print_pdf/print_pdf.admin.inc:114
+#: print_pdf/print_pdf.admin.inc:107
 msgid "New browser window"
 msgstr "Új böngészőablakban"
 
-#: print_pdf/print_pdf.admin.inc:114
+#: print_pdf/print_pdf.admin.inc:107
 msgid "Save dialog"
 msgstr "Mentés párbeszédpanel"
 
-#: print_pdf/print_pdf.admin.inc:116
+#: print_pdf/print_pdf.admin.inc:109
 msgid "Select the desired method for opening the PDF in the user's browser."
-msgstr "A felhasználó böngészőjén a PDF változathoz tartozó megnyitási mód kiválasztása."
+msgstr ""
+"A felhasználó böngészőjén a PDF változathoz tartozó "
+"megnyitási mód kiválasztása."
 
-#: print_pdf/print_pdf.admin.inc:121
+#: print_pdf/print_pdf.admin.inc:114
 msgid "Paper size"
 msgstr "Papír mérete"
 
-#: print_pdf/print_pdf.admin.inc:138
+#: print_pdf/print_pdf.admin.inc:131
 msgid "Choose the paper size of the generated PDF."
 msgstr "Ki kell választani a papír méretét a PDF előállításhoz."
 
-#: print_pdf/print_pdf.admin.inc:143
+#: print_pdf/print_pdf.admin.inc:136
 msgid "Page orientation"
 msgstr "Az oldal tájolása"
 
-#: print_pdf/print_pdf.admin.inc:144
+#: print_pdf/print_pdf.admin.inc:137
 msgid "Portrait"
 msgstr "Álló"
 
-#: print_pdf/print_pdf.admin.inc:144
+#: print_pdf/print_pdf.admin.inc:137
 msgid "Landscape"
 msgstr "Fekvő"
 
-#: print_pdf/print_pdf.admin.inc:146
+#: print_pdf/print_pdf.admin.inc:139
 msgid "Choose the page orientation of the generated PDF."
 msgstr "A PDF változat tájolásának kiválasztása."
 
-#: print_pdf/print_pdf.admin.inc:150
+#: print_pdf/print_pdf.admin.inc:143
 msgid "Font Family"
 msgstr "Betűcsalád"
 
-#: print_pdf/print_pdf.admin.inc:154
+#: print_pdf/print_pdf.admin.inc:147
 msgid "(TCPDF only) Set the font family to be used. Examples: %examples."
-msgstr "(Csak TCPDF) A használandó betűkészlet beállítása. Példák: %examples."
+msgstr ""
+"(Csak TCPDF) A használandó betűkészlet beállítása. Példák: "
+"%examples."
 
-#: print_pdf/print_pdf.admin.inc:155
-msgid "CAUTION: TCPDF embeds the complete font in the generated PDF. If you're not using Unicode, then helvetica or times are safe choices that will keep the PDF small. Unicode fonts can increase the size of the PDF to the 1MB region."
-msgstr "FIGYELMEZTETÉS: A TCPDF beágyazza a teljes betűkészletet az előállított PDF dokumentumba. Ha az Unicode nem használatos, akkor a helvetica és a times egy biztonságos választás a PDF állomány kis méreten tartásához. Az Unicode betűtípusok az 1 MB-os tartományba növelik a PDF állomány méretét."
+#: print_pdf/print_pdf.admin.inc:148
+msgid ""
+"CAUTION: TCPDF embeds the complete font in the generated PDF. If "
+"you're not using Unicode, then helvetica or times are safe choices "
+"that will keep the PDF small. Unicode fonts can increase the size of "
+"the PDF to the 1MB region."
+msgstr ""
+"FIGYELMEZTETÉS: A TCPDF beágyazza a teljes betűkészletet az "
+"előállított PDF dokumentumba. Ha az Unicode nem használatos, akkor "
+"a helvetica és a times egy biztonságos választás a PDF állomány "
+"kis méreten tartásához. Az Unicode betűtípusok az 1 MB-os "
+"tartományba növelik a PDF állomány méretét."
 
-#: print_pdf/print_pdf.admin.inc:159
+#: print_pdf/print_pdf.admin.inc:152
 msgid "Font Size"
 msgstr "Betűméret"
 
-#: print_pdf/print_pdf.admin.inc:163
-msgid "(TCPDF only) Set the font size to be used for normal text. This is the base value for the scaling applied to other text styles."
-msgstr "(Csak TCPDF) Be kell állítani a normál szöveghez tartozó betűméretet. Ez lesz a méretezés bázisértéke a többi szöveg stílushoz."
+#: print_pdf/print_pdf.admin.inc:156
+msgid ""
+"(TCPDF only) Set the font size to be used for normal text. This is the "
+"base value for the scaling applied to other text styles."
+msgstr ""
+"(Csak TCPDF) Be kell állítani a normál szöveghez tartozó "
+"betűméretet. Ez lesz a méretezés bázisértéke a többi szöveg "
+"stílushoz."
 
-#: print_pdf/print_pdf.admin.inc:169
-msgid "No PDF generation tool found! Please dowload a supported PHP PDF generation tool. Check this module's INSTALL.txt for more details."
-msgstr "Nem található PDF előállító eszköz! Le kell tölteni egy támogatott PHP PDF előállító eszközt. További részletek a modul INSTALL.txt fájljában."
+#: print_pdf/print_pdf.admin.inc:162
+msgid ""
+"No PDF generation tool found! Please dowload a supported PHP PDF "
+"generation tool. Check this module's INSTALL.txt for more details."
+msgstr ""
+"Nem található PDF előállító eszköz! Le kell tölteni egy "
+"támogatott PHP PDF előállító eszközt. További részletek a "
+"modul INSTALL.txt fájljában."
 
-#: print_pdf/print_pdf.admin.inc:184
+#: print_pdf/print_pdf.admin.inc:177
 msgid "Font size must be at least 1."
 msgstr "A betűméret legkisebb értéke 1 lehet."
 
-#: print_pdf/print_pdf.pages.inc:351
+#: print_pdf/print_pdf.pages.inc:339
 msgid "Page !n of !total"
 msgstr "!n. oldal (összes: !total)"
 
-#: print_pdf/print_pdf.module:210
+#: print_pdf/print_pdf.module:196
 msgid "Show PDF version link"
 msgstr "PDF változat hivatkozásának mutatása"
 
-#: print_pdf/print_pdf.module:212
-msgid "Displays the link to a PDF version of the content. Further configuration is available on the !settings."
-msgstr "Megjelenít egy hivatkozást a tartalom PDF változatához. További beállítások elérhetők a !settings oldalon."
+#: print_pdf/print_pdf.module:198
+msgid ""
+"Displays the link to a PDF version of the content. Further "
+"configuration is available on the !settings."
+msgstr ""
+"Megjelenít egy hivatkozást a tartalom PDF változatához. További "
+"beállítások elérhetők a !settings oldalon."
 
-#: print_pdf/print_pdf.module:216
+#: print_pdf/print_pdf.module:202
 msgid "Show PDF version link in individual comments"
 msgstr "A PDF változat hivatkozás mutatása minden hozzászólásnál"
 
-#: print_pdf/print_pdf.module:218
-msgid "Displays the link to a PDF version of the comment. Further configuration is available on the !settings."
-msgstr "Megjeleníti a PDF változat hivatkozást a hozzászólásoknál. További beállítások elérhetők a !settings oldalon."
+#: print_pdf/print_pdf.module:204
+msgid ""
+"Displays the link to a PDF version of the comment. Further "
+"configuration is available on the !settings."
+msgstr ""
+"Megjeleníti a PDF változat hivatkozást a hozzászólásoknál. "
+"További beállítások elérhetők a !settings oldalon."
 
-#: print_pdf/print_pdf.module:235
 #: print_pdf/print_pdf.info:0
 msgid "PDF version"
 msgstr "PDF változat"
 
-#: print_pdf/print_pdf.module:237
+#: print_pdf/print_pdf.module:221,221
+msgid "PDF version"
+msgstr "PDF változat"
+
+#: print_pdf/print_pdf.module:223
 msgid "Display a PDF version of this page."
 msgstr "Az oldal PDF változatának megjelenítése."
 
-#: (duplicate) print_pdf/print_pdf.module:100
+#: print_pdf/print_pdf.module:93
 msgid "Print PDF"
 msgstr "PDF nyomtatás"
 
-#: (duplicate) print_pdf/print_pdf.module:101
-msgid "No PDF tool selected. Please configure it in the <a href=\"@url\">PDF settings page</a>."
-msgstr "Nincs PDF eszköz kiválasztva. Be kell állítani egyet a <a href=\"@url\">PDF beállítások oldalon</a>."
+#: print_pdf/print_pdf.module:94
+msgid ""
+"No PDF tool selected. Please configure it in the <a href=\"@url\">PDF "
+"settings page</a>."
+msgstr ""
+"Nincs PDF eszköz kiválasztva. Be kell állítani egyet a <a "
+"href=\"@url\">PDF beállítások oldalon</a>."
 
-#: print_pdf/print_pdf.module:69
+#: print_pdf/print_pdf.module:62
 msgid "Printer-friendly PDF"
 msgstr "Nyomtatóbarát PDF"
 
-#: print_pdf/print_pdf.module:76
+#: print_pdf/print_pdf.module:69
 msgid "PDF"
 msgstr "PDF"
 
@@ -738,8 +1208,5 @@ msgstr "print_pdf"
 
 #: print_pdf/print_pdf.info:0
 msgid "Adds the capability to export pages as PDF."
-msgstr ""
-
-#~ msgid "The form has been reset to the default values."
-#~ msgstr "Az űrlap vissza lett állítva az alapértelmezett értékekre."
+msgstr "Lehetőséget biztosít az oldalak PDF exportjához."
 
