@@ -138,7 +138,7 @@ function print_mail_nodeapi(&$node, $op = 'view', $teaser, $page) {
         if ($link) {
           $node->content['print_mail_link'] = array(
             '#value' => "<span class='print-link'>$link</span>",
-            '#weight' => -2,
+            '#weight' => -102,
           );
         }
       }

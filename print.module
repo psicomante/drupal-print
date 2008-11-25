@@ -246,7 +246,7 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
         if ($link) {
           $node->content['print_link'] = array(
             '#value' => "<span class='print-link'>$link</span>",
-            '#weight' => -1,
+            '#weight' => -101,
           );
         }
       }
