@@ -193,7 +193,7 @@ function print_pdf_nodeapi(&$node, $op = 'view', $teaser, $page) {
         if ($link) {
           $node->content['print_pdf_link'] = array(
             '#value' => "<span class='print-link'>$link</span>",
-            '#weight' => -3,
+            '#weight' => -103,
           );
         }
       }
