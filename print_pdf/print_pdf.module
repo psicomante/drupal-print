@@ -28,6 +28,13 @@ define('PRINT_PDF_FONT_FAMILY_DEFAULT', 'dejavusans');
 define('PRINT_PDF_FONT_SIZE_DEFAULT', 10);
 
 /**
+ * Implementation of hook_init().
+ */
+function print_pdf_init() {
+  $GLOBALS['conf']['cache'] = FALSE;
+}
+
+/**
  * Implementation of hook_menu().
  */
 function print_pdf_menu($may_cache) {
