@@ -10,6 +10,40 @@
  * Implementation of hook_install().
  */
 function print_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("CREATE TABLE {print_node_conf} (
+        nid int(10) unsigned NOT NULL,
+        link tinyint(3) unsigned NOT NULL default '1',
+        comments tinyint(3) unsigned NOT NULL default '1',
+        url_list tinyint(3) unsigned NOT NULL default '1',
+        PRIMARY KEY  (nid)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      db_query("CREATE TABLE {print_page_counter} (
+        path varchar(128) NOT NULL,
+        totalcount bigint(20) unsigned NOT NULL default '0',
+        timestamp int(10) unsigned NOT NULL default '0',
+        PRIMARY KEY  (path)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      break;
+    case 'pgsql':
+      db_query("CREATE TABLE {print_node_conf} (
+        nid int_unsigned NOT NULL,
+        link smallint NOT NULL default '1',
+        comments smallint unsigned NOT NULL default '1',
+        url_list smallint unsigned NOT NULL default '1',
+        PRIMARY KEY  (nid)
+      )");
+      db_query("CREATE TABLE {print_page_counter} (
+        path varchar(128) NOT NULL,
+        totalcount bigint NOT NULL default '0',
+        timestamp int_unsigned NOT NULL default '0',
+        PRIMARY KEY  (path)
+      )");
+      break;
+  }
+
   $t = get_t();
   drupal_set_message($t('Printer-friendly Page settings are available under !link',
     array( '!link' => l('Administer > Site configuration > Printer-friendly Pages ',  'admin/settings/print' ) )
@@ -20,6 +54,9 @@ function print_install() {
  * Implementation of hook_uninstall().
  */
 function print_uninstall() {
+  db_query('DROP TABLE {print_node_conf}');
+  db_query('DROP TABLE {print_page_counter}');
+
   variable_del('print_settings');
   variable_del('print_display_comment');
   variable_del('print_sourceurl_settings');
@@ -134,6 +171,47 @@ function print_update_5301() {
     variable_set('print_robots_nofollow', $print_robot_settings['nofollow']);
     variable_set('print_robots_noarchive', $print_robot_settings['noarchive']);
     variable_del('print_robot_settings');
+  }
+  return $ret;
+}
+
+/**
+ * Update to version 5.x-4.1
+ */
+function print_update_5302() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("CREATE TABLE {print_node_conf} (
+        nid int(10) unsigned NOT NULL,
+        link tinyint(3) unsigned NOT NULL default '1',
+        comments tinyint(3) unsigned NOT NULL default '1',
+        url_list tinyint(3) unsigned NOT NULL default '1',
+        PRIMARY KEY  (nid)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      db_query("CREATE TABLE {print_page_counter} (
+        path varchar(128) NOT NULL,
+        totalcount bigint(20) unsigned NOT NULL default '0',
+        timestamp int(10) unsigned NOT NULL default '0',
+        PRIMARY KEY  (path)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      break;
+    case 'pgsql':
+      db_query("CREATE TABLE {print_node_conf} (
+        nid int_unsigned NOT NULL,
+        link smallint NOT NULL default '1',
+        comments smallint unsigned NOT NULL default '1',
+        url_list smallint unsigned NOT NULL default '1',
+        PRIMARY KEY  (nid)
+      )");
+      db_query("CREATE TABLE {print_page_counter} (
+        path varchar(128) NOT NULL,
+        totalcount bigint NOT NULL default '0',
+        timestamp int_unsigned NOT NULL default '0',
+        PRIMARY KEY  (path)
+      )");
+      break;
   }
   return $ret;
 }

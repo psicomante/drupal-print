@@ -7,9 +7,51 @@
  */
 
 /**
+ * Implementation of hook_install().
+ */
+function print_pdf_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("CREATE TABLE {print_pdf_node_conf} (
+        nid int(10) unsigned NOT NULL,
+        link tinyint(3) unsigned NOT NULL default '1',
+        comments tinyint(3) unsigned NOT NULL default '1',
+        url_list tinyint(3) unsigned NOT NULL default '1',
+        PRIMARY KEY  (nid)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      db_query("CREATE TABLE {print_pdf_page_counter} (
+        path varchar(128) NOT NULL,
+        totalcount bigint(20) unsigned NOT NULL default '0',
+        timestamp int(10) unsigned NOT NULL default '0',
+        PRIMARY KEY  (path)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      break;
+    case 'pgsql':
+      db_query("CREATE TABLE {print_pdf_node_conf} (
+        nid int_unsigned NOT NULL,
+        link smallint NOT NULL default '1',
+        comments smallint unsigned NOT NULL default '1',
+        url_list smallint unsigned NOT NULL default '1',
+        PRIMARY KEY  (nid)
+      )");
+      db_query("CREATE TABLE {print_pdf_page_counter} (
+        path varchar(128) NOT NULL,
+        totalcount bigint NOT NULL default '0',
+        timestamp int_unsigned NOT NULL default '0',
+        PRIMARY KEY  (path)
+      )");
+      break;
+  }
+}
+
+/**
  * Implementation of hook_uninstall().
  */
 function print_pdf_uninstall() {
+  db_query('DROP TABLE {print_pdf_node_conf}');
+  db_query('DROP TABLE {print_pdf_page_counter}');
+
   variable_del('print_pdf_settings');
   variable_del('print_pdf_show_link');
   variable_del('print_pdf_link_pos');
@@ -30,7 +72,7 @@ function print_pdf_uninstall() {
 }
 
 /**
- * Update to version 6.x-1.0
+ * Update to version 5.x-4.0
  */
 function print_pdf_update_6000() {
   global $conf;
@@ -51,6 +93,47 @@ function print_pdf_update_6000() {
     variable_set('print_pdf_paper_size', $print_pdf_settings['paper_size']);
     variable_set('print_pdf_page_orientation', $print_pdf_settings['page_orientation']);
     variable_del('print_pdf_settings');
+  }
+  return $ret;
+}
+
+/**
+ * Update to version 5.x-4.1
+ */
+function print_pdf_update_6001() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("CREATE TABLE {print_pdf_node_conf} (
+        nid int(10) unsigned NOT NULL,
+        link tinyint(3) unsigned NOT NULL default '1',
+        comments tinyint(3) unsigned NOT NULL default '1',
+        url_list tinyint(3) unsigned NOT NULL default '1',
+        PRIMARY KEY  (nid)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      db_query("CREATE TABLE {print_pdf_page_counter} (
+        path varchar(128) NOT NULL,
+        totalcount bigint(20) unsigned NOT NULL default '0',
+        timestamp int(10) unsigned NOT NULL default '0',
+        PRIMARY KEY  (path)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      break;
+    case 'pgsql':
+      db_query("CREATE TABLE {print_pdf_node_conf} (
+        nid int_unsigned NOT NULL,
+        link smallint NOT NULL default '1',
+        comments smallint unsigned NOT NULL default '1',
+        url_list smallint unsigned NOT NULL default '1',
+        PRIMARY KEY  (nid)
+      )");
+      db_query("CREATE TABLE {print_pdf_page_counter} (
+        path varchar(128) NOT NULL,
+        totalcount bigint NOT NULL default '0',
+        timestamp int_unsigned NOT NULL default '0',
+        PRIMARY KEY  (path)
+      )");
+      break;
   }
   return $ret;
 }
