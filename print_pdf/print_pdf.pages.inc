@@ -316,7 +316,7 @@ function theme_print_pdf_tcpdf_content(&$pdf, &$html, $font) {
   $matches[1] = preg_replace($pattern, '', $matches[1]);
 
   // Since TCPDF's writeHTML is so bad with <p>, do everything possible to make it look nice
-  $matches[1] = preg_replace('!(<p\s*/>|</p>)!i', '<br />', $matches[1]);
+  $matches[1] = preg_replace('!(<p>|<p\s*/>|</p>)!i', '<br />', $matches[1]);
   $matches[1] = str_replace(array('<div', 'div>'), array('<span', 'span><br />'), $matches[1]);
 
   $pdf->writeHTML($matches[1]);
