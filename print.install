@@ -10,6 +10,8 @@
  * Implementation of hook_install().
  */
 function print_install() {
+  drupal_install_schema('print');
+
   $t = get_t();
   drupal_set_message($t('Printer-friendly Page settings are available under !link',
     array( '!link' => l('Administer > Site configuration > Printer-friendly Pages ',  'admin/settings/print' ) )
@@ -20,6 +22,8 @@ function print_install() {
  * Implementation of hook_uninstall().
  */
 function print_uninstall() {
+  drupal_uninstall_schema('print');
+
   variable_del('print_settings');
   variable_del('print_sourceurl_settings');
   variable_del('print_html_settings');
@@ -51,6 +55,70 @@ function print_uninstall() {
     variable_del($variable->name);
   }
 }
+
+/**
+ * Implementation of hook_schema().
+ */
+function print_schema() {
+  $schema['print_node_conf'] = array(
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'link' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+      'comments' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+      'url_list' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  $schema['print_page_counter'] = array(
+    'fields' => array(
+      'path' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ),
+      'totalcount' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'big',
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('path'),
+  );
+
+  return $schema;
+}
+
 
 /**
  * Update to version 6.x-1.0
@@ -106,5 +174,71 @@ function print_update_6000() {
 function print_update_6001() {
   $ret = array();
   menu_rebuild();
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.1
+ */
+function print_update_6002() {
+  $schema['print_node_conf'] = array(
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'link' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+      'comments' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+      'url_list' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  $schema['print_page_counter'] = array(
+    'fields' => array(
+      'path' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ),
+      'totalcount' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'big',
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('path'),
+  );
+
+  $ret = array();
+  db_create_table($ret, 'print_node_conf', $schema['print_node_conf']);
+  db_create_table($ret, 'print_page_counter', $schema['print_page_counter']);
   return $ret;
 }

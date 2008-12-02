@@ -29,7 +29,7 @@ function print_pdf_controller() {
 
   $print_pdf_pdf_tool = variable_get('print_pdf_pdf_tool', PRINT_PDF_PDF_TOOL_DEFAULT);
 
-  $print = print_controller($path, $cid);
+  $print = print_controller($path, $cid, PRINT_PDF_FORMAT);
   if ($print === FALSE) {
     return;
   }
@@ -51,7 +51,7 @@ function print_pdf_controller() {
 
   $node = $print['node'];
   ob_start();
-  include_once(_print_get_template('pdf', $print['type']));
+  include_once(_print_get_template(PRINT_PDF_FORMAT, $print['type']));
   $html = ob_get_contents();
   ob_end_clean();
 
@@ -63,6 +63,14 @@ function print_pdf_controller() {
   }
   else {
     return drupal_not_found();
+  }
+
+  $nodepath = drupal_get_normal_path($node->path);
+  db_query("UPDATE {print_pdf_page_counter} SET totalcount = totalcount + 1, timestamp = %d WHERE path = '%s'", time(), $nodepath);
+  // If we affected 0 rows, this is the first time viewing the node.
+  if (!db_affected_rows()) {
+    // We must create a new row to store counters for the new node.
+    db_query("INSERT INTO {print_pdf_page_counter} (path, totalcount, timestamp) VALUES ('%s', 1, %d)", $nodepath, time());
   }
 }
 
