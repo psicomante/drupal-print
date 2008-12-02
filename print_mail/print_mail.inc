@@ -120,8 +120,8 @@ function print_mail_form($form_state) {
     $user_name = t('Someone');
   }
   $site_name = variable_get('site_name', t('an interesting site'));
-  $form['fld_subject']['#default_value'] = t('!user has sent you a message from !site',
-                                              array('!user' => $user_name, '!site' => $site_name));
+  $print_mail_text_subject = variable_get('print_mail_text_subject', t('!user has sent you a message from !site'));
+  $form['fld_subject']['#default_value'] = t($print_mail_text_subject, array('!user' => $user_name, '!site' => $site_name));
 
   return $form;
 }
@@ -234,7 +234,8 @@ function print_mail_form_submit($form, &$form_state) {
     flood_register_event('print_mail');
     watchdog('print_mail', '%name [%from] sent %page to [%to]', array('%name' => $form_state['values']['fld_from_name'], '%from' => $form_state['values']['fld_from_addr'], '%page' => $form_state['values']['path'], '%to' => $to));
     $site_name = variable_get('site_name', t('us'));
-    drupal_set_message(t('Thank you for spreading the word about !site.', array('!site' => $site_name)));
+    $print_mail_text_confirmation = variable_get('print_mail_text_confirmation', t('Thank you for spreading the word about !site.'));
+    drupal_set_message(t($print_mail_text_confirmation, array('!site' => $site_name)));
 
     $nodepath = drupal_get_normal_path($params['path']);
     db_query("UPDATE {print_mail_page_counter} SET sentcount = sentcount + %d, sent_timestamp = %d WHERE path = '%s'", count(split(',', $to)), time(), $nodepath);
@@ -248,7 +249,8 @@ function print_mail_form_submit($form, &$form_state) {
 function print_mail_mail($key, &$message, $params) {
   switch ($key) {
     case 'sendpage':
-      $sender_message = t('Message from sender:') .'<br /><br /><em>'. nl2br($params['message']) .'</em>';
+      $print_mail_text_message = variable_get('print_mail_text_message', t('Message from sender'));
+      $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br($params['message']) .'</em>';
 
       $print = print_controller($params['path'], $params['cid'], PRINT_MAIL_FORMAT, $params['teaser'], $sender_message);
       if ($print === FALSE) {

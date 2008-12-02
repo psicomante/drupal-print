@@ -64,9 +64,6 @@ function print_theme() {
     'print_format_link' => array(
       'arguments' => array(),
     ),
-    'print_text' => array(
-      'arguments' => array(),
-    ),
   );
 }
 
@@ -483,23 +480,6 @@ function theme_print_format_link() {
   return array('text' => $format['text'],
                'html' => $format['html'],
                'attributes' => print_fill_attributes($title, $class, $new_window),
-              );
-}
-
-/**
- * Define the strings displayed by the module in the printer-friendly template
- *
- * @return
- *   array with the used text strings
- * @ingroup themeable
- */
-function theme_print_text() {
-  return array('retrieved' => '',
-               'sourceURL' => '',
-               'published' => '',
-               'by' => '',
-               'created' => '',
-               'links' => '',
               );
 }
 

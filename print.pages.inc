@@ -151,8 +151,6 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
 
   $path = empty($node->nid) ? $node->path : "node/$node->nid";
 
-  $themed = theme('print_text');
-
   // print module settings
   $print_css = variable_get('print_css', PRINT_CSS_DEFAULT);
   $print_logo_options = variable_get('print_logo_options', PRINT_LOGO_OPTIONS_DEFAULT);
@@ -246,7 +244,8 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
 
   $published_site = variable_get('site_name', 0);
   if ($published_site) {
-    $published = (empty($themed['published'])) ? t('Published on %site_name', array('%site_name' => $published_site)) : ($themed['published'] .' '. $published_site);
+    $print_text_published = variable_get('print_text_published', t('Published on %site_name'));
+    $published = t($print_text_published, array('%site_name' => $published_site));
     $print['site_name'] = $published .' ('. l($base_url, $base_url) .')';
   }
   else {
@@ -265,10 +264,11 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
       $url .= '#comment-$cid';
     }
     $retrieved_date = format_date(time(), 'small');
-    $retrieved = (empty($themed['retrieved'])) ? t('retrieved on %date', array('%date' => $retrieved_date)) : ($themed['retrieved'] .' '. $retrieved_date);
+    $print_text_retrieved = variable_get('print_text_retrieved', t('retrieved on %date'));
+    $retrieved = t($print_text_retrieved, array('%date' => $retrieved_date));
     $print['printdate'] = $print_sourceurl_date ? " ($retrieved)" : '';
 
-    $source_url = (empty($themed['sourceURL'])) ? t('Source URL') : $themed['sourceURL'];
+    $source_url = variable_get('print_text_source_url', t('Source URL'));
     $print['source_url'] = '<strong>'. $source_url . $print['printdate'] .':</strong> '. l($url, $url);
   }
   else {
@@ -279,13 +279,13 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
     $node_type = $node->type;
 
     if (theme_get_setting("toggle_node_info_$node_type")) {
+      $print_text_by = variable_get('print_text_by', t('By %author'));
       $by_author = ($node->name ? $node->name : variable_get('anonymous', t('Anonymous')));
-      $by = (empty($themed['by'])) ? t('By %author', array('%author' => $by_author)) : ($themed['by'] .' '. $by_author);
-      $print['submitted'] = $by;
+      $print['submitted'] = t($print_text_by, array('%author' => $by_author));
 
+      $print_text_created = variable_get('print_text_created', t('Created %date'));
       $created_datetime = format_date($node->created, 'small');
-      $created = (empty($themed['created'])) ? t('Created %date', array('%date' => $created_datetime)) : ($themed['created'] .' '. $created_datetime);
-      $print['created'] = $created;
+      $print['created'] = t($print_text_created, array('%date' => $created_datetime));
     }
     else {
       $print['submitted'] = '';
@@ -320,7 +320,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
       for ($i = 0; $i < $max; $i++) {
         $pfp_links .= '['. ($i + 1) .'] '. $urls[$i] ."<br />\n";
       }
-      $links = (empty($themed['links'])) ? t('Links') : $themed['links'];
+      $links = variable_get('print_text_links', t('Links'));
       $print['pfp_links'] = "<p><strong>$links:</strong><br />$pfp_links</p>";
     }
   }
