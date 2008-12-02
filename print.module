@@ -479,23 +479,6 @@ function theme_print_format_link() {
 }
 
 /**
- * Define the strings displayed by the module in the printer-friendly template
- *
- * @return
- *   array with the used text strings
- * @ingroup themeable
- */
-function theme_print_text() {
-  return array('retrieved' => '',
-               'sourceURL' => '',
-               'published' => '',
-               'by' => '',
-               'created' => '',
-               'links' => '',
-              );
-}
-
-/**
  * Auxiliary function to display a formatted Printer-friendly link
  *
  * Function made available so that developers may call this function from
