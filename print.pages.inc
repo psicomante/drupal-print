@@ -501,15 +501,15 @@ function _print_get_template($format = NULL, $type = NULL) {
 function _print_url_list_enabled($node, $format = PRINT_HTML_FORMAT) {
   switch ($format) {
     case PRINT_HTML_FORMAT:
-      $node_urllist = $node->print_display_urllist;
+      $node_urllist = isset($node->print_display_urllist) ? $node->print_display_urllist : TRUE;
       $fmt = '';
       break;
     case PRINT_MAIL_FORMAT:
-      $node_urllist = $node->print_mail_display_urllist;
+      $node_urllist = isset($node->print_mail_display_urllist) ? $node->print_mail_display_urllist : TRUE;
       $fmt = $format .'_';
       break;
     case PRINT_PDF_FORMAT:
-      $node_urllist = $node->print_pdf_display_urllist;
+      $node_urllist = isset($node->print_pdf_display_urllist) ? $node->print_pdf_display_urllist : TRUE;
       $fmt = $format .'_';
       break;
   }
@@ -607,6 +607,11 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
   }
 
   node_invoke_nodeapi($node, 'alter', $teaser, TRUE);
+
+  if ($teaser) {
+    $node->body = $node->teaser;
+    unset($node->teaser);
+  }
 
   //Check URL list settings
   $_print_urls = _print_url_list_enabled($node, $format);

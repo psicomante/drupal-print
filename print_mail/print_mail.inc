@@ -42,8 +42,8 @@ function print_mail_form($form_state) {
   }
   $cid = isset($_GET['comment']) ? (int)$_GET['comment'] : NULL;
 
-  $nodepath = drupal_get_normal_path($path);
   if (count($form_state['post']) == 0) {
+    $nodepath = drupal_get_normal_path($path);
     db_query("UPDATE {print_mail_page_counter} SET totalcount = totalcount + 1, timestamp = %d WHERE path = '%s'", time(), $nodepath);
     // If we affected 0 rows, this is the first time viewing the node.
     if (!db_affected_rows()) {
