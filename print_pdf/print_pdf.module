@@ -30,7 +30,10 @@ define('PRINT_PDF_FONT_SIZE_DEFAULT', 10);
  * Implementation of hook_init().
  */
 function print_pdf_init() {
-  $GLOBALS['conf']['cache'] = FALSE;
+  // Disable cache on the generated PDF page, as the cache isn't working for PDFs
+  if (preg_match('!^'.PRINTPDF_PATH.'!i', $_GET['q']) === 1) {
+    $GLOBALS['conf']['cache'] = FALSE;
+  }
 }
 
 /**
@@ -228,6 +231,9 @@ function print_pdf_nodeapi(&$node, $op = 'view', $teaser, $page) {
   switch ($op) {
     case 'view':
       // Insert content corner links
+      if ($teaser === FALSE) {
+        _print_pdf_set_node_fields($node);
+      }
       $print_pdf_link_pos = variable_get('print_pdf_link_pos', array(PRINT_PDF_LINK_POS_DEFAULT => PRINT_PDF_LINK_POS_DEFAULT));
       if (($teaser === FALSE) && !empty($print_pdf_link_pos['corner']) &&
           (preg_match('!^print!i', $_GET['q']) == 0)) {
@@ -239,14 +245,9 @@ function print_pdf_nodeapi(&$node, $op = 'view', $teaser, $page) {
           );
         }
       }
-      // no break on purpose
+      break;
     case 'prepare':
-      if (empty($teaser)) {
-        $res = db_fetch_object(db_query("SELECT link, comments, url_list FROM {print_pdf_node_conf} WHERE nid = %d", $node->nid));
-        $node->print_pdf_display = $res ? intval($res->link) : PRINT_TYPE_SHOW_LINK_DEFAULT;
-        $node->print_pdf_display_comment = $res ? intval($res->comments) : PRINT_TYPE_COMMENT_LINK_DEFAULT;
-        $node->print_pdf_display_urllist = $res ? intval($res->url_list) : PRINT_TYPE_URLLIST_DEFAULT;
-      }
+      _print_pdf_set_node_fields($node);
       break;
     case 'update':
       _print_pdf_node_conf_modify($node->nid, $node->print_pdf_display, $node->print_pdf_display_comment, $node->print_pdf_display_urllist);
@@ -294,6 +295,19 @@ function print_pdf_form_alter(&$form, $form_state, $form_id) {
       $form['print']['print_pdf_display_urllist']['#default_value'] = $form['#node']->print_pdf_display_urllist;
     }
   }
+}
+
+/**
+ * Auxiliary function to assign the per-node settings to the node object fields
+ *
+ * @param $node
+ *   node to be modified
+ */
+function _print_pdf_set_node_fields(&$node) {
+  $res = db_fetch_object(db_query("SELECT link, comments, url_list FROM {print_pdf_node_conf} WHERE nid = %d", $node->nid));
+  $node->print_pdf_display = $res ? intval($res->link) : PRINT_TYPE_SHOW_LINK_DEFAULT;
+  $node->print_pdf_display_comment = $res ? intval($res->comments) : PRINT_TYPE_COMMENT_LINK_DEFAULT;
+  $node->print_pdf_display_urllist = $res ? intval($res->url_list) : PRINT_TYPE_URLLIST_DEFAULT;
 }
 
 /**
