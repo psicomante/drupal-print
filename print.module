@@ -137,6 +137,7 @@ function print_block($op = 'list', $delta = 0, $edit = array()) {
       }
         break;
       case 1:
+        $block['subject'] = t('Most printed');
         $result = db_query_range("SELECT path FROM {print_page_counter} ORDER BY totalcount DESC", 0, 3);
         if (db_affected_rows()) {
           $block['content'] = '<div class="item-list"><ul>';
@@ -144,7 +145,6 @@ function print_block($op = 'list', $delta = 0, $edit = array()) {
             $block['content'] .= '<li>'. l(_print_get_title($obj->path), $obj->path) .'</li>';
           }
           $block['content'] .= '</ul></div>';
-          $block['subject'] = t('Most printed');
         }
         break;
       }
@@ -475,13 +475,13 @@ function theme_print_format_link() {
   $print_html_link_class = variable_get('print_html_link_class', PRINT_HTML_LINK_CLASS_DEFAULT);
   $print_html_new_window = variable_get('print_html_new_window', PRINT_HTML_NEW_WINDOW_DEFAULT);
   $print_html_show_link = variable_get('print_html_show_link', PRINT_HTML_SHOW_LINK_DEFAULT);
+  $print_html_link_text = variable_get('print_html_link_text', t('Printer-friendly version'));
 
-  $text = t('Printer-friendly version');
   $img = drupal_get_path('module', 'print') .'/icons/print_icon.gif';
   $title = t('Display a printer-friendly version of this page.');
   $class = strip_tags($print_html_link_class);
   $new_window = $print_html_new_window;
-  $format = _print_format_link_aux($print_html_show_link, $text, $img);
+  $format = _print_format_link_aux($print_html_show_link, $print_html_link_text, $img);
 
   return array('text' => $format['text'],
                'html' => $format['html'],

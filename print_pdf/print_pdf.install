@@ -65,6 +65,10 @@ function print_pdf_uninstall() {
   variable_del('print_pdf_content_disposition');
   variable_del('print_pdf_paper_size');
   variable_del('print_pdf_page_orientation');
+  variable_del('print_pdf_font_family');
+  variable_del('print_pdf_font_size');
+  variable_del('print_pdf_link_text');
+  variable_del('print_pdf_link_use_alias');
   $settings = db_query("SELECT name FROM {variable} WHERE name LIKE 'print\_pdf\_display\_%'");
   while ($variable = db_fetch_object($settings)) {
     variable_del($variable->name);

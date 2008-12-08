@@ -83,6 +83,7 @@ function print_pdf_block($op = 'list', $delta = 0, $edit = array()) {
     case 'view':
       switch ($delta) {
       case 0:
+        $block['subject'] = t('Most PDFd');
         $result = db_query_range("SELECT path FROM {print_pdf_page_counter} ORDER BY totalcount DESC", 0, 3);
         if (db_affected_rows()) {
           $block['content'] = '<div class="item-list"><ul>';
@@ -90,7 +91,6 @@ function print_pdf_block($op = 'list', $delta = 0, $edit = array()) {
             $block['content'] .= '<li>'. l(_print_get_title($obj->path), $obj->path) .'</li>';
           }
           $block['content'] .= '</ul></div>';
-          $block['subject'] = t('Most PDFd');
         }
         break;
       }
@@ -317,13 +317,13 @@ function theme_print_pdf_format_link() {
   $print_pdf_link_class  = variable_get('print_pdf_link_class', PRINT_PDF_LINK_CLASS_DEFAULT);
   $print_pdf_content_disposition = variable_get('print_pdf_content_disposition', PRINT_PDF_CONTENT_DISPOSITION_DEFAULT);
   $print_pdf_show_link = variable_get('print_pdf_show_link', PRINT_PDF_SHOW_LINK_DEFAULT);
+  $print_pdf_link_text = variable_get('print_pdf_link_text', t('PDF version'));
 
-  $text = t('PDF version');
   $img = drupal_get_path('module', 'print') .'/icons/pdf_icon.gif';
   $title = t('Display a PDF version of this page.');
   $class = strip_tags($print_pdf_link_class);
   $new_window = ($print_pdf_content_disposition == 1);
-  $format = _print_format_link_aux($print_pdf_show_link, $text, $img);
+  $format = _print_format_link_aux($print_pdf_show_link, $print_pdf_link_text, $img);
 
   return array('text' => $format['text'],
                'html' => $format['html'],

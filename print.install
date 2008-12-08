@@ -83,6 +83,16 @@ function print_uninstall() {
   variable_del('print_robots_noindex');
   variable_del('print_robots_nofollow');
   variable_del('print_robots_noarchive');
+  variable_del('print_footer_options');
+  variable_del('print_footer_user');
+  variable_del('print_html_link_text');
+  variable_del('print_html_link_use_alias');
+  variable_del('print_text_by');
+  variable_del('print_text_created');
+  variable_del('print_text_links');
+  variable_del('print_text_published');
+  variable_del('print_text_retrieved');
+  variable_del('print_text_source_url');
   $settings = db_query("SELECT name FROM {variable} WHERE name LIKE 'print\_display\_%'");
   while ($variable = db_fetch_object($settings)) {
     variable_del($variable->name);

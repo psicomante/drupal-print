@@ -43,6 +43,13 @@ function print_mail_settings() {
     '#description' => t('Select the visual style of the link.'),
   );
 
+  $form['settings']['adv_link']['print_mail_link_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Link text'),
+    '#default_value' => variable_get('print_mail_link_text', t('Send to friend')),
+    '#description' => t("Text used in the link to the send by-email form."),
+  );
+
   $form['settings']['adv_link']['print_mail_link_use_alias'] = array(
     '#type' => 'checkbox',
     '#title' => t('Use URL alias instead of node ID'),
