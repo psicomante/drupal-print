@@ -225,6 +225,13 @@ function print_html_settings() {
     '#description' => t('Select the visual style of the link.'),
   );
 
+  $form['settings']['adv_link']['print_html_link_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Link text'),
+    '#default_value' => variable_get('print_html_link_text', t('Printer-friendly version')),
+    '#description' => t("Text used in the link to the printer-friendly version."),
+  );
+
   $form['settings']['adv_link']['print_html_link_use_alias'] = array(
     '#type' => 'checkbox',
     '#title' => t('Use URL alias instead of node ID'),
