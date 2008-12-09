@@ -1,4 +1,50 @@
+December 10, 2008
+        Update changelog
+        Update translations
+        Minor coder fixes
+December 8, 2008
+        Fix #344036 by eMPee584: generated PDF filename configurable via tokens (requires the token module)
+        Fix #343985 by eMPee584: improve removal of comment form and links
+        Add ability to configure link text strings
+        Improve variable cleanup at uninstall
+December 6, 2008
+        Fix content corner problem and other minor fixes
+December 3, 2008
+        Fix the different teaser comparison
+        Try to fix #336865: also replace the opening <p>
+        Use different teaser comparison
+December 2, 2008
+        Fix #333049 and #333957: Add ability to change user-visible strings in the settings pages
+        Fix #177358: Link options by node
+        Fix #247578: Print URLs by content type
+        Fix #298063: Most printed, emailed and PDFd blocks
+December 1, 2008
+        Disable footer in dompdf
+        Fix #336860 by Limiting Factor: use realpath for the path replacement when using private files
+        Fix #339111: Disable caching for PDF files
+November 25, 2008
+        Fix #336065: change nodeapi content weight to make sure that the content area link is rendered first
+November 14, 2008
+        Handle unclean URLs when using private files
+November 7, 2008
+        Use link format and icon options also in book links.
+        Fix #315204: Add options to show only the current page in book links
+        Fix #314521: Use file:// access when accessing images if private file system is enabled
+October 22, 2008
+        coder fixes
+        Improved UTF-8 conversion for dompdf
+October 21, 2008
+        Since dompdf can't handle Unicode, decode it to ISO-8859-1
+October 18, 2008
+        Don't validate the PDF settings when the form is empty
+October 17, 2008
+        Improve handling of no PDF tool installed
+October 16, 2008
+        Change PF link class from print to print_html
+        Fix #319529: Use referer URL if no path is provided
+        Update translations
 October 15, 2008
+        Minor coder fixes
         Update changelog
         Backport send by e-mail from the 6.x branch
         Fix PDF links (final touches to PDF support in Drupal 5: #299523 and #314754)
