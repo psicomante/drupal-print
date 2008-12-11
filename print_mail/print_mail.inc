@@ -226,59 +226,36 @@ function print_mail_form_submit($form_id, $form_values) {
     $from = $form_values['fld_from_addr'];
   }
   $to = $form_values['txt_to_addrs'];
-  $params = array();
-  $params['subject'] = $form_values['fld_subject'];
-  $params['message'] = $form_values['txt_message'];
-  $params['path'] = $form_values['path'];
-  $params['cid'] = isset($form_values['cid']) ? $form_values['cid'] : NULL;
-  $params['teaser'] = $form_values['chk_teaser'];
+  $cid = isset($form_values['cid']) ? $form_values['cid'] : NULL;
 
-  print_mail_mail('sendpage', $message, $params);
+  $print_mail_text_message = variable_get('print_mail_text_message', t('Message from sender'));
+  $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br($form_values['txt_message']) .'</em>';
 
-  $ret = drupal_mail('print_mail_sendpage', $to, $message['subject'], $message['body'], $from, $message['headers']);
-  if ($ret) {
-    flood_register_event('print_mail');
-    watchdog('print_mail', t('%name [%from] sent %page to [%to]', array('%name' => $form_values['fld_from_name'], '%from' => $form_values['fld_from_addr'], '%page' => $form_values['path'], '%to' => $to)));
-    $site_name = variable_get('site_name', t('us'));
-    $print_mail_text_confirmation = variable_get('print_mail_text_confirmation', t('Thank you for spreading the word about !site.'));
-    drupal_set_message(t($print_mail_text_confirmation, array('!site' => $site_name)));
+  $print = print_controller($form_values['path'], $cid, PRINT_MAIL_FORMAT, $form_values['chk_teaser'], $sender_message);
+  if ($print !== FALSE) {
+    $params = array();
+    $params['subject'] = $form_values['fld_subject'];
+    $headers = array('Content-Type' => 'text/html; charset=utf-8');
 
-    $nodepath = drupal_get_normal_path($params['path']);
-    db_query("UPDATE {print_mail_page_counter} SET sentcount = sentcount + %d, sent_timestamp = %d WHERE path = '%s'", count(split(',', $to)), time(), $nodepath);
+    $node = $print['node'];
+    ob_start();
+    include_once(_print_get_template(PRINT_MAIL_FORMAT, $print['type']));
+    $params['body'] = ob_get_contents();
+    ob_end_clean();
+
+    $ret = drupal_mail('print_mail_sendpage', $to, $params['subject'], $params['body'], $from, $headers);
+    if ($ret) {
+      flood_register_event('print_mail');
+      watchdog('print_mail', t('%name [%from] sent %page to [%to]', array('%name' => $form_values['fld_from_name'], '%from' => $form_values['fld_from_addr'], '%page' => $form_values['path'], '%to' => $to)));
+      $site_name = variable_get('site_name', t('us'));
+      $print_mail_text_confirmation = variable_get('print_mail_text_confirmation', t('Thank you for spreading the word about !site.'));
+      drupal_set_message(t($print_mail_text_confirmation, array('!site' => $site_name)));
+
+      $nodepath = drupal_get_normal_path($form_values['path']);
+      db_query("UPDATE {print_mail_page_counter} SET sentcount = sentcount + %d, sent_timestamp = %d WHERE path = '%s'", count(split(',', $to)), time(), $nodepath);
+    }
   }
   }
+
   return preg_replace('!^book/export/html/!', 'node/', $form_values['path']);
-}
-
-/**
- * Implementation of hook_mail().
- */
-function print_mail_mail($key, &$message, $params) {
-  switch ($key) {
-    case 'sendpage':
-      $print_mail_text_message = variable_get('print_mail_text_message', t('Message from sender'));
-      $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br($params['message']) .'</em>';
-
-      $print = print_controller($params['path'], $params['cid'], PRINT_MAIL_FORMAT, $params['teaser'], $sender_message);
-      if ($print === FALSE) {
-        return;
-      }
-
-      // Img elements must be set to absolute
-//      $pattern = '!<(img\s[^>]*?)>!is';
-//      $print['content'] = preg_replace_callback($pattern, '_print_rewrite_urls', $print['content']);
-//      $print['logo'] = preg_replace_callback($pattern, '_print_rewrite_urls', $print['logo']);
-//      $print['footer_message'] = preg_replace_callback($pattern, '_print_rewrite_urls', $print['footer_message']);
-
-      $node = $print['node'];
-      ob_start();
-      include_once(_print_get_template(PRINT_MAIL_FORMAT, $print['type']));
-      $html = ob_get_contents();
-      ob_end_clean();
-
-      $message['subject'] = $params['subject'];
-      $message['body'] = $html;
-      $message['headers']['Content-Type'] = 'text/html; charset=utf-8';
-    break;
-  }
 }
