@@ -176,7 +176,7 @@ msgstr "Ligações"
 
 #: print.admin.inc:191
 msgid "Only JPEG, PNG and GIF images are allowed to be used as logos."
-msgstr "Apenas imagens JPEG, PNG ou GIF podem ser usadas como logotipo."
+msgstr "Apenas imagens JPEG, PNG e GIF são permitidas como logótipos."
 
 #: print.admin.inc:204
 msgid "Web page options"
@@ -383,7 +383,7 @@ msgstr "Anónimo"
 
 #: print.pages.inc:592
 msgid "Post new comment"
-msgstr ""
+msgstr "Submeter um novo comentário"
 
 #: print.module:71
 msgid "Printer-friendly"
