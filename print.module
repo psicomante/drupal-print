@@ -53,7 +53,7 @@ define('PRINT_ALLOW_BOOK_LINK', 2);
  * Implementation of hook_perm().
  */
 function print_perm() {
-  return array('access print', 'administer print');
+  return array('access print', 'administer print', 'use PHP for link visibility');
 }
 
 /**
@@ -576,6 +576,9 @@ function print_insert_link($path = NULL, $node = NULL) {
  */
 function _print_page_match($visibility, $pages) {
   if ($pages) {
+    if ($visibility == 2) {
+      return drupal_eval($pages);
+    }
     $path = drupal_get_path_alias($_GET['q']);
     $page_match = drupal_match_path($path, $pages);
     if ($path != $_GET['q']) {
