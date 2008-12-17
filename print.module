@@ -56,7 +56,7 @@ require_once(drupal_get_path('module', 'print') .'/print.pages.inc');
  * Implementation of hook_perm().
  */
 function print_perm() {
-  return array('access print', 'administer print');
+  return array('access print', 'administer print', 'use PHP for link visibility');
 }
 
 /**
@@ -591,6 +591,9 @@ function _print_match_path($path, $patterns) {
  */
 function _print_page_match($visibility, $pages) {
   if ($pages) {
+    if ($visibility == 2) {
+      return drupal_eval($pages);
+    }
     $path = drupal_get_path_alias($_GET['q']);
     $page_match = _print_match_path($path, $pages);
     if ($path != $_GET['q']) {
