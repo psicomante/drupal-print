@@ -199,8 +199,8 @@ function print_mail_nodeapi(&$node, $op = 'view', $teaser, $page) {
  */
 function print_mail_form_alter($form_id, &$form) {
   // Add the node-type settings option to activate the mail version link
-  if (($form_id == 'node_type_form') ||
-      (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id)) {
+  if ((user_access('administer print') || user_access('node-specific print configuration')) && (($form_id == 'node_type_form') ||
+      (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id))) {
     $form['print']['mail_label'] = array(
       '#type' => 'markup',
       '#value' => '<p><strong>'. t('Send by e-mail') .'</strong></p>',

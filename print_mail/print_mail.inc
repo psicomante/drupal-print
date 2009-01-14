@@ -21,7 +21,7 @@ function print_mail_form($form_state) {
 
   $print_mail_hourly_threshold = variable_get('print_mail_hourly_threshold', PRINT_MAIL_HOURLY_THRESHOLD);
 
-  if (!flood_is_allowed('print_mail', $print_mail_hourly_threshold)) {
+  if (($user->uid != 1) && (!flood_is_allowed('print_mail', $print_mail_hourly_threshold))) {
     $form['flood'] = array(
       '#type' => 'markup',
       '#value' => '<p>'. t('You cannot send more than %number messages per hour. Please try again later.', array('%number' => $print_mail_hourly_threshold)) .'</p>',
@@ -232,6 +232,11 @@ function print_mail_form_submit($form_id, $form_values) {
   $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br($form_values['txt_message']) .'</em>';
 
   $print = print_controller($form_values['path'], $cid, PRINT_MAIL_FORMAT, $form_values['chk_teaser'], $sender_message);
+
+  // Spaces in img URLs must be replaced with %20
+  $pattern = '!<(img\s[^>]*?)>!is';
+  $print['content'] = preg_replace_callback($pattern, '_print_mail_encode_urls', $print['content']);
+
   if ($print !== FALSE) {
     $params = array();
     $params['subject'] = $form_values['fld_subject'];
@@ -258,4 +263,40 @@ function print_mail_form_submit($form_id, $form_values) {
   }
 
   return preg_replace('!^book/export/html/!', 'node/', $form_values['path']);
+}
+
+/**
+ * Callback function for the preg_replace_callback replacing spaces with %20
+ *
+ * Replace spaces in URLs with %20
+ *
+ * @param $matches
+ *   array with the matched tag patterns, usually <a...>+text+</a>
+ * @return
+ *   tag with re-written URL
+ */
+function _print_mail_encode_urls($matches) {
+  // first, split the html into the different tag attributes
+  $pattern = '!\s*(\w+\s*=\s*"(?:\\\"|[^"])*")\s*|\s*(\w+\s*=\s*\'(?:\\\\\'|[^\'])*\')\s*|\s*(\w+\s*=\s*\w+)\s*|\s+!';
+  $attribs = preg_split($pattern, $matches[1], -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+  foreach ($attribs as $key => $value) {
+    $attribs[$key] = preg_replace('!(\w)\s*=\s*(.*)!', '$1=$2', $value);
+  }
+
+  $size = count($attribs);
+  for ($i=1; $i < $size; $i++) {
+    // If the attribute is href or src, we may need to rewrite the URL in the value
+    if (preg_match('!^(?:href|src)\s*?=(.*)!i', $attribs[$i], $urls) > 0) {
+      $url = trim($urls[1], " \t\n\r\0\x0B\"'");
+      $new_url = str_replace(' ', '%20', $url);
+      $matches[1] = str_replace($url, $new_url, $matches[1]);
+    }
+  }
+
+  $ret = '<'. $matches[1] .'>';
+  if (count($matches) == 4) {
+    $ret .= $matches[2] . $matches[3];
+  }
+
+  return $ret;
 }

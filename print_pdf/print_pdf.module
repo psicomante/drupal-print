@@ -225,8 +225,8 @@ function print_pdf_nodeapi(&$node, $op = 'view', $teaser, $page) {
  */
 function print_pdf_form_alter($form_id, &$form) {
   // Add the node-type settings option to activate the PDF version link
-  if (($form_id == 'node_type_form') ||
-      (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id)) {
+  if ((user_access('administer print') || user_access('node-specific print configuration')) && (($form_id == 'node_type_form') ||
+      (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id))) {
     $form['print']['pdf_label'] = array(
       '#type' => 'markup',
       '#value' => '<p><strong>'. t('PDF version') .'</strong></p>',
