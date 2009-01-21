@@ -166,9 +166,6 @@ function print_mail_nodeapi(&$node, $op = 'view', $teaser, $page) {
   switch ($op) {
     case 'view':
       // Insert content corner links
-      if ($teaser === FALSE) {
-        _print_mail_set_node_fields($node);
-      }
       $print_mail_link_pos = variable_get('print_mail_link_pos', array(PRINT_MAIL_LINK_POS_DEFAULT => PRINT_MAIL_LINK_POS_DEFAULT));
       if (($teaser === FALSE) && !empty($print_mail_link_pos['corner']) &&
           (preg_match('!^print!i', $_GET['q']) == 0)) {
@@ -181,7 +178,7 @@ function print_mail_nodeapi(&$node, $op = 'view', $teaser, $page) {
         }
       }
       break;
-    case 'prepare':
+    case 'load':
       _print_mail_set_node_fields($node);
       break;
     case 'update':
