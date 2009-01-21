@@ -264,9 +264,6 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
   switch ($op) {
     case 'view':
       // Insert content corner links
-      if ($teaser === FALSE) {
-        _print_set_node_fields($node);
-      }
       $print_html_link_pos = variable_get('print_html_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
       if (($teaser === FALSE) && !empty($print_html_link_pos['corner']) &&
           (preg_match('!^print!i', $_GET['q']) == 0)) {
@@ -279,7 +276,7 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
         }
       }
       break;
-    case 'prepare':
+    case 'load':
       _print_set_node_fields($node);
       break;
     case 'update':
@@ -712,52 +709,3 @@ function print_query_string_encode($query, $exclude = array(), $parent = '') {
 
   return implode('&', $params);
 }
-
-/**
- * Implementation of hook_content_build_modes()
- *
- * @return
- * An array describing the build modes used by the module.
- * They are grouped by secondary tabs on CCK's 'Display fields' screens.
- *
- * Expected format:
- * array(
- *   // The first level keys (tab1_url, tab2_url) will be used to generate
- *   // the url of the tab: admin/content/node-type/[type_name]/display/[tab1_url]
- *   // A module can add its render modes to a tab defined by another module.
- *   // In this case, there's no need to provide a 'title' for this tab.
- *   'tab1_url' => array(
- *     'title' => t('The human-readable title of the tab'),
- *     'build modes' => array(
- *       // The keys of the 'context' array are the values used in $node->build_mode.
- *       'mymodule_mode1' => array(
- *         'title' => t('The human-readable name of the build mode'),
- *        // The 'views style' property determines if the render mode should be
- *        // available as an option in Views' 'node' row style (not implemented yet).
- *        'views style' => TRUE,
- *       ),
- *       'mymodule_mode2' => array(
- *         'title' => t('Mode 2'),
- *         'views style' => TRUE,
- *       ),
- *     ),
- *   ),
- *   'tab2_url' => array(
- *     // ...
- *   ),
- * );
- */
-function print_content_build_modes() {
- return array(
-   'print' => array(
-     'title' => t('Print'),
-     'build modes' => array(
-     'print' => array(
-         'title' => t('Print'),
-         'views style' => FALSE,
-       ),
-     ),
-   ),
- );
-}
-

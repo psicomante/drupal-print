@@ -553,11 +553,8 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
   drupal_set_title($node->title);
 
   //alert other modules that we are generating a printer-friendly page, so they can choose to show/hide info
-  // TODO: Remove this in favor of PRINT_BUILD_MODE
   $node->printing = TRUE;
-  
-  $node->build_mode = 'print';
-  
+
   // Turn off Pagination by the Paging module
   unset($node->pages);
   unset($node->page_count);
