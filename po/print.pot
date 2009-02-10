@@ -3,25 +3,25 @@
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  print.admin.inc,v 1.5.2.11.2.7 2009/02/02 21:29:19 jcnventura
+#  print.admin.inc,v 1.5.2.11.2.8 2009/02/05 00:37:09 jcnventura
 #  print.pages.inc,v 1.9.2.21.2.8 2009/01/21 01:11:35 jcnventura
-#  print_mail.admin.inc,v 1.2.2.2.2.6 2009/02/02 21:29:19 jcnventura
-#  print_pdf.admin.inc,v 1.4.2.2.2.7 2009/02/02 21:29:19 jcnventura
-#  print.module,v 1.15.2.5.2.29.2.62.2.14 2009/02/02 21:29:19 jcnventura
-#  print_mail.module,v 1.13.2.2.2.12 2009/02/02 21:29:19 jcnventura
-#  print_pdf.module,v 1.14.2.3.2.17 2009/02/02 21:29:19 jcnventura
+#  print_mail.admin.inc,v 1.2.2.2.2.7 2009/02/05 00:37:10 jcnventura
+#  print_pdf.admin.inc,v 1.4.2.2.2.8 2009/02/05 00:37:10 jcnventura
+#  print.module,v 1.15.2.5.2.29.2.62.2.17 2009/02/10 18:31:38 jcnventura
+#  print_mail.module,v 1.13.2.2.2.15 2009/02/09 22:06:02 jcnventura
+#  print_pdf.module,v 1.14.2.3.2.18 2009/02/09 20:20:10 jcnventura
 #  print.info,v 1.1.2.2.4.2 2008/10/02 22:22:58 jcnventura
 #  print_mail.info,v 1.2.2.2 2008/10/15 11:03:28 jcnventura
 #  print_pdf.info,v 1.2.2.2 2008/10/02 22:22:59 jcnventura
-#  print.install,v 1.1.2.1.2.7.2.3 2009/01/21 01:11:35 jcnventura
+#  print.install,v 1.1.2.1.2.7.2.4 2009/02/05 00:37:09 jcnventura
 #  print_mail.inc,v 1.8.2.2.2.8 2009/01/14 22:59:12 jcnventura
-#  print_pdf.pages.inc,v 1.14.2.3.2.11 2008/12/17 12:19:03 jcnventura
+#  print_pdf.pages.inc,v 1.14.2.3.2.12 2009/02/09 20:25:12 jcnventura
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2009-02-05 01:20+0100\n"
+"POT-Creation-Date: 2009-02-10 23:28+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -354,7 +354,7 @@ msgstr ""
 msgid "Link text"
 msgstr ""
 
-#: print.admin.inc:373 print.module:333;512
+#: print.admin.inc:373 print.module:340;519
 msgid "Printer-friendly version"
 msgstr ""
 
@@ -374,7 +374,7 @@ msgstr ""
 msgid "Printer-friendly"
 msgstr ""
 
-#: print.module:78;140;326 print.info:0 print_mail/print_mail.info:0 print_pdf/print_pdf.info:0
+#: print.module:78;140;333 print.info:0 print_mail/print_mail.info:0 print_pdf/print_pdf.info:0
 msgid "Printer, e-mail and PDF versions"
 msgstr ""
 
@@ -398,23 +398,23 @@ msgstr ""
 msgid "Most printed"
 msgstr ""
 
-#: print.module:338 print_mail/print_mail.module:223 print_pdf/print_pdf.module:249
+#: print.module:345 print_mail/print_mail.module:254 print_pdf/print_pdf.module:251
 msgid "Show link"
 msgstr ""
 
-#: print.module:342 print_mail/print_mail.module:227 print_pdf/print_pdf.module:253
+#: print.module:349 print_mail/print_mail.module:258 print_pdf/print_pdf.module:255
 msgid "Show link in individual comments"
 msgstr ""
 
-#: print.module:346 print_mail/print_mail.module:231 print_pdf/print_pdf.module:257
+#: print.module:353 print_mail/print_mail.module:262 print_pdf/print_pdf.module:259
 msgid "Show Printer-friendly URLs list"
 msgstr ""
 
-#: print.module:359
+#: print.module:366
 msgid "The settings below only apply in case the corresponding type-specific setting is also enabled (except for the \"Show link in individual comments\")."
 msgstr ""
 
-#: print.module:515
+#: print.module:522
 msgid "Display a printer-friendly version of this page."
 msgstr ""
 
@@ -494,7 +494,7 @@ msgstr ""
 msgid "If checked, the user will be able to choose between sending the full content or only the teaser at send time."
 msgstr ""
 
-#: print_mail/print_mail.admin.inc:159 print_mail/print_mail.module:302
+#: print_mail/print_mail.admin.inc:159 print_mail/print_mail.module:333
 msgid "Send to friend"
 msgstr ""
 
@@ -622,16 +622,24 @@ msgstr ""
 msgid "e-mail"
 msgstr ""
 
-#: print_mail/print_mail.module:79;89
+#: print_mail/print_mail.module:108;118
 msgid "Most emailed"
 msgstr ""
 
-#: print_mail/print_mail.module:218 print_mail/print_mail.info:0
+#: (duplicate) print_mail/print_mail.module:249;90  print_mail/print_mail.info:0
 msgid "Send by e-mail"
 msgstr ""
 
-#: print_mail/print_mail.module:305
+#: print_mail/print_mail.module:336
 msgid "Send this page by e-mail."
+msgstr ""
+
+#: (duplicate) print_mail/print_mail.module:91 
+msgid "Mime Mail configuration"
+msgstr ""
+
+#: (duplicate) print_mail/print_mail.module:92 
+msgid "The current configuration of the Mime Mail module creates problems with the 'Send to Friend' function. Either disable Mime Mail's <em>Use mime mail for all messages</em> or disable the <em>HTML filter</em> and <em>Line break converter</em> filters in the input format used by that module (when the format is not selectable in that module's settings form, the default format is used)."
 msgstr ""
 
 #: print_mail/print_mail.info:0
@@ -750,7 +758,7 @@ msgstr ""
 msgid "Font size must be at least 1."
 msgstr ""
 
-#: (duplicate) print_pdf/print_pdf.admin.inc:276 print_pdf/print_pdf.module:244;329;120  print_pdf/print_pdf.info:0
+#: (duplicate) print_pdf/print_pdf.admin.inc:276 print_pdf/print_pdf.module:246;331;120  print_pdf/print_pdf.info:0
 msgid "PDF version"
 msgstr ""
 
@@ -758,7 +766,7 @@ msgstr ""
 msgid "Text used in the link to the PDF version."
 msgstr ""
 
-#: print_pdf/print_pdf.pages.inc:375
+#: print_pdf/print_pdf.pages.inc:378
 msgid "Page !n of !total"
 msgstr ""
 
@@ -774,7 +782,7 @@ msgstr ""
 msgid "Most PDFd"
 msgstr ""
 
-#: print_pdf/print_pdf.module:332
+#: print_pdf/print_pdf.module:334
 msgid "Display a PDF version of this page."
 msgstr ""
 

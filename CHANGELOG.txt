@@ -1,3 +1,10 @@
+February 10, 2009
+        Update changelog
+        Prevent links from showing in event calendar views
+February 9, 2009
+        Fix #370602: proper detection of the incompatible mimemail settings
+        Fix #371388 by victorkane and gurubert: delete tbody tags since dompdf can't handle them
+        Fix #370870: do not delete node-specific settings when users without permission to change them edit a node
 February 5, 2009
         Update changelog
         Add warning for incompatible mimemail settings
