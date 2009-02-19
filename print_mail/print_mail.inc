@@ -221,47 +221,47 @@ function print_mail_form_validate($form_id, $form_values, $form) {
  */
 function print_mail_form_submit($form_id, $form_values) {
   if (!array_key_exists('cancel', $form_values)) {
-  if (!empty($form_values['fld_from_name'])) {
-    $from = '"'. $form_values['fld_from_name'] .'" <'. $form_values['fld_from_addr'] .'>';
-  }
-  else {
-    $from = $form_values['fld_from_addr'];
-  }
-  $to = $form_values['txt_to_addrs'];
-  $cid = isset($form_values['cid']) ? $form_values['cid'] : NULL;
-
-  $print_mail_text_message = variable_get('print_mail_text_message', t('Message from sender'));
-  $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br($form_values['txt_message']) .'</em>';
-
-  $print = print_controller($form_values['path'], $cid, PRINT_MAIL_FORMAT, $form_values['chk_teaser'], $sender_message);
-
-  // Spaces in img URLs must be replaced with %20
-  $pattern = '!<(img\s[^>]*?)>!is';
-  $print['content'] = preg_replace_callback($pattern, '_print_mail_encode_urls', $print['content']);
-
-  if ($print !== FALSE) {
-    $params = array();
-    $params['subject'] = $form_values['fld_subject'];
-    $headers = array('Content-Type' => 'text/html; charset=utf-8');
-
-    $node = $print['node'];
-    ob_start();
-    include_once(_print_get_template(PRINT_MAIL_FORMAT, $print['type']));
-    $params['body'] = ob_get_contents();
-    ob_end_clean();
-
-    $ret = drupal_mail('print_mail_sendpage', $to, $params['subject'], $params['body'], $from, $headers);
-    if ($ret) {
-      flood_register_event('print_mail');
-      watchdog('print_mail', t('%name [%from] sent %page to [%to]', array('%name' => $form_values['fld_from_name'], '%from' => $form_values['fld_from_addr'], '%page' => $form_values['path'], '%to' => $to)));
-      $site_name = variable_get('site_name', t('us'));
-      $print_mail_text_confirmation = variable_get('print_mail_text_confirmation', t('Thank you for spreading the word about !site.'));
-      drupal_set_message(t($print_mail_text_confirmation, array('!site' => $site_name)));
-
-      $nodepath = drupal_get_normal_path($form_values['path']);
-      db_query("UPDATE {print_mail_page_counter} SET sentcount = sentcount + %d, sent_timestamp = %d WHERE path = '%s'", count(split(',', $to)), time(), $nodepath);
+    if (!empty($form_values['fld_from_name'])) {
+      $from = '"'. $form_values['fld_from_name'] .'" <'. $form_values['fld_from_addr'] .'>';
     }
-  }
+    else {
+      $from = $form_values['fld_from_addr'];
+    }
+    $to = $form_values['txt_to_addrs'];
+    $cid = isset($form_values['cid']) ? $form_values['cid'] : NULL;
+
+    $print_mail_text_message = variable_get('print_mail_text_message', t('Message from sender'));
+    $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br($form_values['txt_message']) .'</em>';
+
+    $print = print_controller($form_values['path'], $cid, PRINT_MAIL_FORMAT, $form_values['chk_teaser'], $sender_message);
+
+    // Spaces in img URLs must be replaced with %20
+    $pattern = '!<(img\s[^>]*?)>!is';
+    $print['content'] = preg_replace_callback($pattern, '_print_mail_encode_urls', $print['content']);
+
+    if ($print !== FALSE) {
+      $params = array();
+      $params['subject'] = $form_values['fld_subject'];
+      $headers = array('Content-Type' => 'text/html; charset=utf-8');
+
+      $node = $print['node'];
+      ob_start();
+      include_once(_print_get_template(PRINT_MAIL_FORMAT, $print['type']));
+      $params['body'] = ob_get_contents();
+      ob_end_clean();
+
+      $ret = drupal_mail('print_mail_sendpage', $to, $params['subject'], $params['body'], $from, $headers);
+      if ($ret) {
+        flood_register_event('print_mail');
+        watchdog('print_mail', t('%name [%from] sent %page to [%to]', array('%name' => $form_values['fld_from_name'], '%from' => $form_values['fld_from_addr'], '%page' => $form_values['path'], '%to' => $to)));
+        $site_name = variable_get('site_name', t('us'));
+        $print_mail_text_confirmation = variable_get('print_mail_text_confirmation', t('Thank you for spreading the word about !site.'));
+        drupal_set_message(t($print_mail_text_confirmation, array('!site' => $site_name)));
+
+        $nodepath = drupal_get_normal_path($form_values['path']);
+        db_query("UPDATE {print_mail_page_counter} SET sentcount = sentcount + %d, sent_timestamp = %d WHERE path = '%s'", count(split(',', $to)), time(), $nodepath);
+      }
+    }
   }
 
   return preg_replace('!^book/export/html/!', 'node/', $form_values['path']);
