@@ -164,7 +164,7 @@ function print_mail_strings_settings() {
     '#type' => 'textfield',
     '#title' => t('Message Subject'),
     '#default_value' => variable_get('print_mail_text_subject', t('!user has sent you a message from !site')),
-    '#description' => t("e-mail subject line. The sender's name will appear in place of !user in the subject. The web site name will be inserted in place of !site."),
+    '#description' => t("e-mail subject line. The sender's name will appear in place of !user in the subject. The web site name will be inserted in place of !site. The page title replaces !title."),
   );
   $form['print_mail_text']['print_mail_text_message'] = array(
     '#type' => 'textfield',
