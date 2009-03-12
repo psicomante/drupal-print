@@ -48,6 +48,7 @@ define('PRINT_TYPE_URLLIST_DEFAULT', 1);
 
 define('PRINT_ALLOW_NORMAL_LINK', 1);
 define('PRINT_ALLOW_BOOK_LINK', 2);
+define('PRINT_TYPE_FIELDS_WEIGHT', 50);
 
 /**
  * Implementation of hook_perm().
@@ -331,11 +332,8 @@ function print_form_alter(&$form, $form_state, $form_id) {
       '#title' => t('Printer, e-mail and PDF versions'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
+      '#weight' => function_exists('content_extra_field_weight') ? content_extra_field_weight($form['type']['#value'], 'print') : PRINT_TYPE_FIELDS_WEIGHT,
     );
-
-    if (function_exists('content_extra_field_weight')) {
-      $form['print']['#weight'] = content_extra_field_weight($form['type']['#value'], 'print');
-    }
 
     $form['print']['label'] = array(
       '#type' => 'markup',
@@ -377,7 +375,7 @@ function print_content_extra_fields($type_name) {
   $fields['print'] = array(
     'label' => t('Printer, e-mail and PDF versions'),
     'description' => t('Print module form.'),
-    'weight' => 50,
+    'weight' => PRINT_TYPE_FIELDS_WEIGHT,
   );
   return $fields;
 }
