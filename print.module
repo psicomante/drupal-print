@@ -48,6 +48,7 @@ define('PRINT_TYPE_URLLIST_DEFAULT', 1);
 
 define('PRINT_ALLOW_NORMAL_LINK', 1);
 define('PRINT_ALLOW_BOOK_LINK', 2);
+define('PRINT_TYPE_FIELDS_WEIGHT', 50);
 
 require_once(drupal_get_path('module', 'print') .'/print.admin.inc');
 require_once(drupal_get_path('module', 'print') .'/print.pages.inc');
@@ -333,6 +334,7 @@ function print_form_alter($form_id, &$form) {
       '#title' => t('Printer, e-mail and PDF versions'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
+      '#weight' => PRINT_TYPE_FIELDS_WEIGHT,
     );
 
     $form['print']['label'] = array(
