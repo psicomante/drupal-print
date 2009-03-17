@@ -245,7 +245,7 @@ function print_update_5303() {
   $t = get_t();
 
   foreach ($vars as $name => $default) {
-    if (variable_get($name,'') == $t($default)) {
+    if (variable_get($name, '') == $t($default)) {
       variable_del($name);
     }
   }
