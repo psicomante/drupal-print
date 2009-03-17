@@ -369,7 +369,7 @@ function print_form_alter(&$form, $form_state, $form_id) {
 }
 
 /**
- * Implementation of hook_content_extra_fields.
+ * Implementation of hook_content_extra_fields().
  */
 function print_content_extra_fields($type_name) {
   $fields['print'] = array(
