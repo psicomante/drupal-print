@@ -21,7 +21,7 @@ function print_mail_form($form_state) {
 
   $print_mail_hourly_threshold = variable_get('print_mail_hourly_threshold', PRINT_MAIL_HOURLY_THRESHOLD);
 
-  if (($user->uid != 1) && (!flood_is_allowed('print_mail', $print_mail_hourly_threshold))) {
+  if ((!user_access('administer print')) && (!flood_is_allowed('print_mail', $print_mail_hourly_threshold))) {
     $form['flood'] = array(
       '#type' => 'markup',
       '#value' => '<p>'. t('You cannot send more than %number messages per hour. Please try again later.', array('%number' => $print_mail_hourly_threshold)) .'</p>',
@@ -197,6 +197,12 @@ function print_mail_form_validate($form_id, $form_values, $form) {
     }
   }
 
+  $print_mail_hourly_threshold = variable_get('print_mail_hourly_threshold', PRINT_MAIL_HOURLY_THRESHOLD);
+
+  if ((!user_access('administer print')) && (!flood_is_allowed('print_mail', $print_mail_hourly_threshold - count($to_array) + 1))) {
+    form_set_error('txt_to_addrs',  t('You cannot send more than %number messages per hour. Please reduce the number of recipients.', array('%number' => $print_mail_hourly_threshold)));
+  }
+
   // In all fields, prevent insertion of custom headers
   foreach ($form_values as $key => $string) {
     if ( (substr($key, 0, 4) == 'fld_') && ((strpos($string, "\n") !== FALSE) || (strpos($string, "\r") !== FALSE)) ) {
@@ -234,11 +240,10 @@ function print_mail_form_submit($form_id, $form_values) {
     else {
       $from = $form_values['fld_from_addr'];
     }
-    $to = $form_values['txt_to_addrs'];
     $cid = isset($form_values['cid']) ? $form_values['cid'] : NULL;
 
     $print_mail_text_message = variable_get('print_mail_text_message', t('Message from sender'));
-    $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br($form_values['txt_message']) .'</em>';
+    $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br(check_plain($form_values['txt_message'])) .'</em>';
 
     $print = print_controller($form_values['path'], $cid, PRINT_MAIL_FORMAT, $form_values['chk_teaser'], $sender_message);
 
@@ -257,16 +262,23 @@ function print_mail_form_submit($form_id, $form_values) {
       $params['body'] = ob_get_contents();
       ob_end_clean();
 
-      $ret = drupal_mail('print_mail_sendpage', $to, $params['subject'], $params['body'], $from, $headers);
-      if ($ret) {
-        flood_register_event('print_mail');
-        watchdog('print_mail', t('%name [%from] sent %page to [%to]', array('%name' => $form_values['fld_from_name'], '%from' => $form_values['fld_from_addr'], '%page' => $form_values['path'], '%to' => $to)));
+      $ok = FALSE;
+      $addresses = explode(', ', $form_values['txt_to_addrs']);
+      foreach ($addresses as $to) {
+        $ret = drupal_mail('print_mail_sendpage', $to, $params['subject'], $params['body'], $from, $headers);
+        if ($ret) {
+          flood_register_event('print_mail');
+          $ok = TRUE;
+        }
+      }
+      if ($ok) {
+        watchdog('print_mail', t('%name [%from] sent %page to [%to]', array('%name' => $form_values['fld_from_name'], '%from' => $form_values['fld_from_addr'], '%page' => $form_values['path'], '%to' => $form_values['txt_to_addrs'])));
         $site_name = variable_get('site_name', t('us'));
         $print_mail_text_confirmation = variable_get('print_mail_text_confirmation', t('Thank you for spreading the word about !site.'));
         drupal_set_message(t($print_mail_text_confirmation, array('!site' => $site_name)));
 
         $nodepath = drupal_get_normal_path($form_values['path']);
-        db_query("UPDATE {print_mail_page_counter} SET sentcount = sentcount + %d, sent_timestamp = %d WHERE path = '%s'", count(split(',', $to)), time(), $nodepath);
+        db_query("UPDATE {print_mail_page_counter} SET sentcount = sentcount + %d, sent_timestamp = %d WHERE path = '%s'", count($addresses), time(), $nodepath);
       }
     }
   }
