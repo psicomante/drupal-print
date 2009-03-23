@@ -31,8 +31,8 @@ function print_pdf_install() {
       db_query("CREATE TABLE {print_pdf_node_conf} (
         nid int_unsigned NOT NULL,
         link smallint NOT NULL default '1',
-        comments smallint unsigned NOT NULL default '1',
-        url_list smallint unsigned NOT NULL default '1',
+        comments smallint_unsigned NOT NULL default '1',
+        url_list smallint_unsigned NOT NULL default '1',
         PRIMARY KEY  (nid)
       )");
       db_query("CREATE TABLE {print_pdf_page_counter} (
@@ -128,8 +128,8 @@ function print_pdf_update_6001() {
       db_query("CREATE TABLE {print_pdf_node_conf} (
         nid int_unsigned NOT NULL,
         link smallint NOT NULL default '1',
-        comments smallint unsigned NOT NULL default '1',
-        url_list smallint unsigned NOT NULL default '1',
+        comments smallint_unsigned NOT NULL default '1',
+        url_list smallint_unsigned NOT NULL default '1',
         PRIMARY KEY  (nid)
       )");
       db_query("CREATE TABLE {print_pdf_page_counter} (
