@@ -5,23 +5,23 @@
 # Generated from files:
 #  print.admin.inc,v 1.5.2.11.2.8 2009/02/05 00:37:09 jcnventura
 #  print.pages.inc,v 1.9.2.21.2.8 2009/01/21 01:11:35 jcnventura
-#  print_mail.admin.inc,v 1.2.2.2.2.7 2009/02/05 00:37:10 jcnventura
+#  print_mail.admin.inc,v 1.2.2.2.2.8 2009/03/05 00:45:09 jcnventura
 #  print_pdf.admin.inc,v 1.4.2.2.2.8 2009/02/05 00:37:10 jcnventura
-#  print.module,v 1.15.2.5.2.29.2.62.2.17 2009/02/10 18:31:38 jcnventura
+#  print.module,v 1.15.2.5.2.29.2.62.2.18 2009/03/12 20:14:15 jcnventura
 #  print_mail.module,v 1.13.2.2.2.15 2009/02/09 22:06:02 jcnventura
 #  print_pdf.module,v 1.14.2.3.2.18 2009/02/09 20:20:10 jcnventura
 #  print.info,v 1.1.2.2.4.2 2008/10/02 22:22:58 jcnventura
 #  print_mail.info,v 1.2.2.2 2008/10/15 11:03:28 jcnventura
 #  print_pdf.info,v 1.2.2.2 2008/10/02 22:22:59 jcnventura
-#  print.install,v 1.1.2.1.2.7.2.4 2009/02/05 00:37:09 jcnventura
-#  print_mail.inc,v 1.8.2.2.2.8 2009/01/14 22:59:12 jcnventura
-#  print_pdf.pages.inc,v 1.14.2.3.2.12 2009/02/09 20:25:12 jcnventura
+#  print.install,v 1.1.2.1.2.7.2.5 2009/03/17 20:54:07 jcnventura
+#  print_mail.inc,v 1.8.2.2.2.11 2009/03/18 20:49:37 jcnventura
+#  print_pdf.pages.inc,v 1.14.2.3.2.14 2009/02/20 15:51:33 jcnventura
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2009-02-10 23:28+0100\n"
+"POT-Creation-Date: 2009-03-18 22:30+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -326,7 +326,7 @@ msgstr ""
 msgid "Saving these strings will disable their translation via Drupal's language system. Use the reset button to return them to the original state."
 msgstr ""
 
-#: print.admin.inc:326;367 print.module:98;122 print_mail/print_mail.admin.inc:153 print_mail/print_mail.module:61 print_pdf/print_pdf.admin.inc:270 print_pdf/print_pdf.module:64
+#: print.admin.inc:326;367 print.module:99;123 print_mail/print_mail.admin.inc:153 print_mail/print_mail.module:61 print_pdf/print_pdf.admin.inc:270 print_pdf/print_pdf.module:64
 msgid "Text strings"
 msgstr ""
 
@@ -354,7 +354,7 @@ msgstr ""
 msgid "Link text"
 msgstr ""
 
-#: print.admin.inc:373 print.module:340;519
+#: print.admin.inc:373 print.module:342;521
 msgid "Printer-friendly version"
 msgstr ""
 
@@ -370,67 +370,67 @@ msgstr ""
 msgid "Post new comment"
 msgstr ""
 
-#: print.module:71
+#: print.module:72
 msgid "Printer-friendly"
 msgstr ""
 
-#: print.module:78;140;333 print.info:0 print_mail/print_mail.info:0 print_pdf/print_pdf.info:0
+#: print.module:79;141;334 print.info:0 print_mail/print_mail.info:0 print_pdf/print_pdf.info:0
 msgid "Printer, e-mail and PDF versions"
 msgstr ""
 
-#: print.module:79 print.info:0
+#: print.module:80 print.info:0
 msgid "Adds a printer-friendly version link to content and administrative pages."
 msgstr ""
 
-#: print.module:86
+#: print.module:87
 msgid "Web page"
 msgstr ""
 
-#: print.module:92;116 print_mail/print_mail.module:55 print_pdf/print_pdf.module:58
+#: print.module:93;117 print_mail/print_mail.module:55 print_pdf/print_pdf.module:58
 msgid "Options"
 msgstr ""
 
-#: print.module:107
+#: print.module:108
 msgid "Settings"
 msgstr ""
 
-#: print.module:141;170
+#: print.module:142;171
 msgid "Most printed"
 msgstr ""
 
-#: print.module:345 print_mail/print_mail.module:254 print_pdf/print_pdf.module:251
+#: print.module:347 print_mail/print_mail.module:254 print_pdf/print_pdf.module:251
 msgid "Show link"
 msgstr ""
 
-#: print.module:349 print_mail/print_mail.module:258 print_pdf/print_pdf.module:255
+#: print.module:351 print_mail/print_mail.module:258 print_pdf/print_pdf.module:255
 msgid "Show link in individual comments"
 msgstr ""
 
-#: print.module:353 print_mail/print_mail.module:262 print_pdf/print_pdf.module:259
+#: print.module:355 print_mail/print_mail.module:262 print_pdf/print_pdf.module:259
 msgid "Show Printer-friendly URLs list"
 msgstr ""
 
-#: print.module:366
+#: print.module:368
 msgid "The settings below only apply in case the corresponding type-specific setting is also enabled (except for the \"Show link in individual comments\")."
 msgstr ""
 
-#: print.module:522
+#: print.module:524
 msgid "Display a printer-friendly version of this page."
 msgstr ""
 
-#: print.module:59
+#: print.module:60
 msgid "access print"
 msgstr ""
 
-#: print.module:59
+#: print.module:60
 msgid "administer print"
 msgstr ""
 
-#: print.module:59
+#: print.module:60
 msgid "node-specific print configuration"
 msgstr ""
 
-#: print.module:59
+#: print.module:60
 msgid "use PHP for link visibility"
 msgstr ""
 
@@ -478,7 +478,7 @@ msgstr ""
 msgid "The maximum number of e-mails a user can send per hour."
 msgstr ""
 
-#: print_mail/print_mail.admin.inc:128 print_mail/print_mail.inc:89
+#: print_mail/print_mail.admin.inc:128 print_mail/print_mail.inc:95
 msgid "Send only the teaser"
 msgstr ""
 
@@ -506,19 +506,19 @@ msgstr ""
 msgid "Message Subject"
 msgstr ""
 
-#: print_mail/print_mail.admin.inc:166 print_mail/print_mail.inc:123
+#: print_mail/print_mail.admin.inc:166 print_mail/print_mail.inc:129
 msgid "!user has sent you a message from !site"
 msgstr ""
 
 #: print_mail/print_mail.admin.inc:167
-msgid "e-mail subject line. The sender's name will appear in place of !user in the subject. The web site name will be inserted in place of !site."
+msgid "e-mail subject line. The sender's name will appear in place of !user in the subject. The web site name will be inserted in place of !site. The page title replaces !title."
 msgstr ""
 
 #: print_mail/print_mail.admin.inc:171
 msgid "Message Preamble"
 msgstr ""
 
-#: print_mail/print_mail.admin.inc:172 print_mail/print_mail.inc:233
+#: print_mail/print_mail.admin.inc:172 print_mail/print_mail.inc:245
 msgid "Message from sender"
 msgstr ""
 
@@ -538,7 +538,7 @@ msgstr ""
 msgid "Thank You Message"
 msgstr ""
 
-#: print_mail/print_mail.admin.inc:184 print_mail/print_mail.inc:258
+#: print_mail/print_mail.admin.inc:184 print_mail/print_mail.inc:277
 msgid "Thank you for spreading the word about !site."
 msgstr ""
 
@@ -550,67 +550,79 @@ msgstr ""
 msgid "You cannot send more than %number messages per hour. Please try again later."
 msgstr ""
 
-#: print_mail/print_mail.inc:60
+#: print_mail/print_mail.inc:61
 msgid "Your e-mail"
 msgstr ""
 
-#: print_mail/print_mail.inc:65
+#: print_mail/print_mail.inc:66
 msgid "Your name"
 msgstr ""
 
-#: print_mail/print_mail.inc:70
+#: print_mail/print_mail.inc:71
 msgid "Send to"
 msgstr ""
 
-#: print_mail/print_mail.inc:73
+#: print_mail/print_mail.inc:74
 msgid "Enter multiple addresses separated by commas and/or different lines."
 msgstr ""
 
-#: print_mail/print_mail.inc:77
+#: print_mail/print_mail.inc:78
 msgid "Subject"
 msgstr ""
 
-#: print_mail/print_mail.inc:82
+#: print_mail/print_mail.inc:83
+msgid "Page to be sent"
+msgstr ""
+
+#: print_mail/print_mail.inc:84
+msgid "View page"
+msgstr ""
+
+#: print_mail/print_mail.inc:88
 msgid "Your message"
 msgstr ""
 
-#: print_mail/print_mail.inc:100
+#: print_mail/print_mail.inc:106
 msgid "Send e-mail"
 msgstr ""
 
-#: print_mail/print_mail.inc:104
+#: print_mail/print_mail.inc:110
 msgid "Clear form"
 msgstr ""
 
-#: print_mail/print_mail.inc:109
+#: print_mail/print_mail.inc:115
 msgid "Cancel"
 msgstr ""
 
-#: print_mail/print_mail.inc:120
+#: print_mail/print_mail.inc:126
 msgid "Someone"
 msgstr ""
 
-#: print_mail/print_mail.inc:122
+#: print_mail/print_mail.inc:128
 msgid "an interesting site"
 msgstr ""
 
-#: print_mail/print_mail.inc:202
+#: print_mail/print_mail.inc:203
+msgid "You cannot send more than %number messages per hour. Please reduce the number of recipients."
+msgstr ""
+
+#: print_mail/print_mail.inc:215
 msgid "You must enter a subject."
 msgstr ""
 
-#: print_mail/print_mail.inc:206
+#: print_mail/print_mail.inc:219
 msgid "You must enter a message."
 msgstr ""
 
-#: print_mail/print_mail.inc:256
+#: print_mail/print_mail.inc:275
 msgid "%name [%from] sent %page to [%to]"
 msgstr ""
 
-#: print_mail/print_mail.inc:257
+#: print_mail/print_mail.inc:276
 msgid "us"
 msgstr ""
 
-#: print_mail/print_mail.inc:256 print_mail/print_mail.module:0
+#: print_mail/print_mail.inc:275 print_mail/print_mail.module:0
 msgid "print_mail"
 msgstr ""
 
@@ -766,7 +778,7 @@ msgstr ""
 msgid "Text used in the link to the PDF version."
 msgstr ""
 
-#: print_pdf/print_pdf.pages.inc:378
+#: print_pdf/print_pdf.pages.inc:382
 msgid "Page !n of !total"
 msgstr ""
 

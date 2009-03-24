@@ -18,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: print (6.x-1.3)\n"
-"POT-Creation-Date: 2009-02-10 23:28+0100\n"
-"PO-Revision-Date: 2009-02-20 16:08+0100\n"
+"POT-Creation-Date: 2009-03-18 22:30+0100\n"
+"PO-Revision-Date: 2009-03-24 00:17+0100\n"
 "Last-Translator: Joao Ventura <jcnventura@drupal.org>\n"
 "Language-Team: Hungarian http://forditas.mindworks.hu\n"
 "MIME-Version: 1.0\n"
@@ -371,7 +371,7 @@ msgid "Saving these strings will disable their translation via Drupal's language
 msgstr "Ezen karaktersorozatok mentése le fogja tiltani a fordíthatóságukat a Drupal nyelvi rendszerében. Az alaphelyzet gomb segítségével visszaállítható az eredeti állapot."
 
 #: print.admin.inc:326;367
-#: print.module:98;122
+#: print.module:99;123
 #: print_mail/print_mail.admin.inc:153
 #: print_mail/print_mail.module:61
 #: print_pdf/print_pdf.admin.inc:270
@@ -411,7 +411,7 @@ msgid "Link text"
 msgstr "Hivatkozás szöveg"
 
 #: print.admin.inc:373
-#: print.module:340;519
+#: print.module:342;521
 msgid "Printer-friendly version"
 msgstr "Nyomtatóbarát változat"
 
@@ -427,79 +427,79 @@ msgstr "Anonymous"
 msgid "Post new comment"
 msgstr "Hozzászólás"
 
-#: print.module:71
+#: print.module:72
 msgid "Printer-friendly"
 msgstr "Nyomtatóbarát"
 
-#: print.module:78;140;333
+#: print.module:79;141;334
 #: print.info:0
 #: print_mail/print_mail.info:0
 #: print_pdf/print_pdf.info:0
 msgid "Printer, e-mail and PDF versions"
 msgstr "Nyomtató, email és PDF változatok"
 
-#: print.module:79
+#: print.module:80
 #: print.info:0
 msgid "Adds a printer-friendly version link to content and administrative pages."
 msgstr "Nyomtatóbarát változat hivatkozást ad a tartalmakhoz és az adminisztrációs oldalakhoz."
 
-#: print.module:86
+#: print.module:87
 msgid "Web page"
 msgstr "Weboldal"
 
-#: print.module:92;116
+#: print.module:93;117
 #: print_mail/print_mail.module:55
 #: print_pdf/print_pdf.module:58
 msgid "Options"
 msgstr "Beállítások"
 
-#: print.module:107
+#: print.module:108
 msgid "Settings"
 msgstr "Beállítások"
 
-#: print.module:141;170
+#: print.module:142;171
 msgid "Most printed"
 msgstr "Letöbbször nyomtatott"
 
-#: print.module:345
+#: print.module:347
 #: print_mail/print_mail.module:254
 #: print_pdf/print_pdf.module:251
 msgid "Show link"
 msgstr "Hivatkozás mutatása"
 
-#: print.module:349
+#: print.module:351
 #: print_mail/print_mail.module:258
 #: print_pdf/print_pdf.module:255
 msgid "Show link in individual comments"
 msgstr "Hivatkozás mutatása minden hozzászólásnál"
 
-#: print.module:353
+#: print.module:355
 #: print_mail/print_mail.module:262
 #: print_pdf/print_pdf.module:259
 msgid "Show Printer-friendly URLs list"
 msgstr "Nyomtatóbarát webcímek listájának mutatása"
 
-#: print.module:366
+#: print.module:368
 msgid "The settings below only apply in case the corresponding type-specific setting is also enabled (except for the \"Show link in individual comments\")."
 msgstr "Az alábbi beállítások csak akkor érvényesülnek, ha a megfelelő típus specifikus beállítás szintén engedélyezett (kivéve a „Hivatkozás mutatása minden hozzászólásnál”)."
 
-#: print.module:522
+#: print.module:524
 msgid "Display a printer-friendly version of this page."
 msgstr "Az oldal nyomtatóbarát változatának megjelenítése."
 
-#: print.module:59
+#: print.module:60
 msgid "access print"
 msgstr "nyomtatáshoz hozzáférés"
 
-#: print.module:59
+#: print.module:60
 msgid "administer print"
 msgstr "nyomtatás kezelése"
 
-#: print.module:59
+#: print.module:60
 msgid "node-specific print configuration"
 msgstr "tartalomspecifikus nyomtatási beállítás"
 
-#: print.module:59
+#: print.module:60
 msgid "use PHP for link visibility"
 msgstr "PHP kód használata a hivatkozás láthatóságához"
 
@@ -549,7 +549,7 @@ msgid "The maximum number of e-mails a user can send per hour."
 msgstr "Felhasználónként az egy óra alatt elküldhető emailek száma."
 
 #: print_mail/print_mail.admin.inc:128
-#: print_mail/print_mail.inc:89
+#: print_mail/print_mail.inc:95
 msgid "Send only the teaser"
 msgstr "Csak a bevezető küldése"
 
@@ -579,20 +579,21 @@ msgid "Message Subject"
 msgstr "Üzenet tárgya"
 
 #: print_mail/print_mail.admin.inc:166
-#: print_mail/print_mail.inc:123
+#: print_mail/print_mail.inc:129
 msgid "!user has sent you a message from !site"
 msgstr "!user üzenetet küldött erről a webhelyről: !site"
 
 #: print_mail/print_mail.admin.inc:167
-msgid "e-mail subject line. The sender's name will appear in place of !user in the subject. The web site name will be inserted in place of !site."
-msgstr "Az email tárgya. A küldő neve fog megjelenni a tárgyban az !user helyén. A webhely neve be lesz szúrva a !site helyére."
+#, fuzzy
+msgid "e-mail subject line. The sender's name will appear in place of !user in the subject. The web site name will be inserted in place of !site. The page title replaces !title."
+msgstr "Az email tárgya. A küldő neve fog megjelenni a tárgyban az !user helyén. A webhely neve be lesz szúrva a !site helyére. The page title replaces !title."
 
 #: print_mail/print_mail.admin.inc:171
 msgid "Message Preamble"
 msgstr "Üzenet bevezetője"
 
 #: print_mail/print_mail.admin.inc:172
-#: print_mail/print_mail.inc:233
+#: print_mail/print_mail.inc:245
 msgid "Message from sender"
 msgstr "Üzenet a küldőtől"
 
@@ -613,7 +614,7 @@ msgid "Thank You Message"
 msgstr "Köszönő üzenet"
 
 #: print_mail/print_mail.admin.inc:184
-#: print_mail/print_mail.inc:258
+#: print_mail/print_mail.inc:277
 msgid "Thank you for spreading the word about !site."
 msgstr "Köszönet a webhely (!site) népszerűsítéséért."
 
@@ -625,67 +626,80 @@ msgstr "Ez az üzenet lesz megjelenítve, miután a felhasználó sikeresen bek�
 msgid "You cannot send more than %number messages per hour. Please try again later."
 msgstr "Óránként legfeljebb %number darab üzenetet lehet küldeni. Később érdemes újra próbálkozni."
 
-#: print_mail/print_mail.inc:60
+#: print_mail/print_mail.inc:61
 msgid "Your e-mail"
 msgstr "Feladó email címe"
 
-#: print_mail/print_mail.inc:65
+#: print_mail/print_mail.inc:66
 msgid "Your name"
 msgstr "Név"
 
-#: print_mail/print_mail.inc:70
+#: print_mail/print_mail.inc:71
 msgid "Send to"
 msgstr "Címzett"
 
-#: print_mail/print_mail.inc:73
+#: print_mail/print_mail.inc:74
 msgid "Enter multiple addresses separated by commas and/or different lines."
 msgstr "Vesszővel elválasztva, vagy különböző sorokban több címet is meg lehet adni."
 
-#: print_mail/print_mail.inc:77
+#: print_mail/print_mail.inc:78
 msgid "Subject"
 msgstr "Tárgy"
 
-#: print_mail/print_mail.inc:82
+#: print_mail/print_mail.inc:83
+msgid "Page to be sent"
+msgstr ""
+
+#: print_mail/print_mail.inc:84
+msgid "View page"
+msgstr ""
+
+#: print_mail/print_mail.inc:88
 msgid "Your message"
 msgstr "Az üzenet"
 
-#: print_mail/print_mail.inc:100
+#: print_mail/print_mail.inc:106
 msgid "Send e-mail"
 msgstr "Email elküldése"
 
-#: print_mail/print_mail.inc:104
+#: print_mail/print_mail.inc:110
 msgid "Clear form"
 msgstr "Űrlap törlése"
 
-#: print_mail/print_mail.inc:109
+#: print_mail/print_mail.inc:115
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: print_mail/print_mail.inc:120
+#: print_mail/print_mail.inc:126
 msgid "Someone"
 msgstr "Valaki"
 
-#: print_mail/print_mail.inc:122
+#: print_mail/print_mail.inc:128
 msgid "an interesting site"
 msgstr "egy érdekes webhely"
 
-#: print_mail/print_mail.inc:202
+#: print_mail/print_mail.inc:203
+#, fuzzy
+msgid "You cannot send more than %number messages per hour. Please reduce the number of recipients."
+msgstr "Óránként legfeljebb %number darab üzenetet lehet küldeni. Please reduce the number of recipients."
+
+#: print_mail/print_mail.inc:215
 msgid "You must enter a subject."
 msgstr "Meg kell adni a tárgyat."
 
-#: print_mail/print_mail.inc:206
+#: print_mail/print_mail.inc:219
 msgid "You must enter a message."
 msgstr "Meg kell adni az üzenetet."
 
-#: print_mail/print_mail.inc:256
+#: print_mail/print_mail.inc:275
 msgid "%name [%from] sent %page to [%to]"
 msgstr "%page elküldve %name [%from] által ide: [%to]"
 
-#: print_mail/print_mail.inc:257
+#: print_mail/print_mail.inc:276
 msgid "us"
 msgstr "mi"
 
-#: print_mail/print_mail.inc:256
+#: print_mail/print_mail.inc:275
 #: print_mail/print_mail.module:0
 msgid "print_mail"
 msgstr "print_mail"
@@ -846,7 +860,7 @@ msgstr "PDF változat"
 msgid "Text used in the link to the PDF version."
 msgstr "A PDF változat hivatkozásában használt szöveg."
 
-#: print_pdf/print_pdf.pages.inc:378
+#: print_pdf/print_pdf.pages.inc:382
 msgid "Page !n of !total"
 msgstr "!n. oldal (összes: !total)"
 
