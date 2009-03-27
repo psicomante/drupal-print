@@ -214,8 +214,7 @@ function print_pdf_link($type, $node = NULL, $teaser = FALSE) {
  */
 function print_pdf_help($path, $arg) {
   $print_pdf_link_pos = variable_get('print_pdf_link_pos', array(PRINT_PDF_LINK_POS_DEFAULT => PRINT_PDF_LINK_POS_DEFAULT));
-  if ((preg_match('!^node/!i', $path) == 0) &&
-      !(empty($print_pdf_link_pos['link']) && empty($print_pdf_link_pos['corner']))) {
+  if (($path !== 'node/%') && !(empty($print_pdf_link_pos['link']) && empty($print_pdf_link_pos['corner']))) {
     static $output = FALSE;
 
     if ($output === FALSE) {
@@ -241,10 +240,7 @@ function print_pdf_nodeapi(&$node, $op = 'view', $teaser, $page) {
           (preg_match('!^print!i', $_GET['q']) == 0)) {
         $link = print_pdf_insert_link(NULL, $node);
         if ($link) {
-          $node->content['print_pdf_link'] = array(
-            '#value' => "<span class='print-link'>$link</span>",
-            '#weight' => -103,
-          );
+          $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);
         }
       }
       break;
