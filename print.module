@@ -48,7 +48,7 @@ define('PRINT_TYPE_URLLIST_DEFAULT', 1);
 
 define('PRINT_ALLOW_NORMAL_LINK', 1);
 define('PRINT_ALLOW_BOOK_LINK', 2);
-define('PRINT_TYPE_FIELDS_WEIGHT', 50);
+define('PRINT_TYPE_FIELDS_WEIGHT', 30);
 
 require_once(drupal_get_path('module', 'print') .'/print.admin.inc');
 require_once(drupal_get_path('module', 'print') .'/print.pages.inc');
@@ -273,8 +273,7 @@ function print_help($path) {
   }
 
   $print_html_link_pos = variable_get('print_html_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
-  if ((preg_match('!^node/!i', $path) == 0) &&
-      !(empty($print_html_link_pos['link']) && empty($print_html_link_pos['corner']))) {
+  if (($path !== 'node/%') && !(empty($print_html_link_pos['link']) && empty($print_html_link_pos['corner']))) {
     static $output = FALSE;
 
     if ($output === FALSE) {
@@ -295,15 +294,16 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
   switch ($op) {
     case 'view':
       // Insert content corner links
+      $node->content['print_links'] = array(
+        '#value' => "<span class='print-link'></span>",
+        '#weight' => -101,
+      );
       $print_html_link_pos = variable_get('print_html_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
       if (($teaser === FALSE) && !empty($print_html_link_pos['corner']) &&
           (preg_match('!^print!i', $_GET['q']) == 0)) {
         $link = print_insert_link(NULL, $node);
         if ($link) {
-          $node->content['print_link'] = array(
-            '#value' => "<span class='print-link'>$link</span>",
-            '#weight' => -101,
-          );
+          $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);          
         }
       }
       break;
