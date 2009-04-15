@@ -163,7 +163,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   $print_footer_user = variable_get('print_footer_user', PRINT_FOOTER_USER_DEFAULT);
 
   $print['language'] = $language->language;
-  $print['title'] = $node->title;
+  $print['title'] = check_plain($node->title);
   $print['head'] = drupal_get_html_head();
   $print['scripts'] = drupal_get_js();
   $print['robots_meta'] = _print_robots_meta_generator();
@@ -550,7 +550,7 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
     drupal_access_denied();
     return FALSE;
   }
-  drupal_set_title($node->title);
+  drupal_set_title(check_plain($node->title));
 
   //alert other modules that we are generating a printer-friendly page, so they can choose to show/hide info
   $node->printing = TRUE;
