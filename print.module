@@ -273,7 +273,7 @@ function print_help($path) {
   }
 
   $print_html_link_pos = variable_get('print_html_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
-  if (($path !== 'node/%') && !(empty($print_html_link_pos['link']) && empty($print_html_link_pos['corner']))) {
+  if ((preg_match('!^node/\d+$!', $path) == 0) && !(empty($print_html_link_pos['link']) && empty($print_html_link_pos['corner']))) {
     static $output = FALSE;
 
     if ($output === FALSE) {
