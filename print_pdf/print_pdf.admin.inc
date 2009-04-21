@@ -239,6 +239,7 @@ function _print_pdf_settings_validate($form_id, $form_values, $form) {
 function _print_pdf_tools() {
   $tools = array_keys(file_scan_directory(drupal_get_path('module', 'print'), '^dompdf_config.inc.php$'));
   $tools = array_merge($tools, array_keys(file_scan_directory(drupal_get_path('module', 'print'), '^tcpdf.php$')));
+  $tools = array_merge($tools, array_keys(file_scan_directory(drupal_get_path('module', 'print'), '^wkhtmltopdf$')));
 
   $num_tools = count($tools);
 
