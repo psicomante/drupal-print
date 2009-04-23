@@ -135,10 +135,10 @@ function _print_pdf_dompdf($print, $html, $filename) {
 //  else if (function_exists('iconv')) {
 //    $html = iconv('UTF-8', 'ISO-8859-1', $html);
 //  }
-  else if (function_exists('mb_convert_encoding')) {
+  elseif (function_exists('mb_convert_encoding')) {
     $html = mb_convert_encoding($html, 'ISO-8859-1', 'UTF-8');
   }
-  else if (function_exists('recode_string')) {
+  elseif (function_exists('recode_string')) {
     $html = recode_string('UTF-8..ISO_8859-1', $html);
   }
   $html = htmlspecialchars_decode(htmlentities($html, ENT_NOQUOTES, 'ISO-8859-1'), ENT_NOQUOTES);
@@ -263,19 +263,17 @@ function _print_pdf_wkhtmltopdf($print, $html, $filename) {
     $xdisplay = rand(10, 500);
     $xcmd = realpath($xvfb_binary) ." :$xdisplay -screen 0 320x200x24 -dpi ". WKHTMLTOPDF_DPI .
             ' -terminate -nolisten tcp -tst'.
-            (defined('WKHTMLTOPDF_XVFB_FONT_PATH') ? ' -fp ' . WKHTMLTOPDF_XVFB_FONT_PATH : '');
+            (defined('WKHTMLTOPDF_XVFB_FONT_PATH') ? ' -fp '. WKHTMLTOPDF_XVFB_FONT_PATH : '');
 
     $xdescriptor = array(0 => array('pipe', 'r'), 1 => array('pipe', 'w'), 2 => array('pipe', 'w'));
     $xprocess = proc_open($xcmd, $xdescriptor, $xpipes, NULL, NULL);
   }
 
   $descriptor = array(0 => array('pipe', 'r'), 1 => array('pipe', 'w'), 2 => array('pipe', 'w'));
-  $cmd = realpath($print_pdf_pdf_tool) . " --page-size $print_pdf_paper_size --orientation $print_pdf_page_orientation" .
-         ' --dpi ' . WKHTMLTOPDF_DPI . (defined('WKHTMLTOPDF_OPTIONS') ? WKHTMLTOPDF_OPTIONS : '') .
-         ' - -';
+  $cmd = realpath($print_pdf_pdf_tool) ." --page-size $print_pdf_paper_size --orientation $print_pdf_page_orientation".
+         ' --dpi '. WKHTMLTOPDF_DPI . (defined('WKHTMLTOPDF_OPTIONS') ? WKHTMLTOPDF_OPTIONS : '') .' - -';
 
-  $process = proc_open($cmd, $descriptor, $pipes, NULL,
-             isset($xvfb_binary) ? array('DISPLAY' => ':' . $xdisplay) : NULL);
+  $process = proc_open($cmd, $descriptor, $pipes, NULL, isset($xvfb_binary) ? array('DISPLAY' => ':'. $xdisplay) : NULL);
 
   if (is_resource($process)) {
     fwrite($pipes[0], $html);

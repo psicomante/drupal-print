@@ -303,7 +303,7 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
           (preg_match('!^print!i', $_GET['q']) == 0)) {
         $link = print_insert_link(NULL, $node);
         if ($link) {
-          $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);          
+          $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);
         }
       }
       break;
