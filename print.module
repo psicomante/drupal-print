@@ -298,10 +298,11 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
       );
       $print_html_link_pos = variable_get('print_html_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
       if (($teaser === FALSE) && !empty($print_html_link_pos['corner']) &&
-          isset($node->build_mode) && ($node->build_mode == NODE_BUILD_NORMAL)) {
+          !isset($node->printing)) {
+//          isset($node->build_mode) && ($node->build_mode == NODE_BUILD_NORMAL)) {
         $link = print_insert_link(NULL, $node);
         if ($link) {
-          $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);          
+          $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);
         }
       }
       break;
