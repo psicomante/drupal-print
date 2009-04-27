@@ -561,6 +561,11 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
   unset($node->pages_count);
   unset($node->page_count);
 
+  // Make this page a member of the original page's organic group
+  if (function_exists('og_set_group_context') && isset($node->og_groups)) {
+    og_set_group_context($node->og_groups);
+  }
+
   if ($cid === NULL) {
     // Adapted (simplified) version of node_view
     //Render the node content
