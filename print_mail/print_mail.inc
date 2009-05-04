@@ -263,6 +263,14 @@ function print_mail_form_submit($form_id, $form_values) {
       ob_end_clean();
 
       $ok = FALSE;
+      if (function_exists('job_queue_add') && variable_get('print_mail_job_queue', PRINT_MAIL_JOB_QUEUE_DEFAULT)) {
+        $use_job_queue = TRUE;
+        $this_file = drupal_get_path('module', 'print_mail') .'/print_mail.inc';
+      }
+      else {
+        $use_job_queue = FALSE;
+      }
+
       $addresses = explode(', ', $form_values['txt_to_addrs']);
       foreach ($addresses as $to) {
         // Call to hook_print_mail_before_send in order to know if the mail can be sent
@@ -270,8 +278,15 @@ function print_mail_form_submit($form_id, $form_values) {
         $can_send = module_invoke_all('print_mail_before_send', $node, $to, $from, $params);
 
         if (!in_array(FALSE, $can_send)) {
-          $ret = drupal_mail('print_mail_sendpage', $to, $params['subject'], $params['body'], $from, $headers);
-          if ($ret) {
+          if ($use_job_queue) {
+            // Use job queue to send mails during cron runs
+            job_queue_add('drupal_mail', t('print_mail: From %from', array('%from' => $from)), array('print_mail_sendpage', $to, $params['subject'], $params['body'], $from, $headers), $this_file, TRUE);
+          }
+          else {
+            // Send mail immediately using Drupal's mail handler
+            $ret = drupal_mail('print_mail_sendpage', $to, $params['subject'], $params['body'], $from, $headers);
+          }
+          if ($ret || $use_job_queue) {
             // Call to hook_print_mail_after_send in order to provide information to other modules
             module_invoke_all('print_mail_after_send', $node, $to, $from, $params);
 
