@@ -229,7 +229,7 @@ function print_mail_nodeapi(&$node, $op = 'view', $teaser, $page) {
       break;
     case 'delete':
       db_query("DELETE FROM {print_mail_node_conf} WHERE nid = %d", $node->nid);
-      db_query("DELETE FROM {print_mail_page_counter} WHERE path = '%s'", $node->path);
+      db_query("DELETE FROM {print_mail_page_counter} WHERE path = 'node/%d'", $node->nid);
       break;
   }
 }
@@ -452,9 +452,8 @@ function print_mail_link_allowed($args) {
     $print_mail_node_link_visibility = variable_get('print_mail_node_link_visibility', PRINT_MAIL_NODE_LINK_VISIBILITY_DEFAULT);
     $print_mail_node_link_pages = variable_get('print_mail_node_link_pages', PRINT_MAIL_NODE_LINK_PAGES_DEFAULT);
 
-    if (!empty($node->printing) ||
-        !_print_page_match($print_mail_node_link_visibility, $print_mail_node_link_pages)) {
-      // Page not in visibility list or we are working!
+    if (!_print_page_match($print_mail_node_link_visibility, $print_mail_node_link_pages)) {
+      // Page not in visibility list
       return FALSE;
     }
     elseif (isset($args['type']) && ($args['type'] == 'comment') && isset($node_type)) {
