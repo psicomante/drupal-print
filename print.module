@@ -292,18 +292,20 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
   switch ($op) {
     case 'view':
       // Insert content corner links
+      if (($teaser === FALSE) &&
+          !isset($node->printing)) {
+//          isset($node->build_mode) && ($node->build_mode == NODE_BUILD_NORMAL)) {
       $node->content['print_links'] = array(
         '#value' => "<span class='print-link'></span>",
         '#weight' => -101,
       );
       $print_html_link_pos = variable_get('print_html_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
-      if (($teaser === FALSE) && !empty($print_html_link_pos['corner']) &&
-          !isset($node->printing)) {
-//          isset($node->build_mode) && ($node->build_mode == NODE_BUILD_NORMAL)) {
+      if (!empty($print_html_link_pos['corner'])) {
         $link = print_insert_link(NULL, $node);
         if ($link) {
           $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);
         }
+      }
       }
       break;
     case 'load':
@@ -380,6 +382,23 @@ function print_content_extra_fields($type_name) {
   );
   return $fields;
 }
+
+/**
+ * Implementation of hook_content_build_modes().
+ */
+/*function print_content_build_modes() {
+  return array(
+    'print' => array(
+      'title' => t('Print'),
+      'build modes' => array(
+        NODE_BUILD_PRINT => array(
+          'title' => t('Print'),
+          'views style' => TRUE,
+        ),
+      ),
+    ),
+  );
+}*/
 
 /**
  * Auxiliary function to assign the per-node settings to the node object fields
