@@ -261,6 +261,7 @@ function print_mail_form_submit($form_id, $form_values) {
       include_once(_print_get_template(PRINT_MAIL_FORMAT, $print['type']));
       $params['body'] = ob_get_contents();
       ob_end_clean();
+      $params['body'] = drupal_final_markup($params['body']);
 
       $ok = FALSE;
       if (function_exists('job_queue_add') && variable_get('print_mail_job_queue', PRINT_MAIL_JOB_QUEUE_DEFAULT)) {
