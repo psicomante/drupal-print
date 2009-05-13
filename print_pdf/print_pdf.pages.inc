@@ -65,6 +65,7 @@ function print_pdf_controller() {
   include_once(_print_get_template(PRINT_PDF_FORMAT, $print['type']));
   $html = ob_get_contents();
   ob_end_clean();
+  $html = drupal_final_markup($html);
 
   // Convert the a href elements
   $pattern = '!<(a\s[^>]*?)>!is';

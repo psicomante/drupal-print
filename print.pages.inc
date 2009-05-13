@@ -26,7 +26,13 @@ function print_controller_html() {
   $print = print_controller($path, $cid, PRINT_HTML_FORMAT);
   if ($print !== FALSE) {
     $node = $print['node'];
+
+    ob_start();
     include_once(_print_get_template(PRINT_HTML_FORMAT, $print['type']));
+    $html = ob_get_contents();
+    ob_end_clean();
+    $html = drupal_final_markup($html);
+    print $html;
 
     $nodepath = (isset($node->path)) ? drupal_get_normal_path($node->path) : 'node/'. $path;
     db_query("UPDATE {print_page_counter} SET totalcount = totalcount + 1, timestamp = %d WHERE path = '%s'", time(), $nodepath);
