@@ -32,6 +32,13 @@ define('PRINT_PDF_XVFB_OPTIONS', '');
 //  define('PRINT_PDF_XVFB_OPTIONS', ' -fp /usr/share/fonts/X11/misc/,/usr/share/fonts/X11/Type1/,/usr/share/fonts/X11/75dpi/,/usr/share/fonts/X11/100dpi/');
 
 /**
+ * Implementation of hook_perm().
+ */
+function print_pdf_perm() {
+  return array('access PDF version');
+}
+
+/**
  * Implementation of hook_theme().
  */
 function print_pdf_theme() {
@@ -75,7 +82,7 @@ function print_pdf_menu() {
   $items[PRINTPDF_PATH] = array(
     'title' => 'Printer-friendly PDF',
     'page callback' => 'print_pdf_controller',
-    'access arguments' => array('access print'),
+    'access arguments' => array('access PDF version'),
     'type' => MENU_CALLBACK,
     'file' => 'print_pdf.pages.inc',
   );
@@ -448,7 +455,7 @@ function print_pdf_insert_link($path = NULL, $node = NULL) {
  */
 function print_pdf_link_allowed($args) {
   $print_pdf_pdf_tool = variable_get('print_pdf_pdf_tool', PRINT_PDF_PDF_TOOL_DEFAULT);
-  if (!empty($args['teaser']) || !user_access('access print') || (empty($print_pdf_pdf_tool))) {
+  if (!empty($args['teaser']) || !user_access('access PDF version') || (empty($print_pdf_pdf_tool))) {
     // If showing only the teaser or the user is not allowed or link is disabled
     return FALSE;
   }
