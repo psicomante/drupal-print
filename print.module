@@ -165,7 +165,7 @@ function print_block($op = 'list', $delta = 0, $edit = array()) {
         if (preg_match('!^print.*?_insert_link$!', $func)) {
           $link = $func(NULL, $node);
           if (!empty($link)) {
-            $block['content'] .= $link .'<br />';
+            $block['content'] .= $link;
           }
         }
       }
