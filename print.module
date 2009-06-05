@@ -239,6 +239,9 @@ function print_link_alter(&$node, &$links) {
       $print_html_book_link = variable_get('print_html_book_link', PRINT_HTML_BOOK_LINK_DEFAULT);
 
       if ($print_html_book_link) {
+        $print_html_link_pos = variable_get('print_html_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
+
+        if (!empty($print_html_link_pos['link'])) {
         $format = theme('print_format_link');
 
         switch ($print_html_book_link) {
@@ -257,6 +260,10 @@ function print_link_alter(&$node, &$links) {
           'attributes' => $format['attributes'],
           'html' => $format['html'],
         );
+        }
+        else {
+          unset($links[$module]);
+        }
       }
     }
   }
