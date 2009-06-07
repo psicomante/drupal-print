@@ -81,6 +81,9 @@ function print_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'print.pages.inc',
   );
+  $items[PRINT_PATH .'/'. PRINT_PATH] = array(
+    'page callback' => 'drupal_access_denied',
+  );
   $items['admin/settings/print'] = array(
     'title' => 'Printer, e-mail and PDF versions',
     'description' => 'Adds a printer-friendly version link to content and administrative pages.',
