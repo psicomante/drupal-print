@@ -224,3 +224,19 @@ function print_pdf_update_6003() {
   menu_rebuild();
   return $ret;
 }
+
+/**
+ * Update to version 6.x-1.8
+ */
+function print_pdf_update_6004() {
+  // add new 'access PDF version' permission to any role which has 'access print'
+  $ret = array();
+  $dbret = db_query('SELECT * FROM {permission}');
+  while ($role = db_fetch_object($dbret)) {
+    if ((strpos($role->perm, 'access print') !== FALSE)) {
+      $role->perm = 'access PDF version, ' . $role->perm;
+      $ret[] = update_sql("UPDATE {permission} SET perm = '$role->perm' WHERE rid = $role->rid");
+    }
+  }
+  return $ret;
+}
