@@ -7,6 +7,8 @@
  *
  * This file is included by the _print_pdf_tcpdf function when the current
  * PHP_VERSION is less than 5.0.0
+ *
+ * @ingroup print
  */
 
 class PrintTCPDF extends TCPDF {
