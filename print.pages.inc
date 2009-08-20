@@ -546,7 +546,7 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
   global $_print_urls;
 
   // We can take a node id
-  $node = node_load(array('nid' => $nid));
+  $node = node_load($nid);
   if (!$node) {
     // Node not found
     drupal_not_found();
@@ -731,7 +731,7 @@ function _print_generate_path($path, $format = PRINT_HTML_FORMAT, $teaser = FALS
 function _print_generate_book($nid, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
   global $_print_urls;
 
-  $node = node_load(array('nid' => $nid));
+  $node = node_load($nid);
   if (!$node) {
     // Node not found
     drupal_not_found();
