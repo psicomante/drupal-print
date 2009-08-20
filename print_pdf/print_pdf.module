@@ -336,7 +336,7 @@ function theme_print_pdf_format_link() {
   $print_pdf_link_class  = variable_get('print_pdf_link_class', PRINT_PDF_LINK_CLASS_DEFAULT);
   $print_pdf_content_disposition = variable_get('print_pdf_content_disposition', PRINT_PDF_CONTENT_DISPOSITION_DEFAULT);
   $print_pdf_show_link = variable_get('print_pdf_show_link', PRINT_PDF_SHOW_LINK_DEFAULT);
-  $print_pdf_link_text = variable_get('print_pdf_link_text', t('PDF version'));
+  $print_pdf_link_text = filter_xss(variable_get('print_pdf_link_text', t('PDF version')));
 
   $img = drupal_get_path('module', 'print') .'/icons/pdf_icon.gif';
   $title = t('Display a PDF version of this page.');

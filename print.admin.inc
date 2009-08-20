@@ -29,7 +29,9 @@ function print_main_settings() {
     '#size' => 60,
     '#maxlength' => 250,
     '#description' => t('The URL to your custom print cascading stylesheet, if any. When none is specified, the default module CSS file is used.') .'<br />'.
-                      t('Macros: %b (base path: "%base"), %t (path to theme: "%theme")', array('%base' => base_path(), '%theme' => path_to_theme())),
+                      t('Macros: %b (base path: "%base"), %t (path to theme: "%theme")', array('%base' => base_path(), '%theme' => path_to_theme())) .'<br />'.
+                      t('Requires the <em>administer site configuration</em> permission.'),
+    '#disabled' => !user_access('administer site configuration'),
   );
 
   $form['settings']['print_urls'] = array(
@@ -147,6 +149,8 @@ function print_main_settings() {
  * Validate print_main_settings form.
  */
 function _print_main_settings_validate($form_id, $form_values, $form) {
+  global $base_url;
+
   // Check for a new uploaded logo, and use that instead.
   if ($file = file_check_upload('print_logo_upload')) {
     if ($info = image_get_info($file->filepath)) {
@@ -160,6 +164,13 @@ function _print_main_settings_validate($form_id, $form_values, $form) {
     }
     else {
       form_set_error('print_logo_upload', t('Only JPEG, PNG and GIF images are allowed to be used as logos.'));
+    }
+  }
+
+  // Check that the stylesheet URL is a local URL, if it is an absolute URL, then it must start with the site's base URL
+  if (preg_match('!^http://.*!', $form_state['values']['print_css'], $matches)) {
+    if (!preg_match("!^$base_url/!", $matches[0])) {
+      form_set_error('print_css', t("Stylesheet URL must be a relative path or start with the site's base URL"));
     }
   }
 }

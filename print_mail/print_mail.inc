@@ -126,9 +126,9 @@ function print_mail_form($form_state) {
     $user_name = t('Someone');
   }
   $site_name = variable_get('site_name', t('an interesting site'));
-  $print_mail_text_subject = variable_get('print_mail_text_subject', t('!user has sent you a message from !site'));
+  $print_mail_text_subject = filter_xss(variable_get('print_mail_text_subject', t('!user has sent you a message from !site')));
   $form['fld_subject']['#default_value'] = t($print_mail_text_subject, array('!user' => $user_name, '!site' => $site_name, '!title' => $title));
-  $print_mail_text_content = variable_get('print_mail_text_content', '');
+  $print_mail_text_content = filter_xss(variable_get('print_mail_text_content', ''));
   $form['txt_message']['#default_value'] = t($print_mail_text_content);
 
   return $form;
@@ -242,7 +242,7 @@ function print_mail_form_submit($form_id, $form_values) {
     }
     $cid = isset($form_values['cid']) ? $form_values['cid'] : NULL;
 
-    $print_mail_text_message = variable_get('print_mail_text_message', t('Message from sender'));
+    $print_mail_text_message = filter_xss_admin(variable_get('print_mail_text_message', t('Message from sender')));
     $sender_message = $print_mail_text_message .':<br /><br /><em>'. nl2br(check_plain($form_values['txt_message'])) .'</em>';
 
     $print = print_controller($form_values['path'], $cid, PRINT_MAIL_FORMAT, $form_values['chk_teaser'], $sender_message);
@@ -300,7 +300,7 @@ function print_mail_form_submit($form_id, $form_values) {
         watchdog('print_mail', t('%name [%from] sent %page to [%to]', array('%name' => $form_values['fld_from_name'], '%from' => $form_values['fld_from_addr'], '%page' => $form_values['path'], '%to' => $form_values['txt_to_addrs'])));
         $site_name = variable_get('site_name', t('us'));
         $print_mail_text_confirmation = variable_get('print_mail_text_confirmation', t('Thank you for spreading the word about !site.'));
-        drupal_set_message(t($print_mail_text_confirmation, array('!site' => $site_name)));
+        drupal_set_message(check_plain(t($print_mail_text_confirmation, array('!site' => $site_name))));
 
         $nodepath = drupal_get_normal_path($form_values['path']);
         db_query("UPDATE {print_mail_page_counter} SET sentcount = sentcount + %d, sent_timestamp = %d WHERE path = '%s'", count($addresses), time(), $nodepath);
