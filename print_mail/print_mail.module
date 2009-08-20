@@ -329,7 +329,7 @@ function _print_mail_node_conf_modify($nid, $link, $comments, $url_list) {
 function theme_print_mail_format_link() {
   $print_mail_link_class  = variable_get('print_mail_link_class', PRINT_MAIL_LINK_CLASS_DEFAULT);
   $print_mail_show_link = variable_get('print_mail_show_link', PRINT_MAIL_SHOW_LINK_DEFAULT);
-  $print_mail_link_text = variable_get('print_mail_link_text', t('Send to friend'));
+  $print_mail_link_text = filter_xss(variable_get('print_mail_link_text', t('Send to friend')));
 
   $img = drupal_get_path('module', 'print') .'/icons/mail_icon.gif';
   $title = t('Send this page by e-mail.');
