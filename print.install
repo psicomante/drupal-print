@@ -140,7 +140,7 @@ function print_update_6000() {
   $ret = array();
 
   $lastversion = drupal_get_installed_schema_version('print');
-  if ($lastversion >= 5300 && $lastversion < 6000) {
+  if (($lastversion >= 5300) && ($lastversion < 6000)) {
     return $ret;
   }
 
@@ -191,7 +191,7 @@ function print_update_6000() {
 function print_update_6001() {
   $ret = array();
   $lastversion = drupal_get_installed_schema_version('print');
-  if ($lastversion >= 5301 && $lastversion < 6000) {
+  if (($lastversion >= 5301) && ($lastversion < 6000)) {
     return $ret;
   }
 
@@ -205,7 +205,7 @@ function print_update_6001() {
 function print_update_6002() {
   $ret = array();
   $lastversion = drupal_get_installed_schema_version('print');
-  if ($lastversion >= 5302 && $lastversion < 6000) {
+  if (($lastversion >= 5302) && ($lastversion < 6000)) {
     return $ret;
   }
 
@@ -277,7 +277,7 @@ function print_update_6003() {
   $ret = array();
 
   $lastversion = drupal_get_installed_schema_version('print');
-  if ($lastversion >= 5303 && $lastversion < 6000) {
+  if (($lastversion >= 5303) && ($lastversion < 6000)) {
     return $ret;
   }
 

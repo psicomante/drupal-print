@@ -259,7 +259,7 @@ function print_mail_update_6004() {
   $dbret = db_query('SELECT * FROM {permission}');
   while ($role = db_fetch_object($dbret)) {
     if ((strpos($role->perm, 'access print') !== FALSE)) {
-      $role->perm = 'access send to friend, ' . $role->perm;
+      $role->perm = db_escape_string('access send to friend, '. $role->perm);
       $ret[] = update_sql("UPDATE {permission} SET perm = '$role->perm' WHERE rid = $role->rid");
     }
   }
