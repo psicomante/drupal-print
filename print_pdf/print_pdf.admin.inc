@@ -261,6 +261,9 @@ function _print_pdf_tools() {
   $tools = array_keys(file_scan_directory(drupal_get_path('module', 'print'), '^dompdf_config.inc.php$'));
   $tools = array_merge($tools, array_keys(file_scan_directory(drupal_get_path('module', 'print'), '^tcpdf.php$')));
   $tools = array_merge($tools, array_keys(file_scan_directory(drupal_get_path('module', 'print'), '^wkhtmltopdf$')));
+  $tools = array_merge($tools, array_keys(file_scan_directory(PRINT_PDF_LIB_PATH, '^dompdf_config.inc.php$')));
+  $tools = array_merge($tools, array_keys(file_scan_directory(PRINT_PDF_LIB_PATH, '^tcpdf.php$')));
+  $tools = array_merge($tools, array_keys(file_scan_directory(PRINT_PDF_LIB_PATH, '^wkhtmltopdf$')));
 
   $num_tools = count($tools);
 
