@@ -18,7 +18,7 @@ require_once(drupal_get_path('module', 'print') .'/print.pages.inc');
  *
  * @ingroup forms
  */
-function print_mail_form($form_state) {
+function print_mail_form() {
   global $user;
 
   $print_mail_hourly_threshold = variable_get('print_mail_hourly_threshold', PRINT_MAIL_HOURLY_THRESHOLD);
