@@ -128,7 +128,7 @@ function print_menu($may_cache) {
       'title' => t('Text strings'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('print_html_strings_settings'),
-      'access'  => array('administer print'),
+      'access'  => user_access('administer print'),
       'weight' => 2,
       'type' => MENU_LOCAL_TASK,
     );
@@ -152,7 +152,7 @@ function print_menu($may_cache) {
       'title' => t('Text strings'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('print_main_strings_settings'),
-      'access'  => array('administer print'),
+      'access'  => user_access('administer print'),
       'weight' => 2,
       'type' => MENU_LOCAL_TASK,
     );
