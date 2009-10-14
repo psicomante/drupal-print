@@ -44,14 +44,6 @@ function print_mail_menu($may_cache) {
 
   if ($may_cache) {
     $items[] = array(
-      'path' => PRINTMAIL_PATH,
-      'title' => t('Send page by e-mail'),
-      'callback' => 'drupal_get_form',
-      'callback arguments' => array('print_mail_form'),
-      'access' => user_access('access send to friend'),
-      'type' => MENU_CALLBACK,
-    );
-    $items[] = array(
       'path' => 'admin/settings/print/email',
       'title' => t('e-mail'),
       'callback' => 'drupal_get_form',
@@ -74,6 +66,16 @@ function print_mail_menu($may_cache) {
       'access'  => user_access('administer print'),
       'weight' => 2,
       'type' => MENU_LOCAL_TASK,
+    );
+  }
+  else {
+    $items[] = array(
+      'path' => PRINTMAIL_PATH,
+      'title' => t('Send page by e-mail'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('print_mail_form'),
+      'access' => _print_mail_access('access send to friend'),
+      'type' => MENU_CALLBACK,
     );
   }
 
@@ -289,6 +291,39 @@ function print_mail_job_queue_functions() {
    'title' => t('Send to friend'),
   );
   return $functions;
+}
+
+/**
+ * Access callback to check a combination of user_acess() and page access
+ *
+ * @param $permission
+ *   permission required to view the page
+ * @return
+ *   TRUE if the user has permission to view the page, FALSE otherwise
+ */
+function _print_mail_access($permission) {
+  $page_access = TRUE;
+  $parts = explode('/', $_GET['q']);
+  if (($parts[0] == PRINTMAIL_PATH) && (count($parts) > 1)) {
+    unset($parts[0]);
+    $path = implode('/', $parts);
+    if (is_numeric($parts[1])) {
+      $path = 'node/'. $path;
+    }
+    else {
+      $path = drupal_get_normal_path($path);
+    }
+    if (preg_match('!^node/(\d+)$!', $path, $matches) == 1) {
+      $page_access = node_access('view', node_load($matches[1]));
+    }
+    else {
+      if (!($router_item = menu_get_item(NULL, $path)) || (!$router_item['access'])) {
+        $page_access = FALSE;
+      }
+    }
+  }
+
+  return (user_access($permission) && $page_access);
 }
 
 /**
