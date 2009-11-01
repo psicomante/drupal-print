@@ -80,11 +80,13 @@ function print_mail_form($form_state) {
     '#title' => t('Subject'),
     '#size' => 62,
   );
-  $form['fld_title'] = array(
-    '#type' => 'item',
-    '#title' => t('Page to be sent'),
-    '#value' => l($title, $path, array('attributes' => array('title' => t('View page')))),
-  );
+  if (!empty($title)) {
+    $form['fld_title'] = array(
+      '#type' => 'item',
+      '#title' => t('Page to be sent'),
+      '#value' => l($title, $path, array('attributes' => array('title' => t('View page')))),
+    );
+  }
   $form['txt_message'] = array(
     '#type' => 'textarea',
     '#title' => t('Your message'),
