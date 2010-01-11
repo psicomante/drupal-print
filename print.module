@@ -375,6 +375,7 @@ function print_form_alter(&$form, $form_state, $form_id) {
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#weight' => (function_exists('content_extra_field_weight') && isset($form['type'])) ? content_extra_field_weight($form['type']['#value'], 'print') : PRINT_TYPE_FIELDS_WEIGHT,
+      '#group' => 'additional_settings',
     );
 
     $form['print']['label'] = array(
