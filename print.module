@@ -168,7 +168,9 @@ function print_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
     case 'list':
       $block[0]['info'] = t('Printer, e-mail and PDF versions');
+      $block[0]['cache'] = BLOCK_CACHE_PER_PAGE;
       $block[1]['info'] = t('Most printed');
+      $block[1]['cache'] = BLOCK_CACHE_GLOBAL;
       return $block;
       break;
     case 'configure':
