@@ -300,8 +300,7 @@ function _print_pdf_wkhtmltopdf($print, $html, $filename) {
   }
 
   $descriptor = array(0 => array('pipe', 'r'), 1 => array('pipe', 'w'), 2 => array('pipe', 'w'));
-  $pdf_output = (stristr(PHP_OS, 'Win')) ? tempnam(file_directory_temp(), 'pdf') : '-';
-  $cmd = realpath($print_pdf_pdf_tool) ." --page-size $print_pdf_paper_size --orientation $print_pdf_page_orientation --dpi $dpi $print_pdf_wkhtmltopdf_options - $pdf_output";
+  $cmd = realpath($print_pdf_pdf_tool) ." --page-size $print_pdf_paper_size --orientation $print_pdf_page_orientation --dpi $dpi $print_pdf_wkhtmltopdf_options - -";
 
   $process = proc_open($cmd, $descriptor, $pipes, NULL, NULL);
 
@@ -309,14 +308,7 @@ function _print_pdf_wkhtmltopdf($print, $html, $filename) {
     fwrite($pipes[0], $html);
     fclose($pipes[0]);
 
-    if (stristr(PHP_OS, 'Win')) {
-      // It seems Windows can't use the pipe properly so get the contents from a file and then delete it.
-      $pdf = file_get_contents($pdf_output);
-      unlink($pdf_output);
-    }
-    else {
-      $pdf = stream_get_contents($pipes[1]);
-    }
+    $pdf = stream_get_contents($pipes[1]);
     fclose($pipes[1]);
 
     stream_set_blocking($pipes[2], 0);
