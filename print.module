@@ -333,7 +333,7 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
   switch ($op) {
     case 'view':
       // Insert content corner links
-      if (($teaser === FALSE) && isset($node->build_mode) && ($node->build_mode == NODE_BUILD_NORMAL)) {
+      if ((!$teaser) && isset($node->build_mode) && ($node->build_mode == NODE_BUILD_NORMAL)) {
       $node->content['print_links'] = array(
         '#value' => "<span class='print-link'></span>",
         '#weight' => -101,
