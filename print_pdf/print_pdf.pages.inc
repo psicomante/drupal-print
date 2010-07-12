@@ -118,6 +118,7 @@ function _print_pdf_dompdf($print, $html, $filename) {
     define("DOMPDF_ENABLE_PHP", FALSE);
     define("DOMPDF_ENABLE_REMOTE", TRUE);
     define("DOMPDF_TEMP_DIR", file_directory_temp());
+    define("DOMPDF_UNICODE_ENABLED", variable_get('print_pdf_dompdf_unicode', PRINT_PDF_DOMPDF_UNICODE_DEFAULT));
   }
 
   require_once($print_pdf_pdf_tool);
@@ -141,6 +142,8 @@ function _print_pdf_dompdf($print, $html, $filename) {
 // dompdf can't handle footers cleanly, so disable the following
 //  $html = theme('print_pdf_dompdf_footer', $html);
 
+  // If dompdf Unicode support is disabled, try to convert to ISO-8859-1 and then to HTML entities
+  if (!variable_get('print_pdf_dompdf_unicode', PRINT_PDF_DOMPDF_UNICODE_DEFAULT)) {
   // Convert the euro sign to an HTML entity
   $html = str_replace('€', '&#0128;', $html);
 
@@ -159,6 +162,7 @@ function _print_pdf_dompdf($print, $html, $filename) {
     $html = recode_string('UTF-8..ISO_8859-1', $html);
   }
   $html = htmlspecialchars_decode(htmlentities($html, ENT_NOQUOTES, 'ISO-8859-1'), ENT_NOQUOTES);
+  }
 
   //must get rid of tbody (dompdf goes into recursion)
   $html = preg_replace('!<tbody[^>]*?>|</tbody>!i', '', $html);
