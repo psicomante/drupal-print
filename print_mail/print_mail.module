@@ -213,6 +213,7 @@ function print_mail_nodeapi(&$node, $op = 'view', $teaser, $page) {
     case 'load':
       _print_mail_set_node_fields($node);
       break;
+    case 'insert':
     case 'update':
       if (user_access('administer print') || user_access('node-specific print configuration')) {
       _print_mail_node_conf_modify($node->nid, $node->print_mail_display, $node->print_mail_display_comment, $node->print_mail_display_urllist);
