@@ -275,10 +275,7 @@ function print_mail_form_submit($form, &$form_state) {
       $params['title'] = $form_state['values']['title'];
 
       $node = $print['node'];
-      ob_start();
-      include_once(_print_get_template(PRINT_MAIL_FORMAT, $print['type']));
-      $params['body'] = ob_get_contents();
-      ob_end_clean();
+      $params['body'] = theme('print_page', $print, PRINT_MAIL_FORMAT, $node);
       $params['body'] = drupal_final_markup($params['body']);
 
       $ok = FALSE;

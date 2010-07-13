@@ -18,7 +18,6 @@ $_print_urls = PRINT_URLS_DEFAULT;
  * Generate an HTML version of the printer-friendly page
  *
  * @see print_controller()
- * @see _print_get_template()
  */
 function print_controller_html() {
   $args = func_get_args();
@@ -29,10 +28,7 @@ function print_controller_html() {
   if ($print !== FALSE) {
     $node = $print['node'];
 
-    ob_start();
-    include_once(_print_get_template(PRINT_HTML_FORMAT, $print['type']));
-    $html = ob_get_contents();
-    ob_end_clean();
+    $html = theme('print_page', $print, PRINT_HTML_FORMAT, $node);
     $html = drupal_final_markup($html);
     print $html;
 
@@ -458,51 +454,6 @@ function _print_friendly_urls($url = 0) {
 }
 
 /**
- * Choose most appropriate template
- *
- * Auxiliary function to resolve the most appropriate template trying to find
- * a content specific template in the theme or module dir before falling back
- * on a generic template also in those dirs.
- *
- * @param format
- *   format of the PF page being rendered (html, pdf, etc.)
- * @param $type
- *   name of the node type being rendered in a PF page
- * @return
- *   filename of the most suitable template
- */
-function _print_get_template($format = NULL, $type = NULL) {
-  $filenames = array();
-  // First try to find a template defined both for the format and then the type
-  if (!empty($format) && !empty($type)) {
-    $filenames[] = "print_$format.node-$type.tpl.php";
-  }
-  // Then only for the format
-  if (!empty($format)) {
-    $filenames[] = "print_$format.tpl.php";
-  }
-  // If the node type is known, then try to find that type's template file
-  if (!empty($type)) {
-    $filenames[] = "print.node-$type.tpl.php";
-  }
-  // Finally search for a generic template file
-  $filenames[] = 'print.tpl.php';
-
-  foreach ($filenames as $value) {
-    // First in the theme directory
-    $file = drupal_get_path('theme', $GLOBALS['theme_key']) .'/'. $value;
-    if (file_exists($file)) {
-      return $file;
-    }
-    // Then in the module directory
-    $file = drupal_get_path('module', 'print') .'/'. $value;
-    if (file_exists($file)) {
-      return $file;
-    }
-  }
-}
-
-/**
  * Check URL list settings for this node
  *
  * @param node
@@ -633,6 +584,8 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
   }
 
   node_invoke_nodeapi($node, 'alter', $teaser, TRUE);
+
+  $content = theme('print_node', $node, $teaser, TRUE, $format);
 
   if ($teaser) {
     $node->body = $node->teaser;
