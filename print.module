@@ -336,15 +336,14 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
       // Insert content corner links
       if ((!$teaser) && isset($node->build_mode) && ($node->build_mode === NODE_BUILD_NORMAL)) {
       $node->content['print_links'] = array(
-        '#value' => "<span class='print-link'></span>",
+        '#prefix' => '<span class="print-link">',
+        '#value' => '',
+        '#suffix' => '</span>',
         '#weight' => -101,
       );
       $print_html_link_pos = variable_get('print_html_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
       if (!empty($print_html_link_pos['corner'])) {
-        $link = print_insert_link(NULL, $node);
-        if ($link) {
-          $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);
-        }
+        $node->content['print_links']['#value'] .= print_insert_link(NULL, $node);
       }
       }
       break;
