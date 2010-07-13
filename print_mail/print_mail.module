@@ -224,10 +224,7 @@ function print_mail_nodeapi(&$node, $op = 'view', $teaser, $page) {
       // Insert content corner links
       $print_mail_link_pos = variable_get('print_mail_link_pos', array(PRINT_MAIL_LINK_POS_DEFAULT => PRINT_MAIL_LINK_POS_DEFAULT));
       if (($teaser === FALSE) && !empty($print_mail_link_pos['corner']) && !isset($node->printing)) {
-        $link = print_mail_insert_link(NULL, $node);
-        if ($link) {
-          $node->content['print_links']['#value'] = preg_replace('!</span>$!', $link .'</span>', $node->content['print_links']['#value']);
-        }
+        $node->content['print_links']['#value'] .= print_mail_insert_link(NULL, $node);
       }
       break;
     case 'load':
