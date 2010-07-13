@@ -55,6 +55,7 @@ function print_mail_form() {
 
   $form['path'] = array('#type' => 'value', '#value' => $path);
   $form['cid'] =  array('#type' => 'value', '#value' => $cid);
+  $form['title'] = array('#type' => 'value', '#value' => $title);
 
   $form['fld_from_addr'] = array(
     '#type' => 'textfield',
@@ -88,6 +89,15 @@ function print_mail_form() {
       '#value' => l($title, $path, array('title' => t('View page')), NULL, NULL, FALSE, FALSE),
     );
   }
+  $form['fld_send_option'] = array(
+    '#type' => 'select',
+    '#title' => t('Send page as'),
+    '#default_value' => 'sendpage',
+    '#options' => array(
+      'sendlink' => 'Link',
+      'sendpage' => 'Inline HTML',
+    ),
+  );
   $form['txt_message'] = array(
     '#type' => 'textarea',
     '#title' => t('Your message'),
@@ -159,6 +169,7 @@ function theme_print_mail_form($form) {
       case 'txt_to_addrs':
       case 'fld_subject':
       case 'fld_title':
+      case 'fld_send_option':
         $tmp = str_replace('<label', '<label class ="printmail-label"', $tmp);
         break;
     }
@@ -249,6 +260,9 @@ function print_mail_form_submit($form_id, $form_values) {
     if ($print !== FALSE) {
       $params = array();
       $params['subject'] = $form_values['fld_subject'];
+      $params['message'] = $form_values['txt_message'];
+      $params['link'] = $print['url'];
+      $params['title'] = $form_values['title'];
       $headers = array('Content-Type' => 'text/html; charset=utf-8');
 
       $node = $print['node'];
@@ -257,6 +271,17 @@ function print_mail_form_submit($form_id, $form_values) {
       $params['body'] = ob_get_contents();
       ob_end_clean();
       $params['body'] = drupal_final_markup($params['body']);
+
+      switch($form_values['fld_send_option']) {
+        case 'sendpage':
+          break;
+        case 'sendlink':
+          // Generate plain-text and html versions of message with link
+          $sendlink_html = $params['message'] .'<br/><br/>'. l($params['title'], $params['link']);
+
+          $params['body'] = $sendlink_html;
+          break;
+      }
 
       $ok = FALSE;
       if (function_exists('job_queue_add') && variable_get('print_mail_job_queue', PRINT_MAIL_JOB_QUEUE_DEFAULT)) {
