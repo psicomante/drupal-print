@@ -95,7 +95,6 @@ function print_pdf_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
     case 'list':
       $block[0]['info'] = t('Most PDFd');
-      $block[0]['cache'] = BLOCK_CACHE_GLOBAL;
       return $block;
       break;
     case 'configure':
