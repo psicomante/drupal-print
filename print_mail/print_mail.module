@@ -316,6 +316,9 @@ function _print_mail_access($permission) {
     if (preg_match('!^node/(\d+)$!', $path, $matches) == 1) {
       $page_access = node_access('view', node_load($matches[1]));
     }
+    elseif (preg_match('!^book/export/html/(\d+)$!', $path, $matches) == 1) {
+      $page_access = user_access('see printer-friendly version') && node_access('view', node_load($matches[1]));
+    }
     else {
       if (!($router_item = menu_get_item(NULL, $path)) || (!$router_item['access'])) {
         $page_access = FALSE;
