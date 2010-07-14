@@ -131,7 +131,9 @@ function _print_pdf_dompdf($print, $html, $filename) {
   }
 
   require_once($print_pdf_pdf_tool);
-  spl_autoload_register('DOMPDF_autoload');
+  if (function_exists('spl_autoload_register')) {
+    spl_autoload_register('DOMPDF_autoload');
+  }
 
   // dompdf seems to have problems with something in system.css so let's not use it
   $html = preg_replace('!<link.*?modules/system/system.css.*?/>!', '', $html);
