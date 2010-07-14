@@ -306,3 +306,15 @@ function print_update_6003() {
   menu_rebuild();
   return $ret;
 }
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_update_6004() {
+  $ret = array();
+  // BLOCK_CACHE_PER_PAGE -> 4
+  $ret[] = update_sql("UPDATE {blocks} SET cache = 4 WHERE module = 'print' AND delta = 0");
+  // BLOCK_CACHE_GLOBAL -> 8
+  $ret[] = update_sql("UPDATE {blocks} SET cache = 8 WHERE module = 'print' AND delta = 1");
+  return $ret;
+}

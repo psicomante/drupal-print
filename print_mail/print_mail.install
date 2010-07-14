@@ -267,3 +267,13 @@ function print_mail_update_6004() {
   }
   return $ret;
 }
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_mail_update_6005() {
+  $ret = array();
+  // BLOCK_CACHE_GLOBAL -> 8
+  $ret[] = update_sql("UPDATE {blocks} SET cache = 8 WHERE module = 'print_mail' AND delta = 0");
+  return $ret;
+}

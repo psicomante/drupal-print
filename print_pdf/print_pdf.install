@@ -47,9 +47,6 @@ function print_pdf_uninstall() {
   while ($variable = db_fetch_object($settings)) {
     variable_del($variable->name);
   }
-
-  variable_del('print_pdf_wkhtmltopdf_xdisplay');
-  variable_del('print_pdf_xvfb_options');
 }
 
 /**
@@ -242,5 +239,19 @@ function print_pdf_update_6004() {
       $ret[] = update_sql("UPDATE {permission} SET perm = '$role->perm' WHERE rid = $role->rid");
     }
   }
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_pdf_update_6005() {
+  $ret = array();
+
+  variable_del('print_pdf_wkhtmltopdf_xdisplay');
+  variable_del('print_pdf_xvfb_options');
+
+  // BLOCK_CACHE_GLOBAL -> 8
+  $ret[] = update_sql("UPDATE {blocks} SET cache = 8 WHERE module = 'print_pdf' AND delta = 0");
   return $ret;
 }
