@@ -465,23 +465,22 @@ function _print_friendly_urls($url = 0) {
 function _print_url_list_enabled($node, $format = PRINT_HTML_FORMAT) {
   switch ($format) {
     case PRINT_HTML_FORMAT:
-      $node_urllist = isset($node->print_display_urllist) ? $node->print_display_urllist : TRUE;
+      $node_urllist = isset($node->print_display_urllist) ? $node->print_display_urllist : variable_get('print_display_urllist_'. $node->type, PRINT_TYPE_URLLIST_DEFAULT);
       $fmt = '';
       break;
     case PRINT_MAIL_FORMAT:
-      $node_urllist = isset($node->print_mail_display_urllist) ? $node->print_mail_display_urllist : TRUE;
+      $node_urllist = isset($node->print_mail_display_urllist) ? $node->print_mail_display_urllist : variable_get('print_mail_display_urllist_'. $node->type, PRINT_TYPE_URLLIST_DEFAULT);
       $fmt = $format .'_';
       break;
     case PRINT_PDF_FORMAT:
-      $node_urllist = isset($node->print_pdf_display_urllist) ? $node->print_pdf_display_urllist : TRUE;
+      $node_urllist = isset($node->print_pdf_display_urllist) ? $node->print_pdf_display_urllist : variable_get('print_pdf_display_urllist_'. $node->type, PRINT_TYPE_URLLIST_DEFAULT);
       $fmt = $format .'_';
       break;
   }
-  if (!isset($node_urllist)) $node_urllist = TRUE;
+  if (!isset($node_urllist)) $node_urllist = PRINT_TYPE_URLLIST_DEFAULT;
 
   // Get value of Printer-friendly URLs setting
-  return (variable_get('print_urls', PRINT_URLS_DEFAULT) && ($node_urllist) &&
-          (isset($node->type) ? variable_get('print_'. $fmt .'display_urllist_'. $node->type, PRINT_TYPE_URLLIST_DEFAULT) : PRINT_TYPE_URLLIST_DEFAULT));
+  return (variable_get('print_urls', PRINT_URLS_DEFAULT) && ($node_urllist));
 }
 
 /**
@@ -587,8 +586,7 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
   $content = theme('print_node', $node, $teaser, TRUE, $format);
 
   if ($teaser) {
-    $node->body = $node->teaser;
-    unset($node->teaser);
+    $content = $node->teaser;
   }
 
   //Check URL list settings
@@ -596,7 +594,7 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
 
   // Convert the a href elements
   $pattern = '!<(a\s[^>]*?)>(.*?)(</a>)!is';
-  $node->body = preg_replace_callback($pattern, '_print_rewrite_urls', $node->body);
+  $content = preg_replace_callback($pattern, '_print_rewrite_urls', $content);
 
   $print = _print_var_generator($node, $message, $cid);
   $print['content'] = $content;
