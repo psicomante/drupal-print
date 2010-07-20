@@ -233,7 +233,11 @@ function print_mail_nodeapi(&$node, $op = 'view', $teaser, $page) {
     case 'insert':
     case 'update':
       if (user_access('administer print') || user_access('node-specific print configuration')) {
-      _print_mail_node_conf_modify($node->nid, $node->print_mail_display, $node->print_mail_display_comment, $node->print_mail_display_urllist);
+        if ($node->print_mail_display === NULL) $node->print_mail_display = variable_get('print_mail_display_' . $node->type, PRINT_TYPE_SHOW_LINK_DEFAULT);
+        if ($node->print_mail_display_comment === NULL) $node->print_mail_display_comment = variable_get('print_mail_display_comment_' . $node->type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
+        if ($node->print_mail_display_urllist === NULL) $node->print_mail_display_urllist = variable_get('print_mail_display_urllist_' . $node->type, PRINT_TYPE_URLLIST_DEFAULT);
+
+        _print_mail_node_conf_modify($node->nid, $node->print_mail_display, $node->print_mail_display_comment, $node->print_mail_display_urllist);
       }
       break;
     case 'delete':
