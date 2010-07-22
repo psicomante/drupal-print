@@ -112,6 +112,7 @@ function print_theme() {
  */
 function print_theme_registry_alter(&$theme_registry) {
   $theme_registry['print_node']['theme paths'] += $theme_registry['node']['theme paths'];
+  $theme_registry['print_page']['theme paths'] += $theme_registry['page']['theme paths'];
 }
 
 /**
@@ -134,6 +135,7 @@ function print_preprocess_print_node(&$vars) {
 function print_preprocess_print_page(&$vars) {
   $format = $vars['type'];
   $type = $vars['node']->type;
+  template_preprocess_page($vars);
   $vars['template_files'][] = "print";
   $vars['template_files'][] = "print.node-$type";
   $vars['template_files'][] = "print_$format";
