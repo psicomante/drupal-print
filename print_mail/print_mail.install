@@ -49,6 +49,9 @@ function print_mail_install() {
       )");
       break;
   }
+
+  // Module weight
+  update_sql("UPDATE {system} SET weight = 1 WHERE name = 'print_mail'");
 }
 
 /**
@@ -192,5 +195,15 @@ function print_mail_update_6004() {
       $ret[] = update_sql("UPDATE {permission} SET perm = '$role->perm' WHERE rid = $role->rid");
     }
   }
+  return $ret;
+}
+
+/**
+ * Update to version 5.x-4.10
+ */
+function print_mail_update_6005() {
+  $ret = array();
+  // Module weight
+  $ret[] = update_sql("UPDATE {system} SET weight = 1 WHERE name = 'print_mail'");
   return $ret;
 }

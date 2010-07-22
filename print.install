@@ -46,6 +46,9 @@ function print_install() {
       break;
   }
 
+  // Module weight
+  update_sql("UPDATE {system} SET weight = 0 WHERE name = 'print'");
+
   $t = get_t();
   drupal_set_message($t('Printer-friendly Page settings are available under !link',
     array( '!link' => l($t('Administer > Site configuration > Printer-friendly Pages'),  'admin/settings/print' ) )
@@ -256,5 +259,15 @@ function print_update_5303() {
   }
 
   menu_rebuild();
+  return $ret;
+}
+
+/**
+ * Update to version 5.x-4.10
+ */
+function print_update_5304() {
+  $ret = array();
+  // Module weight
+  $ret[] = update_sql("UPDATE {system} SET weight = 0 WHERE name = 'print'");
   return $ret;
 }
