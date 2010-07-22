@@ -13,6 +13,9 @@
  */
 function print_mail_install() {
   drupal_install_schema('print_mail');
+
+  // Module weight
+  update_sql("UPDATE {system} SET weight = 1 WHERE name = 'print_mail'");
 }
 
 /**
@@ -275,5 +278,15 @@ function print_mail_update_6005() {
   $ret = array();
   // BLOCK_CACHE_GLOBAL -> 8
   $ret[] = update_sql("UPDATE {blocks} SET cache = 8 WHERE module = 'print_mail' AND delta = 0");
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_mail_update_6006() {
+  $ret = array();
+  // Module weight
+  $ret[] = update_sql("UPDATE {system} SET weight = 1 WHERE name = 'print_mail'");
   return $ret;
 }

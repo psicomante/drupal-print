@@ -13,6 +13,9 @@
  */
 function print_pdf_install() {
   drupal_install_schema('print_pdf');
+
+  // Module weight
+  update_sql("UPDATE {system} SET weight = 2 WHERE name = 'print_pdf'");
 }
 
 /**
@@ -253,5 +256,15 @@ function print_pdf_update_6005() {
 
   // BLOCK_CACHE_GLOBAL -> 8
   $ret[] = update_sql("UPDATE {blocks} SET cache = 8 WHERE module = 'print_pdf' AND delta = 0");
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_pdf_update_6006() {
+  $ret = array();
+  // Module weight
+  $ret[] = update_sql("UPDATE {system} SET weight = 2 WHERE name = 'print_pdf'");
   return $ret;
 }
