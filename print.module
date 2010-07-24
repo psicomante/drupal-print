@@ -135,6 +135,8 @@ function print_preprocess_print_node(&$vars) {
 function print_preprocess_print_page(&$vars) {
   $format = $vars['type'];
   $type = $vars['node']->type;
+  $vars['show_blocks'] = FALSE;
+  $vars['show_messages'] = FALSE;
   template_preprocess_page($vars);
   $vars['template_files'][] = "print";
   $vars['template_files'][] = "print.node-$type";
