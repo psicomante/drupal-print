@@ -92,7 +92,7 @@ function print_mail_form() {
   $form['fld_send_option'] = array(
     '#type' => 'select',
     '#title' => t('Send page as'),
-    '#default_value' => 'sendpage',
+    '#default_value' => variable_get('print_mail_send_option_default', PRINT_MAIL_SEND_OPTION_DEFAULT),,
     '#options' => array(
       'sendlink' => 'Link',
       'sendpage' => 'Inline HTML',

@@ -146,6 +146,16 @@ function print_mail_settings() {
     '#description' => t('If checked, the user will be able to choose between sending the full content or only the teaser at send time.'),
   );
 
+  $form['settings']['print_mail_send_option_default'] = array(
+    '#type' => 'select',
+    '#title' => t('Default e-mail sending format'),
+    '#default_value' => variable_get('print_mail_send_option_default', PRINT_MAIL_SEND_OPTION_DEFAULT),
+    '#options' => array(
+      'sendlink' => 'Link',
+      'sendpage' => 'Inline HTML',
+    ),
+  );
+
   if (module_exists('job_queue')) {
     $form['settings']['print_mail_job_queue'] = array(
       '#type' => 'checkbox',
