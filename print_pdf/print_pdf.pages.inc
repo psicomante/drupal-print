@@ -46,12 +46,16 @@ function print_pdf_controller() {
   // And converted from private to public paths
   $file_downloads = variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC);
   if ($file_downloads == FILE_DOWNLOADS_PRIVATE) {
-    $pattern = "!(<img\s[^>]*?src\s*?=\s*?['\"]?)${base_url}/(?:(?:index.php)?\?q=)?system/files(/[^>]*?>)!is";
-    $replacement = '$1file://'. realpath(file_directory_path()) .'$2';
-    $print['content'] = preg_replace($pattern, $replacement, $print['content']);
-    $print['logo'] = preg_replace($pattern, $replacement, $print['logo']);
-    $print['footer_message'] = preg_replace($pattern, $replacement, $print['footer_message']);
+    $pattern = "!(<img\s[^>]*?src\s*?=\s*?['\"]?)${base_url}/(?:(?:index.php)?\?q=)?system/files/([^>]*?>)!is";
+    $replacement = '$1file://'. realpath(file_directory_path()) .'/$2';
   }
+  else {
+    $pattern = "!(<img\s[^>]*?src\s*?=\s*?['\"]?)${base_url}/(?:(?:index.php)?\?q=)?([^>]*?>)!is";
+    $replacement = '$1file://'. realpath($_SERVER["DOCUMENT_ROOT"].base_path()) .'/$2';
+  }
+  $print['content'] = preg_replace($pattern, $replacement, $print['content']);
+  $print['logo'] = preg_replace($pattern, $replacement, $print['logo']);
+  $print['footer_message'] = preg_replace($pattern, $replacement, $print['footer_message']);
   // Send to printer option causes problems with PDF
   $print['sendtoprinter'] = '';
 
@@ -280,7 +284,7 @@ function _print_pdf_tcpdf($print, $html, $filename) {
  */
 function _print_pdf_wkhtmltopdf($print, $html, $filename) {
   $print_pdf_pdf_tool = variable_get('print_pdf_pdf_tool', PRINT_PDF_PDF_TOOL_DEFAULT);
-  $print_pdf_paper_size = drupal_strtolower(variable_get('print_pdf_paper_size', PRINT_PDF_PAPER_SIZE_DEFAULT));
+  $print_pdf_paper_size = variable_get('print_pdf_paper_size', PRINT_PDF_PAPER_SIZE_DEFAULT);
   $print_pdf_page_orientation = variable_get('print_pdf_page_orientation', PRINT_PDF_PAGE_ORIENTATION_DEFAULT);
   $print_pdf_content_disposition = variable_get('print_pdf_content_disposition', PRINT_PDF_CONTENT_DISPOSITION_DEFAULT);
   $print_pdf_wkhtmltopdf_options = variable_get('print_pdf_wkhtmltopdf_options', PRINT_PDF_WKHTMLTOPDF_OPTIONS);
