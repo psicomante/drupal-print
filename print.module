@@ -118,30 +118,30 @@ function print_theme_registry_alter(&$theme_registry) {
 /**
  * Renders the content of the node using the theme api
  */
-function print_preprocess_print_node(&$vars) {
-  $format = $vars['type'];
-  $type = $vars['node']->type;
-  template_preprocess_node($vars);
-  $vars['template_files'][] = "node";
-  $vars['template_files'][] = "node-$type";
-  $vars['template_files'][] = "print_node";
-  $vars['template_files'][] = "print_node_$format";
-  $vars['template_files'][] = "print_node_$format.node-$type";
+function print_preprocess_print_node(&$variables) {
+  $format = $variables['type'];
+  $type = $variables['node']->type;
+  template_preprocess_node($variables);
+  $variables['template_files'][] = "node";
+  $variables['template_files'][] = "node-$type";
+  $variables['template_files'][] = "print_node";
+  $variables['template_files'][] = "print_node_$format";
+  $variables['template_files'][] = "print_node_$format.node-$type";
 }
 
 /**
  * Renders the print page, where the node content gets embedded
  */
-function print_preprocess_print_page(&$vars) {
-  $format = $vars['type'];
-  $type = $vars['node']->type;
-  $vars['show_blocks'] = FALSE;
-  $vars['show_messages'] = FALSE;
-  template_preprocess_page($vars);
-  $vars['template_files'][] = "print";
-  $vars['template_files'][] = "print.node-$type";
-  $vars['template_files'][] = "print_$format";
-  $vars['template_files'][] = "print_$format.node-$type";
+function print_preprocess_print_page(&$variables) {
+  $format = $variables['type'];
+  $type = $variables['node']->type;
+  $variables['show_blocks'] = FALSE;
+  $variables['show_messages'] = FALSE;
+  template_preprocess_page($variables);
+  $variables['template_files'][] = "print";
+  $variables['template_files'][] = "print.node-$type";
+  $variables['template_files'][] = "print_$format";
+  $variables['template_files'][] = "print_$format.node-$type";
 }
 
 /**
