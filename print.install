@@ -271,3 +271,51 @@ function print_update_5304() {
   $ret[] = update_sql("UPDATE {system} SET weight = 0 WHERE name = 'print'");
   return $ret;
 }
+
+/**
+ * Update to version 5.x-4.10
+ */
+function print_update_5305() {
+  global $base_root, $base_path;
+
+  $ret = array();
+  $t = get_t();
+
+  $print_css = variable_get('print_css', '');
+  $pattern = "!(?:${base_root})?${base_path}(.*)!is";
+  if (preg_match($pattern, strtr($print_css, array('%b' => base_path())), $matches)) {
+    variable_set('print_css', $matches[1]);
+  }
+  elseif (!empty($print_css)) {
+    drupal_set_message($t('Please review your custom stylesheet path in the <a href="!url">print module settings</a>, as the path must now be relative to the base path of the site.', array('!url' => url('admin/settings/print/common'))));
+  }
+
+  return $ret;
+}
+
+/**
+ * Update to version 5.x-4.10
+ */
+function print_update_5306() {
+  $ret = array();
+
+  foreach (node_get_types() as $key => $value) {
+    $print_display = variable_get('print_display_'. $value->type, 1);
+    $print_display_comment = variable_get('print_display_comment_'. $value->type, 0);
+    $print_display_urllist = variable_get('print_display_urllist_'. $value->type, 1);
+
+    $result = db_query('SELECT n.nid, link, comments, url_list from {node} AS n LEFT JOIN {print_node_conf} AS pnc ON n.nid = pnc.nid WHERE type = "%s"', $value->type);
+    while ($conf = db_fetch_object($result)) {
+      if (($conf->link != NULL) && ($conf->comments != NULL) && ($conf->url_list != NULL)) {
+        $conf->link = !$print_display ? 0 : $conf->link;
+        $conf->comments = $print_display_comment ? 1 : $conf->comments;
+        $conf->url_list = !$print_display_urllist ? 0 : $conf->url_list;
+        $ret[] = update_sql("UPDATE {print_node_conf} SET link = $conf->link, comments = $conf->comments, url_list = $conf->url_list WHERE nid = $conf->nid");
+      }
+      else {
+        $ret[] = update_sql("INSERT INTO {print_node_conf} (nid, link, comments, url_list) VALUES ($conf->nid, $print_display, $print_display_comment, $print_display_urllist)");
+      }
+    }
+  }
+  return $ret;
+}
