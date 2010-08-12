@@ -68,7 +68,7 @@ function print_pdf_controller() {
     $pdf_filename = str_replace('/', '_', $path) .'.pdf';
   }
   if (function_exists('transliteration_clean_filename')) {
-    $pdf_filename = transliteration_clean_filename($pdf_filename, language_default('language'));
+    $pdf_filename = transliteration_clean_filename($pdf_filename);
   }
 
   if (basename($print_pdf_pdf_tool) == 'dompdf_config.inc.php') {
