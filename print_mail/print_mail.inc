@@ -94,8 +94,8 @@ function print_mail_form() {
     '#title' => t('Send page as'),
     '#default_value' => variable_get('print_mail_send_option_default', PRINT_MAIL_SEND_OPTION_DEFAULT),
     '#options' => array(
-      'sendlink' => 'Link',
-      'sendpage' => 'Inline HTML',
+      'sendlink' => t('Link'),
+      'sendpage' => t('Inline HTML'),
     ),
   );
   $form['txt_message'] = array(
