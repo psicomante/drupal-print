@@ -377,7 +377,7 @@ function _print_pdf_set_node_fields(&$node) {
 function _print_pdf_node_conf_modify($nid, $link, $comments, $url_list) {
     db_query("UPDATE {print_pdf_node_conf} SET link = %d, comments = %d, url_list = %d WHERE nid = %d", $link, $comments, $url_list, $nid);
     if (!db_affected_rows()) {
-      db_query("INSERT INTO {print_pdf_node_conf} (nid, link, comments, url_list) VALUES (%d, %d, %d, %d)", $nid, $link, $comments, $url_list);
+      @db_query("INSERT INTO {print_pdf_node_conf} (nid, link, comments, url_list) VALUES (%d, %d, %d, %d)", $nid, $link, $comments, $url_list);
     }
 }
 
