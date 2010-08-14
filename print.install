@@ -304,7 +304,7 @@ function print_update_5306() {
     $print_display_comment = variable_get('print_display_comment_'. $value->type, 0);
     $print_display_urllist = variable_get('print_display_urllist_'. $value->type, 1);
 
-    $result = db_query('SELECT n.nid, link, comments, url_list from {node} AS n LEFT JOIN {print_node_conf} AS pnc ON n.nid = pnc.nid WHERE type = "%s"', $value->type);
+    $result = db_query("SELECT n.nid, link, comments, url_list from {node} AS n LEFT JOIN {print_node_conf} AS pnc ON n.nid = pnc.nid WHERE type = '%s'", $value->type);
     while ($conf = db_fetch_object($result)) {
       if (($conf->link != NULL) && ($conf->comments != NULL) && ($conf->url_list != NULL)) {
         $conf->link = !$print_display ? 0 : $conf->link;

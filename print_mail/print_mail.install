@@ -219,7 +219,7 @@ function print_mail_update_6007() {
     $print_mail_display_comment = variable_get('print_mail_display_comment_'. $value->type, 0);
     $print_mail_display_urllist = variable_get('print_mail_display_urllist_'. $value->type, 1);
 
-    $result = db_query('SELECT n.nid, link, comments, url_list from {node} AS n LEFT JOIN {print_mail_node_conf} AS pnc ON n.nid = pnc.nid WHERE type = "%s"', $value->type);
+    $result = db_query("SELECT n.nid, link, comments, url_list from {node} AS n LEFT JOIN {print_mail_node_conf} AS pnc ON n.nid = pnc.nid WHERE type = '%s'", $value->type);
     while ($conf = db_fetch_object($result)) {
       if (($conf->link != NULL) && ($conf->comments != NULL) && ($conf->url_list != NULL)) {
         $conf->link = !$print_mail_display ? 0 : $conf->link;
