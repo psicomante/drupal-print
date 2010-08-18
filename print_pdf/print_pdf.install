@@ -47,7 +47,7 @@ function print_pdf_install() {
   }
 
   // Module weight
-  update_sql("UPDATE {system} SET weight = 2 WHERE name = 'print_pdf'");
+  db_query("UPDATE {system} SET weight = 2 WHERE name = 'print_pdf'");
 }
 
 /**

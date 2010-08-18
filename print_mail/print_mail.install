@@ -51,7 +51,7 @@ function print_mail_install() {
   }
 
   // Module weight
-  update_sql("UPDATE {system} SET weight = 1 WHERE name = 'print_mail'");
+  db_query("UPDATE {system} SET weight = 1 WHERE name = 'print_mail'");
 }
 
 /**
