@@ -158,6 +158,9 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
 
   $path = empty($node->nid) ? $node->path : "node/$node->nid";
 
+  // Needed because of the theme_get_setting() calls below
+  init_theme();
+
   // print module settings
   $print_css = variable_get('print_css', PRINT_CSS_DEFAULT);
   $print_logo_options = variable_get('print_logo_options', PRINT_LOGO_OPTIONS_DEFAULT);
@@ -504,6 +507,10 @@ function _print_get_template($format = NULL, $type = NULL) {
  *   TRUE if URL list should be displayed, FALSE otherwise
  */
 function _print_url_list_enabled($node, $format = PRINT_HTML_FORMAT) {
+  if (!isset($node->type)) {
+     return TRUE;
+  }
+
   switch ($format) {
     case PRINT_HTML_FORMAT:
       $node_urllist = isset($node->print_display_urllist) ? $node->print_display_urllist : variable_get('print_display_urllist_'. $node->type, PRINT_TYPE_URLLIST_DEFAULT);
