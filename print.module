@@ -134,10 +134,15 @@ function print_preprocess_print_node(&$variables) {
  */
 function print_preprocess_print_page(&$variables) {
   $format = $variables['type'];
-  $type = $variables['node']->type;
-  $variables['show_blocks'] = FALSE;
-  $variables['show_messages'] = FALSE;
-  template_preprocess_page($variables);
+  if (isset($variables['node']->type)) {
+    $type = $variables['node']->type;
+    $variables['show_blocks'] = FALSE;
+    $variables['show_messages'] = FALSE;
+    template_preprocess_page($variables);
+  }
+  else {
+    $type = '';
+  }
   $variables['template_files'][] = "print";
   $variables['template_files'][] = "print.node-$type";
   $variables['template_files'][] = "print_$format";
