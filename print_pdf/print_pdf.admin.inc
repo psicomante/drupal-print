@@ -224,16 +224,9 @@ function print_pdf_settings() {
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
       );
-      $descriptions = '';
-      $tokens = token_get_list('node');
-      foreach ($tokens as $token) {
-        foreach ($token as $key => $val) {
-          $descriptions .= '<dt>['. $key .']</dt><dd>'. $val ."</dd>\n";
-        }
-      }
       $form['settings']['print_pdf_filename_patterns']['descriptions'] = array(
         '#type' => 'markup',
-        '#value' => "<dl>\n". $descriptions ."</dl>\n",
+        '#value' => theme('token_help', 'node'),
       );
     }
     $form['#validate']['_print_pdf_settings_validate'] = array();
