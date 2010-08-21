@@ -97,8 +97,8 @@ function print_pdf_controller() {
  * Convert image paths to the file:// protocol
  *
  * In some Drupal setups, the use of the 'private' filesystem or Apache's
- * configuration prevent access to the images of the page. This function 
- * tries to circumnvent those problems by accessing files in the local   
+ * configuration prevent access to the images of the page. This function
+ * tries to circumnvent those problems by accessing files in the local
  * filesystem.
  *
  * @param $html

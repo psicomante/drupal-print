@@ -274,9 +274,9 @@ function print_pdf_nodeapi(&$node, $op = 'view', $teaser, $page) {
     case 'insert':
     case 'update':
       if (user_access('administer print') || user_access('node-specific print configuration')) {
-        if ($node->print_pdf_display === NULL) $node->print_pdf_display = variable_get('print_pdf_display_' . $node->type, PRINT_TYPE_SHOW_LINK_DEFAULT);
-        if ($node->print_pdf_display_comment === NULL) $node->print_pdf_display_comment = variable_get('print_pdf_display_comment_' . $node->type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
-        if ($node->print_pdf_display_urllist === NULL) $node->print_pdf_display_urllist = variable_get('print_pdf_display_urllist_' . $node->type, PRINT_TYPE_URLLIST_DEFAULT);
+        if ($node->print_pdf_display === NULL) $node->print_pdf_display = variable_get('print_pdf_display_'. $node->type, PRINT_TYPE_SHOW_LINK_DEFAULT);
+        if ($node->print_pdf_display_comment === NULL) $node->print_pdf_display_comment = variable_get('print_pdf_display_comment_'. $node->type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
+        if ($node->print_pdf_display_urllist === NULL) $node->print_pdf_display_urllist = variable_get('print_pdf_display_urllist_'. $node->type, PRINT_TYPE_URLLIST_DEFAULT);
 
         _print_pdf_node_conf_modify($node->nid, $node->print_pdf_display, $node->print_pdf_display_comment, $node->print_pdf_display_urllist);
       }
@@ -537,8 +537,8 @@ function print_pdf_link_allowed($args) {
 function _print_pdf_wkhtmltopdf_version() {
   $print_pdf_pdf_tool = variable_get('print_pdf_pdf_tool', PRINT_PDF_PDF_TOOL_DEFAULT);
   $descriptor = array(0 => array('pipe', 'r'), 1 => array('pipe', 'w'), 2 => array('pipe', 'w'));
-   
-  $cmd = realpath($print_pdf_pdf_tool) ." --version";
+
+  $cmd = realpath($print_pdf_pdf_tool) .' --version';
   $process = proc_open($cmd, $descriptor, $pipes, NULL, NULL);
   if (is_resource($process)) {
     $out = preg_match('!.*?(\d+\.\d+\.\d+).*$!m', stream_get_contents($pipes[1]), $matches);

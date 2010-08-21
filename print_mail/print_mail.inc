@@ -272,7 +272,7 @@ function print_mail_form_submit($form_id, $form_values) {
       ob_end_clean();
       $params['body'] = drupal_final_markup($params['body']);
 
-      switch($form_values['fld_send_option']) {
+      switch ($form_values['fld_send_option']) {
         case 'sendpage':
           break;
         case 'sendlink':
