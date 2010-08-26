@@ -328,11 +328,6 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
     }
   }
 
-  if (module_exists('taxonomy')) {
-    $terms = taxonomy_link('taxonomy terms', $node);
-    $print['taxonomy'] = theme('links', $terms);
-  }
-
   $print['node'] = $node;
   $print['message'] = $message;
 
