@@ -1,4 +1,3 @@
-# $Id$
 #
 # Swedish translation of Drupal (print)
 # Generated from files:
