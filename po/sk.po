@@ -1,4 +1,3 @@
-# $Id$
 #
 # Slovak translation of Drupal (print)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
