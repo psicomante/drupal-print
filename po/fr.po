@@ -1,5 +1,4 @@
 # French Translation of Drupal
-# $Id$
 #
 msgid ""
 msgstr ""

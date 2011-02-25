@@ -1,6 +1,5 @@
 # Brazilian Portuguese Translation of Drupal
 # Copyright (c) 2005 Henrique Recidive <recidive@gmail.com>
-# $Id$
 #
 msgid ""
 msgstr ""
