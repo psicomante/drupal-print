@@ -193,6 +193,8 @@ function theme_print_mail_form($form) {
  */
 function print_mail_form_validate($form, &$form_state) {
   if (array_key_exists('cancel', $form['#post'])) {
+    form_set_error(NULL,'',TRUE);
+    drupal_get_messages('error');
     return;
   }
   $from_addr = trim($form_state['values']['fld_from_addr']);
