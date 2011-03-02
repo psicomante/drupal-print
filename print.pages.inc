@@ -277,30 +277,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
     $print['source_url'] = '';
   }
 
-  if (isset($node->type)) {
-    $node_type = $node->type;
-
-    if (theme_get_setting("toggle_node_info_$node_type")) {
-      $print_text_by = filter_xss(variable_get('print_text_by', t('By %author')));
-      $by_author = ($node->name ? $node->name : variable_get('anonymous', t('Anonymous')));
-      $print['submitted'] = t($print_text_by, array('%author' => $by_author));
-
-      $print_text_created = filter_xss(variable_get('print_text_created', t('Created %date')));
-      $created_datetime = format_date($node->created, 'small');
-      $print['created'] = t($print_text_created, array('%date' => $created_datetime));
-    }
-    else {
-      $print['submitted'] = '';
-      $print['created'] = '';
-    }
-
-    $print['type'] = $node->type;
-  }
-  else {
-    $print['submitted'] = '';
-    $print['created'] = '';
-    $print['type'] = '';
-  }
+  $print['type'] = (isset($node->type)) ? $node->type : '';
 
   menu_set_active_item($path);
   $breadcrumb = drupal_get_breadcrumb();
