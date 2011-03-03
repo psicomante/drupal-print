@@ -265,6 +265,12 @@ function _print_pdf_tools() {
   $tools = array_merge($tools, array_keys(file_scan_directory(PRINT_PDF_LIB_PATH, '^dompdf_config.inc.php$')));
   $tools = array_merge($tools, array_keys(file_scan_directory(PRINT_PDF_LIB_PATH, '^tcpdf.php$')));
   $tools = array_merge($tools, array_keys(file_scan_directory(PRINT_PDF_LIB_PATH, '^wkhtmltopdf')));
+  if (module_exists('libraries')) {
+    $tools = array_merge($tools, array_keys(file_scan_directory(libraries_get_path('dompdf'), '^dompdf_config.inc.php$')));
+    $tools = array_merge($tools, array_keys(file_scan_directory(libraries_get_path('tcpdf'), '^tcpdf.php$')));
+    $tools = array_merge($tools, array_keys(file_scan_directory(libraries_get_path('wkhtmltopdf'), '^wkhtmltopdf')));
+  }
+
 
   $num_tools = count($tools);
 
