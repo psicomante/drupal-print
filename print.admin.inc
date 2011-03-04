@@ -263,6 +263,18 @@ function print_html_settings() {
     $form['settings']['adv_link']['print_html_node_link_pages']['#description'] .= ' '. t('If the PHP-mode is chosen, enter PHP code between %php. Note that executing incorrect PHP-code can break your Drupal site.', array('%php' => '<?php ?>'));
   }
 
+  $form['settings']['adv_link']['print_html_views_link_visibility'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show in views'),
+    '#default_value' => variable_get('print_html_views_link_visibility', 1),
+  );
+
+  $form['settings']['adv_link']['print_html_view_contained_nodes_link_visibility'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show in nodes inside a view'),
+    '#default_value' => variable_get('print_html_view_contained_nodes_link_visibility', 0),
+  );
+
   $form['settings']['adv_link']['print_html_sys_link_visibility'] = array(
     '#type' => 'radios',
     '#title' => t('Show link in system (non-content) pages'),

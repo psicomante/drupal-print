@@ -445,19 +445,29 @@ function print_mail_link_allowed($args) {
     // If the teaser link is disabled or the user is not allowed
     return FALSE;
   }
+  $is_view = FALSE;
   if (!empty($args['path'])) {
     $nid = preg_replace('!^node/!', '', drupal_get_normal_path($args['path']));
     if (is_numeric($nid)) {
       $args['node'] = node_load($nid);
+    }
+    else { // Not a node - is it a view?
+      $router_item = menu_get_item($args['path']);
+      $is_view = ($router_item['access_callback'] == 'views_access');
     }
   }
   if (!empty($args['node'])) {
     static $node_type = FALSE;
 
     $node = $args['node'];
+    if (!empty($node->view) // node is inside view
+        && !variable_get('print_mail_view_contained_nodes_link_visibility', 0)) {
+      return FALSE;
+    }
     if (isset($node->type)) {
       $node_type = $node->type;
     }
+
     // Node
     $print_mail_node_link_visibility = variable_get('print_mail_node_link_visibility', PRINT_MAIL_NODE_LINK_VISIBILITY_DEFAULT);
     $print_mail_node_link_pages = variable_get('print_mail_node_link_pages', PRINT_MAIL_NODE_LINK_PAGES_DEFAULT);
@@ -480,7 +490,7 @@ function print_mail_link_allowed($args) {
     }
     else {
       // Node link
-      if (!$node->print_mail_display) {
+      if (empty($node->print_mail_display)) {
         // Link for this node is disabled
         return FALSE;
       }
@@ -501,6 +511,9 @@ function print_mail_link_allowed($args) {
         return PRINT_ALLOW_NORMAL_LINK;
       }
     }
+  }
+  elseif ($is_view && variable_get('print_mail_views_link_visibility', 1)) {
+    return PRINT_ALLOW_NORMAL_LINK;
   }
   else {
     // 'System' page
