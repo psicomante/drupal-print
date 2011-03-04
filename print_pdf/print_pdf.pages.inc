@@ -556,7 +556,7 @@ function theme_print_pdf_tcpdf_footer($pdf, $html, $font) {
  */
 function theme_print_pdf_tcpdf_footer2($pdf) {
   //Position at 1.5 cm from bottom
-  $pdf->writeHTMLCell(0, 15, 15, -10, $pdf->footer, 0, 0, 0, TRUE, '');
+  $pdf->writeHTMLCell(0, 15, 15, $pdf->getPageHeight()-15, $pdf->footer);
 
   $ormargins = $pdf->getOriginalMargins();
   $pagenumtxt = t('Page !n of !total', array('!n' => $pdf->PageNo(), '!total' => $pdf->getAliasNbPages()));
