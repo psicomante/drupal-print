@@ -291,12 +291,24 @@ function print_mail_job_queue_functions() {
 function _print_mail_access($permission) {
   $page_access = TRUE;
   $parts = explode('/', $_GET['q']);
-  if (count($parts) > 1) {
-    unset($parts[0]);
-    $path = drupal_get_normal_path(implode('/', $parts));
-    // If the destination page is not accessible, don't show the form
-    if (!($router_item = menu_get_item($path)) || (!$router_item['access'])) {
-      $page_access = FALSE;
+  if ($parts[0] == PRINTMAIL_PATH) {
+    if (count($parts) > 1) {
+      unset($parts[0]);
+      $path = implode('/', $parts);
+      if (is_numeric($parts[1])) {
+        if (drupal_lookup_path('source', $path)) {
+          // This is a numeric alias
+          $path = drupal_get_normal_path($path);
+        }
+        else {
+          // normal nid
+          $path = 'node/' . $path;
+        }
+      }
+      // If the destination page is not accessible, don't show the form
+      if (!($router_item = menu_get_item($path)) || (!$router_item['access'])) {
+        $page_access = FALSE;
+      }
     }
   }
 
