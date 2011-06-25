@@ -295,7 +295,7 @@ function _print_mail_access($permission) {
     if (count($parts) > 1) {
       unset($parts[0]);
       $path = implode('/', $parts);
-      if (is_numeric($parts[1])) {
+      if (ctype_digit($parts[1])) {
         if (drupal_lookup_path('source', $path)) {
           // This is a numeric alias
           $path = drupal_get_normal_path($path);
@@ -460,7 +460,7 @@ function print_mail_link_allowed($args) {
   $is_view = FALSE;
   if (!empty($args['path'])) {
     $nid = preg_replace('!^node/!', '', drupal_get_normal_path($args['path']));
-    if (is_numeric($nid)) {
+    if (ctype_digit($nid)) {
       $args['node'] = node_load($nid);
     }
     else { // Not a node - is it a view?

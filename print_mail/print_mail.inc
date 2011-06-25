@@ -41,7 +41,7 @@ function print_mail_form($form_state) {
   $path = explode('/', $_GET['q']);
   unset($path[0]);
   $path = implode('/', $path);
-  if (is_numeric($path)) {
+  if (ctype_digit($path)) {
     if (drupal_lookup_path('source', $path)) {
       // This is a numeric alias
       $path = drupal_get_normal_path($path);
