@@ -304,9 +304,6 @@ function _print_pdf_tcpdf($print, $html, $filename = NULL) {
   $pdf = theme('print_pdf_tcpdf_footer', $pdf, $html, $font);
   $pdf = theme('print_pdf_tcpdf_page', $pdf);
 
-  //initialize document
-  $pdf->AliasNbPages();
-
   // add a page
   $pdf->AddPage();
 
