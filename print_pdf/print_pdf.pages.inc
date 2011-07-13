@@ -10,7 +10,7 @@
  * @ingroup print
  */
 
-require_once(drupal_get_path('module', 'print') .'/print.pages.inc');
+module_load_include('inc', 'print', 'print.pages');
 
 /**
  * Generate a PDF version of the printer-friendly page
@@ -271,10 +271,10 @@ function _print_pdf_tcpdf($print, $html, $filename = NULL) {
 
   require_once($print_pdf_pdf_tool);
   if (strpos(PDF_PRODUCER, 'PHP4') === FALSE) {
-    require_once(drupal_get_path('module', 'print_pdf') .'/print_pdf.class.inc');
+    module_load_include('inc', 'print_pdf', 'print_pdf.class');
   }
   else {
-    require_once(drupal_get_path('module', 'print_pdf') .'/print_pdf.class_php4.inc');
+    module_load_include('inc', 'print_pdf', 'print_pdf.class_php4');
   }
 
   $font = Array(
@@ -502,9 +502,7 @@ function theme_print_pdf_tcpdf_page($pdf) {
   // set auto page breaks
   $pdf->SetAutoPageBreak(TRUE, 15);
   // set image scale factor
-  sscanf(PDF_PRODUCER, "TCPDF %d.%d.%d", $major, $minor, $build);
-  $imagescale = (($major >= 4) && ($minor >= 6) && ($build >= 2)) ? 1 : 4;
-  $pdf->setImageScale($imagescale);
+  $pdf->setImageScale(1);
   // set image compression quality
   $pdf->setJPEGQuality(100);
 
