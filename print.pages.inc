@@ -471,9 +471,6 @@ function _print_url_list_enabled($node, $format = PRINT_HTML_FORMAT) {
 function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
   global $_print_urls;
 
-  //use the proper build_mode
-  $node->build_mode = NODE_BUILD_PRINT;
-
   // We can take a node id
   $node = node_load($nid);
   if (!$node) {
@@ -490,6 +487,9 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
 
   //alert other modules that we are generating a printer-friendly page, so they can choose to show/hide info
   $node->printing = TRUE;
+
+  //use the proper build_mode
+  $node->build_mode = NODE_BUILD_PRINT;
 
   // Turn off Pagination by the Paging module
   unset($node->pages);
