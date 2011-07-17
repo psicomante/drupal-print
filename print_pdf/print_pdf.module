@@ -602,7 +602,7 @@ function print_pdf_link_allowed($args) {
  */
 function _print_pdf_tcpdf_version() {
   $print_pdf_pdf_tool = variable_get('print_pdf_pdf_tool', PRINT_PDF_PDF_TOOL_DEFAULT);
-  require_once(DRUPAL_ROOT . '/' . $print_pdf_pdf_tool);
+  require_once($print_pdf_pdf_tool);
 
   $pdf = new TCPDF();
 
