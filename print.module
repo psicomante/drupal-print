@@ -236,36 +236,41 @@ function print_block($op = 'list', $delta = 0, $edit = array()) {
       return;
     case 'view':
       switch ($delta) {
-      case 0:
-      $nid = preg_replace('!^node/!', '', $_GET['q']);
-      if (ctype_digit($nid)) {
-        $node = node_load($nid);
-      }
-      else {
-        $node = NULL;
-      }
-      $funcs = get_defined_functions();
-      $block['content'] = '';
-      foreach ($funcs['user'] as $func) {
-        if (preg_match('!^print.*?_insert_link$!', $func)) {
-          $link = $func(NULL, $node);
-          if (!empty($link)) {
-            $block['content'] .= $link;
+        case 0:
+          $nid = preg_replace('!^node/!', '', $_GET['q']);
+          if (ctype_digit($nid)) {
+            $node = node_load($nid);
+            if (!node_access('view', $node)) {
+              // If the user doesn't have access to the node, don't show any links
+              $block['content'] == '';
+              return;
+            }
           }
-        }
-      }
-        break;
-      case 1:
-        $block['subject'] = t('Most printed');
-        $result = db_query_range("SELECT path FROM {print_page_counter} ORDER BY totalcount DESC", 0, 3);
-        if (db_affected_rows()) {
-          $block['content'] = '<div class="item-list"><ul>';
-          while ($obj = db_fetch_object($result)) {
-            $block['content'] .= '<li>'. l(_print_get_title($obj->path), $obj->path) .'</li>';
+          else {
+            $node = NULL;
           }
-          $block['content'] .= '</ul></div>';
-        }
-        break;
+          $funcs = get_defined_functions();
+          $block['content'] = '';
+          foreach ($funcs['user'] as $func) {
+            if (preg_match('!^print.*?_insert_link$!', $func)) {
+              $link = $func(NULL, $node);
+              if (!empty($link)) {
+                $block['content'] .= $link;
+              }
+            }
+          }
+          break;
+        case 1:
+          $block['subject'] = t('Most printed');
+          $result = db_query_range("SELECT path FROM {print_page_counter} ORDER BY totalcount DESC", 0, 3);
+          if (db_affected_rows()) {
+            $block['content'] = '<div class="item-list"><ul>';
+            while ($obj = db_fetch_object($result)) {
+              $block['content'] .= '<li>'. l(_print_get_title($obj->path), $obj->path) .'</li>';
+            }
+            $block['content'] .= '</ul></div>';
+          }
+          break;
       }
       return $block;
       break;
