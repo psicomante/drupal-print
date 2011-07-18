@@ -118,9 +118,29 @@ function print_theme_registry_alter(&$theme_registry) {
  * Implementation of hook_preprocess_HOOK().
  */
 function print_preprocess_print_node(&$variables) {
+  static $hooks = NULL;
+  if (!isset($hooks)) {
+    init_theme();
+    $hooks = theme_get_registry();
+  }
+
+  //Stolen from theme() so that ALL preprocess functions are called
+  $info = $hooks['node'];
+  if (isset($info['preprocess functions']) && is_array($info['preprocess functions'])) {
+      // This construct ensures that we can keep a reference through
+      // call_user_func_array.
+      $args = array(&$variables, $hook);
+      foreach ($info['preprocess functions'] as $preprocess_function) {
+        if (function_exists($preprocess_function)) {
+          call_user_func_array($preprocess_function, $args);
+        }
+      }
+    }
+  $variables += $args[0];
+
+  //Include the right template suggestions based on format (print, email) and type.
   $format = $variables['type'];
   $type = $variables['node']->type;
-  template_preprocess_node($variables);
   $variables['template_files'][] = "node";
   $variables['template_files'][] = "node-$type";
   $variables['template_files'][] = "print_node";
