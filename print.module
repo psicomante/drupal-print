@@ -127,15 +127,15 @@ function print_preprocess_print_node(&$variables) {
   //Stolen from theme() so that ALL preprocess functions are called
   $info = $hooks['node'];
   if (isset($info['preprocess functions']) && is_array($info['preprocess functions'])) {
-      // This construct ensures that we can keep a reference through
-      // call_user_func_array.
-      $args = array(&$variables, $hook);
-      foreach ($info['preprocess functions'] as $preprocess_function) {
-        if (function_exists($preprocess_function)) {
-          call_user_func_array($preprocess_function, $args);
-        }
+    // This construct ensures that we can keep a reference through
+    // call_user_func_array.
+    $args = array(&$variables, $hook);
+    foreach ($info['preprocess functions'] as $preprocess_function) {
+      if (function_exists($preprocess_function)) {
+        call_user_func_array($preprocess_function, $args);
       }
     }
+  }
   $variables += $args[0];
 
   //Include the right template suggestions based on format (print, email) and type.
@@ -152,12 +152,31 @@ function print_preprocess_print_node(&$variables) {
  * Implementation of hook_preprocess_HOOK().
  */
 function print_preprocess_print_page(&$variables) {
+  static $hooks = NULL;
+  if (!isset($hooks)) {
+    init_theme();
+    $hooks = theme_get_registry();
+  }
+
+  //Stolen from theme() so that ALL preprocess functions are called
+  $info = $hooks['page'];
+  if (isset($info['preprocess functions']) && is_array($info['preprocess functions'])) {
+    // This construct ensures that we can keep a reference through
+    // call_user_func_array.
+    $args = array(&$variables, $hook);
+    foreach ($info['preprocess functions'] as $preprocess_function) {
+      if (function_exists($preprocess_function)) {
+        call_user_func_array($preprocess_function, $args);
+      }
+    }
+  }
+  $variables += $args[0];
+
   $format = $variables['type'];
   if (isset($variables['node']->type)) {
     $type = $variables['node']->type;
     $variables['show_blocks'] = FALSE;
     $variables['show_messages'] = FALSE;
-    template_preprocess_page($variables);
   }
   else {
     $type = '';
