@@ -125,8 +125,8 @@ function print_pdf_generate_html($print, $html, $filename = NULL) {
  */
 function _print_pdf_file_access_images($html) {
   global $base_url, $language;
+  $print_pdf_images_via_file = variable_get('print_pdf_images_via_file', PRINT_PDF_IMAGES_VIA_FILE_DEFAULT);
 
-  // And converted from private to public paths
   switch (variable_get('language_negotiation', LANGUAGE_NEGOTIATION_NONE)) {
     case LANGUAGE_NEGOTIATION_PATH_DEFAULT:
     case LANGUAGE_NEGOTIATION_PATH:
@@ -136,15 +136,18 @@ function _print_pdf_file_access_images($html) {
       $lang = '';
       break;
   }
+  // Always convert private to local paths
   $file_downloads = variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC);
   if ($file_downloads == FILE_DOWNLOADS_PRIVATE) {
     $pattern = "!(<img\s[^>]*?src\s*?=\s*?['\"]?)${base_url}/(?:(?:index.php)?\?q=)?(?:${lang}/)?system/files/([^>]*?>)!is";
     $replacement = '$1file://'. realpath(file_directory_path()) .'/$2';
     $html = preg_replace($pattern, $replacement, $html);
   }
-  $pattern = "!(<img\s[^>]*?src\s*?=\s*?['\"]?)${base_url}/(?:(?:index.php)?\?q=)?(?:${lang}/)?([^>]*?>)!is";
-  $replacement = '$1file://'. dirname($_SERVER['SCRIPT_FILENAME']) .'/$2';
-  $html = preg_replace($pattern, $replacement, $html);
+  elseif ($print_pdf_images_via_file) {
+    $pattern = "!(<img\s[^>]*?src\s*?=\s*?['\"]?)${base_url}/(?:(?:index.php)?\?q=)?(?:${lang}/)?([^>]*?>)!is";
+    $replacement = '$1file://'. dirname($_SERVER['SCRIPT_FILENAME']) .'/$2';
+    $html = preg_replace($pattern, $replacement, $html);
+  }
 
   return $html;
 }
@@ -482,9 +485,8 @@ function theme_print_pdf_tcpdf_header($pdf, $html, $font) {
 
   $ratio = 0;
   $logo = '';
-  $logo_ret = preg_match('!src\s*=\s*(\'.*?\'|".*?"|[^\s]*)!i', $tpl_logo[1], $matches);
-  if ($logo_ret) {
-    $logo = trim($matches[1], '\'"');
+  if (preg_match('!src\s*=\s*(?:\'(.*?)\'|"(.*?)"|([^\s]*))!i', $tpl_logo[1], $logo_url)) {
+    $logo = $logo_url[1];
     $size = getimagesize($logo);
     $ratio = $size ? ($size[0] / $size[1]) : 0;
   }
@@ -492,9 +494,9 @@ function theme_print_pdf_tcpdf_header($pdf, $html, $font) {
   // set header font
   $pdf->setHeaderFont($font);
   // set header margin
-  $pdf->SetHeaderMargin(5);
+  $pdf->setHeaderMargin(5);
   // set header data
-  $pdf->SetHeaderData($logo, 10 * $ratio, html_entity_decode($tpl_title[1], ENT_QUOTES, 'UTF-8'), html_entity_decode(strip_tags($tpl_site_name[1]), ENT_QUOTES, 'UTF-8'));
+  $pdf->setHeaderData($logo, 10 * $ratio, html_entity_decode($tpl_title[1], ENT_QUOTES, 'UTF-8'), html_entity_decode(strip_tags($tpl_site_name[1]), ENT_QUOTES, 'UTF-8'));
 
   return $pdf;
 }
