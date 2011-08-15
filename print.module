@@ -142,6 +142,7 @@ function print_preprocess_print_node(&$variables) {
   //Include the right template suggestions based on format (print, email) and type.
   $format = $variables['type'];
   $type = $variables['node']->type;
+
   $variables['template_files'][] = "node";
   $variables['template_files'][] = "node-$type";
   $variables['template_files'][] = "print_node";
@@ -159,6 +160,9 @@ function print_preprocess_print_page(&$variables) {
     $hooks = theme_get_registry();
   }
 
+  $variables['show_blocks'] = FALSE;
+  $variables['show_messages'] = FALSE;
+
   //Stolen from theme() so that ALL preprocess functions are called
   $info = $hooks['page'];
   if (isset($info['preprocess functions']) && is_array($info['preprocess functions'])) {
@@ -174,14 +178,8 @@ function print_preprocess_print_page(&$variables) {
   $variables += $args[0];
 
   $format = $variables['type'];
-  if (isset($variables['node']->type)) {
-    $type = $variables['node']->type;
-    $variables['show_blocks'] = FALSE;
-    $variables['show_messages'] = FALSE;
-  }
-  else {
-    $type = '';
-  }
+  $type = (isset($variables['node']->type)) ? $variables['node']->type : '';
+
   $variables['template_files'][] = "print";
   $variables['template_files'][] = "print.node-$type";
   $variables['template_files'][] = "print_$format";
