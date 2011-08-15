@@ -46,6 +46,7 @@ function print_pdf_uninstall() {
   variable_del('print_pdf_autoconfig');
   variable_del('print_pdf_dompdf_unicode');
   variable_del('print_pdf_wkhtmltopdf_options');
+  variable_del('print_pdf_display_sys_urllist');
   $settings = db_query("SELECT name FROM {variable} WHERE name LIKE 'print\_pdf\_display\_%'");
   while ($variable = db_fetch_object($settings)) {
     variable_del($variable->name);
