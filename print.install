@@ -384,6 +384,10 @@ function print_update_6007() {
  * Update to version 6.x-1.13
  */
 function print_update_6008() {
+  $ret = array();
+
   variable_del('print_text_by');
   variable_del('print_text_created');
+
+  return $ret;
 }
