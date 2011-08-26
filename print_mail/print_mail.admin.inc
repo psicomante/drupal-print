@@ -82,6 +82,7 @@ function print_mail_settings() {
     '#default_value' => variable_get('print_mail_node_link_pages', PRINT_MAIL_NODE_LINK_PAGES_DEFAULT),
     '#rows' => 3,
     '#description' => t("Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array('%blog' => 'blog', '%blog-wildcard' => 'blog/*', '%front' => '<front>')),
+    '#wysiwyg' => FALSE,
   );
 
   $access = user_access('use PHP for link visibility');
@@ -108,6 +109,7 @@ function print_mail_settings() {
     '#rows' => 3,
     '#description' => t('Setting this option will add a send by e-mail link on pages created by Drupal or the enabled modules.') .'<br />'.
                       t("Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array('%blog' => 'blog', '%blog-wildcard' => 'blog/*', '%front' => '<front>')),
+    '#wysiwyg' => FALSE,
   );
 
   if ($form['settings']['adv_link']['print_mail_sys_link_visibility']['#default_value'] == 2 && !$access) {
@@ -218,18 +220,21 @@ function print_mail_strings_settings() {
     '#title' => t('Message Preamble'),
     '#default_value' => variable_get('print_mail_text_message', t('Message from sender')),
     '#description' => t('e-mail message preamble. The sender will be able to add their own message after this.'),
+    '#wysiwyg' => FALSE,
   );
   $form['print_mail_text']['print_mail_text_content'] = array(
     '#type' => 'textarea',
     '#title' => t('Message Content'),
     '#default_value' => variable_get('print_mail_text_content', ''),
     '#description' => t('Set the default contents of the message.'),
+    '#wysiwyg' => FALSE,
   );
   $form['print_mail_text']['print_mail_text_confirmation'] = array(
     '#type' => 'textfield',
     '#title' => t('Thank You Message'),
     '#default_value' => variable_get('print_mail_text_confirmation', t('Thank you for spreading the word about !site.')),
     '#description' => t('This message will be displayed after the user successfully submits the form.'),
+    '#wysiwyg' => FALSE,
   );
 
   return system_settings_form($form);

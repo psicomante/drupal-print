@@ -86,6 +86,7 @@ function print_mail_form($form_state) {
     '#resizable' => FALSE,
     '#description' => t('Enter multiple addresses separated by commas and/or different lines.'),
     '#required' => TRUE,
+    '#wysiwyg' => FALSE,
   );
   $form['fld_subject'] = array(
     '#type' => 'textfield',
@@ -106,6 +107,7 @@ function print_mail_form($form_state) {
     '#title' => t('Your message'),
     '#rows' => 6,
     '#required' => TRUE,
+    '#wysiwyg' => FALSE, 
   );
 
   if ($print_mail_teaser_choice) {

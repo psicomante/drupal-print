@@ -250,6 +250,7 @@ function print_html_settings() {
     '#default_value' => variable_get('print_html_node_link_pages', PRINT_HTML_NODE_LINK_PAGES_DEFAULT),
     '#rows' => 3,
     '#description' => t("Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array('%blog' => 'blog', '%blog-wildcard' => 'blog/*', '%front' => '<front>')),
+    '#wysiwyg' => FALSE,
   );
 
   $access = user_access('use PHP for link visibility');
@@ -276,6 +277,7 @@ function print_html_settings() {
     '#rows' => 3,
     '#description' => t('Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules.') .'<br />'.
                       t("Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array('%blog' => 'blog', '%blog-wildcard' => 'blog/*', '%front' => '<front>')),
+    '#wysiwyg' => FALSE,
   );
 
   if ($form['settings']['adv_link']['print_html_sys_link_visibility']['#default_value'] == 2 && !$access) {
