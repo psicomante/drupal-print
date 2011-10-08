@@ -175,6 +175,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
     drupal_add_js('misc/drupal.js', 'core');
   }
   $print['scripts'] = drupal_get_js();
+  $print['footer_scripts'] = drupal_get_js('footer');
   $print['robots_meta'] = _print_robots_meta_generator();
   $print['url'] = url($path, array('absolute' => TRUE));
   $print['base_href'] = "<base href='". $print['url'] ."' />\n";
