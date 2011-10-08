@@ -98,7 +98,7 @@ function print_mail_form($form_state) {
     $form['fld_title'] = array(
       '#type' => 'item',
       '#title' => t('Page to be sent'),
-      '#value' => '<span id="sent-title">'. l($title, $path, array('attributes' => array('title' => t('View page')))) .'</span>',
+      '#value' => '<span id="sent-title">'. l(t($title), $path, array('attributes' => array('title' => t('View page')))) .'</span>',
       '#id' => 'sent-title',
     );
   }
