@@ -77,12 +77,13 @@ function print_controller($path, $cid = NULL, $format = PRINT_HTML_FORMAT, $teas
   if ($alias = drupal_lookup_path('source', $path)) {
     // Indirect call with print/alias
     // If there is a path alias with these arguments, generate a printer-friendly version for it
-    $ret = preg_match('!^node/(.*)!i', $alias, $matches);
-    if ($ret == 1) {
-      $path = $matches[1];
-    }
+    $path = $alias;
   }
   $parts = explode('/', $path);
+  if ($parts[0] == 'node') {
+    array_shift($parts);
+    $path = implode('/', $parts);
+  }
   if (ctype_digit($parts[0]) && (count($parts) == 1)) {
     $print = _print_generate_node($path, $cid, $format, $teaser, $message);
   }
