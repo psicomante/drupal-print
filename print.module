@@ -444,7 +444,11 @@ function print_nodeapi(&$node, $op = 'view', $teaser, $page) {
       }
       break;
     case 'load':
-      _print_set_node_fields($node);
+      $res = db_fetch_object(db_query("SELECT link, comments, url_list FROM {print_node_conf} WHERE nid = %d", $node->nid));
+
+      $node->print_display = $res ? intval($res->link) : variable_get('print_display_'. $node->type, PRINT_TYPE_SHOW_LINK_DEFAULT);
+      $node->print_display_comment = $res ? intval($res->comments) : variable_get('print_display_comment_'. $node->type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
+      $node->print_display_urllist = $res ? intval($res->url_list) : variable_get('print_display_urllist_'. $node->type, PRINT_TYPE_URLLIST_DEFAULT);
       break;
     case 'insert':
     case 'update':
@@ -544,24 +548,6 @@ function print_content_build_modes() {
       ),
     ),
   );
-}
-
-/**
- * Auxiliary function to assign the per-node settings to the node object fields
- *
- * @param $node
- *   node to be modified
- */
-function _print_set_node_fields(&$node) {
-  if (isset($node->nid)) {
-    $res = db_fetch_object(db_query("SELECT link, comments, url_list FROM {print_node_conf} WHERE nid = %d", $node->nid));
-  }
-  else {
-    $res = FALSE;
-  }
-  $node->print_display = $res ? intval($res->link) : variable_get('print_display_'. $node->type, PRINT_TYPE_SHOW_LINK_DEFAULT);
-  $node->print_display_comment = $res ? intval($res->comments) : variable_get('print_display_comment_'. $node->type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
-  $node->print_display_urllist = $res ? intval($res->url_list) : variable_get('print_display_urllist_'. $node->type, PRINT_TYPE_URLLIST_DEFAULT);
 }
 
 /**
