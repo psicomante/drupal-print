@@ -179,11 +179,14 @@ function print_preprocess_print_page(&$variables) {
 
   $format = $variables['type'];
   $type = (isset($variables['node']->type)) ? $variables['node']->type : '';
+  $nid = (isset($variables['node']->nid)) ? $variables['node']->nid : '';
 
   $variables['template_files'][] = "print";
   $variables['template_files'][] = "print.node-$type";
+  $variables['template_files'][] = "print.node-$type-$nid";
   $variables['template_files'][] = "print_$format";
   $variables['template_files'][] = "print_$format.node-$type";
+  $variables['template_files'][] = "print_$format.node-$type-$nid";
 }
 
 /**
