@@ -581,3 +581,85 @@ function print_mail_views_data_alter(&$data) {
     ),
   );
 }
+
+/**
+ * Implements hook_rules_action_info().
+ * @ingroup rules
+ */
+function print_mail_rules_action_info() {
+  return array(
+    'print_mail_action_submit' => array(
+      'label' => t('Send node as HTML formated email'),
+      'module' => 'Node',
+      'eval input' => array('to', 'from', 'subject', 'message'),
+      'arguments' => array(
+        'node' => array('type' => 'node', 'label' => t('Content')),
+      ),
+    ),
+  );
+}
+
+function print_mail_action_submit_form($settings, &$form) {
+  $settings += array('from' => '', 'from_name' => '', 'to' => '', 'subject' => '', 'message' => '');
+
+  $form['settings']['from'] = array(
+    '#type' => 'textfield',
+    '#title' => t('From email adress'),
+    '#default_value' => $settings['from'],
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#required' => TRUE,
+  );
+  $form['settings']['from_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('From name'),
+    '#default_value' => $settings['from_name'],
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#required' => TRUE,
+  );
+  $form['settings']['to'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Send email to'),
+    '#default_value' => $settings['to'],
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#required' => TRUE,
+  );
+  $form['settings']['subject'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Subject'),
+    '#default_value' => $settings['subject'],
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#required' => TRUE,
+  );
+  $form['settings']['message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Message'),
+    '#default_value' => $settings['message'],
+    '#description' => t('The message that should be displayed.'),
+  );
+}
+
+/**
+ * Action handler for the print_mail_action_submit
+ * @ingroup rules
+ */
+function print_mail_action_submit($node, $settings) {
+  require_once(drupal_get_path('module', 'print_mail') . '/print_mail.inc');
+
+  $form_state['values'] = array(
+    'path' => 'node/' . $node->nid,
+    'cid' => NULL,
+    'title' => $node->title,
+    'fld_from_addr' => $settings['from'],
+    'fld_from_name' => $settings['from_name'],
+    'txt_to_addrs' => $settings['to'],
+    'fld_subject' => $settings['subject'],
+    'txt_message' => $settings['message'],
+    'chk_teaser' => FALSE,
+  );
+
+  print_mail_form_submit(NULL, $form_state);
+}
