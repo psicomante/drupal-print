@@ -38,7 +38,7 @@ function print_mail_form($form_state) {
     }
     drupal_goto(PRINTMAIL_PATH . '/' . $path);
   }
-  else if (ctype_digit($path_arr[1])) {
+  elseif (ctype_digit($path_arr[1])) {
     if (drupal_lookup_path('source', $path)) {
       // This is a numeric alias
       $path = drupal_get_normal_path($path);
@@ -54,7 +54,7 @@ function print_mail_form($form_state) {
   if ((!user_access('administer print')) && (!flood_is_allowed('print_mail', $print_mail_hourly_threshold))) {
     $form['flood'] = array(
       '#type' => 'markup',
-      '#value' => '<p>'. format_plural($print_mail_hourly_threshold,'You cannot send more than 1 message per hour. Please try again later.', 'You cannot send more than @count messages per hour. Please try again later.') . '</p>',
+      '#value' => '<p>'. format_plural($print_mail_hourly_threshold, 'You cannot send more than 1 message per hour. Please try again later.', 'You cannot send more than @count messages per hour. Please try again later.') . '</p>',
     );
     return $form;
   }
@@ -119,7 +119,7 @@ function print_mail_form($form_state) {
     '#title' => t('Your message'),
     '#rows' => 6,
     '#required' => TRUE,
-    '#wysiwyg' => FALSE, 
+    '#wysiwyg' => FALSE,
   );
 
   if ($print_mail_teaser_choice) {
@@ -201,7 +201,7 @@ function theme_print_mail_form($form) {
  */
 function print_mail_form_validate($form, &$form_state) {
   if (array_key_exists('cancel', $form['#post'])) {
-    form_set_error(NULL,'',TRUE);
+    form_set_error(NULL, '', TRUE);
     drupal_get_messages('error');
     return;
   }
@@ -240,7 +240,7 @@ function print_mail_form_validate($form, &$form_state) {
 
   // In all fields, prevent insertion of custom headers
   foreach ($form_state['values'] as $key => $string) {
-    if ( (substr($key, 0, 4) == 'fld_') && ((strpos($string, "\n") !== FALSE) || (strpos($string, "\r") !== FALSE)) ) {
+    if ( (drupal_substr($key, 0, 4) == 'fld_') && ((strpos($string, "\n") !== FALSE) || (strpos($string, "\r") !== FALSE)) ) {
       form_set_error($key, 'Found invalid character');
     }
   }

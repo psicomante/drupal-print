@@ -107,7 +107,7 @@ function print_pdf_generate_html($print, $html, $filename = NULL) {
   elseif (basename($print_pdf_pdf_tool) == 'tcpdf.php') {
     return _print_pdf_tcpdf($print, $html, $filename);
   }
-  elseif (substr(basename($print_pdf_pdf_tool, '.exe'), 0, 11) == 'wkhtmltopdf') {
+  elseif (drupal_substr(basename($print_pdf_pdf_tool, '.exe'), 0, 11) == 'wkhtmltopdf') {
     return _print_pdf_wkhtmltopdf($print, $html, $filename);
   }
   elseif ($filename) {
@@ -312,7 +312,7 @@ function _print_pdf_tcpdf($print, $html, $filename = NULL) {
   $keys = implode(' ', explode("\n", trim(strip_tags($print['taxonomy']))));
   $pdf->SetKeywords($keys);
   $pdf->setPDFVersion('1.6');
-  $pdf->setFontSubsetting(variable_get('print_pdf_font_subsetting',FALSE));
+  $pdf->setFontSubsetting(variable_get('print_pdf_font_subsetting', FALSE));
 
   if ($language->direction == LANGUAGE_RTL) {
     $pdf->setRTL(TRUE);
