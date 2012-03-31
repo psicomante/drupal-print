@@ -31,7 +31,7 @@ define('PRINT_MAIL_JOB_QUEUE_DEFAULT', 0);
  * Implementation of hook_perm().
  */
 function print_mail_perm() {
-  return array('access send to friend');
+  return array('access send to friend', 'send unlimited e-mails');
 }
 
 /**
