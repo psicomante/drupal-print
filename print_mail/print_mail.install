@@ -237,7 +237,7 @@ function print_mail_update_6003() {
   // Delete custom text strings set to the default
   $ret = array();
   $vars = array(
-    'print_mail_link_text' => 'Send to friend',
+    'print_mail_link_text' => 'Send by email',
     'print_mail_text_subject' => '!user has sent you a message from !site',
     'print_mail_text_message' => 'Message from sender',
     'print_mail_text_content' => '',
@@ -260,12 +260,12 @@ function print_mail_update_6003() {
  * Update to version 6.x-1.8
  */
 function print_mail_update_6004() {
-  // add new 'access send to friend' permission to any role which has 'access print'
+  // add new 'access send by email' permission to any role which has 'access print'
   $ret = array();
   $dbret = db_query('SELECT * FROM {permission}');
   while ($role = db_fetch_object($dbret)) {
     if ((strpos($role->perm, 'access print') !== FALSE)) {
-      $role->perm = db_escape_string('access send to friend, '. $role->perm);
+      $role->perm = db_escape_string('access send by email, '. $role->perm);
       $ret[] = update_sql("UPDATE {permission} SET perm = '$role->perm' WHERE rid = $role->rid");
     }
   }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @defgroup print Printer, e-mail and PDF versions
+ * @defgroup print Printer, email and PDF versions
  *
  * Welcome to the print module developer's documentation. The interesting
  * functions for themers are those that start with 'theme_'.
@@ -12,7 +12,7 @@
  *   - @link print.pages.inc HTML generation @endlink
  *   - @link print.install (Un)Install routines @endlink
  *   - @link print.tpl.php Page generation template @endlink
- * - Send by e-mail
+ * - Send by email
  *   - @link print_mail.module Module main file @endlink
  *   - @link print_mail.admin.inc Settings form @endlink
  *   - @link print_mail.inc Mail form and send mail routine @endlink
@@ -207,7 +207,7 @@ function print_menu() {
     'access callback' => FALSE,
   );
   $items['admin/settings/print'] = array(
-    'title' => 'Printer, e-mail and PDF versions',
+    'title' => 'Printer, email and PDF versions',
     'description' => 'Adds a printer-friendly version link to content and administrative pages.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('print_html_settings'),
@@ -266,7 +266,7 @@ function print_menu() {
 function print_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
     case 'list':
-      $block[0]['info'] = t('Printer, e-mail and PDF versions');
+      $block[0]['info'] = t('Printer, email and PDF versions');
       $block[0]['cache'] = BLOCK_CACHE_PER_PAGE;
       $block[1]['info'] = t('Most printed');
       $block[1]['cache'] = BLOCK_CACHE_GLOBAL;
@@ -477,7 +477,7 @@ function print_form_alter(&$form, $form_state, $form_id) {
       (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id))) {
     $form['print'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Printer, e-mail and PDF versions'),
+      '#title' => t('Printer, email and PDF versions'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#weight' => (function_exists('content_extra_field_weight') && isset($form['type'])) ? content_extra_field_weight($form['type']['#value'], 'print') : PRINT_TYPE_FIELDS_WEIGHT,
@@ -521,7 +521,7 @@ function print_form_alter(&$form, $form_state, $form_id) {
  */
 function print_content_extra_fields($type_name) {
   $fields['print'] = array(
-    'label' => t('Printer, e-mail and PDF versions'),
+    'label' => t('Printer, email and PDF versions'),
     'description' => t('Print module form.'),
     'weight' => PRINT_TYPE_FIELDS_WEIGHT,
   );

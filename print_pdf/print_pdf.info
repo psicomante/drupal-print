@@ -2,4 +2,4 @@ name = "PDF version"
 description = "Adds the capability to export pages as PDF."
 dependencies[] = print
 core=6.x
-package = "Printer, e-mail and PDF versions"
+package = "Printer, email and PDF versions"
