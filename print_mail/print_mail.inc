@@ -351,7 +351,7 @@ function print_mail_mail($key, &$message, $params) {
 
   switch ($key) {
     case 'sendpage':
-      $message['body'] = $params['body'];
+      $message['body'] = module_exists('mailsystem') ? check_plain($params['body']) : $params['body'];
       $message['headers']['Content-Type'] = 'text/html; charset=utf-8';
       break;
     case 'sendlink':
@@ -361,7 +361,7 @@ function print_mail_mail($key, &$message, $params) {
 
       // Send HTML-only version if MIME library not present
       if (!class_exists('Mail_mime')) {
-        $message['body'] = $sendlink_html;
+        $message['body'] = module_exists('mailsystem') ? check_plain($sendlink_html) : $sendlink_html;
         $message['headers']['Content-Type'] = 'text/html; charset=utf-8';
         break;
       }
