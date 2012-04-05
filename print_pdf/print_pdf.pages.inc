@@ -66,8 +66,6 @@ function print_pdf_controller() {
     // We must create a new row to store counters for the new node.
     db_query("INSERT INTO {print_pdf_page_counter} (path, totalcount, timestamp) VALUES ('%s', 1, %d)", $nodepath, time());
   }
-
-  drupal_exit();
 }
 
 function print_pdf_generate_path($path, $cid = NULL, $pdf_filename = NULL) {
