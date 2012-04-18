@@ -291,8 +291,8 @@ function print_pdf_link($type, $node = NULL, $teaser = FALSE) {
       $query = print_query_string_encode($query_arr, array('q'));
       if (empty($query)) $query = NULL;
 
-      if ($print_pdf_link_use_alias) {
-        $path = drupal_get_path_alias('node/'. $node->nid);
+      if (($print_pdf_link_use_alias) && ($alias = drupal_lookup_path('alias', 'node/'. $node->nid))) {
+        $path = $alias;
       }
       else {
         $path = $node->nid;
@@ -492,8 +492,8 @@ function print_pdf_insert_link($path = NULL, $node = NULL) {
         $path = 'book/export/html/'. $nid;
       }
       else {
-        if (variable_get('print_pdf_link_use_alias', PRINT_PDF_LINK_USE_ALIAS_DEFAULT)) {
-          $path = drupal_get_path_alias($path);
+        if (variable_get('print_pdf_link_use_alias', PRINT_PDF_LINK_USE_ALIAS_DEFAULT) && ($alias = drupal_lookup_path('alias', $path))) {
+          $path = $alias;
         }
         else {
           $path = $nid;
