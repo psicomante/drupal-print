@@ -32,7 +32,7 @@ define('PRINT_PDF_IMAGES_VIA_FILE_DEFAULT', 0);
 define('PRINT_PDF_AUTOCONFIG_DEFAULT', 1);
 define('PRINT_PDF_FONT_FAMILY_DEFAULT', 'dejavusans');
 define('PRINT_PDF_FONT_SIZE_DEFAULT', 10);
-define('PRINT_PDF_FONT_SUBSETTING_DEFAULT', 0);
+define('PRINT_PDF_FONT_SUBSETTING_DEFAULT', FALSE);
 define('PRINT_PDF_FILENAME_DEFAULT', '[site:name] - [node:title] - [node:changed:custom:Y-m-d]');
 define('PRINT_PDF_DOMPDF_UNICODE_DEFAULT', 0);
 define('PRINT_PDF_WKHTMLTOPDF_OPTIONS', "--footer-font-size 7 --footer-right '[page]'");
@@ -268,50 +268,55 @@ function print_pdf_requirements($phase) {
  * Implements hook_node_view().
  */
 function print_pdf_node_view($node, $view_mode) {
-  $type = 'node';
   $print_pdf_link_pos = variable_get('print_pdf_link_pos', array(PRINT_PDF_LINK_POS_DEFAULT => PRINT_PDF_LINK_POS_DEFAULT));
   $print_pdf_link_use_alias = variable_get('print_pdf_link_use_alias', PRINT_PDF_LINK_USE_ALIAS_DEFAULT);
-  $allowed_type = print_pdf_link_allowed(array('type' => $type, 'node' => $node, 'view_mode' => $view_mode));
-  if (($allowed_type) && !empty($print_pdf_link_pos['link'])) {
-    drupal_add_css(drupal_get_path('module', 'print') . '/css/printlinks.css');
-    $links = array();
-    $format = theme('print_pdf_format_link');
 
-    // Show book link
-    if ($allowed_type === PRINT_ALLOW_BOOK_LINK) {
-      $links['book_pdf'] = array('href' => PRINTPDF_PATH . '/book/export/html/' . $node->nid,
-                                 'title' => $format['text'],
-                                 'attributes' => $format['attributes'],
-                                 'html' => $format['html'],
+  foreach (array('node', 'comment') as $type) {
+    $allowed_type = print_pdf_link_allowed(array('type' => $type, 'node' => $node, 'view_mode' => $view_mode));
+    if (($allowed_type) && !empty($print_pdf_link_pos['link'])) {
+      drupal_add_css(drupal_get_path('module', 'print') . '/css/printlinks.css');
+      $links = array();
+      $format = theme('print_pdf_format_link');
+
+      // Show book link
+      if ($allowed_type === PRINT_ALLOW_BOOK_LINK) {
+        $links['book_pdf'] = array(
+          'href' => PRINTPDF_PATH . '/book/export/html/' . $node->nid,
+          'title' => $format['text'],
+          'attributes' => $format['attributes'],
+          'html' => $format['html'],
+        );
+      }
+      elseif ($allowed_type === PRINT_ALLOW_NORMAL_LINK) {
+        $path = (($print_pdf_link_use_alias) && ($alias = drupal_lookup_path('alias', 'node/' . $node->nid))) ? $alias : $node->nid;
+
+        $links['print_pdf'] = array(
+          'href' => PRINTPDF_PATH . '/' . $path,
+          'title' => $format['text'],
+          'attributes' => $format['attributes'],
+          'html' => $format['html'],
+          'query' => print_query_string_encode($_GET, array('q')),
+        );
+      }
+
+      $link_content = array(
+        '#theme' => 'links',
+        '#links' => $links,
+        '#attributes' => array('class' => array('links', 'inline')),
       );
-    }
-    elseif ($allowed_type === PRINT_ALLOW_NORMAL_LINK) {
-      $query_arr = $_GET;
-      if ($type == 'comment') {
-        $query_arr['comment'] = $node->cid;
-      }
-      $query = print_query_string_encode($query_arr, array('q'));
-      if (empty($query)) $query = NULL;
 
-      if (($print_pdf_link_use_alias) && ($alias = drupal_lookup_path('alias', 'node/' . $node->nid))) {
-        $path = $alias;
+      if ($type == 'node') {
+        $node->content['links']['print_pdf'] = $link_content;
       }
-      else {
-        $path = $node->nid;
+      elseif ($type == 'comment') {
+        foreach ($node->content['comments']['comments'] as $cid => $comment) {
+          if (is_numeric($cid)) {
+            $link_content['#links']['print_pdf']['query']['comment'] = $cid;
+            $node->content['comments']['comments'][$cid]['links']['print_pdf'] = $link_content;
+          }
+        }
       }
-
-      $links['print_pdf'] = array('href' => PRINTPDF_PATH . '/' . $path,
-                                  'title' => $format['text'],
-                                  'attributes' => $format['attributes'],
-                                  'html' => $format['html'],
-                                  'query' => $query,
-      );
     }
-    $node->content['links']['print_pdf'] = array(
-      '#theme' => 'links',
-      '#links' => $links,
-      '#attributes' => array('class' => array('links', 'inline')),
-    );
   }
 
   // Insert content corner links
@@ -324,8 +329,7 @@ function print_pdf_node_view($node, $view_mode) {
  * Implements hook_help().
  */
 function print_pdf_help($path, $arg) {
-  $print_pdf_link_pos = variable_get('print_pdf_link_pos', array(PRINT_PDF_LINK_POS_DEFAULT => PRINT_PDF_LINK_POS_DEFAULT));
-  if (($path !== 'node/%') && !(empty($print_pdf_link_pos['link']) && empty($print_pdf_link_pos['corner']))) {
+  if ($path !== 'node/%') {
     static $output = FALSE;
 
     if ($output === FALSE) {
@@ -531,9 +535,6 @@ function print_pdf_insert_link($path = NULL, $node = NULL) {
       }
       $path = PRINTPDF_PATH . '/' . $path;
       $query = print_query_string_encode($_GET, array('q'));
-      if (empty($query)) {
-        $query = NULL;
-      }
     }
     else {
       $query = NULL;
