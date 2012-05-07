@@ -268,7 +268,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
       $url = $base_url .'/'. (((bool)variable_get('clean_url', '0')) ? '' : '?q=') . $path;
     }
     if (is_int($cid)) {
-      $url .= '#comment-$cid';
+      $url .= "#comment-$cid";
     }
     $retrieved_date = format_date(time(), 'small');
     $print_text_retrieved = filter_xss(variable_get('print_text_retrieved', t('retrieved on %date')));
