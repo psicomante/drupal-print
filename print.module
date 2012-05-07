@@ -294,13 +294,18 @@ function print_block($op = 'list', $delta = 0, $edit = array()) {
           else {
             $node = NULL;
           }
-          $funcs = get_defined_functions();
           $block['content'] = '';
-          foreach ($funcs['user'] as $func) {
-            if (preg_match('!^print.*?_insert_link$!', $func)) {
-              $link = $func(NULL, $node);
-              if (!empty($link)) {
-                $block['content'] .= $link;
+          foreach (array('html' => 'print', 'mail' => 'print_mail', 'pdf' => 'print_pdf') as $format => $module) {
+            $link_pos = variable_get('print_' . $format . '_link_pos', array(PRINT_HTML_LINK_POS_DEFAULT => PRINT_HTML_LINK_POS_DEFAULT));
+
+            if (!(empty($link_pos['block']))) {
+              $func = $module . '_insert_link';
+
+              if (function_exists($func)) {
+                $links = $func(NULL, $node);
+                  if (!empty($links)) {
+                    $block['content'] .= $links;
+                }
               }
             }
           }

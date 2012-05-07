@@ -330,7 +330,7 @@ function _print_pdf_tcpdf($print, $html, $filename = NULL) {
     $pdf->SetKeywords($keys);
   }
   $pdf->setPDFVersion('1.6');
-  $pdf->setFontSubsetting(variable_get('print_pdf_font_subsetting', FALSE));
+  $pdf->setFontSubsetting(variable_get('print_pdf_font_subsetting', PRINT_PDF_FONT_SUBSETTING_DEFAULT));
 
   if ($language->direction == LANGUAGE_RTL) {
     $pdf->setRTL(TRUE);
