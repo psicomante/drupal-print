@@ -308,7 +308,7 @@ function print_pdf_node_view($node, $view_mode) {
       if ($type == 'node') {
         $node->content['links']['print_pdf'] = $link_content;
       }
-      elseif ($type == 'comment') {
+      elseif (($type == 'comment') && isset($node->content['comments']['comments'])) {
         foreach ($node->content['comments']['comments'] as $cid => $comment) {
           if (is_numeric($cid)) {
             $link_content['#links']['print_pdf']['query']['comment'] = $cid;
@@ -593,10 +593,9 @@ function print_pdf_link_allowed($args) {
       // Cache this statically to avoid duplicate queries for every comment.
       static $res = array();
       if (!isset($res[$node->nid])) {
-        $res[$node->nid] = db_query("SELECT comments FROM {print_pdf_node_conf} WHERE nid = :nid", array(':nid' => $node->nid))
-                                    ->fetch();
+        $res[$node->nid] = db_query("SELECT comments FROM {print_pdf_node_conf} WHERE nid = :nid", array(':nid' => $node->nid))->fetchField();
       }
-      $print_display_comment = $res ? intval($res[$node->nid]->comments) : variable_get('print_pdf_display_comment_' . $node_type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
+      $print_display_comment = ($res[$node->nid] !== FALSE) ? $res[$node->nid] : variable_get('print_pdf_display_comment_' . $node_type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
       if ($print_display_comment) {
         return PRINT_ALLOW_NORMAL_LINK;
       }
