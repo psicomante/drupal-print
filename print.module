@@ -886,16 +886,12 @@ function print_link_allowed($args) {
 function print_query_string_encode($query, $exclude = array(), $parent = '') {
   $params = array();
   foreach ($query as $key => $value) {
-    if ($parent) {
-      $key = $parent . '[' . $key . ']';
-    }
-
     if (in_array($key, $exclude)) {
       continue;
     }
 
     if (is_array($value)) {
-      $params[] = print_query_string_encode($value, $exclude, $key);
+      $params[$key] = print_query_string_encode($value, $exclude, $key);
     }
     else {
       $params[$key] = $value;
