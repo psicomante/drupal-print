@@ -910,3 +910,13 @@ function print_contextual_links_view_alter(&$element, $items) {
     unset($element['#links']);
   }
 }
+
+/**
+ * Implements hook_views_api().
+ */
+function print_views_api() {
+  return array(
+    'api' => 2.0,
+    'path' => drupal_get_path('module', 'print'),
+  );
+}
