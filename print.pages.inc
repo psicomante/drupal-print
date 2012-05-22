@@ -214,7 +214,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   }
 
   $window_close = ($print_html_new_window && $print_html_windowclose) ? 'window.close();' : '';
-  $print['sendtoprinter'] = $print_html_sendtoprinter ? "<script type='text/javascript'>(function ($) { Drupal.behaviors.print = { attach: function(context) {window.print();$window_close}};}(jQuery));</script>" : '';
+  $print['sendtoprinter'] = $print_html_sendtoprinter ? '<script type="text/javascript">(function ($) { Drupal.behaviors.print = {attach: function(context) {$(window).load(function() {window.print();' . $window_close . '})}}})(jQuery);</script>' : '';
 
   switch ($print_logo_options) {
     case 0: // none
