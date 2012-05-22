@@ -219,7 +219,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   }
 
   $window_close = ($print_html_new_window && $print_html_windowclose) ? 'window.close();' : '';
-  $print['sendtoprinter'] = $print_html_sendtoprinter ? "<script type='text/javascript'>Drupal.behaviors.print = function(context) {window.print();$window_close}</script>" : '';
+  $print['sendtoprinter'] = $print_html_sendtoprinter ? '<script type="text/javascript">Drupal.behaviors.print = function(context) {$(window).load(function() {window.print();' . $window_close . '})};</script>' : '';
 
   switch ($print_logo_options) {
     case 0: // none
