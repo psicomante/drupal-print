@@ -131,7 +131,7 @@ function print_preprocess_print_node(&$variables) {
   if (isset($info['preprocess functions']) && is_array($info['preprocess functions'])) {
     // This construct ensures that we can keep a reference through
     // call_user_func_array.
-    $args = array(&$variables, $hook);
+    $args = array(&$variables, 'node');
     foreach ($info['preprocess functions'] as $preprocess_function) {
       if (function_exists($preprocess_function)) {
         call_user_func_array($preprocess_function, $args);
@@ -169,7 +169,7 @@ function print_preprocess_print_page(&$variables) {
   if (isset($info['preprocess functions']) && is_array($info['preprocess functions'])) {
     // This construct ensures that we can keep a reference through
     // call_user_func_array.
-    $args = array(&$variables, $hook);
+    $args = array(&$variables, 'page');
     foreach ($info['preprocess functions'] as $preprocess_function) {
       if (function_exists($preprocess_function)) {
         call_user_func_array($preprocess_function, $args);
