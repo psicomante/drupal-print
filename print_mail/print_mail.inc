@@ -295,6 +295,14 @@ function print_mail_form_submit($form, &$form_state) {
       $params['body'] = theme('print_page', $print, PRINT_MAIL_FORMAT, $node);
       $params['body'] = drupal_final_markup($params['body']);
 
+      // Img elements must be set to absolute
+      $pattern = '!<(img\s[^>]*?)>!is';
+      $params['body'] = preg_replace_callback($pattern, '_print_rewrite_urls', $params['body']);
+
+      // Convert the a href elements, to make sure no relative links remain
+      $pattern = '!<(a\s[^>]*?)>!is';
+      $params['body'] = preg_replace_callback($pattern, '_print_rewrite_urls', $params['body']);
+
       $ok = FALSE;
       if (function_exists('job_queue_add') && variable_get('print_mail_job_queue', PRINT_MAIL_JOB_QUEUE_DEFAULT)) {
         $use_job_queue = TRUE;
