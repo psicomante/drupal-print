@@ -44,7 +44,7 @@ function print_pdf_controller() {
     }
     else {
       $pdf_filename = token_replace($pdf_filename, array('site'));
-      if (count(token_scan($pdf_filename))) {
+      if (empty($pdf_filename) || count(token_scan($pdf_filename))) {
         // If there are still tokens, use a fallback solution
         $pdf_filename = str_replace('/', '_', $path);
       }
@@ -57,6 +57,8 @@ function print_pdf_controller() {
   if (function_exists('transliteration_clean_filename')) {
     $pdf_filename = transliteration_clean_filename($pdf_filename, language_default('language'));
   }
+
+  drupal_alter('print_pdf_filename', $pdf_filename, $path);
 
   $pdf = print_pdf_generate_path($path, $cid, $pdf_filename . '.pdf');
   if ($pdf == NULL) {
