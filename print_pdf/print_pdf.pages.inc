@@ -39,14 +39,16 @@ function print_pdf_controller() {
     }
 
     $pdf_filename = variable_get('print_pdf_filename', PRINT_PDF_FILENAME_DEFAULT);
-    if (function_exists('token_replace') && !empty($pdf_filename) && !empty($node)) {
-      $pdf_filename = token_replace($pdf_filename, 'node', $node);
-    }
-    else {
-      $pdf_filename = token_replace($pdf_filename, 'global');
-      if (empty($pdf_filename) || count(token_scan($pdf_filename))) {
-        // If there are still tokens, use a fallback solution
-        $pdf_filename = str_replace('/', '_', $path);
+    if (module_exists('token')) {
+      if (!empty($pdf_filename) && !empty($node)) {
+        $pdf_filename = token_replace($pdf_filename, 'node', $node);
+      }
+      else {
+        $pdf_filename = token_replace($pdf_filename, 'global');
+        if (empty($pdf_filename) || count(token_scan($pdf_filename))) {
+          // If there are still tokens, use a fallback solution
+          $pdf_filename = str_replace('/', '_', $path);
+        }
       }
     }
   }
