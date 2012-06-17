@@ -188,6 +188,7 @@ function _print_pdf_dompdf($print, $html, $filename = NULL) {
     define("DOMPDF_ENABLE_REMOTE", TRUE);
     define("DOMPDF_TEMP_DIR", file_directory_temp());
     define("DOMPDF_UNICODE_ENABLED", variable_get('print_pdf_dompdf_unicode', PRINT_PDF_DOMPDF_UNICODE_DEFAULT));
+    define("DOMPDF_FONT_CACHE", file_directory_path() . '/' . PRINT_PDF_DOMPDF_CACHE_DIR_DEFAULT . '/');
   }
 
   require_once($print_pdf_pdf_tool);
@@ -283,7 +284,7 @@ function _print_pdf_tcpdf($print, $html, $filename = NULL) {
     define('K_PATH_MAIN', dirname($_SERVER['SCRIPT_FILENAME']));
     define('K_PATH_URL', $base_url);
     define('K_PATH_FONTS', $pdf_tool_path .'/fonts/');
-    define('K_PATH_CACHE', $pdf_tool_path .'/cache/');
+    define('K_PATH_CACHE', file_directory_path() . '/' . PRINT_PDF_TCPDF_CACHE_DIR_DEFAULT . '/');
     define('K_PATH_IMAGES', '');
     define('K_BLANK_IMAGE', $pdf_tool_path .'/images/_blank.png');
     define('K_CELL_HEIGHT_RATIO', 1.25);
