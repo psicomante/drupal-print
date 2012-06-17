@@ -36,6 +36,8 @@ define('PRINT_PDF_FONT_SUBSETTING_DEFAULT', FALSE);
 define('PRINT_PDF_FILENAME_DEFAULT', '[site:name] - [node:title] - [node:changed:custom:Y-m-d]');
 define('PRINT_PDF_DOMPDF_UNICODE_DEFAULT', 0);
 define('PRINT_PDF_WKHTMLTOPDF_OPTIONS', "--footer-font-size 7 --footer-right '[page]'");
+define('PRINT_PDF_DOMPDF_CACHE_DIR_DEFAULT', 'print_pdf/dompdf/fonts');
+define('PRINT_PDF_TCPDF_CACHE_DIR_DEFAULT', 'print_pdf/tcpdf');
 
 /**
  * Implements hook_permission().
@@ -82,6 +84,32 @@ function print_pdf_theme() {
       'file' => 'print_pdf.pages.inc',
     ),
   );
+}
+
+/**
+ * Implements hook_init().
+ */
+function print_pdf_init() {
+  if (variable_get('print_pdf_autoconfig', PRINT_PDF_AUTOCONFIG_DEFAULT)) {
+    $pdf_dirs = array();
+    $print_pdf_pdf_tool = variable_get('print_pdf_pdf_tool', PRINT_PDF_PDF_TOOL_DEFAULT);
+
+    if (basename($print_pdf_pdf_tool) == 'dompdf_config.inc.php') {
+      $pdf_dirs[] = PRINT_PDF_DOMPDF_CACHE_DIR_DEFAULT;
+    }
+    elseif (basename($print_pdf_pdf_tool) == 'tcpdf.php') {
+      foreach (array('cache', 'images') as $dir) {
+        $pdf_dirs[] = PRINT_PDF_TCPDF_CACHE_DIR_DEFAULT . '/' . $dir;
+      }
+    }
+
+    if (!empty($pdf_dirs)) {
+      foreach ($pdf_dirs as $pdf_dir) {
+        $directory = 'public://' . $pdf_dir;
+        file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
+      }
+    }
+  }
 }
 
 /**
@@ -188,7 +216,7 @@ function print_pdf_requirements($phase) {
         }
         elseif (basename($print_pdf_pdf_tool) == 'dompdf_config.inc.php') {
           if (variable_get('print_pdf_autoconfig', PRINT_PDF_AUTOCONFIG_DEFAULT)) {
-            $directory = dirname($print_pdf_pdf_tool) . '/lib/fonts';
+            $directory = 'public://' . PRINT_PDF_DOMPDF_CACHE_DIR_DEFAULT;
             if (!is_dir($directory) || !is_writable($directory)) {
               $requirements['print_pdf_tool'] = array(
                 'title' => $t('DOMPDF font cache directory'),
@@ -219,7 +247,7 @@ function print_pdf_requirements($phase) {
 
           if (variable_get('print_pdf_autoconfig', PRINT_PDF_AUTOCONFIG_DEFAULT)) {
             foreach (array('cache', 'images') as $dir) {
-              $directory = dirname($print_pdf_pdf_tool) . '/' . $dir;
+              $directory = 'public://' . PRINT_PDF_TCPDF_CACHE_DIR_DEFAULT . '/' . $dir;
               if (!is_dir($directory) || !is_writable($directory)) {
                 $requirements['print_pdf_tool_' . $dir] = array(
                   'title' => $t('TCPDF directory'),
