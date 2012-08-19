@@ -598,7 +598,7 @@ function print_pdf_link_allowed($args) {
       if (!isset($res[$node->nid])) {
         $res[$node->nid] = db_fetch_object(db_query("SELECT comments FROM {print_pdf_node_conf} WHERE nid = %d", $node->nid));
       }
-      $print_display_comment = $res ? intval($res[$node->nid]->comments) : variable_get('print_pdf_display_comment_'. $node_type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
+      $print_display_comment = ($res && ($res[$node->nid] !== FALSE)) ? intval($res[$node->nid]->comments) : variable_get('print_pdf_display_comment_'. $node_type, PRINT_TYPE_COMMENT_LINK_DEFAULT);
       if ($print_display_comment) {
         return PRINT_ALLOW_NORMAL_LINK;
       }
