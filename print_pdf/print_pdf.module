@@ -705,7 +705,7 @@ function _print_pdf_wkhtmltopdf_version() {
     fclose($pipes[0]);
     fclose($pipes[1]);
     fclose($pipes[2]);
-    $retval = proc_terminate($process);
+    $retval = proc_close($process);
   }
 
   return ($matches[1]);
