@@ -571,7 +571,7 @@ function print_mail_views_api() {
 function print_mail_rules_action_info() {
   return array(
     'print_mail_action_submit' => array(
-      'label' => t('Send node as HTML formated email'),
+      'label' => t('Send node as HTML formatted email'),
       'module' => 'Node',
       'eval input' => array('to', 'from', 'subject', 'message'),
       'arguments' => array(
@@ -620,7 +620,7 @@ function print_mail_action_submit_form($settings, &$form) {
     '#type' => 'textarea',
     '#title' => t('Message'),
     '#default_value' => $settings['message'],
-    '#description' => t('The message that should be displayed.'),
+    '#description' => t('The message that should be displayed (optional).'),
   );
 }
 
