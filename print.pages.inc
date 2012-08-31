@@ -23,7 +23,11 @@ function print_controller_html() {
   $path = filter_xss(implode('/', $args));
   $cid = isset($_GET['comment']) ? (int)$_GET['comment'] : NULL;
 
-  $print = print_controller($path, $cid, PRINT_HTML_FORMAT);
+  // Handle the query
+  $query = $_GET;
+  unset($query['q']);
+
+  $print = print_controller($path, $query, $cid, PRINT_HTML_FORMAT);
   if ($print !== FALSE) {
     $node = $print['node'];
     $html = theme('print', array('print' => $print, 'type' => PRINT_HTML_FORMAT, 'node' => $node));
@@ -51,6 +55,8 @@ function print_controller_html() {
  *
  * @param $path
  *   path of the original page
+ * @param array $query
+ *   (optional) array of key/value pairs as used in the url() function for the query
  * @param $cid
  *   comment ID of the individual comment to be rendered
  * @param $format
@@ -65,7 +71,7 @@ function print_controller_html() {
  * @see _print_generate_path()
  * @see _print_generate_book()
  */
-function print_controller($path, $cid = NULL, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
+function print_controller($path, $query = NULL, $cid = NULL, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
   if (empty($path)) {
     // If no path was provided, let's try to generate a page for the referer
     global $base_url;
@@ -87,17 +93,17 @@ function print_controller($path, $cid = NULL, $format = PRINT_HTML_FORMAT, $teas
     $path = implode('/', $parts);
   }
   if (ctype_digit($parts[0]) && (count($parts) == 1)) {
-    $print = _print_generate_node($path, $cid, $format, $teaser, $message);
+    $print = _print_generate_node($path, $query, $cid, $format, $teaser, $message);
   }
   else {
     $ret = preg_match('!^book/export/html/(.*)!i', $path, $matches);
     if ($ret == 1) {
       // This is a book PF page link, handle trough the book handling functions
-      $print = _print_generate_book($matches[1], $format, $teaser, $message);
+      $print = _print_generate_book($matches[1], $query, $format, $teaser, $message);
     }
     else {
       // If no content node was found, handle the page printing with the 'printable' engine
-      $print = _print_generate_path($path, $format, $teaser, $message);
+      $print = _print_generate_path($path, $query, $format, $teaser, $message);
     }
   }
 
@@ -142,6 +148,8 @@ function _print_robots_meta_generator() {
  *
  * @param $node
  *   generated node with a printer-friendly node body
+ * @param array $query
+ *   (optional) array of key/value pairs as used in the url() function for the query
  * @param $message
  *   optional sender's message (used by the send email module)
  * @param $cid
@@ -150,7 +158,7 @@ function _print_robots_meta_generator() {
  * @return
  *   array with the fields to be used in the template
  */
-function _print_var_generator($node, $message = NULL, $cid = NULL) {
+function _print_var_generator($node, $query = NULL, $message = NULL, $cid = NULL) {
   global $base_url, $language, $_print_urls;
 
   $path = empty($node->nid) ? $node->path : "node/$node->nid";
@@ -178,7 +186,7 @@ function _print_var_generator($node, $message = NULL, $cid = NULL) {
   $print['scripts'] = drupal_get_js();
   $print['footer_scripts'] = drupal_get_js('footer');
   $print['robots_meta'] = _print_robots_meta_generator();
-  $print['url'] = url($path, array('absolute' => TRUE));
+  $print['url'] = url($path, array('absolute' => TRUE, 'query' => $query));
   $print['base_href'] = "<base href='" . $print['url'] . "' />\n";
   $print['favicon'] = theme_get_setting('toggle_favicon') ? "<link rel='shortcut icon' href='" . theme_get_setting('favicon') . "' type='image/x-icon' />\n" : '';
 
@@ -486,6 +494,8 @@ function _print_url_list_enabled($node, $format = PRINT_HTML_FORMAT) {
  *
  * @param $nid
  *   node ID of the node to be rendered into a printer-friendly page
+ * @param array $query
+ *   (optional) array of key/value pairs as used in the url() function for the query
  * @param $cid
  *   comment ID of the individual comment to be rendered
  * @param $format
@@ -497,7 +507,7 @@ function _print_url_list_enabled($node, $format = PRINT_HTML_FORMAT) {
  * @return
  *   filled array ready to be used in the template
  */
-function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
+function _print_generate_node($nid, $query = NULL, $cid = NULL, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
   global $_print_urls;
 
   if (!isset($langcode)) {
@@ -596,7 +606,7 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
   $pattern = '!<(a\s[^>]*?)>(.*?)(</a>)!is';
   $content = preg_replace_callback($pattern, '_print_rewrite_urls', $content);
 
-  $print = _print_var_generator($node, $message, $cid);
+  $print = _print_var_generator($node, $query, $message, $cid);
   $print['content'] = $content;
 
   return $print;
@@ -607,6 +617,8 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
  *
  * @param $path
  *   path of the node to be rendered into a printer-friendly page
+ * @param array $query
+ *   (optional) array of key/value pairs as used in the url() function for the query
  * @param $format
  *   format of the page being generated
  * @param $teaser
@@ -616,7 +628,7 @@ function _print_generate_node($nid, $cid = NULL, $format = PRINT_HTML_FORMAT, $t
  * @return
  *   filled array ready to be used in the template
  */
-function _print_generate_path($path, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
+function _print_generate_path($path, $query = NULL, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
   global $_print_urls;
 
   // Handle node tabs
@@ -662,7 +674,7 @@ function _print_generate_path($path, $format = PRINT_HTML_FORMAT, $teaser = FALS
   $pattern = '!<(a\s[^>]*?)>(.*?)(</a>)!is';
   $node->body = preg_replace_callback($pattern, '_print_rewrite_urls', $node->body);
 
-  $print = _print_var_generator($node, $message);
+  $print = _print_var_generator($node, $query, $message);
   $print['content'] = $node->body;
 
   return $print;
@@ -674,6 +686,8 @@ function _print_generate_path($path, $format = PRINT_HTML_FORMAT, $teaser = FALS
  *
  * @param $nid
  *   node ID of the node to be rendered into a printer-friendly page
+ * @param array $query
+ *   (optional) array of key/value pairs as used in the url() function for the query
  * @param $format
  *   format of the page being generated
  * @param $teaser
@@ -683,7 +697,7 @@ function _print_generate_path($path, $format = PRINT_HTML_FORMAT, $teaser = FALS
  * @return
  *   filled array ready to be used in the template
  */
-function _print_generate_book($nid, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
+function _print_generate_book($nid, $query = NULL, $format = PRINT_HTML_FORMAT, $teaser = FALSE, $message = NULL) {
   global $_print_urls;
 
   $node = node_load($nid);
@@ -708,7 +722,7 @@ function _print_generate_book($nid, $format = PRINT_HTML_FORMAT, $teaser = FALSE
   $pattern = '!<(a\s[^>]*?)>(.*?)(</a>)!is';
   $node->body = preg_replace_callback($pattern, '_print_rewrite_urls', $node->body);
 
-  $print = _print_var_generator($node, $message);
+  $print = _print_var_generator($node, $query, $message);
   $print['content'] = $node->body;
 
   // The title is already displayed by the book_recurse, so avoid duplication

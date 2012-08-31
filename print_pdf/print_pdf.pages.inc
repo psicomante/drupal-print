@@ -27,6 +27,10 @@ function print_pdf_controller() {
   $path = filter_xss(implode('/', $args));
   $cid = isset($_GET['comment']) ? (int)$_GET['comment'] : NULL;
 
+  // Handle the query
+  $query = $_GET;
+  unset($query['q']);
+
   if (!empty($path)) {
     if ($alias = drupal_lookup_path('source', $path)) {
       // Alias
@@ -60,7 +64,7 @@ function print_pdf_controller() {
 
   drupal_alter('print_pdf_filename', $pdf_filename, $path);
 
-  $pdf = print_pdf_generate_path($path, $cid, $pdf_filename . '.pdf');
+  $pdf = print_pdf_generate_path($path, $query, $cid, $pdf_filename . '.pdf');
   if ($pdf == NULL) {
     drupal_goto($path);
     exit;
@@ -79,10 +83,10 @@ function print_pdf_controller() {
   drupal_exit();
 }
 
-function print_pdf_generate_path($path, $cid = NULL, $pdf_filename = NULL) {
+function print_pdf_generate_path($path, $query = NULL, $cid = NULL, $pdf_filename = NULL) {
   global $base_url;
 
-  $print = print_controller($path, $cid, PRINT_PDF_FORMAT);
+  $print = print_controller($path, $query, $cid, PRINT_PDF_FORMAT);
   if ($print === FALSE) {
     return;
   }
