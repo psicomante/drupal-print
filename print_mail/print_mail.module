@@ -730,6 +730,7 @@ function print_mail_action_submit($from, $from_name, $to, $subject, $message, $n
   $form_state['values'] = array(
     'path' => 'node/' . $node->nid,
     'cid' => NULL,
+    'query' => NULL,
     'title' => $node->title,
     'fld_from_addr' => $from,
     'fld_from_name' => $from_name,

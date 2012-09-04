@@ -56,7 +56,8 @@ function print_controller_html() {
  * @param $path
  *   path of the original page
  * @param array $query
- *   (optional) array of key/value pairs as used in the url() function for the query
+ *   (optional) array of key/value pairs as used in the url() function for the
+ *   query
  * @param $cid
  *   comment ID of the individual comment to be rendered
  * @param $format
@@ -149,7 +150,8 @@ function _print_robots_meta_generator() {
  * @param $node
  *   generated node with a printer-friendly node body
  * @param array $query
- *   (optional) array of key/value pairs as used in the url() function for the query
+ *   (optional) array of key/value pairs as used in the url() function for the
+ *   query
  * @param $message
  *   optional sender's message (used by the send email module)
  * @param $cid
@@ -236,7 +238,7 @@ function _print_var_generator($node, $query = NULL, $message = NULL, $cid = NULL
       $logo_url = strip_tags($print_logo_url);
       break;
   }
-  $logo_url = preg_replace('!^'. base_path() .'!', '', $logo_url);
+  $logo_url = preg_replace('!^' . base_path() . '!', '', $logo_url);
   $site_name = variable_get('site_name', 'Drupal');
   $print['logo'] = $logo_url ? theme('image', array('path' => $logo_url, 'alt' => $site_name, 'attributes' => array('class' => 'print-logo', 'id' => 'logo'))) : '';
 
@@ -495,7 +497,8 @@ function _print_url_list_enabled($node, $format = PRINT_HTML_FORMAT) {
  * @param $nid
  *   node ID of the node to be rendered into a printer-friendly page
  * @param array $query
- *   (optional) array of key/value pairs as used in the url() function for the query
+ *   (optional) array of key/value pairs as used in the url() function for the
+ *   query
  * @param $cid
  *   comment ID of the individual comment to be rendered
  * @param $format
@@ -618,7 +621,8 @@ function _print_generate_node($nid, $query = NULL, $cid = NULL, $format = PRINT_
  * @param $path
  *   path of the node to be rendered into a printer-friendly page
  * @param array $query
- *   (optional) array of key/value pairs as used in the url() function for the query
+ *   (optional) array of key/value pairs as used in the url() function for the
+ *   query
  * @param $format
  *   format of the page being generated
  * @param $teaser
@@ -687,7 +691,8 @@ function _print_generate_path($path, $query = NULL, $format = PRINT_HTML_FORMAT,
  * @param $nid
  *   node ID of the node to be rendered into a printer-friendly page
  * @param array $query
- *   (optional) array of key/value pairs as used in the url() function for the query
+ *   (optional) array of key/value pairs as used in the url() function for the
+ *   query
  * @param $format
  *   format of the page being generated
  * @param $teaser
