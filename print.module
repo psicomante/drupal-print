@@ -263,6 +263,8 @@ function print_block_info() {
  * Implements hook_block_view().
  */
 function print_block_view($delta = '') {
+  $block = array();
+
   switch ($delta) {
     case 'print-links':
       $nid = preg_replace('!^node/!', '', $_GET['q']);

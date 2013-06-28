@@ -170,6 +170,8 @@ function print_pdf_block_info() {
  * Implements hook_block_view().
  */
 function print_pdf_block_view($delta = 0) {
+  $block = array();
+
       switch ($delta) {
       case 'print_pdf-top':
         $block['subject'] = t('Most PDFd');

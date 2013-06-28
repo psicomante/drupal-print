@@ -145,6 +145,8 @@ function print_mail_block_info() {
  * Implements hook_block_view().
  */
 function print_mail_block_view($delta = 0) {
+  $block = array();
+
       switch ($delta) {
       case 'print_mail-top':
         $block['subject'] = t('Most emailed');
