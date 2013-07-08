@@ -93,7 +93,7 @@ function print_pdf_schema() {
     'fields' => array(
       'path' => array(
         'type' => 'varchar',
-        'length' => 128,
+        'length' => 255,
         'not null' => TRUE,
       ),
       'totalcount' => array(
@@ -296,6 +296,20 @@ function print_pdf_update_6118() {
   $link_pos['block'] = 'block';
   $link_pos['help'] = 'help';
   variable_set('print_pdf_link_pos', $link_pos);
+
+  return $ret;
+}
+
+/**
+ * Increase size of the path field in the print_pdf_page_counter table
+ */
+function print_pdf_update_6119(&$sandbox) {
+  $ret = array();
+
+  db_drop_primary_key($ret, 'print_pdf_page_counter');
+  db_change_field($ret, 'print_pdf_page_counter', 'path', 'path',
+    array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'description' => 'Page path'),
+    array('primary key' => array('path')));
 
   return $ret;
 }
