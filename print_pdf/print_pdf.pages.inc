@@ -609,7 +609,7 @@ function theme_print_pdf_tcpdf_footer($pdf, $html, $font) {
   // set footer margin
   $pdf->SetFooterMargin(10);
   // set footer data
-  $pdf->SetFooterData($footer);
+  $pdf->setFooterContent($footer);
 
   return $pdf;
 }
