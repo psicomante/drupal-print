@@ -184,11 +184,11 @@ function _print_pdf_dompdf($print, $html, $filename = NULL) {
   $print_pdf_content_disposition = variable_get('print_pdf_content_disposition', PRINT_PDF_CONTENT_DISPOSITION_DEFAULT);
 
   if (variable_get('print_pdf_autoconfig', PRINT_PDF_AUTOCONFIG_DEFAULT)) {
-    define("DOMPDF_ENABLE_PHP", FALSE);
-    define("DOMPDF_ENABLE_REMOTE", TRUE);
-    define("DOMPDF_TEMP_DIR", file_directory_temp());
-    define("DOMPDF_UNICODE_ENABLED", variable_get('print_pdf_dompdf_unicode', PRINT_PDF_DOMPDF_UNICODE_DEFAULT));
-    define("DOMPDF_FONT_CACHE", file_directory_path() . '/' . PRINT_PDF_DOMPDF_CACHE_DIR_DEFAULT . '/fonts/');
+    if (!defined('DOMPDF_ENABLE_PHP')) define("DOMPDF_ENABLE_PHP", FALSE);
+    if (!defined('DOMPDF_ENABLE_REMOTE')) define("DOMPDF_ENABLE_REMOTE", TRUE);
+    if (!defined('DOMPDF_TEMP_DIR')) define("DOMPDF_TEMP_DIR", file_directory_temp());
+    if (!defined('DOMPDF_UNICODE_ENABLED')) define("DOMPDF_UNICODE_ENABLED", variable_get('print_pdf_dompdf_unicode', PRINT_PDF_DOMPDF_UNICODE_DEFAULT));
+    if (!defined('DOMPDF_FONT_CACHE')) define("DOMPDF_FONT_CACHE", file_directory_path() . '/' . PRINT_PDF_DOMPDF_CACHE_DIR_DEFAULT . '/fonts/');
   }
 
   require_once($print_pdf_pdf_tool);
@@ -280,15 +280,15 @@ function _print_pdf_tcpdf($print, $html, $filename = NULL) {
   $pdf_tool_path = realpath(dirname($print_pdf_pdf_tool));
 
   if (variable_get('print_pdf_autoconfig', PRINT_PDF_AUTOCONFIG_DEFAULT)) {
-    define('K_TCPDF_EXTERNAL_CONFIG', TRUE);
-    define('K_PATH_MAIN', dirname($_SERVER['SCRIPT_FILENAME']));
-    define('K_PATH_URL', $base_url);
-    define('K_PATH_FONTS', $pdf_tool_path .'/fonts/');
-    define('K_PATH_CACHE', file_directory_path() . '/' . PRINT_PDF_TCPDF_CACHE_DIR_DEFAULT . '/cache/');
-    define('K_PATH_IMAGES', '');
-    define('K_BLANK_IMAGE', $pdf_tool_path .'/images/_blank.png');
-    define('K_CELL_HEIGHT_RATIO', 1.25);
-    define('K_SMALL_RATIO', 2/3);
+    if (!defined('K_TCPDF_EXTERNAL_CONFIG')) define('K_TCPDF_EXTERNAL_CONFIG', TRUE);
+    if (!defined('K_PATH_MAIN')) define('K_PATH_MAIN', dirname($_SERVER['SCRIPT_FILENAME']));
+    if (!defined('K_PATH_URL')) define('K_PATH_URL', $base_url);
+    if (!defined('K_PATH_FONTS')) define('K_PATH_FONTS', $pdf_tool_path .'/fonts/');
+    if (!defined('K_PATH_CACHE')) define('K_PATH_CACHE', file_directory_path() . '/' . PRINT_PDF_TCPDF_CACHE_DIR_DEFAULT . '/cache/');
+    if (!defined('K_PATH_IMAGES')) define('K_PATH_IMAGES', '');
+    if (!defined('K_BLANK_IMAGE')) define('K_BLANK_IMAGE', $pdf_tool_path .'/images/_blank.png');
+    if (!defined('K_CELL_HEIGHT_RATIO')) define('K_CELL_HEIGHT_RATIO', 1.25);
+    if (!defined('K_SMALL_RATIO')) define('K_SMALL_RATIO', 2/3);
   }
 
   // Try to use local file access for image files
