@@ -421,7 +421,7 @@ function _print_pdf_wkhtmltopdf($print, $html, $filename = NULL) {
       if (empty($error)) {
         $error = 'No stderr output available.';
       }
-      watchdog('print_pdf', "wkhtmltopdf (returned $retval): $error");
+      watchdog('print_pdf', 'wkhtmltopdf [%cmd] (returned %ret): %error', array('%cmd' => $cmd, '%ret' => $retval, '%error' => $error));
     }
   }
 
