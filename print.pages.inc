@@ -254,6 +254,9 @@ function _print_var_generator($node, $query = NULL, $message = NULL, $cid = NULL
       $footer = $print_footer_user;
       break;
   }
+  // Delete the contextual links
+  $footer = preg_replace('!\s*<div class="contextual-links-wrapper">.*?</div>!sim', '', $footer);
+
   $print['footer_message'] = filter_xss_admin($footer);
 
   $published_site = variable_get('site_name', 0);
@@ -670,6 +673,9 @@ function _print_generate_path($path, $query = NULL, $format = PRINT_HTML_FORMAT,
 
   // Delete any links area
   $node->body = preg_replace('!\s*<div class="links">.*?</div>!sim', '', $node->body);
+
+  // Delete the contextual links also
+  $node->content = preg_replace('!\s*<div class="contextual-links-wrapper">.*?</div>!sim', '', $node->content);
 
   // Check URL list settings
   $_print_urls = _print_url_list_enabled($node, $format);
