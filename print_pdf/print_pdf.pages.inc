@@ -44,12 +44,12 @@ function print_pdf_controller() {
 
     $pdf_filename = variable_get('print_pdf_filename', PRINT_PDF_FILENAME_DEFAULT);
     if (!empty($pdf_filename) && !empty($node)) {
-      $pdf_filename = token_replace($pdf_filename, array('node' => $node));
+      $pdf_filename = token_replace($pdf_filename, array('node' => $node), array('clear' => TRUE));
     }
     else {
-      $pdf_filename = token_replace($pdf_filename, array('site'));
-      if (empty($pdf_filename) || count(token_scan($pdf_filename))) {
-        // If there are still tokens, use a fallback solution
+      $pdf_filename = token_replace($pdf_filename, array('site'), array('clear' => TRUE));
+      if (empty($pdf_filename)) {
+        // If empty, use a fallback solution
         $pdf_filename = str_replace('/', '_', $path);
       }
     }
@@ -367,7 +367,7 @@ function _print_pdf_wkhtmltopdf($print, $html, $filename = NULL) {
   $dpi = 96;
 
   if (!empty($print_pdf_wkhtmltopdf_options)) {
-    $print_pdf_wkhtmltopdf_options = token_replace($print_pdf_wkhtmltopdf_options, array('node' => $print['node']));
+    $print_pdf_wkhtmltopdf_options = token_replace($print_pdf_wkhtmltopdf_options, array('node' => $print['node']), array('clear' => TRUE));
   }
 
   $version = _print_pdf_wkhtmltopdf_version();
