@@ -461,38 +461,43 @@ function _print_pdf_wkhtmltopdf($print, $html, $filename = NULL) {
  */
 function theme_print_pdf_dompdf_footer($html) {
   preg_match('!<div class="print-footer">(.*?)</div>!si', $html, $tpl_footer);
-  $html = str_replace($tpl_footer[0], '', $html);
 
-  $text = '<script type="text/php">
-    if (isset($pdf)) {
-      $font = Font_Metrics::get_font("verdana");;
-      $size = 10;
-      $color = array(0,0,0);
-      $text_height = Font_Metrics::get_font_height($font, $size);
+  if (isset($tpl_footer[1])) {
+    $html = str_replace($tpl_footer[0], '', $html);
 
-      $w = $pdf->get_width();
-      $h = $pdf->get_height();
+    $text = '<script type="text/php">
+      if (isset($pdf)) {
+        $font = Font_Metrics::get_font("verdana");;
+        $size = 10;
+        $color = array(0,0,0);
+        $text_height = Font_Metrics::get_font_height($font, $size);
 
-      $footer = $pdf->open_object();
+        $w = $pdf->get_width();
+        $h = $pdf->get_height();
 
-      // Draw a line along the bottom
-      $y = $h - 25;
-      $pdf->line(15, $y, $w - 15, $y, $color, 1);
+        $footer = $pdf->open_object();
 
-      $y += $text_height / 2;
-      $pdf->page_text(15, $y, \''. addslashes(strip_tags($tpl_footer[1])) .'\', $font, $size, $color);
+        // Draw a line along the bottom
+        $y = $h - 25;
+        $pdf->line(15, $y, $w - 15, $y, $color, 1);
 
-      $pdf->close_object();
-      $pdf->add_object($footer, "all");
+        $y += $text_height / 2;
+        $pdf->page_text(15, $y, \''. addslashes(strip_tags($tpl_footer[1])) .'\', $font, $size, $color);
 
-      // Center the text
-      $width = Font_Metrics::get_text_width("Page 1 of 2", $font, $size);
-      $pagenumtxt = t("Page !n of !total", array("!n" => "{PAGE_NUM}", "!total" => "{PAGE_COUNT}"));
-      $pdf->page_text($w - 15 - $width, $y, $pagenumtxt, $font, $size, $color);
-    }
-  </script>';
+        $pdf->close_object();
+        $pdf->add_object($footer, "all");
 
-  return str_replace("<body>", "<body>" . $text, $html);
+        // Center the text
+        $width = Font_Metrics::get_text_width("Page 1 of 2", $font, $size);
+        $pagenumtxt = t("Page !n of !total", array("!n" => "{PAGE_NUM}", "!total" => "{PAGE_COUNT}"));
+        $pdf->page_text($w - 15 - $width, $y, $pagenumtxt, $font, $size, $color);
+      }
+    </script>';
+
+    return str_replace("<body>", "<body>" . $text, $html);
+  } else {
+    return $html;
+  }
 }
 
 /**
@@ -601,15 +606,17 @@ function theme_print_pdf_tcpdf_content($pdf, $html, $font) {
  */
 function theme_print_pdf_tcpdf_footer($pdf, $html, $font) {
   preg_match('!<div class="print-footer">(.*?)</div>!si', $html, $tpl_footer);
-  $footer = trim(preg_replace('!</?div[^>]*?>!i', '', $tpl_footer[1]));
+  if (isset($tpl_footer[1])) {
+    $footer = trim(preg_replace('!</?div[^>]*?>!i', '', $tpl_footer[1]));
 
-  // set footer font
-  $font[2] *= 0.8;
-  $pdf->setFooterFont($font);
-  // set footer margin
-  $pdf->SetFooterMargin(10);
-  // set footer data
-  $pdf->setFooterContent($footer);
+    // set footer font
+    $font[2] *= 0.8;
+    $pdf->setFooterFont($font);
+    // set footer margin
+    $pdf->SetFooterMargin(10);
+    // set footer data
+    $pdf->setFooterContent($footer);
+  }
 
   return $pdf;
 }
