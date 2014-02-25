@@ -242,6 +242,10 @@ function _print_pdf_dompdf($print, $html, $filename = NULL) {
   }
   $html = htmlspecialchars_decode(htmlentities($html, ENT_NOQUOTES, 'ISO-8859-1'), ENT_NOQUOTES);
   }
+  else {
+    // Otherwise, ensure the content is properly formatted Unicode.
+    $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+  }
 
   // Must get rid of tbody (dompdf goes into recursion)
   $html = preg_replace('!<tbody[^>]*?>|</tbody>!i', '', $html);
