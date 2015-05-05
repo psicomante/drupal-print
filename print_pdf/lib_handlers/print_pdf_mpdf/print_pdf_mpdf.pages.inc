@@ -47,6 +47,9 @@ function print_pdf_mpdf_print_pdf_generate($html, $meta, $paper_size = NULL, $pa
   // set the alias for totale pages
   $mpdf->AliasNbPages('[pagetotal]');
 
+  // set the automatically generated ToC entries
+  $mpdf->h2toc = array('H1'=>0, 'H2'=>1, 'H3'=>2);
+
   // Pulled from the HTML meta data
   // $mpdf->SetTitle(html_entity_decode($meta['title'], ENT_QUOTES, 'UTF-8'));
 
