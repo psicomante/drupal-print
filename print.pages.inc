@@ -425,10 +425,15 @@ function _print_css_generator($expand = FALSE) {
 function _print_rewrite_urls($matches) {
   global $base_url, $base_root, $_print_urls;
 
+  // we don't need to modify a base64 url to absolute
+  if (strpos($matches[1],"data:image/png")) {
+      return $matches[0];
+  }
+
   $include_anchors = variable_get('print_urls_anchors', PRINT_URLS_ANCHORS_DEFAULT);
 
   // first, split the html into the different tag attributes
-  $pattern = '!\s*(\w+\s*=\s*"(?:\\\"|[^"])*")\s*|\s*(\w+\s*=\s*\'(?:\\\\\'|[^\'])*\')\s*|\s*(\w+\s*=\s*\w+)\s*|\s+!';
+  $pattern = '/!\s*(\w+\s*=\s*"(?:\\\"|[^"])*")\s*|\s*(\w+\s*=\s*\'(?:\\\\\'|[^\'])*\')\s*|\s*(\w+\s*=\s*\w+)\s*|\s+!/u';
   $attribs = preg_split($pattern, $matches[1], -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
   foreach ($attribs as $key => $value) {
     $attribs[$key] = preg_replace('!(\w)\s*=\s*(.*)!', '$1=$2', $value);
