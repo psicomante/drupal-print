@@ -1,0 +1,12 @@
+diff --git a/print_pdf/lib_handlers/print_pdf_mpdf/print_pdf_mpdf.pages.inc b/print_pdf/lib_handlers/print_pdf_mpdf/print_pdf_mpdf.pages.inc
+index 52c9e1c..9a14969 100644
+--- a/print_pdf/lib_handlers/print_pdf_mpdf/print_pdf_mpdf.pages.inc
++++ b/print_pdf/lib_handlers/print_pdf_mpdf/print_pdf_mpdf.pages.inc
+@@ -43,6 +43,7 @@ function print_pdf_mpdf_print_pdf_generate($html, $meta, $paper_size = NULL, $pa
+
+   $mpdf->SetAuthor(strip_tags($meta['name']));
+   $mpdf->SetCreator(variable_get('site_name', 'Drupal'));
++  $mpdf->AliasNbPages('[pagetotal]');
+   // Pulled from the HTML meta data
+   // $mpdf->SetTitle(html_entity_decode($meta['title'], ENT_QUOTES, 'UTF-8'));
+
