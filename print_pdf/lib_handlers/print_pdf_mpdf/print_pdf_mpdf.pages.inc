@@ -51,7 +51,7 @@ function print_pdf_mpdf_print_pdf_generate($html, $meta, $paper_size = NULL, $pa
   $mpdf->h2toc = array('H2'=>0, 'H3'=>2);
 
   // Pulled from the HTML meta data
-  // $mpdf->SetTitle(html_entity_decode($meta['title'], ENT_QUOTES, 'UTF-8'));
+  $mpdf->SetTitle(html_entity_decode($meta['title'], ENT_QUOTES, 'UTF-8'));
 
 //  $keys = implode(' ', explode("\n", trim(strip_tags($print['taxonomy']))));
 //  $mpdf->SetKeywords($keys);
