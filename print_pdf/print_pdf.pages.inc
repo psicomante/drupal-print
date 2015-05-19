@@ -41,7 +41,10 @@ function print_pdf_controller() {
       foreach (array_reverse($args) as $key => $value) {
         if(ctype_digit($value)) {
           // normal nid
-          $node = node_load($value);
+          $node_check = node_load($value);
+          if ($node_check){
+            $node = $node_check;
+          }
           break;
         }
       }
