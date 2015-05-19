@@ -151,6 +151,22 @@ function print_pdf_generate_path($path, $query = NULL, $cid = NULL, $pdf_filenam
 
     $pdf = '';
     $cachemiss = FALSE;
+
+    // fix to allow other node-related pages to be saved
+    if (!isset($node->nid)) {
+      $args = explode("/", $node->path);
+      foreach (array_reverse($args) as $key => $value) {
+        if(ctype_digit($value)) {
+          // normal nid
+          $node_check = node_load($value);
+          if ($node_check){
+            $node->nid = $node_check->nid;
+          }
+          break;
+        }
+      }
+    }
+
     if ($cache_enabled && isset($node->nid)) {
       // See if the file exists in the cache
       $cachefile = drupal_realpath(print_pdf_cache_dir()) . '/' . $node->nid . '.pdf';
