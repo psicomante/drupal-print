@@ -37,9 +37,14 @@ function print_pdf_controller() {
       $path_arr = explode('/', $alias);
       $node = node_load($path_arr[1]);
     }
-    elseif (ctype_digit($args[0])) {
-      // normal nid
-      $node = node_load($args[0]);
+    else{
+      foreach (array_reverse($args) as $key => $value) {
+        if(ctype_digit($value)) {
+          // normal nid
+          $node = node_load($value);
+          break;
+        }
+      }
     }
 
     $pdf_filename = variable_get('print_pdf_filename', PRINT_PDF_FILENAME_DEFAULT);
