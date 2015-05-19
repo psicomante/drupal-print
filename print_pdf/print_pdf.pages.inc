@@ -152,24 +152,30 @@ function print_pdf_generate_path($path, $query = NULL, $cid = NULL, $pdf_filenam
     $pdf = '';
     $cachemiss = FALSE;
 
-    // fix to allow other node-related pages to be saved
-    if (!isset($node->nid)) {
-      $args = explode("/", $node->path);
-      foreach (array_reverse($args) as $key => $value) {
-        if(ctype_digit($value)) {
-          // normal nid
-          $node_check = node_load($value);
-          if ($node_check){
-            $node->nid = $node_check->nid;
-          }
-          break;
-        }
-      }
-    }
+//    // fix to allow other node-related pages to be saved
+//    if (!isset($node->nid)) {
+//      $args = explode("/", $node->path);
+//      foreach (array_reverse($args) as $key => $value) {
+//        if(ctype_digit($value)) {
+//          // normal nid
+//          $node_check = node_load($value);
+//          if ($node_check){
+//            $node->nid = $node_check->nid;
+//          }
+//          break;
+//        }
+//      }
+//    }
 
-    if ($cache_enabled && isset($node->nid)) {
+    if ($cache_enabled) {
+      if (isset($node->nid)) {
+        $cached_file_name = $node->nid;
+      }
+      else {
+        $cached_file_name = str_replace('/', '_', $node->path);
+      }
       // See if the file exists in the cache
-      $cachefile = drupal_realpath(print_pdf_cache_dir()) . '/' . $node->nid . '.pdf';
+      $cachefile = drupal_realpath(print_pdf_cache_dir()) . '/' . $cached_file_name . '.pdf';
       if (is_readable($cachefile)) {
         // Get the PDF content from the cached file
         $pdf = file_get_contents($cachefile);
