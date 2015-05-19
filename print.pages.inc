@@ -426,7 +426,11 @@ function _print_rewrite_urls($matches) {
   global $base_url, $base_root, $_print_urls;
 
   // we don't need to modify a base64 url to absolute
-  if (strpos($matches[1],"data:image/png")) {
+  switch ($matches[1]) {
+    case 'data:image/png':
+    case 'data:image/jpeg':
+    case 'data:image/jpg':
+    case 'data:image/gif':
       return $matches[0];
   }
 
